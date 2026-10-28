@@ -47,7 +47,7 @@ Optional: `.env.example` nach `.env` kopieren. Die Einstellungen darin sind dort
 - **Chat-Mockup im Hero** ist HTML statt Bild und lässt sich daher übersetzen.
 - **Responsiv:** Mobil (ab 375 px), Tablet (ab 768 px), Desktop-Navigation ab 1024 px, Desktop-Layout bis 1440 px.
 
-## Buchung und Kontakt: Pipedrive und Netlify
+## Buchung und Kontakt: Pipedrive, E-Mail und Netlify
 
 Die Formulare senden an `/api/booking/` und `/api/contact/`. Diese beiden Routen laufen serverseitig (auf Netlify als Function, lokal in `npm run dev`). Der Pipedrive-Token bleibt auf dem Server und erscheint nie im Browser.
 
@@ -63,14 +63,90 @@ Die Formulare senden an `/api/booking/` und `/api/contact/`. Diese beiden Routen
 
 **Fehlerfälle:** fehlerhafte Eingaben → Meldung und Fokus auf das erste Feld; Pipedrive nicht konfiguriert → Hinweis auf E-Mail/Telefon; Pipedrive nicht erreichbar → Hinweis, es später erneut zu versuchen oder direkt Kontakt aufzunehmen.
 
-### Einrichtung (einmalig)
+### Stand der Einrichtung (28.10.2026)
 
-1. **Pipedrive (SVS-Konto):** Pipeline „Smart Speech Flow Form“ anlegen, Phasen z. B. „Buchung eingegangen“, „Server eingerichtet“, „Aktiv“ (optional „Anfrage“ für Kontakte).
-2. **IDs herausfinden:** Pipeline in Pipedrive öffnen – die Zahl in der Adresszeile (`…/pipeline/<ID>`) ist die Pipeline-ID. Phasen-IDs: `https://<firma>.pipedrive.com/api/v1/stages?pipeline_id=<ID>&api_token=<TOKEN>` im Browser öffnen, dort steht je Phase `id`.
-3. **API-Token:** Pipedrive → Persönliche Einstellungen → API. Am besten einen eigenen Pipedrive-Nutzer nur für die Website verwenden, dann hängt der Token nicht an einer Person.
-4. **Lokal testen:** `.env.example` nach `.env` kopieren, `PIPEDRIVE_API_TOKEN`, `PIPEDRIVE_DOMAIN`, `PIPEDRIVE_PIPELINE_ID`, `PIPEDRIVE_BOOKING_STAGE_ID` eintragen, `npm run dev`, Testbuchung abschicken, Deal in Pipedrive prüfen und wieder löschen.
-5. **Netlify:** Repository verbinden (Build-Befehl `npm run build`, Ordner `dist`, Node 22). Dieselben Variablen unter *Site configuration → Environment variables* eintragen. Die `.env` wird nie hochgeladen.
-6. **Bestätigungsmails (optional):** Absender-Domain `mail.smartspeechflow.de` ist im Resend-Konto von TPWD angelegt (Region EU); sie wird erst nach Eintragen der DNS-Einträge verifiziert. Dann `RESEND_API_KEY`, `MAIL_FROM` (z. B. `Smart Speech Flow <buchung@mail.smartspeechflow.de>`) und `MAIL_NOTIFY_TO` (mehrere Adressen mit Komma getrennt) setzen. Ohne diese Werte wird keine Mail verschickt, und die Danke-Seite verspricht auch keine.
+| Baustein | Stand |
+|---|---|
+| Netlify-Projekt `smartspeechflowwebsite` | läuft unter https://smartspeechflowwebsite.netlify.app/ (Build aus GitHub `main`) |
+| Formular-API | läuft; ohne Pipedrive-Werte melden die Formulare „noch nicht eingerichtet“ und speichern nichts |
+| Resend (E-Mail) | Domain `mail.smartspeechflow.de` im Resend-Konto von **TPWD** angelegt, **DNS-Einträge fehlen noch** → noch nicht verifiziert, es gehen keine Mails raus |
+| Netlify-Variablen für Mail | `RESEND_API_KEY`, `MAIL_FROM`, `MAIL_NOTIFY_TO` sind eingetragen |
+| Pipedrive (SVS) | **offen** – Pipeline, Token und IDs müssen von jemandem mit Zugang zum SVS-Pipedrive kommen |
+
+### Anleitung 1: E-Mail-Versand (Resend)
+
+Wer macht das: wer Zugriff auf die DNS-Verwaltung von smartspeechflow.de hat.
+
+**1. DNS-Einträge bei smartspeechflow.de anlegen.** Die Namen gelten relativ zur Domain `smartspeechflow.de` (bei manchen Anbietern muss der volle Name eingetragen werden, z. B. `resend._domainkey.mail.smartspeechflow.de`). Die Einträge betreffen nur die Subdomain `mail.` – das bestehende Postfach unter smartspeechflow.de bleibt unberührt.
+
+| Typ | Name | Wert | Priorität |
+|---|---|---|---|
+| TXT | `resend._domainkey.mail` | `p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDoiQcsW9mZmZ+OCmeqNtifsLu50lWgN4fyIWksRcG/FeaDsuFIa8sf8SsAUNllrK40jxO8/865plZpeh8BvnLlK4ObSVTjU+npDSDZOFkFk92bfOz5R6el3QB/c9uwZ86MrclMKQraD4L5p9/2yWtHDjVRk8bZYLJ25StWWDHXHwIDAQAB` | – |
+| MX | `send.mail` | `feedback-smtp.eu-west-1.amazonses.com` | 10 |
+| TXT | `send.mail` | `v=spf1 include:amazonses.com ~all` | – |
+| CNAME | `rsend.mail` | `send.forge.rmta.net` | – |
+
+**2. Domain in Resend bestätigen:** resend.com → *Domains* → `mail.smartspeechflow.de` → *Verify*. Das kann je nach DNS-Anbieter einige Minuten bis Stunden dauern. Status muss „Verified“ sein.
+
+**3. Netlify-Variablen** (bereits eingetragen, hier nur zur Kontrolle; *Project configuration → Environment variables*, Scope **Functions**):
+
+| Variable | Wert |
+|---|---|
+| `RESEND_API_KEY` | Sende-Schlüssel „smartspeechflow-website (Netlify)“ aus dem Resend-Konto von TPWD, nur für diese Domain; als *secret*, Kontext Production. Der Wert steht nicht in diesem Repository. Geht er verloren: in Resend neuen Schlüssel anlegen (*API Keys → Create*, Berechtigung „Sending access“, Domain `mail.smartspeechflow.de`) und bei Netlify ersetzen. |
+| `MAIL_FROM` | `Smart Speech Flow <buchung@mail.smartspeechflow.de>` |
+| `MAIL_NOTIFY_TO` | `p.wilimzig@smart-village.solutions, eh@tpwd.de, tr@tpwd.de` (mehrere Adressen mit Komma) |
+
+**4. Neu deployen:** Netlify → *Deploys → Trigger deploy*. Variablen wirken erst nach einem neuen Deploy.
+
+**Was dann passiert**
+- Buchung: Die Kommune erhält eine Bestätigung in der Sprache der Seite; die Adressen aus `MAIL_NOTIFY_TO` erhalten eine Benachrichtigung mit Link zum Deal in Pipedrive.
+- Kontaktanfrage: Benachrichtigung an die Adressen aus `MAIL_NOTIFY_TO`.
+- „Antworten“ in einer Benachrichtigung geht direkt an die Person, die das Formular ausgefüllt hat.
+- Mails werden nur verschickt, wenn Pipedrive eingerichtet ist (die Buchungsnummer ist die Deal-ID).
+
+### Anleitung 2: Pipedrive (SVS-Konto)
+
+Wer macht das: jemand mit Admin-Zugang zum Pipedrive von SVS. Gebraucht werden am Ende **vier Werte**.
+
+**1. Pipeline anlegen:** *Deals* → Pipeline-Auswahl oben links → *Pipeline hinzufügen* → Name „Smart Speech Flow Form“. Vorschlag für Phasen: „Buchung eingegangen“, „Server eingerichtet“, „Aktiv“, optional „Anfrage“ (für Kontaktanfragen).
+
+**2. API-Token:** Profilbild → *Persönliche Einstellungen* → *API* → Token kopieren. Empfehlung: einen eigenen Pipedrive-Nutzer nur für die Website anlegen, dann hängt der Token nicht an einer Person und lässt sich gezielt erneuern. Achtung bei Logins mit mehreren Firmenkonten: vorher oben rechts auf das **SVS**-Konto wechseln – der Token ist je Firmenkonto verschieden.
+
+**3. Subdomain:** der Teil vor `.pipedrive.com` in der Adresszeile (bei `https://svs-gmbh.pipedrive.com` also `svs-gmbh`).
+
+**4. IDs ablesen:** im Browser öffnen (Subdomain und Token einsetzen):
+- `https://<subdomain>.pipedrive.com/api/v1/pipelines?api_token=<TOKEN>` → bei „Smart Speech Flow Form“ steht die `id` = **Pipeline-ID**
+- `https://<subdomain>.pipedrive.com/api/v1/stages?pipeline_id=<PIPELINE-ID>&api_token=<TOKEN>` → bei „Buchung eingegangen“ steht die `id` = **Phasen-ID** (optional auch die von „Anfrage“)
+
+Diese Adressen enthalten den Token. Danach den Browserverlauf dafür löschen oder ein privates Fenster verwenden.
+
+**5. Bei Netlify eintragen** (*Project configuration → Environment variables → Add a variable*, jeweils Scope **Functions**):
+
+| Variable | Wert | Pflicht |
+|---|---|---|
+| `PIPEDRIVE_API_TOKEN` | Token aus Schritt 2, als *secret* markieren | ja |
+| `PIPEDRIVE_DOMAIN` | Subdomain aus Schritt 3 | ja |
+| `PIPEDRIVE_PIPELINE_ID` | Pipeline-ID aus Schritt 4 | ja* |
+| `PIPEDRIVE_BOOKING_STAGE_ID` | Phasen-ID „Buchung eingegangen“ | ja* |
+| `PIPEDRIVE_CONTACT_STAGE_ID` | Phasen-ID „Anfrage“ – nur setzen, wenn Kontaktanfragen Deals statt Leads werden sollen | nein |
+
+\* Technisch optional, aber ohne diese Werte landen Buchungen in der Standard-Pipeline des Kontos.
+
+**6. Neu deployen:** *Deploys → Trigger deploy*.
+
+**7. Testen:** Auf https://smartspeechflowwebsite.netlify.app/de/buchen/ eine Buchung mit erkennbaren Testdaten abschicken (Organisation z. B. „TEST Musterstadt“). In Pipedrive prüfen: Organisation, Person, Deal in „Smart Speech Flow Form“ mit Notiz. Danach alles wieder löschen. Ebenso eine Kontaktanfrage (landet als Lead im Leads-Eingang).
+
+### Fehlersuche
+
+| Meldung im Formular | Ursache |
+|---|---|
+| „Das Formular ist noch nicht eingerichtet …“ | `PIPEDRIVE_API_TOKEN` oder `PIPEDRIVE_DOMAIN` fehlt, Scope ohne „Functions“ oder nicht neu deployt |
+| „Das hat leider nicht geklappt …“ | Pipedrive hat die Anfrage abgelehnt: Token falsch/abgelaufen, Subdomain falsch, Pipeline- oder Phasen-ID gehört nicht zum Konto. Details: Netlify → *Logs → Functions* (Einträge „booking: Pipedrive-Fehler“ bzw. „contact: Pipedrive-Fehler“) |
+| Buchung klappt, aber keine Mail | Resend-Domain nicht verifiziert, `RESEND_API_KEY`/`MAIL_FROM` fehlt oder Absender passt nicht zur verifizierten Domain. Details: resend.com → *Emails* bzw. *Logs* |
+
+### Lokal testen (Entwickler)
+
+`.env.example` nach `.env` kopieren, Werte eintragen, `npm run dev`, Formular unter http://localhost:4321/de/buchen/ abschicken. Die `.env` wird nie hochgeladen.
 
 **Ohne Pipedrive vorführen:** `FORMS_DEMO=true` – die Formulare melden Erfolg, speichern aber nichts. Nur lokal oder auf einer Vorschau-Adresse verwenden, nie live.
 
