@@ -23,7 +23,7 @@ type Item = { title: string; text: string };
 <section class="section" aria-labelledby="steps-title">
   <div class="container stack" style="--stack-gap: var(--spacing-40)">
     <h2 id="steps-title" class="t-section">{t('product.stepsTitle')}</h2>
-    <ol class="grid-4" role="list">
+    <ol class="grid-4">
       {tv<Item[]>('product.steps').map((s, i) => <StepCard number={i + 1} title={s.title} text={s.text} />)}
     </ol>
   </div>
@@ -41,8 +41,8 @@ type Item = { title: string; text: string };
 
 <section class="section">
   <div class="container grid-2">
-    <TextCard title={t('product.techTitle')} tone="tint"><p>{t('product.techText')}</p></TextCard>
-    <TextCard title={t('product.blackboxTitle')} tone="tint"><p>{t('product.blackboxText')}</p><p><a href={pathFor(locale, 'openSource')}>{t('nav.openSource')}</a></p></TextCard>
+    <TextCard title={t('product.techTitle')} tone="tint" level={2}><p>{t('product.techText')}</p></TextCard>
+    <TextCard title={t('product.blackboxTitle')} tone="tint" level={2}><p>{t('product.blackboxText')}</p><p><a href={pathFor(locale, 'openSource')}>{t('nav.openSource')}</a></p></TextCard>
   </div>
 </section>
 

@@ -42,8 +42,8 @@ const field = (key: string) => t(`booking.fields.${key}`);
     </nav>
     <h1 class="t-hero">{t('booking.title')}</h1>
     <p class="t-body-l intro">{t('booking.intro')}</p>
-    <ol class="steps" role="list">
-      {steps.map((s, i) => <li><span class:list={['num', i === 0 && 'num--active']}>{i + 1}</span><span>{s}</span></li>)}
+    <ol class="steps">
+      {steps.map((s, i) => <li aria-current={i === 0 ? 'step' : undefined}><span class:list={['num', i === 0 && 'num--active']}>{i + 1}</span><span>{s}</span></li>)}
     </ol>
   </div>
 </section>
@@ -55,8 +55,8 @@ const field = (key: string) => t(`booking.fields.${key}`);
     <legend class="t-h4">{t('booking.step1')}</legend>
     <div class="plans">
       {plans.map((plan, i) => (
-        <label class="plan">
-          <input type="radio" name="option" value={plan.id} checked={i === 0} class="visually-hidden" />
+        <div class="plan">
+          <input type="radio" name="option" value={plan.id} checked={i === 0} class="cover" aria-label={`${t(`pricing.plans.${plan.id}.title`)}, ${plan.monthlyNet === null ? t('pricing.pricePlaceholder') : formatEuro(plan.monthlyNet, tag)} ${t('pricing.perMonth')}`} />
           <span class="overline">{t(`pricing.plans.${plan.id}.overline`)}</span>
           <span class="t-h5">{t(`pricing.plans.${plan.id}.title`)}</span>
           <span class="price"><b>{plan.monthlyNet === null ? t('pricing.pricePlaceholder') : formatEuro(plan.monthlyNet, tag)}</b> <span class="t-body-xs t-muted">{t('pricing.perMonth')}</span></span>
@@ -65,7 +65,7 @@ const field = (key: string) => t(`booking.fields.${key}`);
             {tv<string[]>(`pricing.plans.${plan.id}.features`).map((f) => <li><Icon name="check" size={16} />{f}</li>)}
           </ul>
           <span class="choose" aria-hidden="true"><span class="when-off">{t('pricing.select')}</span><span class="when-on">{t('pricing.selected')}</span></span>
-        </label>
+        </div>
       ))}
     </div>
   </fieldset>
@@ -90,16 +90,16 @@ const field = (key: string) => t(`booking.fields.${key}`);
     <legend class="t-h4">{t('booking.step3')}</legend>
     <div class="details">
       <div class="fields">
-        <label class="f f--full"><span>{field('org')}*</span><input name="organisation" required autocomplete="organization" placeholder={field('orgPh')} /></label>
-        <label class="f"><span>{field('person')}*</span><input name="name" required autocomplete="name" placeholder={field('personPh')} /></label>
-        <label class="f"><span>{field('role')}</span><input name="role" autocomplete="organization-title" placeholder={field('rolePh')} /></label>
+        <label class="f f--full"><span>{field('org')}*</span><input type="text" name="organisation" required autocomplete="organization" placeholder={field('orgPh')} /></label>
+        <label class="f"><span>{field('person')}*</span><input type="text" name="name" required autocomplete="name" placeholder={field('personPh')} /></label>
+        <label class="f"><span>{field('role')}</span><input type="text" name="role" autocomplete="organization-title" placeholder={field('rolePh')} /></label>
         <label class="f"><span>{field('email')}*</span><input name="email" type="email" required autocomplete="email" placeholder={field('emailPh')} /></label>
         <label class="f"><span>{field('phone')}</span><input name="phone" type="tel" autocomplete="tel" placeholder={field('phonePh')} /></label>
         <p class="t-h6 f--full billing">{field('billing')}</p>
-        <label class="f f--full"><span>{field('street')}*</span><input name="street" required autocomplete="street-address" /></label>
+        <label class="f f--full"><span>{field('street')}*</span><input type="text" name="street" required autocomplete="address-line1" /></label>
         <div class="f--full zip-city">
-          <label class="f"><span>{field('zip')}*</span><input name="zip" required autocomplete="postal-code" inputmode="numeric" /></label>
-          <label class="f"><span>{field('city')}*</span><input name="city" required autocomplete="address-level2" /></label>
+          <label class="f"><span>{field('zip')}*</span><input type="text" name="zip" required autocomplete="postal-code" inputmode="numeric" /></label>
+          <label class="f"><span>{field('city')}*</span><input type="text" name="city" required autocomplete="address-level2" /></label>
         </div>
         <label class="f"><span>{field('start')}</span><input name="start" type="date" /></label>
         <label class="f f--full"><span>{field('message')}</span><textarea name="message" rows="5"></textarea></label>
@@ -108,7 +108,7 @@ const field = (key: string) => t(`booking.fields.${key}`);
         <p class="t-body-xxs t-muted f--full">* {t('booking.required')}</p>
       </div>
 
-      <aside class="summary" aria-labelledby="summary-title" aria-live="polite">
+      <section class="summary" aria-labelledby="summary-title">
         <h2 id="summary-title" class="t-h5">{t('booking.summary.title')}</h2>
         <dl>
           <div><dt>{t('booking.summary.option')}</dt><dd data-sum="option"></dd></div>
@@ -116,11 +116,11 @@ const field = (key: string) => t(`booking.fields.${key}`);
           <div><dt>{t('booking.summary.price')}</dt><dd data-sum="price"></dd></div>
           <div><dt>{t('booking.summary.promo')}</dt><dd data-sum="promo"></dd></div>
         </dl>
-        <p class="total"><span class="t-body-s t-strong" data-sum="totalLabel"></span><span class="t-h4" data-sum="total"></span></p>
+        <p class="total" aria-live="polite"><span class="t-body-s t-strong" data-sum="totalLabel"></span><span class="t-h4" data-sum="total"></span></p>
         <p class="estimate" data-sum="estimateRow" hidden><span class="t-body-xs">{t('booking.summary.estimatedSaving')}</span><b data-sum="estimate"></b></p>
         <Button type="submit" size="L" icon block>{t('booking.submit')}</Button>
         <p class="t-body-xxs t-muted">{t('booking.note')}</p>
-      </aside>
+      </section>
     </div>
   </fieldset>
 </form>
@@ -213,6 +213,7 @@ const field = (key: string) => t(`booking.fields.${key}`);
   legend { padding: 0; margin-block-end: var(--spacing-24); color: var(--color-petrol-900); font-weight: var(--font-weight-bold); }
 
   .plans { display: grid; gap: var(--spacing-16); }
+  .plan .cover { position: absolute; inset: 0; z-index: 1; inline-size: 100%; block-size: 100%; margin: 0; opacity: 0; cursor: pointer; }
   .plan { position: relative; display: grid; gap: var(--spacing-8); align-content: start; padding: var(--spacing-24); background: var(--color-white); border: 1px solid var(--color-gray-cool-200); border-radius: var(--radius-16); cursor: pointer; color: var(--color-petrol-900); }
   .plan:has(input:checked) { border: 2px solid var(--color-petrol-700); padding: calc(var(--spacing-24) - 1px); }
   .plan:has(input:focus-visible) { outline: 3px solid var(--color-petrol-500); outline-offset: 2px; }
@@ -252,7 +253,7 @@ const field = (key: string) => t(`booking.fields.${key}`);
 
   .summary { display: grid; gap: var(--spacing-16); align-self: start; padding: var(--spacing-24); background: var(--color-petrol-050); border-radius: var(--radius-16); }
   dl { margin: 0; display: grid; gap: 12px; padding-block-end: var(--spacing-16); border-block-end: 1px solid var(--color-gray-cool-300); }
-  dl div { display: flex; justify-content: space-between; gap: var(--spacing-16); font-size: var(--font-size-body-xs); }
+  dl div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--spacing-4) var(--spacing-16); font-size: var(--font-size-body-xs); }
   dt { color: var(--color-gray-cool-600); }
   dd { margin: 0; font-weight: var(--font-weight-bold); color: var(--color-petrol-900); text-align: end; }
   .total { display: grid; gap: var(--spacing-4); }

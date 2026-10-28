@@ -10,7 +10,7 @@ interface Props {
 const { locale } = Astro.props;
 const { t } = useTranslations(locale);
 const contact = pathFor(locale, 'contact');
-const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" ');
+const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
 ---
 <footer class="site-footer">
   <div class="container">

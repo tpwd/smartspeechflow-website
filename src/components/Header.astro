@@ -21,7 +21,7 @@ const items: { page: PageKey; label: string }[] = [
   { page: 'openSource', label: t('nav.openSource') },
 ];
 const offerHref = pathFor(locale, 'home', 'preise');
-const logo = logoSvg.replace('<svg ', '<svg role="img" aria-hidden="true" ');
+const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
 ---
 <header class="site-header">
   <div class="container bar">
@@ -52,7 +52,7 @@ const logo = logoSvg.replace('<svg ', '<svg role="img" aria-hidden="true" ');
   </div>
 
   <div id="mobile-menu" class="mobile-menu" hidden>
-    <nav class="container" aria-label={t('nav.main')}>
+    <nav class="container" aria-label={t('nav.mobile')}>
       <ul role="list" class="mobile-links">
         {items.map((item) => (
           <li><a href={pathFor(locale, item.page)} aria-current={item.page === page ? 'page' : undefined}>{item.label}<Icon name="caret-right" size={20} /></a></li>

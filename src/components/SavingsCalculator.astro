@@ -44,7 +44,7 @@ const config = {
       <p class="t-body-l">{t('savings.intro')}</p>
     </div>
 
-    <form class="calc" data-savings>
+    <div class="calc" data-savings role="group" aria-labelledby="savings-title">
       <div class="inputs">
         <fieldset>
           <legend>{t('savings.hours.label')}</legend>
@@ -75,22 +75,22 @@ const config = {
 
         <label class="rate">
           <span>{t('savings.rate.label')}</span>
-          <span class="rate-input"><input name="rate" type="number" inputmode="decimal" min="1" max="1000" step="1" value={savings.interpreterHourlyRate} /><span aria-hidden="true">€</span></span>
-          <span class="t-body-xxs t-muted">{t('savings.rate.hint')}</span>
+          <span class="rate-input"><input name="rate" type="number" inputmode="decimal" min="1" max="1000" step="1" value={savings.interpreterHourlyRate} aria-describedby="calc-rate-hint" /><span aria-hidden="true">€</span></span>
+          <span id="calc-rate-hint" class="t-body-xxs t-muted">{t('savings.rate.hint')}</span>
         </label>
       </div>
 
-      <div class="result" aria-live="polite">
+      <div class="result" data-surface="dark">
         <dl>
           <div><dt>{t('savings.result.interpreter')}</dt><dd data-out="interpreter">{eur(start.interpreterPerYear)}</dd></div>
           <div><dt>{t('savings.result.ssf')}</dt><dd data-out="ssf">− {eur(start.ssfPerYear)}</dd></div>
         </dl>
-        <p class="saving">
+        <p class="saving" aria-live="polite">
           <span class="label">{t('savings.result.saving')}</span>
           <span class="amount" data-out="saving">{eur(start.savingPerYear)}</span>
           <span class="t-body-xs" data-out="perMonth">{t('savings.result.perMonthEquivalent').replace('{amount}', eur(start.savingPerYear / 12))}</span>
         </p>
-        <p class="note t-body-xs" data-out="breakEven" hidden></p>
+        <p class="note t-body-xs" data-out="breakEven" role="status" hidden></p>
         {promoOn && <p class="promo t-body-xs" data-out="promo">{t('savings.result.promoBonus').replace('{amount}', eur(start.promoBonus)).replace('{months}', String(promotion.freeMonths))}</p>}
 
         <div class="effort">
@@ -103,7 +103,7 @@ const config = {
         <Button href={`${pathFor(locale, 'booking')}?option=${startPlan.id}`} size="L" icon block data-out="cta">{t('savings.cta')}</Button>
         <p class="t-body-xxs t-muted">{t('savings.disclaimer')}</p>
       </div>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -121,19 +121,19 @@ const config = {
     text: Record<string, string>;
   };
   const config = JSON.parse(document.getElementById('savings-config')!.textContent!) as Config;
-  const form = document.querySelector<HTMLFormElement>('[data-savings]');
+  const form = document.querySelector<HTMLElement>('[data-savings]');
   if (form) {
     const eur = (v: number) => new Intl.NumberFormat(config.locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
     const out = (key: string) => form.querySelector<HTMLElement>(`[data-out="${key}"]`);
+    const field = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:not([type="radio"]), input[name="${name}"]:checked`)!;
     const num = (name: string, fallback: number) => {
-      const value = Number((form.elements.namedItem(name) as HTMLInputElement).value);
+      const value = Number(field(name).value);
       return Number.isFinite(value) && value >= 0 ? value : fallback;
     };
 
     const update = () => {
-      const data = new FormData(form);
-      const planId = String(data.get('plan'));
-      const period = data.get('period') === 'year' ? 'year' : 'month';
+      const planId = field('plan').value;
+      const period = field('period').value === 'year' ? 'year' : 'month';
       const plan = config.plans[planId];
       const hours = num('hours', 0);
       const rate = Math.max(num('rate', 40), 1);
@@ -157,7 +157,6 @@ const config = {
       (out('cta') as HTMLAnchorElement).href = `${config.bookingUrl}?${params}`;
     };
     form.addEventListener('input', update);
-    form.addEventListener('submit', (e) => e.preventDefault());
     update();
   }
 </script>
@@ -166,8 +165,8 @@ const config = {
   .savings { background: var(--color-petrol-050); }
   .intro { display: grid; gap: var(--spacing-16); max-inline-size: 792px; margin-block-end: var(--spacing-40); }
   .intro p { color: var(--color-gray-cool-700); }
-  .calc { display: grid; gap: var(--spacing-24); }
-  .inputs, .result { display: grid; gap: var(--spacing-32); align-content: start; padding: var(--spacing-24); background: var(--color-white); border-radius: var(--radius-24); }
+  .calc { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-24); }
+  .inputs, .result { min-inline-size: 0; display: grid; gap: var(--spacing-32); align-content: start; padding: var(--spacing-24); background: var(--color-white); border-radius: var(--radius-24); }
   .result { background: var(--color-petrol-900); color: var(--color-petrol-100); gap: var(--spacing-24); }
   fieldset { margin: 0; padding: 0; border: 0; min-inline-size: 0; display: grid; gap: 12px; }
   legend, .rate > span:first-child { padding: 0; margin-block-end: 12px; color: var(--color-petrol-900); font-weight: var(--font-weight-bold); font-size: var(--font-size-body-s); }
@@ -197,11 +196,11 @@ const config = {
   .rate-input { display: flex; align-items: center; gap: var(--spacing-8); max-inline-size: 160px; color: var(--color-petrol-900); font-weight: var(--font-weight-bold); }
 
   dl { margin: 0; display: grid; gap: 12px; padding-block-end: var(--spacing-16); border-block-end: 1px solid var(--color-petrol-700); }
-  dl div { display: flex; justify-content: space-between; gap: var(--spacing-16); font-size: var(--font-size-body-s); }
+  dl div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--spacing-4) var(--spacing-16); font-size: var(--font-size-body-s); }
   dd { margin: 0; color: var(--color-white); font-weight: var(--font-weight-bold); }
   .saving { display: grid; gap: 4px; }
   .saving .label { font-weight: var(--font-weight-bold); color: var(--color-white); }
-  .amount { color: var(--color-green-300); font-size: var(--font-size-h2); line-height: var(--line-height-h2); font-weight: var(--font-weight-bold); letter-spacing: var(--letter-spacing-h2); }
+  .amount { color: var(--color-green-300); font-size: var(--font-size-h3); line-height: var(--line-height-h3); font-weight: var(--font-weight-bold); letter-spacing: var(--letter-spacing-h3); overflow-wrap: anywhere; }
   .is-negative .amount { color: var(--color-petrol-300); }
   .note, .promo { padding: 12px var(--spacing-16); border-radius: var(--radius-8); background: var(--color-petrol-800); color: var(--color-white); }
   .effort { display: grid; gap: 12px; }
@@ -214,11 +213,12 @@ const config = {
   .result :global(.btn--primary:hover) { background: var(--color-petrol-100); }
 
   @media (min-width: 768px) {
+    .amount { font-size: var(--font-size-h2); line-height: var(--line-height-h2); letter-spacing: var(--letter-spacing-h2); }
     .inputs, .result { padding: var(--spacing-32); }
     .plans { grid-template-columns: 1fr 1fr; }
   }
   @media (min-width: 1024px) {
-    .calc { grid-template-columns: 1fr 1fr; gap: var(--spacing-24); }
+    .calc { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-24); }
     .inputs, .result { padding: var(--spacing-40); }
   }
 </style>

@@ -1,7 +1,6 @@
 {
   "meta": {
     "siteName": "Smart Speech Flow",
-    "homeTitle": "Smart Speech Flow – Interpreting for public services",
     "description": "Smart Speech Flow interprets conversations between public services and citizens in real time – in 20 languages, legally compliant and privacy-friendly. Open source."
   },
   "nav": {
@@ -16,7 +15,8 @@
     "language": "Choose language",
     "book": "Book now",
     "menuOpen": "Open menu",
-    "menuClose": "Close menu"
+    "menuClose": "Close menu",
+    "mobile": "Menu"
   },
   "promo": {
     "badge": "Until 31 Dec 2026: 2 months free",
@@ -193,7 +193,6 @@
     "terms": "Terms and conditions"
   },
   "booking": {
-    "metaTitle": "Book Smart Speech Flow",
     "breadcrumb": "Breadcrumb",
     "breadcrumbCurrent": "Booking",
     "title": "Book Smart Speech Flow",
@@ -256,7 +255,6 @@
     "demoNotice": "Demo mode: no booking backend is connected. Submitting sends no data; you are only redirected to the thank-you page."
   },
   "thanks": {
-    "metaTitle": "Thank you for your booking",
     "title1": "Thank you!",
     "title2": "We have received your booking.",
     "text": "We have sent a confirmation to [email address]. It contains all details of your booking.",
@@ -697,6 +695,56 @@
     "terms": {
       "title": "Terms and conditions",
       "text": "[Placeholder – the terms and conditions for booking Smart Speech Flow are not available yet. The booking form requires them to be accepted.]"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Interpreting for public services – Smart Speech Flow",
+      "description": "Smart Speech Flow interprets conversations with citizens in real time – in 20 languages, legally compliant and privacy-friendly. Calculate your savings."
+    },
+    "product": {
+      "title": "Real-time interpreting in the browser – Smart Speech Flow",
+      "description": "How Smart Speech Flow works: speech recognition, translation and speech output in 20 languages, three conversation modes, ready within 2 days."
+    },
+    "useCases": {
+      "title": "Use cases in administration and advice – Smart Speech Flow",
+      "description": "Citizen services, social and integration advice, community work, mobile settings: where Smart Speech Flow bridges language barriers instantly."
+    },
+    "project": {
+      "title": "About the project – Smart Speech Flow",
+      "description": "Created with Smart City Kassel, implemented by Smart Village Solutions and funded through the German Smart Cities Model Projects programme."
+    },
+    "openSource": {
+      "title": "Open source under the MIT License – Smart Speech Flow",
+      "description": "The source code of Smart Speech Flow is available under the MIT License: transparent, verifiable, no licence fees. Run it yourself or let us run it."
+    },
+    "contact": {
+      "title": "Contact and live demo – Smart Speech Flow",
+      "description": "Request a live demo, ask about booking or discuss your use case: how to reach the Smart Speech Flow team."
+    },
+    "booking": {
+      "title": "Book Smart Speech Flow online",
+      "description": "Book Smart Speech Flow in three steps: choose an option, choose a term, enter your details. Ready within 2 days."
+    },
+    "thanks": {
+      "title": "Thank you for your booking – Smart Speech Flow",
+      "description": "We have received your Smart Speech Flow booking. Here is what happens next."
+    },
+    "legalNotice": {
+      "title": "Legal notice – Smart Speech Flow",
+      "description": "Legal notice of Smart Speech Flow: Smart Village Solutions SVS GmbH, Bad Belzig, Germany."
+    },
+    "privacy": {
+      "title": "Privacy policy – Smart Speech Flow",
+      "description": "Privacy policy of smartspeechflow.de: controller, hosting, contact form, your rights."
+    },
+    "terms": {
+      "title": "Terms and conditions – Smart Speech Flow",
+      "description": "Terms and conditions for booking Smart Speech Flow."
+    },
+    "notFound": {
+      "title": "Page not found – Smart Speech Flow",
+      "description": "The page you requested does not exist."
     }
   }
 }

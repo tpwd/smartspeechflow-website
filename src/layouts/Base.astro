@@ -8,46 +8,73 @@ import '../styles/global.css';
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { defaultLocale, isRtl, locales, localeTags, pathFor, type Locale, type PageKey } from '../i18n/config';
-import { t } from '../i18n';
+import { defaultLocale, isRtl, localeTags, pathFor, type Locale, type PageKey } from '../i18n/config';
+import { indexableLocales, isComplete, t } from '../i18n';
+import { structuredData } from '../lib/seo';
 
 interface Props {
   locale: Locale;
-  page: PageKey;
-  title: string;
-  description?: string;
+  /** null = Seite ohne festen Pfad (404) */
+  page: PageKey | null;
 }
 
-const { locale, page, title, description = t(locale, 'meta.description') } = Astro.props;
+const { locale, page } = Astro.props;
 const site = Astro.site ?? new URL('https://smartspeechflow.de');
-const canonical = new URL(pathFor(locale, page), site).href;
-// Bis zum Go-live: noindex (siehe .env.example).
-const noindex = import.meta.env.PUBLIC_NOINDEX !== 'false';
-const indexable = noindex ? false : page !== 'thanks';
+const seoKey = page ?? 'notFound';
+const title = t(locale, `seo.${seoKey}.title`);
+const description = t(locale, `seo.${seoKey}.description`);
+
+// Unvollständig übersetzte Sprachen zeigen deutschen Text: dann ehrlich als Deutsch auszeichnen,
+// nicht indexieren und auf die deutsche Fassung als Original verweisen.
+const complete = isComplete(locale);
+const contentLocale: Locale = complete ? locale : defaultLocale;
+const canonicalLocale: Locale = complete ? locale : defaultLocale;
+const canonical = page ? new URL(pathFor(canonicalLocale, page), site).href : null;
+
+const noindexEnv = import.meta.env.PUBLIC_NOINDEX !== 'false';
+const indexable = !noindexEnv && complete && page !== null && page !== 'thanks';
+const ogImage = new URL(`/og/${contentLocale === 'en' ? 'en' : 'de'}.png`, site).href;
+const jsonLd = page ? structuredData(contentLocale, page, title, description) : null;
 ---
 <!doctype html>
-<html lang={localeTags[locale]} dir={isRtl(locale) ? 'rtl' : 'ltr'}>
+<html lang={localeTags[contentLocale]} dir={isRtl(contentLocale) ? 'rtl' : 'ltr'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {!indexable && <meta name="robots" content="noindex, nofollow" />}
-    <link rel="canonical" href={canonical} />
-    {locales.map((l) => <link rel="alternate" hreflang={localeTags[l]} href={new URL(pathFor(l, page), site).href} />)}
-    <link rel="alternate" hreflang="x-default" href={new URL(pathFor(defaultLocale, page), site).href} />
+    <meta name="robots" content={indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow'} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {page && complete && indexableLocales.map((l) => (
+      <link rel="alternate" hreflang={localeTags[l]} href={new URL(pathFor(l, page), site).href} />
+    ))}
+    {page && complete && <link rel="alternate" hreflang="x-default" href={new URL(pathFor(defaultLocale, page), site).href} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <meta name="theme-color" content="#0a2833" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Smart Speech Flow" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content={localeTags[locale].replace('-', '_')} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={t(contentLocale, 'hero.headline')} />
+    <meta property="og:locale" content={localeTags[contentLocale].replace('-', '_')} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
     <a class="skip-link" href="#inhalt">{t(locale, 'nav.skip')}</a>
-    <Header locale={locale} page={page} />
-    <main id="inhalt">
+    <Header locale={locale} page={page ?? 'home'} />
+    <main id="inhalt" tabindex="-1">
       <slot />
     </main>
     <Footer locale={locale} />
   </body>
 </html>
+
+<style>
+  main:focus { outline: none; }
+</style>

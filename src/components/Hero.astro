@@ -45,7 +45,8 @@ const { t } = useTranslations(locale);
   .savings-link :global(.icon) { transform: rotate(90deg); }
   .media { position: relative; min-block-size: 320px; }
   .media :global(img) { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; }
-  .chat-wrap { position: absolute; inset-inline-end: var(--spacing-16); inset-block-end: var(--spacing-16); inline-size: min(248px, 70%); }
+  .chat-wrap { position: absolute; inset-inline-end: var(--spacing-16); inset-block-end: var(--spacing-16); inline-size: 248px; max-inline-size: calc(100% - 2 * var(--spacing-16)); }
+  .chat-wrap :global(.chat) { max-inline-size: none; }
   .chat-wrap :global(.chat) { zoom: 0.62; inline-size: 400px; }
 
   @media (min-width: 768px) {

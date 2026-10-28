@@ -20,6 +20,7 @@ npm run build        # statische Seite nach dist/ bauen
 npm run preview      # gebaute Seite lokal ansehen (wie später auf dem Server)
 npm run check        # Typprüfung + Übersicht fehlender Übersetzungen
 npm run i18n:check   # nur fehlende Übersetzungen
+npm run validate     # bauen + alle Seiten mit html-validate prüfen
 ```
 
 Optional: `.env.example` nach `.env` kopieren. Die Einstellungen darin sind dort erklärt.
@@ -36,7 +37,7 @@ Optional: `.env.example` nach `.env` kopieren. Die Einstellungen darin sind dort
 | Impressum, Datenschutz | wie heute | wie heute | Rechtstexte **wörtlich** aus der Bestandsseite, Datenschutz mit markiertem Platzhalter für das Buchungsformular |
 | AGB | `/de/agb/` | `/en/terms/` | Platzhalter, **Text fehlt** (vom Buchungsformular vorausgesetzt) |
 
-**Ersparnisrechner** (Startseite, Anker `#ersparnis`): Dolmetscherstunden pro Monat oder Jahr × Stundensatz (Annahme 40 €, im Rechner änderbar) minus Jahrespreis der gewählten Option. Zeigt die Ersparnis pro Jahr, die Gewinnschwelle, den Aktionsbonus und den eingesparten Aufwand. „Mit dieser Option buchen“ übergibt Option und Schätzung an die Buchen-Seite. Ohne JavaScript steht eine fertige Beispielrechnung da.
+**Ersparnisrechner** (Startseite, Anker `#ersparnis`): Dolmetscherstunden pro Monat oder Jahr × Stundensatz (Startwert 83 € laut Briefing, im Rechner änderbar) minus Jahrespreis der gewählten Option. Zeigt die Ersparnis pro Jahr, die Gewinnschwelle, den Aktionsbonus und den eingesparten Aufwand. „Mit dieser Option buchen“ übergibt Option und Schätzung an die Buchen-Seite. Ohne JavaScript steht eine fertige Beispielrechnung da.
 
 - **9 Sprachen** wie auf der heutigen Seite: de, en, hi, fr, it, pl, es, tr, ar. Das URL-Schema ist übernommen, damit alle bestehenden Links gültig bleiben.
 - **Arabisch** wird mit `dir="rtl"` gespiegelt. Alle Abstände nutzen logische CSS-Eigenschaften.
@@ -62,6 +63,28 @@ src/
   assets/               Bilder und Logos aus Figma, Icons (Phosphor Light, MIT)
 ```
 
+## Barrierefreiheit, SEO und KI-Lesbarkeit
+
+**Barrierefreiheit (Ziel: WCAG 2.2 AA / BITV 2.0)**
+- Skip-Link, sinnvolle Überschriftenhierarchie (je Seite genau eine `h1`), Landmarks mit eindeutigen Namen
+- komplett per Tastatur bedienbar: Mobilmenü und Sprachauswahl mit Enter/Escape, Radio-Gruppen mit Pfeiltasten, sichtbarer Fokusrahmen (auf dunklen Flächen weiß)
+- Formulare mit Labels, Pflichtfeld-Kennzeichnung, `autocomplete`; Ergebnisse des Rechners und der Buchungssumme werden per `aria-live` angesagt
+- Kontraste nach WCAG AA, kein horizontales Scrollen bei 320 px Breite und 200 % Zoom, `prefers-reduced-motion` wird beachtet
+- `role="list"` an Listen ohne Aufzählungszeichen ist Absicht (Safari/VoiceOver), daher ist die html-validate-Regel `no-redundant-role` aus
+
+Geprüft beim Aufbau mit html-validate (alle Seiten), axe-core 4.10 (WCAG 2.0–2.2 A/AA + Best Practices, 15 Seiten in 375 und 1440 px) und einem Tastatur-Durchlauf. Automatische Tests ersetzen keinen Test mit echten Screenreadern (NVDA, VoiceOver) – vor dem Go-live empfohlen.
+
+**SEO**
+- eigener Seitentitel (≤ 60 Zeichen) und eigene Beschreibung je Seite und Sprache (`seo.*` in den Sprachdateien)
+- `canonical`, `hreflang` + `x-default`, `sitemap.xml`, Open-Graph-Bilder (`public/og/`), strukturierte Daten (schema.org JSON-LD: Organisation, Website, Produkt mit Preisen, Brotkrumen)
+- Sprachen ohne vollständige Übersetzung zeigen deutschen Text und sind deshalb `noindex` mit `canonical` auf die deutsche Seite; sie erscheinen weder in `hreflang` noch in der Sitemap. Sobald eine Sprache vollständig ist, wird sie automatisch indexiert.
+- `robots.txt` wird erzeugt: vor dem Go-live alles gesperrt, danach alles erlaubt inkl. Sitemap
+
+**KI-Assistenten**
+- alle Inhalte stehen als fertiges HTML im Quelltext (kein JavaScript nötig), auch die Beispielrechnung des Rechners
+- `/llms.txt` fasst Produkt, Fakten, Preise und Seiten kompakt zusammen – automatisch aus denselben Daten wie die Seite (Vorschlag llmstxt.org, kein offizieller Standard)
+- JSON-LD liefert Preise und Anbieter maschinenlesbar
+
 ## Übersetzungen
 
 `de.json` ist die Referenz. Fehlt ein Text in einer anderen Sprache, erscheint dort der deutsche Text. `npm run i18n:check` zeigt, was fehlt.
@@ -72,7 +95,6 @@ src/
 
 ## Offene Punkte (vor Go-live)
 
-- [ ] **Stundensatz im Rechner:** 40 € (Vorgabe) oder ca. 83 € („Bundestarif“ laut Briefing-Call)? Wert in `src/data/site.ts` → `savings.interpreterHourlyRate`
 - [ ] Kontaktformular-Backend: Ziel-URL in `PUBLIC_CONTACT_ENDPOINT`
 - [ ] Impressum/Datenschutz: Die Bestandstexte nennen das TMG, das 2024 durch das Digitale-Dienste-Gesetz (DDG) abgelöst wurde – rechtlich prüfen lassen. Abschnitt zum Buchungsformular ergänzen.
 - [ ] Serverstandort: „Server in Deutschland“ ist laut Briefing nicht belegt (Hosting bei Hetzner) – Formulierung bestätigen

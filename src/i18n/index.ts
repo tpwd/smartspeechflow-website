@@ -15,6 +15,19 @@ function lookup(dict: Record<string, unknown>, key: string): unknown {
   }, dict);
 }
 
+function flatKeys(node: unknown, prefix = ''): string[] {
+  if (!node || typeof node !== 'object' || Array.isArray(node)) return [prefix];
+  return Object.entries(node as Record<string, unknown>).flatMap(([k, v]) => flatKeys(v, prefix ? `${prefix}.${k}` : k));
+}
+const referenceKeys = flatKeys(dictionaries[defaultLocale]);
+
+/** Vollständig übersetzt = jeder Schlüssel aus de.json ist vorhanden. Nur solche Sprachen werden indexiert. */
+export function isComplete(locale: Locale): boolean {
+  if (locale === defaultLocale) return true;
+  return referenceKeys.every((key) => lookup(dictionaries[locale], key) !== undefined);
+}
+export const indexableLocales = locales.filter(isComplete);
+
 /** Wert zu einem Schlüssel (String, Liste oder Objekt) mit Fallback auf Deutsch. */
 export function tv<T = unknown>(locale: Locale, key: string): T {
   const value = lookup(dictionaries[locale], key) ?? lookup(dictionaries[defaultLocale], key);

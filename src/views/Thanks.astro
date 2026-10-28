@@ -37,7 +37,7 @@ const config = {
 <section class="section" aria-labelledby="next-title">
   <div class="container stack" style="--stack-gap: var(--spacing-40)">
     <h2 id="next-title" class="t-section">{t('thanks.nextTitle')}</h2>
-    <ol class="steps" role="list">
+    <ol class="steps">
       {steps.map((s, i) => <StepCard number={i + 1} title={s.title} text={s.text} />)}
     </ol>
   </div>

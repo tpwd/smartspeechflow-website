@@ -1,14 +1,15 @@
 import type { APIRoute } from 'astro';
-import { locales, localeTags, pages, pathFor } from '../i18n/config';
+import { localeTags, pages, pathFor } from '../i18n/config';
+import { indexableLocales } from '../i18n';
 
-// Sitemap mit hreflang-Alternativen. Die Danke-Seite ist ausgenommen.
+// Sitemap mit hreflang-Alternativen. Enthält nur vollständig übersetzte Sprachen; die Danke-Seite ist ausgenommen.
 export const GET: APIRoute = ({ site }) => {
   const base = site ?? new URL('https://smartspeechflow.de');
   const urls = pages
     .filter((page) => page !== 'thanks')
     .flatMap((page) =>
-      locales.map((locale) => {
-        const alternates = locales
+      indexableLocales.map((locale) => {
+        const alternates = indexableLocales
           .map((l) => `    <xhtml:link rel="alternate" hreflang="${localeTags[l]}" href="${new URL(pathFor(l, page), base).href}"/>`)
           .join('\n');
         return `  <url>\n    <loc>${new URL(pathFor(locale, page), base).href}</loc>\n${alternates}\n  </url>`;

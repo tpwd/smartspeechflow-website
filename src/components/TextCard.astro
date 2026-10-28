@@ -3,12 +3,14 @@ interface Props {
   title: string;
   overline?: string;
   tone?: 'white' | 'tint';
+  level?: 2 | 3;
 }
-const { title, overline, tone = 'white' } = Astro.props;
+const { title, overline, tone = 'white', level = 3 } = Astro.props;
+const Heading = level === 2 ? 'h2' : 'h3';
 ---
 <article class:list={['text-card', `text-card--${tone}`]}>
   {overline && <p class="overline">{overline}</p>}
-  <h3 class="t-h5">{title}</h3>
+  <Heading class="t-h5">{title}</Heading>
   <div class="t-body-s body"><slot /></div>
 </article>
 

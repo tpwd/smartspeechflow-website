@@ -42,6 +42,24 @@ const label = t(locale, 'nav.language');
   </details>
 )}
 
+<script>
+  // <details> schließt sich nicht von selbst per Escape oder Klick daneben – das ergänzen wir.
+  document.querySelectorAll<HTMLDetailsElement>('details.lang').forEach((details) => {
+    details.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && details.open) {
+        details.open = false;
+        details.querySelector('summary')?.focus();
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (details.open && !details.contains(e.target as Node)) details.open = false;
+    });
+    details.addEventListener('focusout', (e) => {
+      if (details.open && !details.contains(e.relatedTarget as Node | null)) details.open = false;
+    });
+  });
+</script>
+
 <style>
   .lang { position: relative; }
   .lang summary {

@@ -11,7 +11,6 @@ import OpenSource from '../../views/OpenSource.astro';
 import Contact from '../../views/Contact.astro';
 import Legal from '../../views/Legal.astro';
 import { locales, pages, slugs, type Locale, type PageKey } from '../../i18n/config';
-import { t } from '../../i18n';
 
 export const getStaticPaths = (() =>
   locales.flatMap((locale) =>
@@ -27,15 +26,8 @@ interface Props {
 }
 const { locale, page } = Astro.props;
 
-const titles: Partial<Record<PageKey, string>> = {
-  home: t(locale, 'meta.homeTitle'),
-  booking: `${t(locale, 'booking.metaTitle')} – Smart Speech Flow`,
-  thanks: `${t(locale, 'thanks.metaTitle')} – Smart Speech Flow`,
-};
-const pageName = page === 'home' || page === 'booking' || page === 'thanks' ? '' : t(locale, `pageNames.${page}`);
-const title = titles[page] ?? `${pageName} – Smart Speech Flow`;
 ---
-<Base locale={locale} page={page} title={title}>
+<Base locale={locale} page={page}>
   {page === 'home' && <Home locale={locale} />}
   {page === 'booking' && <Booking locale={locale} />}
   {page === 'thanks' && <Thanks locale={locale} />}

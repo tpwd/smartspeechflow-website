@@ -23,7 +23,7 @@ const resourceLinks = [links.github, links.docs, links.github];
       <h2 class="t-section">{t('openSource.mitTitle')}</h2>
       <p class="t-body-m">{t('openSource.mitText')}</p>
     </div>
-    <TextCard title={t('openSource.mitAllowsTitle')} tone="tint">
+    <TextCard title={t('openSource.mitAllowsTitle')} tone="tint" level={2}>
       <ul role="list" class="checks">{tv<string[]>('openSource.mitAllows').map((a) => <li><Icon name="check" size={16} />{a}</li>)}</ul>
     </TextCard>
   </div>

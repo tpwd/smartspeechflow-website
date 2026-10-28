@@ -1,7 +1,6 @@
 {
   "meta": {
     "siteName": "Smart Speech Flow",
-    "homeTitle": "Smart Speech Flow – Dolmetschen im Bürgerkontakt",
     "description": "Smart Speech Flow dolmetscht Gespräche im Bürgerkontakt in Echtzeit – in 20 Sprachen, rechtssicher und datenschutzkonform. Open Source."
   },
   "nav": {
@@ -16,7 +15,8 @@
     "language": "Sprache wählen",
     "book": "Jetzt buchen",
     "menuOpen": "Menü öffnen",
-    "menuClose": "Menü schließen"
+    "menuClose": "Menü schließen",
+    "mobile": "Menü"
   },
   "promo": {
     "badge": "Bis 31.12.2026: 2 Monate gratis",
@@ -193,7 +193,6 @@
     "terms": "AGB"
   },
   "booking": {
-    "metaTitle": "Smart Speech Flow buchen",
     "breadcrumb": "Brotkrumen-Navigation",
     "breadcrumbCurrent": "Buchen",
     "title": "Smart Speech Flow buchen",
@@ -256,7 +255,6 @@
     "demoNotice": "Demo-Modus: Es ist kein Buchungs-Backend angebunden. Beim Absenden werden keine Daten übertragen, Sie werden nur zur Danke-Seite weitergeleitet."
   },
   "thanks": {
-    "metaTitle": "Vielen Dank für Ihre Buchung",
     "title1": "Vielen Dank!",
     "title2": "Ihre Buchung ist bei uns eingegangen.",
     "text": "Wir haben Ihnen eine Bestätigung an [E-Mail-Adresse] gesendet. Darin finden Sie alle Details zu Ihrer Buchung.",
@@ -697,6 +695,56 @@
     "terms": {
       "title": "AGB",
       "text": "[Platzhalter – die Vertragsbedingungen / AGB für die Buchung von Smart Speech Flow liegen noch nicht vor. Das Buchungsformular setzt ihre Zustimmung voraus.]"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Dolmetschen im Bürgerkontakt – Smart Speech Flow",
+      "description": "Smart Speech Flow dolmetscht im Bürgerkontakt in Echtzeit – in 20 Sprachen, rechtssicher und datenschutzkonform. Ersparnis berechnen und online buchen."
+    },
+    "product": {
+      "title": "Echtzeit-Dolmetschen im Browser – Smart Speech Flow",
+      "description": "So funktioniert Smart Speech Flow: Spracherkennung, Übersetzung und Sprachausgabe in 20 Sprachen, drei Gesprächsmodi, startklar in 2 Tagen."
+    },
+    "useCases": {
+      "title": "Einsatzfelder in Verwaltung und Beratung – Smart Speech Flow",
+      "description": "Bürgerservice, Sozial- und Integrationsberatung, Quartiersarbeit, mobile Einsätze: Wo Smart Speech Flow Sprachbarrieren sofort überbrückt."
+    },
+    "project": {
+      "title": "Über das Projekt – Smart Speech Flow",
+      "description": "Entstanden mit Smart City Kassel, umgesetzt von Smart Village Solutions, gefördert im Programm Modellprojekte Smart Cities des Bundes."
+    },
+    "openSource": {
+      "title": "Open Source unter MIT-Lizenz – Smart Speech Flow",
+      "description": "Der Quellcode von Smart Speech Flow steht unter der MIT License: transparent, prüfbar, ohne Lizenzkosten. Selbst betreiben oder betreiben lassen."
+    },
+    "contact": {
+      "title": "Kontakt und Live-Demo – Smart Speech Flow",
+      "description": "Live-Demo anfragen, Fragen zur Buchung stellen oder über Ihren Einsatz sprechen: So erreichen Sie das Team von Smart Speech Flow."
+    },
+    "booking": {
+      "title": "Smart Speech Flow online buchen",
+      "description": "Smart Speech Flow in drei Schritten buchen: Option wählen, Laufzeit wählen, Angaben machen. Startklar in bis zu 2 Tagen."
+    },
+    "thanks": {
+      "title": "Vielen Dank für Ihre Buchung – Smart Speech Flow",
+      "description": "Ihre Buchung von Smart Speech Flow ist eingegangen. So geht es weiter."
+    },
+    "legalNotice": {
+      "title": "Impressum – Smart Speech Flow",
+      "description": "Impressum von Smart Speech Flow: Smart Village Solutions SVS GmbH, Bad Belzig."
+    },
+    "privacy": {
+      "title": "Datenschutzerklärung – Smart Speech Flow",
+      "description": "Datenschutzerklärung der Website smartspeechflow.de: Verantwortlicher, Hosting, Kontaktformular, Ihre Rechte."
+    },
+    "terms": {
+      "title": "AGB – Smart Speech Flow",
+      "description": "Allgemeine Geschäftsbedingungen für die Buchung von Smart Speech Flow."
+    },
+    "notFound": {
+      "title": "Seite nicht gefunden – Smart Speech Flow",
+      "description": "Die aufgerufene Seite gibt es nicht."
     }
   }
 }

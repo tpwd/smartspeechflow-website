@@ -42,11 +42,10 @@ export const links = {
 /** Ersparnisrechner: Annahmen. Alle Beträge netto. */
 export const savings = {
   /**
-   * Annahme: Kosten pro Dolmetscherstunde in Euro (im Rechner änderbar).
-   * TODO: abstimmen – Vorgabe Tobias Raddatz: 40 €; im Briefing-Call (Philipp Wilimzig) genannt: ca. 83 € („Bundestarif“).
-   * Von diesem Wert hängt auch der Text „Rechnet sich ab ca. … Stunden“ ab.
+   * Startwert für die Kosten pro Dolmetscherstunde in Euro (netto), im Rechner änderbar.
+   * 83 € laut Briefing-Call („Bundestarif“). Davon hängt auch der Text „Rechnet sich ab ca. … Stunden“ ab.
    */
-  interpreterHourlyRate: 40,
+  interpreterHourlyRate: 83,
   /** Startwerte des Rechners */
   defaultHours: 20,
   defaultPeriod: 'month' as 'month' | 'year',

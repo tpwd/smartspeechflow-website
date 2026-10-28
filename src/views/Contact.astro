@@ -18,21 +18,21 @@ const f = (k: string) => t(`contact.fields.${k}`);
 
 <section class="section">
   <div class="container layout">
-    <aside class="side">
-      <TextCard title={t('contact.peopleTitle')} tone="tint">
+    <div class="side">
+      <TextCard title={t('contact.peopleTitle')} tone="tint" level={2}>
         {tv<{ name: string; role: string }[]>('contact.people').map((p) => <p><b>{p.name}</b><br />{p.role}</p>)}
-        <p><b>{t('contact.direct')}</b><br /><a href={`mailto:${links.email}`}>{links.email}</a><br /><a href={`tel:+49${links.phone.replace(/^0/, '').replace(/\D/g, '')}`}>{links.phone}</a></p>
+        <p><b>{t('contact.direct')}</b><br /><a href={`mailto:${links.email}`}>{links.email}</a><br /><a href={`tel:+49${links.phone.replace(/^0/, '').replace(/\D/g, '')}`}>{links.phone.replaceAll('-', '\u2011')}</a></p>
       </TextCard>
-      <TextCard title={t('contact.topicsTitle')}>
+      <TextCard title={t('contact.topicsTitle')} level={2}>
         <ul role="list" class="checks">{tv<string[]>('contact.topics').map((x) => <li><Icon name="check" size={16} />{x}</li>)}</ul>
       </TextCard>
-    </aside>
+    </div>
 
     <form class="form" method="post" action={endpoint || undefined} data-demo={endpoint ? undefined : 'true'} novalidate aria-labelledby="form-title">
       <h2 id="form-title" class="t-h4">{t('contact.formTitle')}</h2>
       {!endpoint && <p class="notice t-body-xs" role="note">{t('contact.demoNotice')}</p>}
-      <label class="field"><span>{f('name')}*</span><input name="name" required autocomplete="name" /></label>
-      <label class="field"><span>{f('org')}</span><input name="organisation" autocomplete="organization" /></label>
+      <label class="field"><span>{f('name')}*</span><input type="text" name="name" required autocomplete="name" /></label>
+      <label class="field"><span>{f('org')}</span><input type="text" name="organisation" autocomplete="organization" /></label>
       <label class="field"><span>{f('email')}*</span><input name="email" type="email" required autocomplete="email" /></label>
       <label class="field"><span>{f('category')}</span>
         <select name="category">

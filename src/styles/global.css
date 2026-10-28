@@ -60,6 +60,12 @@ textarea {
   outline: 3px solid var(--color-petrol-500);
   outline-offset: 2px;
 }
+/* Auf dunklen Flächen reicht Petrol 500 nicht für 3:1 – dort weißer Fokusrahmen */
+.section--dark :focus-visible,
+.site-footer :focus-visible,
+[data-surface='dark'] :focus-visible {
+  outline-color: var(--color-white);
+}
 
 .visually-hidden {
   position: absolute !important;
@@ -115,6 +121,11 @@ textarea {
 .t-h6 {
   color: var(--color-petrol-900);
   font-weight: var(--font-weight-bold);
+}
+
+.t-hero, .t-section, .t-h4, .t-h5, .t-h6 {
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .t-hero {
