@@ -44,7 +44,6 @@ export const pages = [
   'thanks',
   'legalNotice',
   'privacy',
-  'terms',
 ] as const;
 export type PageKey = (typeof pages)[number];
 
@@ -59,7 +58,6 @@ const englishSlugs: Record<PageKey, string> = {
   thanks: 'booking/thank-you',
   legalNotice: 'legal-notice',
   privacy: 'privacy',
-  terms: 'terms',
 };
 
 export const slugs: Record<Locale, Record<PageKey, string>> = {
@@ -74,7 +72,6 @@ export const slugs: Record<Locale, Record<PageKey, string>> = {
     thanks: 'buchen/danke',
     legalNotice: 'impressum',
     privacy: 'datenschutz',
-    terms: 'agb',
   },
   en: englishSlugs,
   hi: englishSlugs,

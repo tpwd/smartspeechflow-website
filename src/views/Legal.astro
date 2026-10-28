@@ -5,12 +5,12 @@ import { useTranslations } from '../i18n';
 
 interface Props {
   locale: Locale;
-  doc: 'notice' | 'privacy' | 'terms';
+  doc: 'notice' | 'privacy';
 }
 const { locale, doc } = Astro.props;
 const { t, tv } = useTranslations(locale);
 type Section = { title: string; lines?: string[]; paragraphs?: string[]; list?: string[]; after?: string[] };
-const sections = doc === 'terms' ? [] : tv<Section[]>(`legal.${doc}.sections`);
+const sections = tv<Section[]>(`legal.${doc}.sections`);
 const note = t('legal.translationNote');
 ---
 <PageHead locale={locale} current={t(`legal.${doc}.title`)} title={t(`legal.${doc}.title`)} />
@@ -18,7 +18,6 @@ const note = t('legal.translationNote');
 <section class="section">
   <div class="container legal">
     {note && <p class="note t-body-xs">{note}</p>}
-    {doc === 'terms' && <p class="t-body-m">{t('legal.terms.text')}</p>}
     {sections.map((s) => (
       <section>
         <h2 class="t-h5">{s.title}</h2>

@@ -105,7 +105,6 @@ const field = (key: string) => t(`booking.fields.${key}`);
         <label class="f"><span>{field('start')}</span><input name="start" type="date" /></label>
         <label class="f f--full"><span>{field('message')}</span><textarea name="message" rows="5"></textarea></label>
         <label class="check f--full"><input type="checkbox" name="consentPrivacy" required /><span>{t('booking.consentPrivacy')}*</span></label>
-        <label class="check f--full"><input type="checkbox" name="consentTerms" required /><span>{t('booking.consentTerms')}*</span></label>
         <p class="t-body-xxs t-muted f--full">* {t('booking.required')}</p>
       </div>
 

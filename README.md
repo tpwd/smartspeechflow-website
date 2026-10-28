@@ -36,7 +36,6 @@ Optional: `.env.example` nach `.env` kopieren. Die Einstellungen darin sind dort
 | Produkt, Einsatzfelder, Projekt, Open Source | wie heute | wie heute | Inhalte der Bestandsseite, neu geschrieben mit Fokus auf Buchung |
 | Kontakt | `/de/kontakt/` | `/en/contact/` | fertig, legt in Pipedrive einen Lead an (oder einen Deal, siehe unten), Thema per `?topic=demo` vorwählbar |
 | Impressum, Datenschutz | wie heute | wie heute | Rechtstexte **wörtlich** aus der Bestandsseite, Datenschutz mit markiertem Platzhalter für das Buchungsformular |
-| AGB | `/de/agb/` | `/en/terms/` | Platzhalter, **Text fehlt** (vom Buchungsformular vorausgesetzt) |
 
 **Ersparnisrechner** (Startseite, Anker `#ersparnis`): Dolmetscherstunden pro Monat oder Jahr × Stundensatz (Startwert 83 € laut Briefing, im Rechner änderbar) minus Jahrespreis der gewählten Option. Zeigt die Ersparnis pro Jahr, die Gewinnschwelle, den Aktionsbonus und den eingesparten Aufwand. „Mit dieser Option buchen“ übergibt Option und Schätzung an die Buchen-Seite. Ohne JavaScript steht eine fertige Beispielrechnung da.
 
@@ -140,7 +139,8 @@ Geprüft beim Aufbau mit html-validate (alle Seiten), axe-core 4.10 (WCAG 2.0–
 - [ ] Bildrechte prüfen. Die Fotos stammen aus Figma, Dateinamen dort deuten auf Getty Images hin. Das Hero-Foto liegt nur in 509 × 339 px vor, für scharfe Darstellung wird eine größere Fassung gebraucht.
 - [ ] Nutzungsrechte und Belege für die Pressen-Logos (hr, Kommune21, RTL)
 - [ ] Alleinstellungs-Aussage „Einziges deutsches Open-Source-Tool …“ rechtlich prüfen lassen
-- [ ] Inhalte der Unterseiten und AGB-Text
+- [ ] Inhalte der Unterseiten
+- [ ] Vertragsbedingungen für die Buchung klären (die AGB-Seite und die AGB-Zustimmung im Buchungsformular wurden auf Wunsch entfernt)
 - [ ] Übersetzungen für hi, fr, it, pl, es, tr, ar
 - [ ] Video (Open Source Business Award) von der heutigen Startseite: übernehmen oder nicht?
 

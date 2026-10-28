@@ -63,7 +63,7 @@ export const POST: APIRoute = async ({ request, url }) => {
         ['Nachricht', input.message],
         ['Schätzung aus Ersparnisrechner', estimate],
         ['Sprache der Seite', input.locale],
-        ['Zustimmung Datenschutz und AGB', `ja (${new Date().toISOString()})`],
+        ['Zustimmung Datenschutz', `ja (${new Date().toISOString()})`],
       ]),
     });
 

@@ -22,7 +22,6 @@ export const bookingSchema = z.object({
   start: text(20).optional().default(''),
   message: text(4000).optional().default(''),
   consentPrivacy: z.literal(true),
-  consentTerms: z.literal(true),
   // Schätzung aus dem Ersparnisrechner (nur zur Information im CRM)
   estimate: z
     .object({ hours: z.number().min(0).max(100000), period: z.enum(['month', 'year']), rate: z.number().min(1).max(1000) })

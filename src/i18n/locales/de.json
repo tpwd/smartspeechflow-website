@@ -189,8 +189,7 @@
     "openSource": "Open Source",
     "contact": "Kontakt",
     "legalNotice": "Impressum",
-    "privacy": "Datenschutz",
-    "terms": "AGB"
+    "privacy": "Datenschutz"
   },
   "booking": {
     "breadcrumb": "Brotkrumen-Navigation",
@@ -234,7 +233,6 @@
       "message": "Nachricht / Fragen"
     },
     "consentPrivacy": "Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zu.",
-    "consentTerms": "Ich akzeptiere die Vertragsbedingungen / AGB.",
     "required": "Pflichtfeld",
     "summary": {
       "title": "Zusammenfassung",
@@ -689,10 +687,6 @@
           ]
         }
       ]
-    },
-    "terms": {
-      "title": "AGB",
-      "text": "[Platzhalter – die Vertragsbedingungen / AGB für die Buchung von Smart Speech Flow liegen noch nicht vor. Das Buchungsformular setzt ihre Zustimmung voraus.]"
     }
   },
   "seo": {
@@ -735,10 +729,6 @@
     "privacy": {
       "title": "Datenschutzerklärung – Smart Speech Flow",
       "description": "Datenschutzerklärung der Website smartspeechflow.de: Verantwortlicher, Hosting, Kontaktformular, Ihre Rechte."
-    },
-    "terms": {
-      "title": "AGB – Smart Speech Flow",
-      "description": "Allgemeine Geschäftsbedingungen für die Buchung von Smart Speech Flow."
     },
     "notFound": {
       "title": "Seite nicht gefunden – Smart Speech Flow",

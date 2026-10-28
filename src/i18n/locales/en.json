@@ -189,8 +189,7 @@
     "openSource": "Open Source",
     "contact": "Contact",
     "legalNotice": "Legal notice",
-    "privacy": "Privacy policy",
-    "terms": "Terms and conditions"
+    "privacy": "Privacy policy"
   },
   "booking": {
     "breadcrumb": "Breadcrumb",
@@ -234,7 +233,6 @@
       "message": "Message / questions"
     },
     "consentPrivacy": "I have read the privacy policy and agree to the processing of my data.",
-    "consentTerms": "I accept the terms and conditions.",
     "required": "Required field",
     "summary": {
       "title": "Summary",
@@ -689,10 +687,6 @@
           ]
         }
       ]
-    },
-    "terms": {
-      "title": "Terms and conditions",
-      "text": "[Placeholder – the terms and conditions for booking Smart Speech Flow are not available yet. The booking form requires them to be accepted.]"
     }
   },
   "seo": {
@@ -735,10 +729,6 @@
     "privacy": {
       "title": "Privacy policy – Smart Speech Flow",
       "description": "Privacy policy of smartspeechflow.de: controller, hosting, contact form, your rights."
-    },
-    "terms": {
-      "title": "Terms and conditions – Smart Speech Flow",
-      "description": "Terms and conditions for booking Smart Speech Flow."
     },
     "notFound": {
       "title": "Page not found – Smart Speech Flow",
