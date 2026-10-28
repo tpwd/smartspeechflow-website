@@ -1,0 +1,16 @@
+---
+import CtaBanner from './CtaBanner.astro';
+import { pathFor, type Locale } from '../i18n/config';
+import { t } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+---
+<CtaBanner
+  title={t(locale, 'subpage.ctaTitle')}
+  text={t(locale, 'subpage.ctaText')}
+  primary={{ label: t(locale, 'subpage.ctaSavings'), href: pathFor(locale, 'home', 'ersparnis') }}
+  secondary={{ label: t(locale, 'subpage.ctaBook'), href: pathFor(locale, 'booking') }}
+/>

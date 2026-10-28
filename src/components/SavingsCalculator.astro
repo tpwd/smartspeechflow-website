@@ -1,0 +1,224 @@
+---
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import { localeTags, pathFor, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+import { calculateSavings, formatEuro, pricedPlans, promotion, promotionActive, savings } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const { t, tv } = useTranslations(locale);
+const tag = localeTags[locale];
+
+// Startwerte serverseitig berechnen: Ohne JavaScript steht eine fertige Beispielrechnung da.
+const startPlan = pricedPlans.find((p) => p.id === savings.defaultPlan) ?? pricedPlans[0];
+const promoOn = promotionActive();
+const start = calculateSavings({
+  hours: savings.defaultHours,
+  period: savings.defaultPeriod,
+  monthlyNet: startPlan.monthlyNet,
+  rate: savings.interpreterHourlyRate,
+  promo: startPlan.promo && promoOn,
+});
+const eur = (v: number) => formatEuro(v, tag);
+
+const config = {
+  locale: tag,
+  bookingUrl: pathFor(locale, 'booking'),
+  promoActive: promoOn,
+  freeMonths: promotion.freeMonths,
+  plans: Object.fromEntries(pricedPlans.map((p) => [p.id, { monthlyNet: p.monthlyNet, promo: p.promo }])),
+  text: {
+    breakEven: t('savings.result.breakEven'),
+    promoBonus: t('savings.result.promoBonus'),
+    perMonthEquivalent: t('savings.result.perMonthEquivalent'),
+  },
+};
+---
+<section id="ersparnis" class="section savings" aria-labelledby="savings-title">
+  <div class="container">
+    <div class="intro">
+      <h2 id="savings-title" class="t-section">{t('savings.title')}</h2>
+      <p class="t-body-l">{t('savings.intro')}</p>
+    </div>
+
+    <form class="calc" data-savings>
+      <div class="inputs">
+        <fieldset>
+          <legend>{t('savings.hours.label')}</legend>
+          <div class="hours">
+            <label class="visually-hidden" for="calc-hours">{t('savings.hours.label')}</label>
+            <input id="calc-hours" name="hours" type="number" inputmode="numeric" min="0" max="100000" step="1" value={savings.defaultHours} />
+            <div class="toggle" role="radiogroup" aria-label={t('savings.hours.period')}>
+              <label><input type="radio" name="period" value="month" checked={savings.defaultPeriod === 'month'} /><span>{t('savings.hours.perMonth')}</span></label>
+              <label><input type="radio" name="period" value="year" checked={savings.defaultPeriod === 'year'} /><span>{t('savings.hours.perYear')}</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>{t('savings.plan.label')}</legend>
+          <div class="plans">
+            {pricedPlans.map((plan) => (
+              <label class="plan">
+                <input type="radio" name="plan" value={plan.id} checked={plan.id === startPlan.id} />
+                <span>
+                  <b>{t(`pricing.plans.${plan.id}.title`)}</b>
+                  <span class="t-body-xs t-muted">{eur(plan.monthlyNet)}{t('pricing.perMonth')} · {t(`savings.plan.hint.${plan.id}`)}</span>
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <label class="rate">
+          <span>{t('savings.rate.label')}</span>
+          <span class="rate-input"><input name="rate" type="number" inputmode="decimal" min="1" max="1000" step="1" value={savings.interpreterHourlyRate} /><span aria-hidden="true">€</span></span>
+          <span class="t-body-xxs t-muted">{t('savings.rate.hint')}</span>
+        </label>
+      </div>
+
+      <div class="result" aria-live="polite">
+        <dl>
+          <div><dt>{t('savings.result.interpreter')}</dt><dd data-out="interpreter">{eur(start.interpreterPerYear)}</dd></div>
+          <div><dt>{t('savings.result.ssf')}</dt><dd data-out="ssf">− {eur(start.ssfPerYear)}</dd></div>
+        </dl>
+        <p class="saving">
+          <span class="label">{t('savings.result.saving')}</span>
+          <span class="amount" data-out="saving">{eur(start.savingPerYear)}</span>
+          <span class="t-body-xs" data-out="perMonth">{t('savings.result.perMonthEquivalent').replace('{amount}', eur(start.savingPerYear / 12))}</span>
+        </p>
+        <p class="note t-body-xs" data-out="breakEven" hidden></p>
+        {promoOn && <p class="promo t-body-xs" data-out="promo">{t('savings.result.promoBonus').replace('{amount}', eur(start.promoBonus)).replace('{months}', String(promotion.freeMonths))}</p>}
+
+        <div class="effort">
+          <p class="t-body-s t-strong">{t('savings.effort.title')}</p>
+          <ul role="list" class="t-body-xs">
+            {tv<string[]>('savings.effort.items').map((item) => <li><Icon name="check" size={16} />{item}</li>)}
+          </ul>
+        </div>
+
+        <Button href={`${pathFor(locale, 'booking')}?option=${startPlan.id}`} size="L" icon block data-out="cta">{t('savings.cta')}</Button>
+        <p class="t-body-xxs t-muted">{t('savings.disclaimer')}</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script is:inline type="application/json" id="savings-config" set:html={JSON.stringify(config)}></script>
+
+<script>
+  import { calculateSavings } from '../data/site';
+
+  type Config = {
+    locale: string;
+    bookingUrl: string;
+    promoActive: boolean;
+    freeMonths: number;
+    plans: Record<string, { monthlyNet: number; promo: boolean }>;
+    text: Record<string, string>;
+  };
+  const config = JSON.parse(document.getElementById('savings-config')!.textContent!) as Config;
+  const form = document.querySelector<HTMLFormElement>('[data-savings]');
+  if (form) {
+    const eur = (v: number) => new Intl.NumberFormat(config.locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
+    const out = (key: string) => form.querySelector<HTMLElement>(`[data-out="${key}"]`);
+    const num = (name: string, fallback: number) => {
+      const value = Number((form.elements.namedItem(name) as HTMLInputElement).value);
+      return Number.isFinite(value) && value >= 0 ? value : fallback;
+    };
+
+    const update = () => {
+      const data = new FormData(form);
+      const planId = String(data.get('plan'));
+      const period = data.get('period') === 'year' ? 'year' : 'month';
+      const plan = config.plans[planId];
+      const hours = num('hours', 0);
+      const rate = Math.max(num('rate', 40), 1);
+      const r = calculateSavings({ hours, period, monthlyNet: plan.monthlyNet, rate, promo: plan.promo && config.promoActive });
+
+      out('interpreter')!.textContent = eur(r.interpreterPerYear);
+      out('ssf')!.textContent = `− ${eur(r.ssfPerYear)}`;
+      out('saving')!.textContent = eur(Math.max(r.savingPerYear, 0));
+      out('perMonth')!.textContent = config.text.perMonthEquivalent.replace('{amount}', eur(Math.max(r.savingPerYear, 0) / 12));
+      form.classList.toggle('is-negative', r.savingPerYear <= 0);
+
+      const breakEven = out('breakEven')!;
+      breakEven.hidden = r.savingPerYear > 0;
+      breakEven.textContent = config.text.breakEven.replace('{hours}', String(Math.ceil(plan.monthlyNet / rate)));
+
+      const promo = out('promo');
+      if (promo) promo.textContent = config.text.promoBonus.replace('{amount}', eur(r.promoBonus)).replace('{months}', String(config.freeMonths));
+      if (promo) promo.hidden = r.promoBonus === 0;
+
+      const params = new URLSearchParams({ option: planId, term: 'prepaid', hours: String(hours), period, rate: String(rate) });
+      (out('cta') as HTMLAnchorElement).href = `${config.bookingUrl}?${params}`;
+    };
+    form.addEventListener('input', update);
+    form.addEventListener('submit', (e) => e.preventDefault());
+    update();
+  }
+</script>
+
+<style>
+  .savings { background: var(--color-petrol-050); }
+  .intro { display: grid; gap: var(--spacing-16); max-inline-size: 792px; margin-block-end: var(--spacing-40); }
+  .intro p { color: var(--color-gray-cool-700); }
+  .calc { display: grid; gap: var(--spacing-24); }
+  .inputs, .result { display: grid; gap: var(--spacing-32); align-content: start; padding: var(--spacing-24); background: var(--color-white); border-radius: var(--radius-24); }
+  .result { background: var(--color-petrol-900); color: var(--color-petrol-100); gap: var(--spacing-24); }
+  fieldset { margin: 0; padding: 0; border: 0; min-inline-size: 0; display: grid; gap: 12px; }
+  legend, .rate > span:first-child { padding: 0; margin-block-end: 12px; color: var(--color-petrol-900); font-weight: var(--font-weight-bold); font-size: var(--font-size-body-s); }
+  input[type='number'] {
+    inline-size: 100%;
+    padding: 12px var(--spacing-16);
+    border: 1px solid var(--color-gray-cool-300);
+    border-radius: var(--radius-8);
+    font-size: var(--font-size-h5);
+    line-height: var(--line-height-h5);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-petrol-900);
+  }
+  .hours { display: grid; gap: 12px; }
+  .toggle { display: inline-flex; padding: 4px; border-radius: var(--radius-32); background: var(--color-petrol-050); inline-size: fit-content; }
+  .toggle label { position: relative; }
+  .toggle input { position: absolute; opacity: 0; inset: 0; }
+  .toggle span { display: block; padding: var(--spacing-8) var(--spacing-16); border-radius: var(--radius-32); font-size: var(--font-size-body-xs); font-weight: var(--font-weight-semibold); color: var(--color-petrol-900); cursor: pointer; }
+  .toggle input:checked + span { background: var(--color-petrol-900); color: var(--color-white); }
+  .toggle input:focus-visible + span { outline: 3px solid var(--color-petrol-500); outline-offset: 2px; }
+  .plans { display: grid; gap: 12px; }
+  .plan { display: flex; gap: 12px; align-items: flex-start; padding: var(--spacing-16); border: 1px solid var(--color-gray-cool-200); border-radius: var(--radius-16); cursor: pointer; color: var(--color-petrol-900); }
+  .plan:has(input:checked) { border: 2px solid var(--color-petrol-700); padding: 15px; }
+  .plan > span { display: grid; gap: 2px; }
+  .plan input { inline-size: 20px; block-size: 20px; margin: 2px 0 0; accent-color: var(--color-petrol-900); flex: none; }
+  .rate { display: grid; gap: 4px; }
+  .rate-input { display: flex; align-items: center; gap: var(--spacing-8); max-inline-size: 160px; color: var(--color-petrol-900); font-weight: var(--font-weight-bold); }
+
+  dl { margin: 0; display: grid; gap: 12px; padding-block-end: var(--spacing-16); border-block-end: 1px solid var(--color-petrol-700); }
+  dl div { display: flex; justify-content: space-between; gap: var(--spacing-16); font-size: var(--font-size-body-s); }
+  dd { margin: 0; color: var(--color-white); font-weight: var(--font-weight-bold); }
+  .saving { display: grid; gap: 4px; }
+  .saving .label { font-weight: var(--font-weight-bold); color: var(--color-white); }
+  .amount { color: var(--color-green-300); font-size: var(--font-size-h2); line-height: var(--line-height-h2); font-weight: var(--font-weight-bold); letter-spacing: var(--letter-spacing-h2); }
+  .is-negative .amount { color: var(--color-petrol-300); }
+  .note, .promo { padding: 12px var(--spacing-16); border-radius: var(--radius-8); background: var(--color-petrol-800); color: var(--color-white); }
+  .effort { display: grid; gap: 12px; }
+  .effort .t-strong { color: var(--color-white); }
+  .effort ul { margin: 0; padding: 0; display: grid; gap: var(--spacing-8); }
+  .effort li { display: flex; gap: var(--spacing-8); }
+  .effort :global(.icon) { flex: none; margin-block-start: 2px; color: var(--color-green-300); }
+  .result .t-muted { color: var(--color-petrol-300); }
+  .result :global(.btn--primary) { background: var(--color-white); color: var(--color-petrol-900); }
+  .result :global(.btn--primary:hover) { background: var(--color-petrol-100); }
+
+  @media (min-width: 768px) {
+    .inputs, .result { padding: var(--spacing-32); }
+    .plans { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .calc { grid-template-columns: 1fr 1fr; gap: var(--spacing-24); }
+    .inputs, .result { padding: var(--spacing-40); }
+  }
+</style>

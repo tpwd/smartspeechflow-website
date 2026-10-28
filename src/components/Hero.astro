@@ -4,9 +4,10 @@ import hero from '../assets/images/hero-gespraech.jpg';
 import Badge from './Badge.astro';
 import Button from './Button.astro';
 import ChatMockup from './ChatMockup.astro';
+import Icon from './Icon.astro';
 import { pathFor, type Locale } from '../i18n/config';
 import { useTranslations } from '../i18n';
-import { links } from '../data/site';
+import { demoHref } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -22,8 +23,9 @@ const { t } = useTranslations(locale);
       <p class="t-body-l">{t('hero.subline')}</p>
       <div class="ctas">
         <Button href={pathFor(locale, 'booking')} size="L" icon>{t('hero.ctaBook')}</Button>
-        <Button href={links.demo ?? pathFor(locale, 'contact')} size="L" variant="secondary-dark">{t('hero.ctaDemo')}</Button>
+        <Button href={demoHref(pathFor(locale, 'contact'))} size="L" variant="secondary-dark">{t('hero.ctaDemo')}</Button>
       </div>
+      <a class="savings-link t-body-s" href="#ersparnis">{t('hero.ctaSavings')} <Icon name="arrow-right" size={16} /></a>
     </div>
   </div>
   <div class="media">
@@ -39,6 +41,8 @@ const { t } = useTranslations(locale);
   .inner p { color: var(--color-gray-cool-700); }
   .ctas { display: grid; gap: 12px; inline-size: 100%; }
   .ctas :global(.btn) { inline-size: 100%; }
+  .savings-link { display: inline-flex; align-items: center; gap: var(--spacing-8); color: var(--color-petrol-900); font-weight: var(--font-weight-semibold); }
+  .savings-link :global(.icon) { transform: rotate(90deg); }
   .media { position: relative; min-block-size: 320px; }
   .media :global(img) { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; }
   .chat-wrap { position: absolute; inset-inline-end: var(--spacing-16); inset-block-end: var(--spacing-16); inline-size: min(248px, 70%); }

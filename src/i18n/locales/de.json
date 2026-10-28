@@ -27,7 +27,8 @@
     "subline": "Kein Gespräch scheitert mehr an der Sprache. Smart Speech Flow dolmetscht in 20 Sprachen, rechtssicher und datenschutzkonform.",
     "ctaBook": "Jetzt buchen",
     "ctaDemo": "Live-Demo buchen",
-    "imageAlt": "Beratungsgespräch zwischen einer Mitarbeiterin und einem Bürger"
+    "imageAlt": "Beratungsgespräch zwischen einer Mitarbeiterin und einem Bürger",
+    "ctaSavings": "Ersparnis berechnen"
   },
   "chat": {
     "app": "Smart Speech Flow",
@@ -68,15 +69,34 @@
   "why": {
     "title": "Warum Smart Speech Flow",
     "items": [
-      { "title": "Rechtskonform", "text": "Einziges deutsches Open-Source-Tool für rechtskonforme Sprachübersetzung" },
-      { "title": "Rechtlich geprüftes Konzept", "text": "Betrieb und Gesprächsmodi wurden mit einer Anwaltskanzlei für den Einsatz in Behörden abgestimmt" },
-      { "title": "Datenschutz", "text": "Open-Source-Modelle laufen auf Servern in Deutschland" },
-      { "title": "Software gehört der Kommune", "text": "Open Source unter MIT-Lizenz: frei nutzbar und weiterentwickelbar, ohne Bindung an einen Anbieter" },
-      { "title": "Rechnet sich", "text": "Ab ca. 12 Dolmetscherstunden im Monat" }
+      {
+        "title": "Rechtskonform",
+        "text": "Einziges deutsches Open-Source-Tool für rechtskonforme Sprachübersetzung"
+      },
+      {
+        "title": "Rechtlich geprüftes Konzept",
+        "text": "Betrieb und Gesprächsmodi wurden mit einer Anwaltskanzlei für den Einsatz in Behörden abgestimmt – auch für sensible Gespräche"
+      },
+      {
+        "title": "Datenschutz",
+        "text": "Lokal betriebene Open-Source-Modelle auf einem Server nur für Ihre Kommune – oder geteilt, ebenso datenschutzkonform"
+      },
+      {
+        "title": "Software gehört der Kommune",
+        "text": "Open Source unter MIT-Lizenz: frei nutzbar und weiterentwickelbar, ohne Bindung an einen Anbieter"
+      },
+      {
+        "title": "Rechnet sich",
+        "text": "Mit dem Geteilten Server ab ca. {hours} Dolmetscherstunden im Monat (bei {rate} € pro Stunde)"
+      }
     ],
     "modes": {
       "title": "Drei Gesprächsmodi",
-      "items": ["Ohne Aufzeichnung", "Aufzeichnungsprotokoll, optional zur Prüfung durch Dolmetscher", "Vollständige Aufzeichnung"]
+      "items": [
+        "Ohne Aufzeichnung: es wird nichts gespeichert",
+        "Protokoll-Modus: rechtlich relevante Gesprächsteile werden verschlüsselt aufgezeichnet und können von einer beauftragten Dolmetscherin oder einem Dolmetscher geprüft werden",
+        "Testmodus: vollständige Aufzeichnung, nur für Tests"
+      ]
     }
   },
   "testimonials": {
@@ -106,18 +126,36 @@
       "shared": {
         "overline": "Einstieg",
         "title": "Geteilter Server",
-        "features": ["Im Browser auf vorhandenen Geräten", "Drei Gesprächsmodi", "20 Sprachen", "Server bei SVS, geteilt mit anderen Kommunen", "Bis zu 3 Gespräche gleichzeitig"]
+        "features": [
+          "Im Browser auf vorhandenen Geräten",
+          "Drei Gesprächsmodi",
+          "20 Sprachen",
+          "Server bei SVS, geteilt mit anderen Kommunen",
+          "Bis zu ca. 3 Gespräche gleichzeitig"
+        ]
       },
       "dedicated": {
         "overline": "Upgrade",
         "title": "Eigener Server",
-        "features": ["Im Browser auf vorhandenen Geräten", "Drei Gesprächsmodi", "20 Sprachen", "Eigener Server bei SVS, nur für Ihre Kommune", "Bis zu 5 Gespräche gleichzeitig"]
+        "features": [
+          "Im Browser auf vorhandenen Geräten",
+          "Drei Gesprächsmodi",
+          "20 Sprachen",
+          "Eigener Server bei SVS, nur für Ihre Kommune",
+          "Bis zu ca. 5 Gespräche gleichzeitig"
+        ]
       },
       "selfhosted": {
         "overline": "Selbstbetrieb",
         "title": "Betrieb in der Kommune",
         "badge": "Open Source, ohne Lizenzkosten",
-        "features": ["Im Browser auf vorhandenen Geräten", "Drei Gesprächsmodi", "20 Sprachen", "Betrieb auf dem eigenen Server der Kommune", "Volle Kontrolle über Infrastruktur und Daten"]
+        "features": [
+          "Im Browser auf vorhandenen Geräten",
+          "Drei Gesprächsmodi",
+          "20 Sprachen",
+          "Betrieb auf dem eigenen Server der Kommune",
+          "Volle Kontrolle über Infrastruktur und Daten"
+        ]
       }
     }
   },
@@ -154,23 +192,29 @@
     "privacy": "Datenschutz",
     "terms": "AGB"
   },
-  "placeholder": {
-    "text": "Diese Seite ist im Grundgerüst noch leer. Der Inhalt wird aus der bestehenden Seite übernommen.",
-    "back": "Zur Startseite"
-  },
   "booking": {
     "metaTitle": "Smart Speech Flow buchen",
     "breadcrumb": "Brotkrumen-Navigation",
     "breadcrumbCurrent": "Buchen",
     "title": "Smart Speech Flow buchen",
     "intro": "In drei Schritten zur verbindlichen Buchung. Nach erfolgreicher Buchung ist Smart Speech Flow in bis zu 2 Tagen startklar.",
-    "steps": ["Option", "Laufzeit", "Ihre Angaben"],
+    "steps": [
+      "Option",
+      "Laufzeit",
+      "Ihre Angaben"
+    ],
     "step1": "1. Option wählen",
     "step2": "2. Laufzeit wählen",
     "step3": "3. Ihre Angaben",
     "terms": {
-      "prepaid": { "label": "12 Monate im Voraus", "text": "Abrechnung für 12 Monate, bei Buchung bis 31.12.2026 mit Aktion" },
-      "monthly": { "label": "Monatlich", "text": "Monatliche Abrechnung" }
+      "prepaid": {
+        "label": "12 Monate im Voraus",
+        "text": "Abrechnung für 12 Monate, bei Buchung bis 31.12.2026 mit Aktion"
+      },
+      "monthly": {
+        "label": "Monatlich",
+        "text": "Monatliche Abrechnung"
+      }
     },
     "fields": {
       "org": "Kommune / Organisation",
@@ -203,7 +247,9 @@
       "total12": "Gesamt für 12 Monate",
       "totalMonthly": "Monatlicher Betrag",
       "net": "netto",
-      "onRequest": "auf Anfrage"
+      "onRequest": "auf Anfrage",
+      "estimatedSaving": "Ihre geschätzte Ersparnis",
+      "perYear": "pro Jahr"
     },
     "submit": "Verbindlich buchen",
     "note": "Nach der Buchung erhalten Sie eine Bestätigung per E-Mail. Startklar in bis zu 2 Tagen.",
@@ -218,10 +264,22 @@
     "numberPlaceholder": "[Nummer]",
     "nextTitle": "Was passiert als Nächstes?",
     "steps": [
-      { "title": "E-Mail-Bestätigung", "text": "Sie erhalten die Buchungsbestätigung mit allen Details an die angegebene Adresse." },
-      { "title": "Bereitstellung", "text": "Wir melden uns mit den nächsten Schritten zur Einrichtung, abgestimmt auf die gebuchte Option." },
-      { "title": "Zugang und Organisation", "text": "Per E-Mail erhalten Sie Ihren Zugang. Sie legen Ihre Organisation an und nehmen die Einstellungen vor, etwa eigene Bereiche für einzelne Ämter." },
-      { "title": "Startklar", "text": "In bis zu 2 Tagen nach der Buchung können Sie die ersten Gespräche führen." }
+      {
+        "title": "E-Mail-Bestätigung",
+        "text": "Sie erhalten die Buchungsbestätigung mit allen Details an die angegebene Adresse."
+      },
+      {
+        "title": "Bereitstellung",
+        "text": "Wir melden uns mit den nächsten Schritten zur Einrichtung, abgestimmt auf die gebuchte Option."
+      },
+      {
+        "title": "Zugang und Organisation",
+        "text": "Per E-Mail erhalten Sie Ihren Zugang. Sie legen Ihre Organisation an und nehmen die Einstellungen vor, etwa eigene Bereiche für einzelne Ämter."
+      },
+      {
+        "title": "Startklar",
+        "text": "In bis zu 2 Tagen nach der Buchung können Sie die ersten Gespräche führen."
+      }
     ],
     "questionsTitle": "Fragen zu Ihrer Buchung?",
     "questionsText": "Wir helfen Ihnen gern weiter – bei Fragen zu Einrichtung, Zugang oder Abrechnung erreichen Sie uns direkt.",
@@ -232,5 +290,413 @@
     "title": "Seite nicht gefunden",
     "text": "Die aufgerufene Seite gibt es nicht (mehr).",
     "back": "Zur Startseite"
+  },
+  "savings": {
+    "title": "Was spart Ihre Kommune?",
+    "intro": "Rechnen Sie selbst: Ihre Dolmetscherstunden gegen den festen Monatspreis von Smart Speech Flow.",
+    "hours": {
+      "label": "Dolmetscherstunden",
+      "period": "Zeitraum",
+      "perMonth": "pro Monat",
+      "perYear": "pro Jahr"
+    },
+    "plan": {
+      "label": "Option",
+      "hint": {
+        "shared": "bis zu ca. 3 Gespräche gleichzeitig",
+        "dedicated": "bis zu ca. 5 Gespräche gleichzeitig"
+      }
+    },
+    "rate": {
+      "label": "Kosten pro Dolmetscherstunde (netto)",
+      "hint": "Annahme. Tragen Sie Ihren eigenen Stundensatz ein."
+    },
+    "result": {
+      "interpreter": "Dolmetscherkosten pro Jahr",
+      "ssf": "Smart Speech Flow pro Jahr",
+      "saving": "Ihre Ersparnis pro Jahr",
+      "perMonthEquivalent": "entspricht {amount} pro Monat",
+      "breakEven": "Bei diesem Umfang rechnet sich die Option noch nicht. Sie lohnt sich ab ca. {hours} Dolmetscherstunden im Monat.",
+      "promoBonus": "Bei Buchung bis 31.12.2026 mit 12 Monaten Vorauszahlung sparen Sie im ersten Jahr zusätzlich {amount} ({months} Monate gratis)."
+    },
+    "effort": {
+      "title": "Und Sie sparen Aufwand:",
+      "items": [
+        "Keine Dolmetschertermine mehr organisieren und abstimmen",
+        "Gespräche sofort führen statt auf einen Termin warten",
+        "Keine Anfahrt, keine Abrechnung einzelner Einsätze – ein fester Monatspreis",
+        "Läuft im Browser auf vorhandenen Geräten, startklar in bis zu 2 Tagen"
+      ]
+    },
+    "cta": "Mit dieser Option buchen",
+    "disclaimer": "Beispielrechnung ohne Gewähr, alle Beträge netto. Tatsächliche Dolmetscherkosten hängen u. a. von Sprache, Anbieter, Anfahrt und Mindestabrechnung ab. Lassen Sie Protokolle durch Dolmetscher prüfen, entstehen dafür zusätzliche, in der Regel deutlich geringere Kosten."
+  },
+  "subpage": {
+    "ctaTitle": "Lohnt sich Smart Speech Flow für Ihre Kommune?",
+    "ctaText": "Berechnen Sie Ihre Ersparnis gegenüber Dolmetscherstunden – oder buchen Sie direkt. Nach der Buchung ist Smart Speech Flow in bis zu 2 Tagen startklar.",
+    "ctaSavings": "Ersparnis berechnen",
+    "ctaBook": "Jetzt buchen"
+  },
+  "product": {
+    "title": "Dolmetschen in Echtzeit – direkt im Browser",
+    "intro": "Smart Speech Flow verbindet Spracherkennung, Übersetzung und Sprachausgabe in einem durchgängigen Ablauf. Mitarbeitende und Gäste sprechen oder schreiben in ihrer Sprache, das Gegenüber erhält die Übersetzung sofort als Text und Audio.",
+    "stepsTitle": "Vom Gespräch zur Verständigung",
+    "steps": [
+      {
+        "title": "Eingabe per Sprache oder Text",
+        "text": "Mitarbeitende oder Bürgerinnen und Bürger sprechen oder schreiben in ihrer jeweiligen Sprache."
+      },
+      {
+        "title": "Automatische Verarbeitung",
+        "text": "Das System erkennt die Sprache, übersetzt den Inhalt und bereitet die Ausgabe für die Gegenseite auf."
+      },
+      {
+        "title": "Ausgabe als Text und Audio",
+        "text": "Die Gegenseite erhält die Übersetzung lesbar und optional als gesprochene Ausgabe."
+      },
+      {
+        "title": "Dialog in Echtzeit",
+        "text": "Aus Sprachbarrieren wird ein direkter Austausch – auf zwei Geräten der Kommune oder mit dem eigenen Handy des Gasts."
+      }
+    ],
+    "benefitsTitle": "Was Sie bekommen",
+    "benefits": [
+      {
+        "title": "20 Sprachen in Echtzeit",
+        "text": "Die 20 häufigsten Fremdsprachen in Deutschland, übersetzt als Text und Audio."
+      },
+      {
+        "title": "Läuft im Browser",
+        "text": "Keine Installation, keine spezielle Hardware: vorhandene Geräte reichen."
+      },
+      {
+        "title": "Startklar in 2 Tagen",
+        "text": "Kein monatelanges Einführungsprojekt: Nach der Buchung richten wir den Server ein, dann kann es losgehen."
+      },
+      {
+        "title": "Eigene Bereiche je Amt",
+        "text": "Legen Sie Ihre Organisation an und richten Sie für einzelne Ämter eigene Bereiche und Regeln ein."
+      },
+      {
+        "title": "Open Source unter MIT-Lizenz",
+        "text": "Offener Quellcode, lokal betriebene Open-Source-Modelle, keine Bindung an einen Anbieter."
+      }
+    ],
+    "techTitle": "Technisch modern, in der Nutzung einfach",
+    "techText": "Smart Speech Flow basiert auf einer modularen Architektur mit Komponenten für Speech-to-Text, Übersetzung, Text-to-Speech und WebSocket-basierte Echtzeitkommunikation. Das System lässt sich nachvollziehbar erweitern, betreiben und in bestehende Abläufe integrieren.",
+    "blackboxTitle": "Kein Blackbox-Produkt",
+    "blackboxText": "Der Quellcode ist offen verfügbar und steht unter der MIT License. Das schafft Transparenz und Anpassbarkeit – und macht Ihre Kommune langfristig unabhängig."
+  },
+  "useCases": {
+    "title": "Einsatz dort, wo Verständigung entscheidend ist",
+    "intro": "Smart Speech Flow ist für Situationen gemacht, in denen Menschen mit unterschiedlichen Sprachen direkt und verständlich miteinander sprechen müssen – in Verwaltung, Beratung und überall im Bürgerkontakt.",
+    "stats": [
+      {
+        "value": "20",
+        "label": "Sprachen"
+      },
+      {
+        "value": "Echtzeit",
+        "label": "Sprach- und Textübersetzung"
+      },
+      {
+        "value": "Browser",
+        "label": "keine Installation nötig"
+      }
+    ],
+    "fieldsTitle": "Wo Smart Speech Flow Mehrwert schafft",
+    "fields": [
+      {
+        "title": "Bürgerservice und Verwaltung",
+        "text": "Im Büro, am Servicepoint oder im mobilen Einsatz: Mitarbeitende sprechen direkt mit Bürgerinnen und Bürgern – unabhängig von der Sprache."
+      },
+      {
+        "title": "Sozial- und Integrationsberatung",
+        "text": "In sensiblen Beratungen ist direkte Verständigung zentral. Gespräche werden niedrigschwelliger und strukturierter – ohne auf externe Dolmetscher zu warten."
+      },
+      {
+        "title": "Quartiersarbeit und Begegnungsorte",
+        "text": "In Stadtteilzentren, Nachbarschaftshäusern und Begegnungscafés wird die Kommunikation zwischen Fachkräften und Besuchern verständlicher."
+      },
+      {
+        "title": "Mobile und dezentrale Situationen",
+        "text": "Auch bei Hausbesuchen, auf Veranstaltungen oder in temporären Beratungsangeboten – einfach im Browser."
+      }
+    ],
+    "practiceTitle": "In der Praxis im Einsatz",
+    "practiceText": "Smart Speech Flow wurde gemeinsam mit der Stadt Kassel entwickelt und im Stadtteilzentrum Wesertor unter realen Bedingungen erprobt. Gesprochene Alltagssprache wird verständlich ins Deutsche und umgekehrt übertragen – direkt im Gespräch, ohne Wartezeit auf Dolmetscher. Inzwischen ist Smart Speech Flow in mehreren Kommunen im Einsatz.",
+    "transferTitle": "Bereit für Ihre Kommune",
+    "transferText": "Als Open-Source-Lösung mit kommunalem Ursprung lässt sich Smart Speech Flow ohne Anpassungsprojekt in anderen Städten, Kreisen und Einrichtungen einsetzen."
+  },
+  "project": {
+    "title": "Hinter dem Projekt",
+    "intro": "Smart Speech Flow ist aus einem konkreten Bedarf im kommunalen Alltag entstanden: Sprachbarrieren in öffentlichen und sozialen Kontexten zu verringern.",
+    "originTitle": "Wie Smart Speech Flow entstanden ist",
+    "origin": [
+      "In Stadtteilzentren, Beratungsstellen und öffentlichen Einrichtungen treffen täglich Menschen aufeinander, die keine gemeinsame Sprache sprechen. Die Idee: ein digitales Werkzeug, das diesen Alltag spürbar erleichtert.",
+      "Entstanden ist Smart Speech Flow im Kontext von Smart Kassel / Smart City Kassel. Erprobt wurde es im Stadtteilzentrum Wesertor in Kassel – unter realen Bedingungen und mit dem Feedback der Menschen vor Ort."
+    ],
+    "fundingTitle": "Förderkontext",
+    "fundingText": "Smart Speech Flow wird im Rahmen der Modellprojekte Smart Cities der Bundesregierung gefördert. Das Programm unterstützt Kommunen bei der Entwicklung und Erprobung digitaler Lösungen.",
+    "partnersTitle": "Wer hinter Smart Speech Flow steht",
+    "partners": [
+      {
+        "role": "Projektpartner",
+        "name": "Smart City Kassel",
+        "text": "Smart Kassel ist kommunaler Anwendungs- und Entwicklungskontext. Das Smart Kassel Büro hat die Anwendung gemeinsam mit Smart Village Solutions entwickelt und erprobt."
+      },
+      {
+        "role": "Technische Umsetzung und Betrieb",
+        "name": "Smart Village Solutions SVS GmbH",
+        "text": "SVS verantwortet Konzeption, Entwicklung und Betrieb der Plattform und ihrer offenen, modularen Systemarchitektur."
+      }
+    ],
+    "whyTitle": "Warum dieses Projekt wichtig ist",
+    "why": [
+      {
+        "title": "Kommunal gedacht",
+        "text": "Entstanden aus einem echten Bedarf im kommunalen Alltag, nicht als abstraktes Technologieprojekt."
+      },
+      {
+        "title": "Offen weiterentwickelbar",
+        "text": "Kommunaler Praxisbezug und Open Source – als Grundlage für Nachnutzung, Transfer und digitale Souveränität."
+      }
+    ]
+  },
+  "openSource": {
+    "title": "Open Source als Prinzip",
+    "intro": "Der Quellcode von Smart Speech Flow ist offen verfügbar und steht unter der MIT License. Die Software gehört damit Ihrer Kommune – nachvollziehbar, prüfbar und weiterentwickelbar.",
+    "mitTitle": "MIT License",
+    "mitText": "Die MIT License ist eine etablierte Open-Source-Lizenz. Sie erlaubt Nutzung, Anpassung, Weitergabe und Integration in eigene Systeme, solange der Lizenzhinweis erhalten bleibt – ohne Lizenzkosten und ohne komplexe rechtliche Hürden.",
+    "mitAllowsTitle": "Die MIT License erlaubt",
+    "mitAllows": [
+      "Kommerzielle Nutzung",
+      "Modifikation und Anpassung",
+      "Weitergabe und Distribution",
+      "Private Nutzung"
+    ],
+    "principlesTitle": "Was Open Source hier konkret heißt",
+    "principles": [
+      {
+        "title": "Transparenz",
+        "text": "Jede Zeile Code ist einsehbar und nachvollziehbar."
+      },
+      {
+        "title": "Weiterentwicklung",
+        "text": "Eigene Anpassungen an spezifische Anforderungen sind möglich."
+      },
+      {
+        "title": "Nachnutzbarkeit",
+        "text": "Einsatz in weiteren Projekten und Kommunen – ohne Lizenzkosten oder Vendor Lock-in."
+      },
+      {
+        "title": "Kooperation",
+        "text": "Gute Grundlage für Integrationen und gemeinsame Weiterentwicklung."
+      }
+    ],
+    "operateTitle": "Selbst betreiben oder betreiben lassen",
+    "operateText": "Sie können Smart Speech Flow auf eigenen Servern betreiben. Oder Sie überlassen Betrieb, Updates und Server SVS – ab 250 € im Monat, startklar in bis zu 2 Tagen.",
+    "operateCta": "Preise ansehen",
+    "resourcesTitle": "Code, Dokumentation und Mitwirkung",
+    "resources": [
+      {
+        "title": "GitHub Repository",
+        "text": "github.com/smart-village-solutions/smart-speech-flow"
+      },
+      {
+        "title": "Dokumentation",
+        "text": "Technische Dokumentation und Anleitungen"
+      },
+      {
+        "title": "Lizenzdatei",
+        "text": "MIT License im Repository"
+      }
+    ],
+    "contribute": "Externes Mitwirken ist über GitHub Issues und Pull Requests möglich. Formale Contribution Guidelines werden derzeit erarbeitet. Für eine Zusammenarbeit freuen wir uns über Ihre Nachricht."
+  },
+  "contact": {
+    "title": "Kontakt und Austausch",
+    "intro": "Sie möchten Smart Speech Flow kennenlernen, haben Fragen zur Buchung oder möchten über Ihren Einsatz sprechen? Wir freuen uns auf Ihre Nachricht.",
+    "peopleTitle": "Ansprechpartner",
+    "people": [
+      {
+        "name": "Corinna Neige",
+        "role": "Stadt Kassel – Digitales und IT, Smart Kassel Büro"
+      },
+      {
+        "name": "Philipp Wilimzig",
+        "role": "Smart Village Solutions SVS GmbH"
+      }
+    ],
+    "direct": "Direkt erreichbar",
+    "topicsTitle": "Wofür Sie uns kontaktieren können",
+    "topics": [
+      "Live-Demo und Webinar",
+      "Fragen zur Buchung",
+      "Kommunale Einsatzszenarien",
+      "Technische Zusammenarbeit und Open Source"
+    ],
+    "formTitle": "Nachricht senden",
+    "fields": {
+      "name": "Name",
+      "org": "Organisation",
+      "email": "E-Mail",
+      "category": "Thema",
+      "message": "Nachricht"
+    },
+    "categories": {
+      "demo": "Live-Demo / Webinar",
+      "call": "Individueller Call",
+      "booking": "Fragen zur Buchung",
+      "municipal": "Kommunaler Einsatz",
+      "tech": "Open Source / Technik",
+      "other": "Sonstiges"
+    },
+    "consent": "Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu.",
+    "submit": "Nachricht senden",
+    "demoNotice": "Demo-Modus: Das Formular ist noch nicht angebunden. Beim Absenden wird nichts übertragen.",
+    "demoSent": "Demo-Modus: Ihre Eingaben wurden geprüft, aber nicht gesendet."
+  },
+  "legal": {
+    "translationNote": "",
+    "notice": {
+      "title": "Impressum",
+      "sections": [
+        {
+          "title": "Angaben gemäß § 5 TMG",
+          "lines": [
+            "Smart Village Solutions SVS GmbH",
+            "Klein Glien 25",
+            "14806 Bad Belzig",
+            "Deutschland"
+          ]
+        },
+        {
+          "title": "Kontakt",
+          "lines": [
+            "Tel.: 033841-63969-0",
+            "E-Mail: info@smart-village.solutions"
+          ]
+        },
+        {
+          "title": "Handelsregister",
+          "lines": [
+            "Registergericht: Amtsgericht Potsdam",
+            "Registernummer: HRB 34248"
+          ]
+        },
+        {
+          "title": "Geschäftsführung",
+          "lines": [
+            "Philipp Wilimzig & Erik Hildenbrand"
+          ]
+        },
+        {
+          "title": "Umsatzsteuer-Identifikationsnummer",
+          "lines": [
+            "DE265570015"
+          ]
+        },
+        {
+          "title": "Verantwortlich i.S.d. § 18 Abs. 2 MStV",
+          "lines": [
+            "Philipp Wilimzig"
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Datenschutzerklärung",
+      "sections": [
+        {
+          "title": "1. Verantwortlicher",
+          "lines": [
+            "Smart Village Solutions SVS GmbH",
+            "Klein Glien 25",
+            "14806 Bad Belzig",
+            "Deutschland",
+            "E-Mail: info@smart-village.solutions",
+            "Tel.: 033841-63969-0"
+          ]
+        },
+        {
+          "title": "2. Allgemeines zur Datenverarbeitung",
+          "paragraphs": [
+            "Der Schutz Ihrer personenbezogenen Daten ist uns ein wichtiges Anliegen. Wir verarbeiten Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, BDSG, TMG). In dieser Datenschutzerklärung informieren wir Sie über die wichtigsten Aspekte der Datenverarbeitung im Rahmen unserer Website."
+          ]
+        },
+        {
+          "title": "3. Hosting und Bereitstellung der Website",
+          "paragraphs": [
+            "Beim Besuch unserer Website werden durch den Hostinganbieter automatisch Informationen in sogenannten Server-Logfiles erfasst, die Ihr Browser automatisch übermittelt. Dies sind:"
+          ],
+          "list": [
+            "Browsertyp und Browserversion",
+            "verwendetes Betriebssystem",
+            "Referrer-URL",
+            "Hostname des zugreifenden Rechners",
+            "IP-Adresse",
+            "Uhrzeit der Serveranfrage"
+          ],
+          "after": [
+            "Diese Daten sind nicht bestimmten Personen zuordenbar. Eine Zusammenführung mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der technischen Bereitstellung der Website)."
+          ]
+        },
+        {
+          "title": "4. Kontaktformular",
+          "paragraphs": [
+            "Wenn Sie uns über das Kontaktformular auf unserer Website kontaktieren, werden die von Ihnen angegebenen Daten (Name, Organisation, E-Mail-Adresse, Kategorie, Nachricht) zum Zwecke der Bearbeitung Ihrer Anfrage bei uns gespeichert und verarbeitet.",
+            "Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Beantwortung von Anfragen). Ihre Daten werden nach abschließender Bearbeitung Ihrer Anfrage gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen."
+          ]
+        },
+        {
+          "title": "[Entwurf] Buchungsformular",
+          "paragraphs": [
+            "[Platzhalter – vor Go-live durch die verantwortliche Stelle bzw. Datenschutzberatung ergänzen: Welche Daten das Buchungsformular erhebt (Organisation, Ansprechperson, Kontakt- und Rechnungsdaten, Wunschtermin, Nachricht), Zweck, Rechtsgrundlage, Speicherdauer und Empfänger.]"
+          ]
+        },
+        {
+          "title": "5. Cookies",
+          "paragraphs": [
+            "Diese Website verwendet keine Tracking-Cookies und keine Analyse-Tools von Drittanbietern. Es werden ausschließlich technisch notwendige Cookies eingesetzt, die für den Betrieb der Website erforderlich sind."
+          ]
+        },
+        {
+          "title": "6. Ihre Rechte",
+          "paragraphs": [
+            "Sie haben gegenüber uns folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:"
+          ],
+          "list": [
+            "Recht auf Auskunft (Art. 15 DSGVO)",
+            "Recht auf Berichtigung (Art. 16 DSGVO)",
+            "Recht auf Löschung (Art. 17 DSGVO)",
+            "Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)",
+            "Recht auf Datenübertragbarkeit (Art. 20 DSGVO)",
+            "Widerspruchsrecht (Art. 21 DSGVO)"
+          ],
+          "after": [
+            "Darüber hinaus haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten zu beschweren."
+          ]
+        },
+        {
+          "title": "7. Externe Links",
+          "paragraphs": [
+            "Unsere Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich. Zum Zeitpunkt der Verlinkung wurden die Seiten auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar."
+          ]
+        },
+        {
+          "title": "8. Änderungen dieser Datenschutzerklärung",
+          "paragraphs": [
+            "Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.",
+            "Bei Fragen zum Datenschutz können Sie sich jederzeit an uns wenden: info@smart-village.solutions",
+            "Weitere Informationen zum Anbieter finden Sie im Impressum."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "AGB",
+      "text": "[Platzhalter – die Vertragsbedingungen / AGB für die Buchung von Smart Speech Flow liegen noch nicht vor. Das Buchungsformular setzt ihre Zustimmung voraus.]"
+    }
   }
 }

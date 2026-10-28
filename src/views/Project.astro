@@ -1,0 +1,58 @@
+---
+import PageHead from '../components/PageHead.astro';
+import TextCard from '../components/TextCard.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import { pathFor, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+import { links } from '../data/site';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const { t, tv } = useTranslations(locale);
+type Item = { title: string; text: string };
+const partnerLinks = [links.smartCityKassel, links.svs];
+---
+<PageHead locale={locale} current={t('pageNames.project')} title={t('project.title')} intro={t('project.intro')} />
+
+<section class="section">
+  <div class="container origin">
+    <div class="stack" style="--stack-gap: var(--spacing-16)">
+      <h2 class="t-section">{t('project.originTitle')}</h2>
+      {tv<string[]>('project.origin').map((p) => <p class="t-body-m">{p}</p>)}
+    </div>
+    <TextCard title={t('project.fundingTitle')} tone="tint"><p>{t('project.fundingText')}</p></TextCard>
+  </div>
+</section>
+
+<section class="section section--tint" aria-labelledby="partners-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="partners-title" class="t-section">{t('project.partnersTitle')}</h2>
+    <div class="grid-2">
+      {tv<{ role: string; name: string; text: string }[]>('project.partners').map((p, i) => (
+        <TextCard overline={p.role} title={p.name}><p>{p.text}</p><p><a href={partnerLinks[i]} rel="noopener">{partnerLinks[i].replace(/^https:\/\/(www\.)?/, '').replace(/\/.*$/, '')}</a></p></TextCard>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="why-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="why-title" class="t-section">{t('project.whyTitle')}</h2>
+    <div class="grid-2">
+      {tv<Item[]>('project.why').map((w) => <TextCard title={w.title}><p>{w.text}</p></TextCard>)}
+    </div>
+  </div>
+</section>
+
+<CtaBanner
+  title={t('subpage.ctaTitle')}
+  text={t('subpage.ctaText')}
+  primary={{ label: t('subpage.ctaSavings'), href: pathFor(locale, 'home', 'ersparnis') }}
+  secondary={{ label: t('footer.github'), href: links.github }}
+/>
+
+<style>
+  .origin { display: grid; gap: var(--spacing-32); align-items: start; }
+  .origin p { color: var(--color-gray-cool-700); }
+  @media (min-width: 1024px) { .origin { grid-template-columns: 2fr 1fr; gap: var(--spacing-48); } }
+</style>

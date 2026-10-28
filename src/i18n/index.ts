@@ -29,9 +29,14 @@ export function t(locale: Locale, key: string): string {
   return value;
 }
 
+/** Ersetzt Platzhalter wie {hours} im Text. */
+export function fill(text: string, vars: Record<string, string | number>): string {
+  return text.replace(/\{(\w+)\}/g, (match, name: string) => (name in vars ? String(vars[name]) : match));
+}
+
 export function useTranslations(locale: Locale) {
   return {
-    t: (key: string) => t(locale, key),
+    t: (key: string, vars?: Record<string, string | number>) => (vars ? fill(t(locale, key), vars) : t(locale, key)),
     tv: <T = unknown>(key: string) => tv<T>(locale, key),
   };
 }

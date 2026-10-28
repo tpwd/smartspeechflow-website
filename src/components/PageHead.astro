@@ -1,0 +1,31 @@
+---
+import { pathFor, type Locale } from '../i18n/config';
+import { t } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  intro?: string;
+  current: string;
+}
+const { locale, title, intro, current } = Astro.props;
+---
+<section class="page-head section--tint">
+  <div class="container inner">
+    <nav aria-label={t(locale, 'booking.breadcrumb')} class="t-body-xs t-muted">
+      <a href={pathFor(locale, 'home')}>{t(locale, 'nav.home')}</a> / <span aria-current="page">{current}</span>
+    </nav>
+    <h1 class="t-hero">{title}</h1>
+    {intro && <p class="t-body-l">{intro}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-head { padding-block: var(--spacing-40); }
+  .inner { display: grid; gap: var(--spacing-16); justify-items: start; }
+  .inner a { color: inherit; }
+  p { max-inline-size: 792px; color: var(--color-gray-cool-700); }
+  @media (min-width: 768px) { .page-head { padding-block: var(--spacing-56); } }
+  @media (min-width: 1024px) { .page-head { padding-block: var(--spacing-80); } }
+</style>

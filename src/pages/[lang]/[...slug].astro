@@ -4,7 +4,12 @@ import Base from '../../layouts/Base.astro';
 import Home from '../../views/Home.astro';
 import Booking from '../../views/Booking.astro';
 import Thanks from '../../views/Thanks.astro';
-import Placeholder from '../../views/Placeholder.astro';
+import Product from '../../views/Product.astro';
+import UseCases from '../../views/UseCases.astro';
+import Project from '../../views/Project.astro';
+import OpenSource from '../../views/OpenSource.astro';
+import Contact from '../../views/Contact.astro';
+import Legal from '../../views/Legal.astro';
 import { locales, pages, slugs, type Locale, type PageKey } from '../../i18n/config';
 import { t } from '../../i18n';
 
@@ -34,5 +39,12 @@ const title = titles[page] ?? `${pageName} – Smart Speech Flow`;
   {page === 'home' && <Home locale={locale} />}
   {page === 'booking' && <Booking locale={locale} />}
   {page === 'thanks' && <Thanks locale={locale} />}
-  {pageName && <Placeholder locale={locale} title={pageName} />}
+  {page === 'product' && <Product locale={locale} />}
+  {page === 'useCases' && <UseCases locale={locale} />}
+  {page === 'project' && <Project locale={locale} />}
+  {page === 'openSource' && <OpenSource locale={locale} />}
+  {page === 'contact' && <Contact locale={locale} />}
+  {page === 'legalNotice' && <Legal locale={locale} doc="notice" />}
+  {page === 'privacy' && <Legal locale={locale} doc="privacy" />}
+  {page === 'terms' && <Legal locale={locale} doc="terms" />}
 </Base>

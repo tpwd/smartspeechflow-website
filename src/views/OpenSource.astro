@@ -1,0 +1,78 @@
+---
+import PageHead from '../components/PageHead.astro';
+import TextCard from '../components/TextCard.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import SubpageCta from '../components/SubpageCta.astro';
+import { pathFor, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+import { links } from '../data/site';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const { t, tv } = useTranslations(locale);
+type Item = { title: string; text: string };
+// TODO: Pfad der Lizenzdatei im Repository prüfen (konnte beim Aufbau nicht abgerufen werden).
+const resourceLinks = [links.github, links.docs, links.github];
+---
+<PageHead locale={locale} current={t('pageNames.openSource')} title={t('openSource.title')} intro={t('openSource.intro')} />
+
+<section class="section">
+  <div class="container mit">
+    <div class="stack" style="--stack-gap: var(--spacing-16)">
+      <h2 class="t-section">{t('openSource.mitTitle')}</h2>
+      <p class="t-body-m">{t('openSource.mitText')}</p>
+    </div>
+    <TextCard title={t('openSource.mitAllowsTitle')} tone="tint">
+      <ul role="list" class="checks">{tv<string[]>('openSource.mitAllows').map((a) => <li><Icon name="check" size={16} />{a}</li>)}</ul>
+    </TextCard>
+  </div>
+</section>
+
+<section class="section section--tint" aria-labelledby="principles-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="principles-title" class="t-section">{t('openSource.principlesTitle')}</h2>
+    <div class="grid-4">
+      {tv<Item[]>('openSource.principles').map((p) => <TextCard title={p.title}><p>{p.text}</p></TextCard>)}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container operate">
+    <div class="stack" style="--stack-gap: var(--spacing-16)">
+      <h2 class="t-section">{t('openSource.operateTitle')}</h2>
+      <p class="t-body-m">{t('openSource.operateText')}</p>
+    </div>
+    <Button href={pathFor(locale, 'home', 'preise')} size="L" icon>{t('openSource.operateCta')}</Button>
+  </div>
+</section>
+
+<section class="section section--tint" aria-labelledby="resources-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="resources-title" class="t-section">{t('openSource.resourcesTitle')}</h2>
+    <div class="grid-3">
+      {tv<Item[]>('openSource.resources').map((r, i) => (
+        <a class="resource" href={resourceLinks[i]} rel="noopener"><span class="t-h6">{r.title}</span><span class="t-body-s">{r.text}</span><Icon name="arrow-square-out" size={20} /></a>
+      ))}
+    </div>
+    <p class="t-body-s contribute">{t('openSource.contribute')} <a href={pathFor(locale, 'contact')}>{t('footer.contactUs')}</a></p>
+  </div>
+</section>
+
+<SubpageCta locale={locale} />
+
+<style>
+  .mit, .operate { display: grid; gap: var(--spacing-32); align-items: center; }
+  .mit p, .operate p, .contribute { color: var(--color-gray-cool-700); }
+  .checks { margin: 0; padding: 0; display: grid; gap: var(--spacing-8); }
+  .checks li { display: flex; gap: var(--spacing-8); }
+  .checks :global(.icon) { flex: none; margin-block-start: 4px; color: var(--color-green-700); }
+  .resource { display: grid; gap: var(--spacing-8); padding: var(--spacing-24); background: var(--color-white); border: 1px solid var(--color-gray-cool-200); border-radius: var(--radius-16); text-decoration: none; color: var(--color-petrol-900); overflow-wrap: anywhere; }
+  .resource:hover { border-color: var(--color-petrol-700); }
+  .contribute a { color: var(--color-petrol-700); }
+  @media (min-width: 1024px) {
+    .mit { grid-template-columns: 2fr 1fr; gap: var(--spacing-48); }
+    .operate { grid-template-columns: 1fr auto; gap: var(--spacing-48); }
+  }
+</style>

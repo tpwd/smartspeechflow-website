@@ -6,12 +6,13 @@ import BenefitCard from '../components/BenefitCard.astro';
 import Testimonial from '../components/Testimonial.astro';
 import PricingCard from '../components/PricingCard.astro';
 import CtaBanner from '../components/CtaBanner.astro';
+import SavingsCalculator from '../components/SavingsCalculator.astro';
 import tileDialog from '../assets/images/tile-dialog.jpg';
 import tileDevices from '../assets/images/tile-geraete.jpg';
 import tileLanguages from '../assets/images/tile-sprachen.jpg';
 import { pathFor, localeTags, type Locale } from '../i18n/config';
-import { useTranslations } from '../i18n';
-import { formatEuro, links, plans } from '../data/site';
+import { fill, useTranslations } from '../i18n';
+import { breakEvenHoursPerMonth, callHref, demoHref, formatEuro, plans, pricedPlans, savings } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -26,7 +27,10 @@ const tiles = [
   { image: tileDevices, size: 'S' as const },
   { image: tileLanguages, size: 'M' as const },
 ];
-const why = tv<Item[]>('why.items');
+// „Rechnet sich“: Schwelle aus Preis und angenommenem Stundensatz berechnen, damit Text und Rechner übereinstimmen.
+const cheapest = pricedPlans.reduce((a, b) => (b.monthlyNet < a.monthlyNet ? b : a));
+const breakEven = breakEvenHoursPerMonth(cheapest.monthlyNet);
+const why = tv<Item[]>('why.items').map((item) => ({ ...item, text: fill(item.text, { hours: breakEven, rate: savings.interpreterHourlyRate }) }));
 const quotes = tv<{ quote: string; name: string; org: string }[]>('testimonials.items');
 const contact = pathFor(locale, 'contact');
 ---
@@ -42,6 +46,8 @@ const contact = pathFor(locale, 'contact');
   </div>
 </section>
 
+<SavingsCalculator locale={locale} />
+
 <section class="section" aria-labelledby="why-title">
   <div class="container stack" style="--stack-gap: var(--spacing-40)">
     <h2 id="why-title" class="t-section">{t('why.title')}</h2>
@@ -55,7 +61,7 @@ const contact = pathFor(locale, 'contact');
 <section class="section" aria-labelledby="testimonials-title">
   <div class="container stack" style="--stack-gap: var(--spacing-40)">
     <h2 id="testimonials-title" class="t-section">{t('testimonials.title')}</h2>
-    <div class="grid-2">
+    <div class="quotes">
       {quotes.map((q) => <Testimonial quote={q.quote} name={q.name} org={q.org} coatLabel={t('testimonials.coatOfArms')} />)}
     </div>
   </div>
@@ -64,7 +70,7 @@ const contact = pathFor(locale, 'contact');
 <section id="preise" class="section section--tint" aria-labelledby="pricing-title">
   <div class="container stack" style="--stack-gap: var(--spacing-40)">
     <h2 id="pricing-title" class="t-section">{t('pricing.title')}</h2>
-    <div class="grid-3 grid-3--plans">
+    <div class="grid-3">
       {plans.map((plan) => (
         <PricingCard
           overline={t(`pricing.plans.${plan.id}.overline`)}
@@ -83,19 +89,12 @@ const contact = pathFor(locale, 'contact');
 <CtaBanner
   title={t('cta.title')}
   text={t('cta.text')}
-  primary={{ label: t('cta.demo'), href: links.demo ?? contact }}
-  secondary={{ label: t('cta.call'), href: links.call ?? contact }}
+  primary={{ label: t('cta.demo'), href: demoHref(contact) }}
+  secondary={{ label: t('cta.call'), href: callHref(contact) }}
 />
 
 <style>
-  .grid-3, .grid-2 { display: grid; gap: var(--spacing-16); }
-  @media (min-width: 768px) {
-    .grid-3, .grid-2 { gap: var(--spacing-24); }
-    .grid-3 { grid-template-columns: repeat(2, 1fr); }
-    .grid-2 { grid-template-columns: 1fr; }
-  }
-  @media (min-width: 1024px) {
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    .grid-2 { grid-template-columns: 1fr 1fr; }
-  }
+  .quotes { display: grid; gap: var(--spacing-16); }
+  @media (min-width: 768px) { .quotes { gap: var(--spacing-24); } }
+  @media (min-width: 1024px) { .quotes { grid-template-columns: 1fr 1fr; } }
 </style>

@@ -1,0 +1,53 @@
+---
+import PageHead from '../components/PageHead.astro';
+import Button from '../components/Button.astro';
+import StepCard from '../components/StepCard.astro';
+import BenefitCard from '../components/BenefitCard.astro';
+import TextCard from '../components/TextCard.astro';
+import SubpageCta from '../components/SubpageCta.astro';
+import { pathFor, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const { t, tv } = useTranslations(locale);
+type Item = { title: string; text: string };
+---
+<PageHead locale={locale} current={t('pageNames.product')} title={t('product.title')} intro={t('product.intro')}>
+  <div class="ctas">
+    <Button href={pathFor(locale, 'booking')} size="L" icon>{t('nav.book')}</Button>
+    <Button href={pathFor(locale, 'home', 'ersparnis')} size="L" variant="secondary-dark">{t('hero.ctaSavings')}</Button>
+  </div>
+</PageHead>
+
+<section class="section" aria-labelledby="steps-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="steps-title" class="t-section">{t('product.stepsTitle')}</h2>
+    <ol class="grid-4" role="list">
+      {tv<Item[]>('product.steps').map((s, i) => <StepCard number={i + 1} title={s.title} text={s.text} />)}
+    </ol>
+  </div>
+</section>
+
+<section class="section section--tint" aria-labelledby="benefits-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="benefits-title" class="t-section">{t('product.benefitsTitle')}</h2>
+    <div class="grid-3">
+      {tv<Item[]>('product.benefits').map((b) => <BenefitCard title={b.title} text={b.text} />)}
+      <BenefitCard title={t('why.modes.title')} list={tv<string[]>('why.modes.items')} />
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid-2">
+    <TextCard title={t('product.techTitle')} tone="tint"><p>{t('product.techText')}</p></TextCard>
+    <TextCard title={t('product.blackboxTitle')} tone="tint"><p>{t('product.blackboxText')}</p><p><a href={pathFor(locale, 'openSource')}>{t('nav.openSource')}</a></p></TextCard>
+  </div>
+</section>
+
+<SubpageCta locale={locale} />
+
+<style>
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-block-start: var(--spacing-8); }
+</style>

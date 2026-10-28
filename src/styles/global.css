@@ -166,3 +166,20 @@ textarea {
 [dir='rtl'] .icon--directional {
   transform: scaleX(-1);
 }
+
+/* Raster für Kachelgruppen: Mobil 1 Spalte, Tablet 2, Desktop 2/3/4 */
+.grid-2, .grid-3, .grid-4 { display: grid; gap: var(--spacing-16); }
+/* Listen-Abstände zurücksetzen, ohne .container oder .stack zu überschreiben (Spezifität 0) */
+:where(.grid-2, .grid-3, .grid-4) { padding: 0; margin-block-end: 0; }
+:where(ol.grid-2, ol.grid-3, ol.grid-4, ul.grid-2, ul.grid-3, ul.grid-4) { margin-block-start: 0; }
+@media (min-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { gap: var(--spacing-24); grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Sprungziele nicht unter der fixierten Kopfzeile verstecken */
+[id] { scroll-margin-block-start: 80px; }
+@media (min-width: 1024px) { [id] { scroll-margin-block-start: 112px; } }

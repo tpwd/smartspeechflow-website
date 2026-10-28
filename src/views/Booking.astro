@@ -30,6 +30,7 @@ const config = {
     promo: t('promo.short'),
     noPromo: t('booking.summary.noPromo'),
     onRequest: t('booking.summary.onRequest'),
+    perYear: t('booking.summary.perYear'),
   },
 };
 const field = (key: string) => t(`booking.fields.${key}`);
@@ -116,6 +117,7 @@ const field = (key: string) => t(`booking.fields.${key}`);
           <div><dt>{t('booking.summary.promo')}</dt><dd data-sum="promo"></dd></div>
         </dl>
         <p class="total"><span class="t-body-s t-strong" data-sum="totalLabel"></span><span class="t-h4" data-sum="total"></span></p>
+        <p class="estimate" data-sum="estimateRow" hidden><span class="t-body-xs">{t('booking.summary.estimatedSaving')}</span><b data-sum="estimate"></b></p>
         <Button type="submit" size="L" icon block>{t('booking.submit')}</Button>
         <p class="t-body-xxs t-muted">{t('booking.note')}</p>
       </aside>
@@ -140,9 +142,17 @@ const field = (key: string) => t(`booking.fields.${key}`);
   const set = (key: string, value: string) => { const el = form.querySelector(`[data-sum="${key}"]`); if (el) el.textContent = value; };
 
   // Vorauswahl über ?option=… (Links „Jetzt buchen“ auf der Startseite)
-  const pre = new URLSearchParams(location.search).get('option');
-  const preInput = pre ? form.querySelector<HTMLInputElement>(`input[name="option"][value="${CSS.escape(pre)}"]`) : null;
-  if (preInput) preInput.checked = true;
+  const query = new URLSearchParams(location.search);
+  for (const name of ['option', 'term']) {
+    const value = query.get(name);
+    const input = value ? form.querySelector<HTMLInputElement>(`input[name="${name}"][value="${CSS.escape(value)}"]`) : null;
+    if (input) input.checked = true;
+  }
+  // Aus dem Ersparnisrechner übernommene Angaben (nur zur Anzeige, werden nicht gespeichert)
+  const calcHours = Number(query.get('hours'));
+  const calcRate = Number(query.get('rate'));
+  const calcPerYear = query.get('period') === 'year' ? calcHours : calcHours * 12;
+  const hasEstimate = query.has('hours') && Number.isFinite(calcPerYear) && calcPerYear > 0 && calcRate > 0;
 
   function update() {
     const option = (form.querySelector<HTMLInputElement>('input[name="option"]:checked')?.value) ?? 'shared';
@@ -152,6 +162,10 @@ const field = (key: string) => t(`booking.fields.${key}`);
     set('option', plan.title);
     set('term', config.terms[term]);
     set('promo', promoActive ? config.text.promo : config.text.noPromo);
+    const estimateRow = form.querySelector<HTMLElement>('[data-sum="estimateRow"]')!;
+    const estimate = hasEstimate && plan.monthlyNet !== null ? calcPerYear * calcRate - plan.monthlyNet * 12 : 0;
+    estimateRow.hidden = estimate <= 0;
+    set('estimate', `${eur(estimate)} ${config.text.perYear}`);
     if (plan.monthlyNet === null) {
       set('price', config.text.onRequest);
       set('totalLabel', '');
@@ -243,6 +257,8 @@ const field = (key: string) => t(`booking.fields.${key}`);
   dd { margin: 0; font-weight: var(--font-weight-bold); color: var(--color-petrol-900); text-align: end; }
   .total { display: grid; gap: var(--spacing-4); }
   .total .t-h4 { color: var(--color-petrol-900); font-weight: var(--font-weight-bold); }
+  .estimate { display: flex; justify-content: space-between; gap: var(--spacing-16); padding: 12px var(--spacing-16); border-radius: var(--radius-8); background: var(--color-green-100); color: var(--color-green-800); }
+  .estimate[hidden] { display: none; }
 
   @media (min-width: 768px) {
     .head { padding-block: var(--spacing-56); }

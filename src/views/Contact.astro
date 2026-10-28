@@ -1,0 +1,85 @@
+---
+import PageHead from '../components/PageHead.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import TextCard from '../components/TextCard.astro';
+import { pathFor, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+import { links } from '../data/site';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const { t, tv } = useTranslations(locale);
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || '';
+const categories = ['demo', 'call', 'booking', 'municipal', 'tech', 'other'] as const;
+const f = (k: string) => t(`contact.fields.${k}`);
+---
+<PageHead locale={locale} current={t('pageNames.contact')} title={t('contact.title')} intro={t('contact.intro')} />
+
+<section class="section">
+  <div class="container layout">
+    <aside class="side">
+      <TextCard title={t('contact.peopleTitle')} tone="tint">
+        {tv<{ name: string; role: string }[]>('contact.people').map((p) => <p><b>{p.name}</b><br />{p.role}</p>)}
+        <p><b>{t('contact.direct')}</b><br /><a href={`mailto:${links.email}`}>{links.email}</a><br /><a href={`tel:+49${links.phone.replace(/^0/, '').replace(/\D/g, '')}`}>{links.phone}</a></p>
+      </TextCard>
+      <TextCard title={t('contact.topicsTitle')}>
+        <ul role="list" class="checks">{tv<string[]>('contact.topics').map((x) => <li><Icon name="check" size={16} />{x}</li>)}</ul>
+      </TextCard>
+    </aside>
+
+    <form class="form" method="post" action={endpoint || undefined} data-demo={endpoint ? undefined : 'true'} novalidate aria-labelledby="form-title">
+      <h2 id="form-title" class="t-h4">{t('contact.formTitle')}</h2>
+      {!endpoint && <p class="notice t-body-xs" role="note">{t('contact.demoNotice')}</p>}
+      <label class="field"><span>{f('name')}*</span><input name="name" required autocomplete="name" /></label>
+      <label class="field"><span>{f('org')}</span><input name="organisation" autocomplete="organization" /></label>
+      <label class="field"><span>{f('email')}*</span><input name="email" type="email" required autocomplete="email" /></label>
+      <label class="field"><span>{f('category')}</span>
+        <select name="category">
+          {categories.map((c) => <option value={c}>{t(`contact.categories.${c}`)}</option>)}
+        </select>
+      </label>
+      <label class="field"><span>{f('message')}*</span><textarea name="message" rows="6" required></textarea></label>
+      <label class="check"><input type="checkbox" name="consent" required /><span>{t('contact.consent')}* <a href={pathFor(locale, 'privacy')}>{t('pageNames.privacy')}</a></span></label>
+      <p class="t-body-xxs t-muted">* {t('booking.required')}</p>
+      <Button type="submit" size="L" icon>{t('contact.submit')}</Button>
+      <p class="sent t-body-s" role="status" hidden>{t('contact.demoSent')}</p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('form.form');
+  if (form) {
+    // Thema vorauswählen: /kontakt/?topic=demo (Buttons „Live-Demo buchen“, „Individueller Call“)
+    const topic = new URLSearchParams(location.search).get('topic');
+    const select = form.querySelector<HTMLSelectElement>('select[name="category"]');
+    if (topic && select && [...select.options].some((o) => o.value === topic)) select.value = topic;
+
+    form.addEventListener('submit', (event) => {
+      if (!form.reportValidity()) { event.preventDefault(); return; }
+      if (form.dataset.demo) {
+        event.preventDefault();
+        form.querySelector<HTMLElement>('.sent')!.hidden = false;
+      }
+    });
+  }
+</script>
+
+<style>
+  .layout { display: grid; gap: var(--spacing-32); align-items: start; }
+  .side { display: grid; gap: var(--spacing-24); }
+  .side a, .check a { color: var(--color-petrol-700); }
+  .checks { margin: 0; padding: 0; display: grid; gap: var(--spacing-8); }
+  .checks li { display: flex; gap: var(--spacing-8); }
+  .checks :global(.icon) { flex: none; margin-block-start: 4px; color: var(--color-green-700); }
+  .form { display: grid; gap: var(--spacing-24); }
+  .notice { padding: 12px var(--spacing-16); border-radius: var(--radius-8); background: #fff7ed; border: 1px solid var(--color-status-warning); color: #7c2d12; }
+  .field { display: grid; gap: var(--spacing-8); font-size: var(--font-size-body-xs); font-weight: var(--font-weight-bold); color: var(--color-petrol-900); }
+  .field input, .field select, .field textarea { inline-size: 100%; padding: 12px var(--spacing-16); border: 1px solid var(--color-gray-cool-300); border-radius: var(--radius-8); background: var(--color-white); font-weight: var(--font-weight-regular); font-size: var(--font-size-body-s); color: var(--color-petrol-900); }
+  .check { display: flex; gap: 12px; align-items: flex-start; font-size: var(--font-size-body-s); }
+  .check input { inline-size: 20px; block-size: 20px; margin: 2px 0 0; accent-color: var(--color-petrol-900); flex: none; }
+  .form :global(.btn) { justify-self: start; }
+  .sent { padding: 12px var(--spacing-16); border-radius: var(--radius-8); background: var(--color-green-050); border: 1px solid var(--color-green-600); color: var(--color-green-800); }
+  @media (min-width: 1024px) { .layout { grid-template-columns: 1fr 2fr; gap: var(--spacing-48); } }
+</style>

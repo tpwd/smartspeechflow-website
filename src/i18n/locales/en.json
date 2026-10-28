@@ -27,7 +27,8 @@
     "subline": "No conversation fails because of language anymore. Smart Speech Flow interprets in 20 languages, legally compliant and privacy-friendly.",
     "ctaBook": "Book now",
     "ctaDemo": "Book a live demo",
-    "imageAlt": "Consultation between a public servant and a citizen"
+    "imageAlt": "Consultation between a public servant and a citizen",
+    "ctaSavings": "Calculate your savings"
   },
   "chat": {
     "app": "Smart Speech Flow",
@@ -68,15 +69,34 @@
   "why": {
     "title": "Why Smart Speech Flow",
     "items": [
-      { "title": "Legally compliant", "text": "The only German open-source tool for legally compliant speech translation" },
-      { "title": "Legally reviewed concept", "text": "Operation and conversation modes were agreed with a law firm for use in public authorities" },
-      { "title": "Data protection", "text": "Open-source models run on servers in Germany" },
-      { "title": "The software belongs to the municipality", "text": "Open source under the MIT licence: free to use and extend, without vendor lock-in" },
-      { "title": "Pays off", "text": "From around 12 interpreter hours per month" }
+      {
+        "title": "Legally compliant",
+        "text": "The only German open-source tool for legally compliant speech translation"
+      },
+      {
+        "title": "Legally reviewed concept",
+        "text": "Operation and conversation modes were agreed with a law firm for use in public authorities – including sensitive conversations"
+      },
+      {
+        "title": "Data protection",
+        "text": "Locally operated open-source models on a server just for your municipality – or shared, equally privacy-compliant"
+      },
+      {
+        "title": "The software belongs to the municipality",
+        "text": "Open source under the MIT licence: free to use and extend, without vendor lock-in"
+      },
+      {
+        "title": "Pays off",
+        "text": "With the shared server from around {hours} interpreter hours per month (at €{rate} per hour)"
+      }
     ],
     "modes": {
       "title": "Three conversation modes",
-      "items": ["No recording", "Recording log, optionally reviewed by an interpreter", "Full recording"]
+      "items": [
+        "No recording: nothing is stored",
+        "Log mode: legally relevant parts of the conversation are recorded in encrypted form and can be reviewed by an appointed interpreter",
+        "Test mode: full recording, for testing only"
+      ]
     }
   },
   "testimonials": {
@@ -106,18 +126,36 @@
       "shared": {
         "overline": "Starter",
         "title": "Shared server",
-        "features": ["Runs in the browser on existing devices", "Three conversation modes", "20 languages", "Server at SVS, shared with other municipalities", "Up to 3 simultaneous conversations"]
+        "features": [
+          "Runs in the browser on existing devices",
+          "Three conversation modes",
+          "20 languages",
+          "Server at SVS, shared with other municipalities",
+          "Up to approx. 3 simultaneous conversations"
+        ]
       },
       "dedicated": {
         "overline": "Upgrade",
         "title": "Dedicated server",
-        "features": ["Runs in the browser on existing devices", "Three conversation modes", "20 languages", "Dedicated server at SVS, only for your municipality", "Up to 5 simultaneous conversations"]
+        "features": [
+          "Runs in the browser on existing devices",
+          "Three conversation modes",
+          "20 languages",
+          "Dedicated server at SVS, only for your municipality",
+          "Up to approx. 5 simultaneous conversations"
+        ]
       },
       "selfhosted": {
         "overline": "Self-hosted",
         "title": "Operated by the municipality",
         "badge": "Open source, no licence fees",
-        "features": ["Runs in the browser on existing devices", "Three conversation modes", "20 languages", "Runs on the municipality’s own server", "Full control over infrastructure and data"]
+        "features": [
+          "Runs in the browser on existing devices",
+          "Three conversation modes",
+          "20 languages",
+          "Runs on the municipality’s own server",
+          "Full control over infrastructure and data"
+        ]
       }
     }
   },
@@ -154,23 +192,29 @@
     "privacy": "Privacy policy",
     "terms": "Terms and conditions"
   },
-  "placeholder": {
-    "text": "This page is still empty in the scaffold. Its content will be taken over from the existing site.",
-    "back": "Back to home"
-  },
   "booking": {
     "metaTitle": "Book Smart Speech Flow",
     "breadcrumb": "Breadcrumb",
     "breadcrumbCurrent": "Booking",
     "title": "Book Smart Speech Flow",
     "intro": "A binding booking in three steps. After a successful booking, Smart Speech Flow is ready to use within 2 days.",
-    "steps": ["Option", "Term", "Your details"],
+    "steps": [
+      "Option",
+      "Term",
+      "Your details"
+    ],
     "step1": "1. Choose an option",
     "step2": "2. Choose a term",
     "step3": "3. Your details",
     "terms": {
-      "prepaid": { "label": "12 months in advance", "text": "Billed for 12 months; includes the offer when booked by 31 Dec 2026" },
-      "monthly": { "label": "Monthly", "text": "Billed monthly" }
+      "prepaid": {
+        "label": "12 months in advance",
+        "text": "Billed for 12 months; includes the offer when booked by 31 Dec 2026"
+      },
+      "monthly": {
+        "label": "Monthly",
+        "text": "Billed monthly"
+      }
     },
     "fields": {
       "org": "Municipality / organisation",
@@ -203,7 +247,9 @@
       "total12": "Total for 12 months",
       "totalMonthly": "Monthly amount",
       "net": "excl. VAT",
-      "onRequest": "on request"
+      "onRequest": "on request",
+      "estimatedSaving": "Your estimated savings",
+      "perYear": "per year"
     },
     "submit": "Book now (binding)",
     "note": "After booking you will receive a confirmation by email. Ready to use within 2 days.",
@@ -218,10 +264,22 @@
     "numberPlaceholder": "[Number]",
     "nextTitle": "What happens next?",
     "steps": [
-      { "title": "Email confirmation", "text": "You will receive the booking confirmation with all details at the address you provided." },
-      { "title": "Provisioning", "text": "We will get in touch with the next steps for the setup, tailored to the option you booked." },
-      { "title": "Access and organisation", "text": "You will receive your access by email. You create your organisation and adjust the settings, for example separate areas for individual departments." },
-      { "title": "Ready to go", "text": "Within 2 days of booking you can hold your first conversations." }
+      {
+        "title": "Email confirmation",
+        "text": "You will receive the booking confirmation with all details at the address you provided."
+      },
+      {
+        "title": "Provisioning",
+        "text": "We will get in touch with the next steps for the setup, tailored to the option you booked."
+      },
+      {
+        "title": "Access and organisation",
+        "text": "You will receive your access by email. You create your organisation and adjust the settings, for example separate areas for individual departments."
+      },
+      {
+        "title": "Ready to go",
+        "text": "Within 2 days of booking you can hold your first conversations."
+      }
     ],
     "questionsTitle": "Questions about your booking?",
     "questionsText": "We are happy to help – contact us directly with questions about setup, access or billing.",
@@ -232,5 +290,413 @@
     "title": "Page not found",
     "text": "The page you requested does not exist (anymore).",
     "back": "Back to home"
+  },
+  "savings": {
+    "title": "How much can your municipality save?",
+    "intro": "Do the maths: your interpreter hours compared with the fixed monthly price of Smart Speech Flow.",
+    "hours": {
+      "label": "Interpreter hours",
+      "period": "Period",
+      "perMonth": "per month",
+      "perYear": "per year"
+    },
+    "plan": {
+      "label": "Option",
+      "hint": {
+        "shared": "up to approx. 3 simultaneous conversations",
+        "dedicated": "up to approx. 5 simultaneous conversations"
+      }
+    },
+    "rate": {
+      "label": "Cost per interpreter hour (excl. VAT)",
+      "hint": "Assumption. Enter your own hourly rate."
+    },
+    "result": {
+      "interpreter": "Interpreter costs per year",
+      "ssf": "Smart Speech Flow per year",
+      "saving": "Your savings per year",
+      "perMonthEquivalent": "equals {amount} per month",
+      "breakEven": "At this volume the option does not pay off yet. It pays off from around {hours} interpreter hours per month.",
+      "promoBonus": "Book by 31 Dec 2026 and pay 12 months in advance to save an extra {amount} in the first year ({months} months free)."
+    },
+    "effort": {
+      "title": "And you save effort:",
+      "items": [
+        "No more organising and coordinating interpreter appointments",
+        "Hold conversations right away instead of waiting for an appointment",
+        "No travel, no billing per assignment – one fixed monthly price",
+        "Runs in the browser on existing devices, ready within 2 days"
+      ]
+    },
+    "cta": "Book this option",
+    "disclaimer": "Example calculation without guarantee, all amounts excl. VAT. Actual interpreter costs depend on language, provider, travel and minimum billing, among other things. If you have logs reviewed by interpreters, this incurs additional, usually much lower costs."
+  },
+  "subpage": {
+    "ctaTitle": "Does Smart Speech Flow pay off for your municipality?",
+    "ctaText": "Calculate your savings compared with interpreter hours – or book right away. After booking, Smart Speech Flow is ready within 2 days.",
+    "ctaSavings": "Calculate your savings",
+    "ctaBook": "Book now"
+  },
+  "product": {
+    "title": "Real-time interpreting – right in the browser",
+    "intro": "Smart Speech Flow combines speech recognition, translation and speech output in one continuous process. Staff and visitors speak or write in their own language; the other side receives the translation instantly as text and audio.",
+    "stepsTitle": "From conversation to understanding",
+    "steps": [
+      {
+        "title": "Voice or text input",
+        "text": "Staff or citizens speak or write in their own language."
+      },
+      {
+        "title": "Automatic processing",
+        "text": "The system recognises speech, translates the content and prepares it for the recipient."
+      },
+      {
+        "title": "Text and audio output",
+        "text": "The recipient receives a readable translation and, optionally, spoken output."
+      },
+      {
+        "title": "Real-time dialogue",
+        "text": "Language barriers turn into a direct exchange – on two devices of the municipality or with the visitor’s own phone."
+      }
+    ],
+    "benefitsTitle": "What you get",
+    "benefits": [
+      {
+        "title": "20 languages in real time",
+        "text": "The 20 most common foreign languages in Germany, translated as text and audio."
+      },
+      {
+        "title": "Runs in the browser",
+        "text": "No installation, no special hardware: existing devices are enough."
+      },
+      {
+        "title": "Ready within 2 days",
+        "text": "No months-long rollout project: after booking we set up the server and you can start."
+      },
+      {
+        "title": "Separate areas per department",
+        "text": "Create your organisation and set up separate areas and rules for individual departments."
+      },
+      {
+        "title": "Open source under the MIT licence",
+        "text": "Open source code, locally operated open-source models, no vendor lock-in."
+      }
+    ],
+    "techTitle": "Modern technology, simple to use",
+    "techText": "Smart Speech Flow uses a modular architecture with speech-to-text, translation, text-to-speech and WebSocket-based real-time communication. It can be extended, operated and integrated into existing processes in a transparent way.",
+    "blackboxTitle": "No black-box product",
+    "blackboxText": "The source code is openly available under the MIT License. This creates transparency and adaptability – and keeps your municipality independent in the long term."
+  },
+  "useCases": {
+    "title": "Use it wherever understanding matters",
+    "intro": "Smart Speech Flow is made for situations where people who speak different languages need to communicate directly and clearly – in administration, advice services and wherever you deal with citizens.",
+    "stats": [
+      {
+        "value": "20",
+        "label": "languages"
+      },
+      {
+        "value": "Real time",
+        "label": "voice and text translation"
+      },
+      {
+        "value": "Browser",
+        "label": "no installation required"
+      }
+    ],
+    "fieldsTitle": "Where Smart Speech Flow adds value",
+    "fields": [
+      {
+        "title": "Citizen services and administration",
+        "text": "In the office, at a service point or on the move: staff talk directly with citizens, regardless of the language they speak."
+      },
+      {
+        "title": "Social and integration advice",
+        "text": "Direct understanding is essential in sensitive consultations. Conversations become more accessible and structured – without waiting for external interpreters."
+      },
+      {
+        "title": "Community work and meeting places",
+        "text": "In community centres, neighbourhood hubs and meeting cafés, communication between professionals and visitors becomes clearer."
+      },
+      {
+        "title": "Mobile and decentralised settings",
+        "text": "Also for home visits, events or temporary advice services – simply in the browser."
+      }
+    ],
+    "practiceTitle": "In use in practice",
+    "practiceText": "Smart Speech Flow was developed together with the City of Kassel and tested under real conditions at the Stadtteilzentrum Wesertor. Everyday speech is translated clearly into German and vice versa – directly in the conversation, without waiting for an interpreter. Smart Speech Flow is now in use in several municipalities.",
+    "transferTitle": "Ready for your municipality",
+    "transferText": "As an open-source solution with municipal roots, Smart Speech Flow can be used in other cities, districts and institutions without an adaptation project."
+  },
+  "project": {
+    "title": "Behind the project",
+    "intro": "Smart Speech Flow grew out of a concrete need in everyday municipal work: reducing language barriers in public and social settings.",
+    "originTitle": "How Smart Speech Flow began",
+    "origin": [
+      "Every day, people without a shared language meet in community centres, advice services and public facilities. The idea: a digital tool that makes these encounters noticeably easier.",
+      "Smart Speech Flow was developed in the context of Smart Kassel / Smart City Kassel and tested at the Stadtteilzentrum Wesertor in Kassel – under real conditions and with feedback from the people there."
+    ],
+    "fundingTitle": "Funding context",
+    "fundingText": "Smart Speech Flow is supported through the Smart Cities Model Projects programme of the German federal government, which helps municipalities develop and test digital solutions.",
+    "partnersTitle": "Who is behind Smart Speech Flow",
+    "partners": [
+      {
+        "role": "Project partner",
+        "name": "Smart City Kassel",
+        "text": "Smart Kassel provides the municipal application and development context. The Smart Kassel office developed and tested the application together with Smart Village Solutions."
+      },
+      {
+        "role": "Technical implementation and operation",
+        "name": "Smart Village Solutions SVS GmbH",
+        "text": "SVS is responsible for the concept, development and operation of the platform and its open, modular architecture."
+      }
+    ],
+    "whyTitle": "Why this project matters",
+    "why": [
+      {
+        "title": "Designed for municipalities",
+        "text": "Created from a real need in everyday municipal work, not as an abstract technology project."
+      },
+      {
+        "title": "Open and extensible",
+        "text": "Municipal practice and open source – a foundation for reuse, transfer and digital sovereignty."
+      }
+    ]
+  },
+  "openSource": {
+    "title": "Open source as a principle",
+    "intro": "The source code of Smart Speech Flow is openly available under the MIT License. The software therefore belongs to your municipality – transparent, verifiable and extensible.",
+    "mitTitle": "MIT License",
+    "mitText": "The MIT License is a well-established open-source licence. It permits use, adaptation, distribution and integration into your own systems as long as the licence notice is retained – without licence fees or complex legal barriers.",
+    "mitAllowsTitle": "The MIT License permits",
+    "mitAllows": [
+      "Commercial use",
+      "Modification and adaptation",
+      "Sharing and distribution",
+      "Private use"
+    ],
+    "principlesTitle": "What open source means here",
+    "principles": [
+      {
+        "title": "Transparency",
+        "text": "Every line of code can be inspected and understood."
+      },
+      {
+        "title": "Further development",
+        "text": "Your own adaptations to specific requirements are possible."
+      },
+      {
+        "title": "Reusability",
+        "text": "Use in other projects and municipalities – without licence fees or vendor lock-in."
+      },
+      {
+        "title": "Collaboration",
+        "text": "A strong foundation for integrations and joint development."
+      }
+    ],
+    "operateTitle": "Run it yourself or let us run it",
+    "operateText": "You can operate Smart Speech Flow on your own servers. Or leave operation, updates and servers to SVS – from €250 per month, ready within 2 days.",
+    "operateCta": "See pricing",
+    "resourcesTitle": "Code, documentation and contribution",
+    "resources": [
+      {
+        "title": "GitHub repository",
+        "text": "github.com/smart-village-solutions/smart-speech-flow"
+      },
+      {
+        "title": "Documentation",
+        "text": "Technical documentation and guides"
+      },
+      {
+        "title": "Licence file",
+        "text": "MIT License in the repository"
+      }
+    ],
+    "contribute": "External contributions are possible through GitHub issues and pull requests. Formal contribution guidelines are being prepared. If you are interested in working with us, please get in touch."
+  },
+  "contact": {
+    "title": "Contact and exchange",
+    "intro": "Would you like to get to know Smart Speech Flow, do you have questions about booking or would you like to discuss your use case? We look forward to hearing from you.",
+    "peopleTitle": "Contact persons",
+    "people": [
+      {
+        "name": "Corinna Neige",
+        "role": "City of Kassel – Digital and IT, Smart Kassel office"
+      },
+      {
+        "name": "Philipp Wilimzig",
+        "role": "Smart Village Solutions SVS GmbH"
+      }
+    ],
+    "direct": "Reach us directly",
+    "topicsTitle": "What you can contact us about",
+    "topics": [
+      "Live demo and webinar",
+      "Questions about booking",
+      "Municipal use cases",
+      "Technical collaboration and open source"
+    ],
+    "formTitle": "Send a message",
+    "fields": {
+      "name": "Name",
+      "org": "Organisation",
+      "email": "Email",
+      "category": "Topic",
+      "message": "Message"
+    },
+    "categories": {
+      "demo": "Live demo / webinar",
+      "call": "Individual call",
+      "booking": "Questions about booking",
+      "municipal": "Municipal use",
+      "tech": "Open source / technology",
+      "other": "Other"
+    },
+    "consent": "I have read the privacy policy and agree to the processing of my data to handle my enquiry.",
+    "submit": "Send message",
+    "demoNotice": "Demo mode: the form is not connected yet. Nothing is sent when you submit it.",
+    "demoSent": "Demo mode: your input was validated but not sent."
+  },
+  "legal": {
+    "translationNote": "This is a translation of the German legal text for information purposes. In case of discrepancies, the German version prevails.",
+    "notice": {
+      "title": "Legal notice",
+      "sections": [
+        {
+          "title": "Information pursuant to Section 5 TMG",
+          "lines": [
+            "Smart Village Solutions SVS GmbH",
+            "Klein Glien 25",
+            "14806 Bad Belzig",
+            "Germany"
+          ]
+        },
+        {
+          "title": "Contact",
+          "lines": [
+            "Tel.: 033841-63969-0",
+            "Email: info@smart-village.solutions"
+          ]
+        },
+        {
+          "title": "Commercial register",
+          "lines": [
+            "Registration court: Potsdam Local Court",
+            "Registration number: HRB 34248"
+          ]
+        },
+        {
+          "title": "Managing directors",
+          "lines": [
+            "Philipp Wilimzig & Erik Hildenbrand"
+          ]
+        },
+        {
+          "title": "VAT identification number",
+          "lines": [
+            "DE265570015"
+          ]
+        },
+        {
+          "title": "Responsible pursuant to Section 18(2) MStV",
+          "lines": [
+            "Philipp Wilimzig"
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "sections": [
+        {
+          "title": "1. Controller",
+          "lines": [
+            "Smart Village Solutions SVS GmbH",
+            "Klein Glien 25",
+            "14806 Bad Belzig",
+            "Germany",
+            "Email: info@smart-village.solutions",
+            "Tel.: 033841-63969-0"
+          ]
+        },
+        {
+          "title": "2. General information on data processing",
+          "paragraphs": [
+            "Protecting your personal data is important to us. We process your data solely in accordance with the applicable legal provisions (GDPR, BDSG and TMG). This privacy policy explains the most important aspects of data processing on our website."
+          ]
+        },
+        {
+          "title": "3. Hosting and provision of the website",
+          "paragraphs": [
+            "When you visit our website, the hosting provider automatically records information transmitted by your browser in server log files. This includes:"
+          ],
+          "list": [
+            "Browser type and version",
+            "Operating system used",
+            "Referrer URL",
+            "Host name of the accessing device",
+            "IP address",
+            "Time of the server request"
+          ],
+          "after": [
+            "This data cannot be attributed to specific individuals and is not combined with other data sources. It is collected on the basis of Article 6(1)(f) GDPR (legitimate interest in the technical provision of the website)."
+          ]
+        },
+        {
+          "title": "4. Contact form",
+          "paragraphs": [
+            "If you contact us using the website form, the data you provide (name, organisation, email address, category and message) is stored and processed so that we can handle your enquiry.",
+            "The legal basis is Article 6(1)(b) GDPR (pre-contractual measures) or Article 6(1)(f) GDPR (legitimate interest in responding to enquiries). Your data will be deleted once your enquiry has been fully processed, unless statutory retention obligations apply."
+          ]
+        },
+        {
+          "title": "[Draft] Booking form",
+          "paragraphs": [
+            "[Placeholder – to be completed before go-live by the controller or data protection advisor: which data the booking form collects, purpose, legal basis, retention period and recipients.]"
+          ]
+        },
+        {
+          "title": "5. Cookies",
+          "paragraphs": [
+            "This website does not use tracking cookies or third-party analytics tools. Only technically necessary cookies required to operate the website are used."
+          ]
+        },
+        {
+          "title": "6. Your rights",
+          "paragraphs": [
+            "You have the following rights regarding your personal data:"
+          ],
+          "list": [
+            "Right of access (Article 15 GDPR)",
+            "Right to rectification (Article 16 GDPR)",
+            "Right to erasure (Article 17 GDPR)",
+            "Right to restriction of processing (Article 18 GDPR)",
+            "Right to data portability (Article 20 GDPR)",
+            "Right to object (Article 21 GDPR)"
+          ],
+          "after": [
+            "You also have the right to lodge a complaint with a data protection supervisory authority about the processing of your personal data."
+          ]
+        },
+        {
+          "title": "7. External links",
+          "paragraphs": [
+            "Our website contains links to external third-party websites whose content we cannot control. The respective provider is responsible for linked content. The pages were checked for possible legal violations when the links were created, and no unlawful content was apparent at that time."
+          ]
+        },
+        {
+          "title": "8. Changes to this privacy policy",
+          "paragraphs": [
+            "We may update this privacy policy to reflect current legal requirements or changes to our services. The updated privacy policy will apply to your next visit.",
+            "If you have questions about privacy, you can contact us at any time: info@smart-village.solutions",
+            "You can find more information about the provider in the Legal notice."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms and conditions",
+      "text": "[Placeholder – the terms and conditions for booking Smart Speech Flow are not available yet. The booking form requires them to be accepted.]"
+    }
   }
 }

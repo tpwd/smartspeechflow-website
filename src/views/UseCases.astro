@@ -1,0 +1,52 @@
+---
+import PageHead from '../components/PageHead.astro';
+import TextCard from '../components/TextCard.astro';
+import SubpageCta from '../components/SubpageCta.astro';
+import { Image } from 'astro:assets';
+import tileDevices from '../assets/images/tile-geraete.jpg';
+import type { Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const { t, tv } = useTranslations(locale);
+type Item = { title: string; text: string };
+---
+<PageHead locale={locale} current={t('pageNames.useCases')} title={t('useCases.title')} intro={t('useCases.intro')}>
+  <dl class="stats">
+    {tv<{ value: string; label: string }[]>('useCases.stats').map((s) => <div><dt>{s.label}</dt><dd>{s.value}</dd></div>)}
+  </dl>
+</PageHead>
+
+<section class="section" aria-labelledby="fields-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="fields-title" class="t-section">{t('useCases.fieldsTitle')}</h2>
+    <div class="grid-2">
+      {tv<Item[]>('useCases.fields').map((f) => <TextCard title={f.title}><p>{f.text}</p></TextCard>)}
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint" aria-labelledby="practice-title">
+  <div class="container practice">
+    <Image src={tileDevices} alt={t('how.items.1.alt')} widths={[400, 800]} sizes="(min-width: 768px) 50vw, 100vw" />
+    <div class="stack" style="--stack-gap: var(--spacing-16)">
+      <h2 id="practice-title" class="t-section">{t('useCases.practiceTitle')}</h2>
+      <p class="t-body-m">{t('useCases.practiceText')}</p>
+      <h3 class="t-h6">{t('useCases.transferTitle')}</h3>
+      <p class="t-body-s">{t('useCases.transferText')}</p>
+    </div>
+  </div>
+</section>
+
+<SubpageCta locale={locale} />
+
+<style>
+  .stats { display: flex; flex-wrap: wrap; gap: var(--spacing-24) var(--spacing-48); margin: var(--spacing-16) 0 0; }
+  .stats div { display: flex; flex-direction: column-reverse; }
+  .stats dd { margin: 0; color: var(--color-petrol-900); font-size: var(--font-size-h4); line-height: var(--line-height-h4); font-weight: var(--font-weight-bold); }
+  .stats dt { font-size: var(--font-size-body-xs); color: var(--color-gray-cool-700); }
+  .practice { display: grid; gap: var(--spacing-32); align-items: center; }
+  .practice :global(img) { inline-size: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-16); }
+  @media (min-width: 768px) { .practice { grid-template-columns: 1fr 1fr; gap: var(--spacing-48); } }
+</style>

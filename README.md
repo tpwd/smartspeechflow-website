@@ -31,9 +31,12 @@ Optional: `.env.example` nach `.env` kopieren. Die Einstellungen darin sind dort
 | Startseite | `/de/` | `/en/` … | fertig nach HiFi-Entwurf |
 | Buchen | `/de/buchen/` | `/en/booking/` | fertig, **ohne Backend** (Demo-Modus) |
 | Danke | `/de/buchen/danke/` | `/en/booking/thank-you/` | fertig, Buchungsnummer und E-Mail sind Platzhalter |
-| Produkt, Einsatzfelder, Projekt, Open Source, Kontakt | wie heute | wie heute | Platzhalter, Inhalt aus Bestandsseite übernehmen |
-| Impressum, Datenschutz | wie heute | wie heute | Platzhalter, Inhalt aus Bestandsseite übernehmen |
+| Produkt, Einsatzfelder, Projekt, Open Source | wie heute | wie heute | Inhalte der Bestandsseite, neu geschrieben mit Fokus auf Buchung |
+| Kontakt | `/de/kontakt/` | `/en/contact/` | Formular **ohne Backend** (Demo-Modus), Thema per `?topic=demo` vorwählbar |
+| Impressum, Datenschutz | wie heute | wie heute | Rechtstexte **wörtlich** aus der Bestandsseite, Datenschutz mit markiertem Platzhalter für das Buchungsformular |
 | AGB | `/de/agb/` | `/en/terms/` | Platzhalter, **Text fehlt** (vom Buchungsformular vorausgesetzt) |
+
+**Ersparnisrechner** (Startseite, Anker `#ersparnis`): Dolmetscherstunden pro Monat oder Jahr × Stundensatz (Annahme 40 €, im Rechner änderbar) minus Jahrespreis der gewählten Option. Zeigt die Ersparnis pro Jahr, die Gewinnschwelle, den Aktionsbonus und den eingesparten Aufwand. „Mit dieser Option buchen“ übergibt Option und Schätzung an die Buchen-Seite. Ohne JavaScript steht eine fertige Beispielrechnung da.
 
 - **9 Sprachen** wie auf der heutigen Seite: de, en, hi, fr, it, pl, es, tr, ar. Das URL-Schema ist übernommen, damit alle bestehenden Links gültig bleiben.
 - **Arabisch** wird mit `dir="rtl"` gespiegelt. Alle Abstände nutzen logische CSS-Eigenschaften.
@@ -69,6 +72,10 @@ src/
 
 ## Offene Punkte (vor Go-live)
 
+- [ ] **Stundensatz im Rechner:** 40 € (Vorgabe) oder ca. 83 € („Bundestarif“ laut Briefing-Call)? Wert in `src/data/site.ts` → `savings.interpreterHourlyRate`
+- [ ] Kontaktformular-Backend: Ziel-URL in `PUBLIC_CONTACT_ENDPOINT`
+- [ ] Impressum/Datenschutz: Die Bestandstexte nennen das TMG, das 2024 durch das Digitale-Dienste-Gesetz (DDG) abgelöst wurde – rechtlich prüfen lassen. Abschnitt zum Buchungsformular ergänzen.
+- [ ] Serverstandort: „Server in Deutschland“ ist laut Briefing nicht belegt (Hosting bei Hetzner) – Formulierung bestätigen
 - [ ] Preis „Betrieb in der Kommune“ (`src/data/site.ts`, derzeit `null` → „xy €“)
 - [ ] Ziele für „Live-Demo buchen“ und „Individueller Call“ (`links.demo`, `links.call`; derzeit Kontaktseite)
 - [ ] Aktion: Gilt sie nur bei 12 Monaten Vorauszahlung? (`promotion.requiresPrepaid`)

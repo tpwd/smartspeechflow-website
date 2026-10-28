@@ -2,7 +2,7 @@
 import logoSvg from '../assets/logos/ssf-logo-inverse.svg?raw';
 import { pathFor, type Locale } from '../i18n/config';
 import { useTranslations } from '../i18n';
-import { links } from '../data/site';
+import { callHref, demoHref, links } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -34,8 +34,8 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" ');
         <h2>{t('footer.contact')}</h2>
         <ul role="list">
           <li><a href={contact}>{t('footer.contactUs')}</a></li>
-          <li><a href={links.demo ?? contact}>{t('footer.demo')}</a></li>
-          <li><a href={links.call ?? contact}>{t('footer.call')}</a></li>
+          <li><a href={demoHref(contact)}>{t('footer.demo')}</a></li>
+          <li><a href={callHref(contact)}>{t('footer.call')}</a></li>
         </ul>
       </div>
       <div>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  overline?: string;
+  tone?: 'white' | 'tint';
+}
+const { title, overline, tone = 'white' } = Astro.props;
+---
+<article class:list={['text-card', `text-card--${tone}`]}>
+  {overline && <p class="overline">{overline}</p>}
+  <h3 class="t-h5">{title}</h3>
+  <div class="t-body-s body"><slot /></div>
+</article>
+
+<style>
+  .text-card { display: grid; align-content: start; gap: 12px; padding: var(--spacing-24); border-radius: var(--radius-16); border: 1px solid var(--color-gray-cool-200); background: var(--color-white); }
+  .text-card--tint { background: var(--color-petrol-050); border-color: transparent; }
+  .overline { color: var(--color-petrol-700); font-size: var(--font-size-body-xxs); font-weight: var(--font-weight-bold); text-transform: uppercase; letter-spacing: 0.08em; }
+  .body { display: grid; gap: 12px; }
+  .body :global(a) { color: var(--color-petrol-700); }
+  @media (min-width: 768px) { .text-card { padding: var(--spacing-32); } }
+</style>
