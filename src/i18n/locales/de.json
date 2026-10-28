@@ -251,20 +251,18 @@
       "perYear": "pro Jahr"
     },
     "submit": "Verbindlich buchen",
-    "note": "Nach der Buchung erhalten Sie eine Bestätigung per E-Mail. Startklar in bis zu 2 Tagen.",
-    "demoNotice": "Demo-Modus: Es ist kein Buchungs-Backend angebunden. Beim Absenden werden keine Daten übertragen, Sie werden nur zur Danke-Seite weitergeleitet."
+    "note": "Nach der Buchung erhalten Sie eine Bestätigung per E-Mail. Startklar in bis zu 2 Tagen."
   },
   "thanks": {
     "title1": "Vielen Dank!",
     "title2": "Ihre Buchung ist bei uns eingegangen.",
-    "text": "Wir haben Ihnen eine Bestätigung an [E-Mail-Adresse] gesendet. Darin finden Sie alle Details zu Ihrer Buchung.",
+    "text": "Wir haben Ihnen eine Bestätigung per E-Mail gesendet. Darin finden Sie alle Details zu Ihrer Buchung.",
     "number": "Buchungsnummer",
-    "numberPlaceholder": "[Nummer]",
     "nextTitle": "Was passiert als Nächstes?",
     "steps": [
       {
-        "title": "E-Mail-Bestätigung",
-        "text": "Sie erhalten die Buchungsbestätigung mit allen Details an die angegebene Adresse."
+        "title": "Bestätigung",
+        "text": "Wir bestätigen Ihre Buchung per E-Mail mit allen Details an die angegebene Adresse."
       },
       {
         "title": "Bereitstellung",
@@ -282,7 +280,8 @@
     "questionsTitle": "Fragen zu Ihrer Buchung?",
     "questionsText": "Wir helfen Ihnen gern weiter – bei Fragen zu Einrichtung, Zugang oder Abrechnung erreichen Sie uns direkt.",
     "home": "Zur Startseite",
-    "contact": "Kontakt aufnehmen"
+    "contact": "Kontakt aufnehmen",
+    "textNoMail": "Wir melden uns in Kürze bei Ihnen. Alle Details zu Ihrer Buchung finden Sie unten."
   },
   "notFound": {
     "title": "Seite nicht gefunden",
@@ -552,8 +551,7 @@
     },
     "consent": "Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu.",
     "submit": "Nachricht senden",
-    "demoNotice": "Demo-Modus: Das Formular ist noch nicht angebunden. Beim Absenden wird nichts übertragen.",
-    "demoSent": "Demo-Modus: Ihre Eingaben wurden geprüft, aber nicht gesendet."
+    "sent": "Vielen Dank für Ihre Nachricht. Wir melden uns in Kürze bei Ihnen."
   },
   "legal": {
     "translationNote": "",
@@ -648,9 +646,9 @@
           ]
         },
         {
-          "title": "[Entwurf] Buchungsformular",
+          "title": "[Entwurf] Buchungs- und Kontaktformular",
           "paragraphs": [
-            "[Platzhalter – vor Go-live durch die verantwortliche Stelle bzw. Datenschutzberatung ergänzen: Welche Daten das Buchungsformular erhebt (Organisation, Ansprechperson, Kontakt- und Rechnungsdaten, Wunschtermin, Nachricht), Zweck, Rechtsgrundlage, Speicherdauer und Empfänger.]"
+            "[Platzhalter – vor Go-live durch die verantwortliche Stelle bzw. Datenschutzberatung ergänzen: Das Buchungs- und das Kontaktformular übermitteln die Angaben (Organisation, Ansprechperson, Kontakt- und Rechnungsdaten, Wunschtermin, Nachricht) an das CRM-System Pipedrive (Pipedrive OÜ). Die Website wird bei Netlify gehostet; die Formulare werden über Netlify Functions verarbeitet. Optional werden Bestätigungsmails über Resend versendet. Zu ergänzen: Zweck, Rechtsgrundlage (Art. 6 Abs. 1 lit. b DSGVO), Speicherdauer, Empfänger, Auftragsverarbeitungsverträge, ggf. Drittlandübermittlung.]"
           ]
         },
         {
@@ -746,5 +744,18 @@
       "title": "Seite nicht gefunden – Smart Speech Flow",
       "description": "Die aufgerufene Seite gibt es nicht."
     }
+  },
+  "forms": {
+    "sending": "Wird gesendet …",
+    "invalid": "Bitte prüfen Sie Ihre Angaben – mindestens ein Feld ist nicht korrekt ausgefüllt.",
+    "notConfigured": "Das Formular ist noch nicht eingerichtet. Bitte schreiben Sie uns an info@smart-village.solutions.",
+    "failed": "Das hat leider nicht geklappt. Bitte versuchen Sie es erneut oder schreiben Sie uns an info@smart-village.solutions."
+  },
+  "mail": {
+    "bookingSubject": "Ihre Buchung von Smart Speech Flow",
+    "greeting": "Guten Tag {name},",
+    "bookingIntro": "vielen Dank für Ihre Buchung von Smart Speech Flow. Hier die Details:",
+    "bookingNext": "Wir melden uns mit den nächsten Schritten zur Einrichtung. Nach der Buchung ist Smart Speech Flow in bis zu 2 Tagen startklar.",
+    "signature": "Ihr Team von Smart Speech Flow\nSmart Village Solutions SVS GmbH · info@smart-village.solutions"
   }
 }

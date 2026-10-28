@@ -12,13 +12,14 @@ interface Props {
 const { locale } = Astro.props;
 const { t, tv } = useTranslations(locale);
 const tag = localeTags[locale];
-const endpoint = import.meta.env.PUBLIC_BOOKING_ENDPOINT || '';
 const steps = tv<string[]>('booking.steps');
 
 // Texte und Preise für das kleine Skript unten (Zusammenfassung live aktualisieren).
 const config = {
   locale: tag,
   thanksUrl: pathFor(locale, 'thanks'),
+  pageLocale: locale,
+  submit: { sending: t('forms.sending'), invalid: t('forms.invalid'), notConfigured: t('forms.notConfigured'), failed: t('forms.failed') },
   promo: promotion,
   plans: Object.fromEntries(plans.map((p) => [p.id, { title: t(`pricing.plans.${p.id}.title`), monthlyNet: p.monthlyNet, promo: p.promo }])),
   terms: { prepaid: t('booking.terms.prepaid.label'), monthly: t('booking.terms.monthly.label') },
@@ -48,8 +49,8 @@ const field = (key: string) => t(`booking.fields.${key}`);
   </div>
 </section>
 
-<form class="container booking" method="post" action={endpoint || undefined} data-demo={endpoint ? undefined : 'true'} novalidate>
-  {!endpoint && <p class="demo-notice t-body-xs" role="note"><Icon name="bell" size={16} />{t('booking.demoNotice')}</p>}
+<form class="container booking" method="post" action="/api/booking/" novalidate>
+  <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
 
   <fieldset class="block">
     <legend class="t-h4">{t('booking.step1')}</legend>
@@ -118,6 +119,7 @@ const field = (key: string) => t(`booking.fields.${key}`);
         </dl>
         <p class="total" aria-live="polite"><span class="t-body-s t-strong" data-sum="totalLabel"></span><span class="t-h4" data-sum="total"></span></p>
         <p class="estimate" data-sum="estimateRow" hidden><span class="t-body-xs">{t('booking.summary.estimatedSaving')}</span><b data-sum="estimate"></b></p>
+        <p class="form-status t-body-xs" data-form-status hidden></p>
         <Button type="submit" size="L" icon block>{t('booking.submit')}</Button>
         <p class="t-body-xxs t-muted">{t('booking.note')}</p>
       </section>
@@ -128,7 +130,11 @@ const field = (key: string) => t(`booking.fields.${key}`);
 <script is:inline type="application/json" id="booking-config" set:html={JSON.stringify(config)}></script>
 
 <script>
+  import { setupForm, type SubmitTexts } from '../lib/submit-form';
+
   type Config = {
+    pageLocale: string;
+    submit: SubmitTexts;
     locale: string;
     thanksUrl: string;
     promo: { until: string; freeMonths: number; requiresPrepaid: boolean };
@@ -185,15 +191,18 @@ const field = (key: string) => t(`booking.fields.${key}`);
   form.addEventListener('change', update);
   update();
 
-  form.addEventListener('submit', (event) => {
-    if (!form.reportValidity()) { event.preventDefault(); return; }
-    if (form.dataset.demo) {
-      // Demo-Modus: kein Backend – nichts senden, nur zur Danke-Seite mit Auswahl weiterleiten.
-      event.preventDefault();
+  setupForm(form, {
+    endpoint: '/api/booking/',
+    locale: config.pageLocale,
+    texts: config.submit,
+    extra: () => (hasEstimate ? { estimate: { hours: calcHours, period: query.get('period') === 'year' ? 'year' : 'month', rate: calcRate } } : {}),
+    onSuccess: (result) => {
       const data = new FormData(form);
       const params = new URLSearchParams({ option: String(data.get('option')), term: String(data.get('term')) });
+      if (typeof result.number === 'string') params.set('nr', result.number);
+      if (result.emailSent) params.set('mail', '1');
       location.href = `${config.thanksUrl}?${params}`;
-    }
+    },
   });
 </script>
 
@@ -208,7 +217,10 @@ const field = (key: string) => t(`booking.fields.${key}`);
   .num--active { background: var(--color-petrol-900); color: var(--color-white); }
 
   .booking { display: grid; gap: var(--spacing-48); padding-block: var(--spacing-48) var(--spacing-64); }
-  .demo-notice { display: flex; gap: var(--spacing-8); align-items: flex-start; padding: 12px var(--spacing-16); border-radius: var(--radius-8); background: #fff7ed; border: 1px solid var(--color-status-warning); color: #7c2d12; }
+  .hp { position: absolute; inset-inline-start: -10000px; inline-size: 1px; block-size: 1px; overflow: hidden; }
+  .form-status { padding: 12px var(--spacing-16); border-radius: var(--radius-8); background: var(--color-petrol-100); color: var(--color-petrol-900); }
+  .form-status[data-kind='error'] { background: #fdecec; border: 1px solid var(--color-status-error); color: #7f1d1d; }
+  .form-status[hidden] { display: none; }
   .block { margin: 0; padding: 0; border: 0; display: grid; gap: var(--spacing-24); min-inline-size: 0; }
   legend { padding: 0; margin-block-end: var(--spacing-24); color: var(--color-petrol-900); font-weight: var(--font-weight-bold); }
 

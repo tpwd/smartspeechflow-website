@@ -15,6 +15,7 @@ const steps = tv<{ title: string; text: string }[]>('thanks.steps');
 const config = {
   plans: Object.fromEntries(plans.map((p) => [p.id, t(`pricing.plans.${p.id}.title`)])),
   terms: { prepaid: t('booking.terms.prepaid.label'), monthly: t('booking.terms.monthly.label') },
+  textMail: t('thanks.text'),
 };
 ---
 <section class="confirm section--tint">
@@ -23,11 +24,11 @@ const config = {
       <span class="icon" aria-hidden="true"><Icon name="check" /></span>
       <div class="stack">
         <h1 class="t-hero">{t('thanks.title1')}<br />{t('thanks.title2')}</h1>
-        <p class="t-body-l">{t('thanks.text')}</p>
+        <p class="t-body-l" data-thanks="text">{t('thanks.textNoMail')}</p>
       </div>
     </div>
     <dl class="overview">
-      <div><dt>{t('thanks.number')}</dt><dd>{t('thanks.numberPlaceholder')}</dd></div>
+      <div data-thanks="numberRow" hidden><dt>{t('thanks.number')}</dt><dd data-thanks="number"></dd></div>
       <div><dt>{t('booking.summary.option')}</dt><dd data-thanks="option">{config.plans.shared}</dd></div>
       <div><dt>{t('booking.summary.term')}</dt><dd data-thanks="term">{config.terms.prepaid}</dd></div>
     </dl>
@@ -54,12 +55,16 @@ const config = {
 <script>
   // Zeigt die gewählte Option aus der Weiterleitung (?option=…&term=…). Buchungsnummer und
   // E-Mail kommen erst mit einem echten Buchungs-Backend.
-  const cfg = JSON.parse(document.getElementById('thanks-config')!.textContent!) as { plans: Record<string, string>; terms: Record<string, string> };
+  const cfg = JSON.parse(document.getElementById('thanks-config')!.textContent!) as { plans: Record<string, string>; terms: Record<string, string>; textMail: string };
   const q = new URLSearchParams(location.search);
   const option = q.get('option'); const term = q.get('term');
   const setText = (key: string, value?: string) => { const el = document.querySelector(`[data-thanks="${key}"]`); if (el && value) el.textContent = value; };
   if (option) setText('option', cfg.plans[option]);
   if (term) setText('term', cfg.terms[term]);
+  const nr = q.get('nr');
+  if (nr && /^[A-Z]+-?\d*$/.test(nr)) { setText('number', nr); document.querySelector<HTMLElement>('[data-thanks="numberRow"]')!.hidden = false; }
+  // Nur wenn wirklich eine Bestätigung verschickt wurde, steht das auch da.
+  if (q.get('mail') === '1') setText('text', cfg.textMail);
 </script>
 
 <style>
@@ -69,6 +74,7 @@ const config = {
   .head p { color: var(--color-gray-cool-700); max-inline-size: 792px; }
   .icon { display: grid; place-items: center; inline-size: 48px; block-size: 48px; border-radius: 50%; background: var(--color-petrol-900); color: var(--color-white); }
   .overview { margin: 0; display: grid; gap: var(--spacing-16); padding: 20px; background: var(--color-white); border: 1px solid var(--color-gray-cool-200); border-radius: var(--radius-16); }
+  .overview div[hidden] { display: none; }
   .overview div { display: flex; justify-content: space-between; gap: var(--spacing-16); }
   dt { color: var(--color-gray-cool-600); font-size: var(--font-size-body-xs); }
   dd { margin: 0; color: var(--color-petrol-900); font-weight: var(--font-weight-bold); }

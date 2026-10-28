@@ -3,19 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Mehrsprachige Landingpage f\u00fcr Smart Speech Flow (statisch, Astro)",
+  "description": "Mehrsprachige Landingpage für Smart Speech Flow (statisch, Astro)",
   "engines": {
     "node": ">=22.12.0"
   },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
     "check": "astro check && node scripts/check-i18n.mjs",
     "i18n:check": "node scripts/check-i18n.mjs",
     "validate": "astro build && html-validate \"dist/**/*.html\""
   },
   "dependencies": {
+    "@astrojs/netlify": "8.2.8",
     "@fontsource-variable/hanken-grotesk": "5.3.0",
     "@fontsource/noto-sans-arabic": "5.3.0",
     "@fontsource/noto-sans-devanagari": "5.3.0",

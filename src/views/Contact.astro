@@ -10,7 +10,6 @@ import { links } from '../data/site';
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const { t, tv } = useTranslations(locale);
-const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || '';
 const categories = ['demo', 'call', 'booking', 'municipal', 'tech', 'other'] as const;
 const f = (k: string) => t(`contact.fields.${k}`);
 ---
@@ -28,9 +27,10 @@ const f = (k: string) => t(`contact.fields.${k}`);
       </TextCard>
     </div>
 
-    <form class="form" method="post" action={endpoint || undefined} data-demo={endpoint ? undefined : 'true'} novalidate aria-labelledby="form-title">
+    <form class="form" method="post" action="/api/contact/" novalidate aria-labelledby="form-title" data-locale={locale}
+      data-texts={JSON.stringify({ sending: t('forms.sending'), invalid: t('forms.invalid'), notConfigured: t('forms.notConfigured'), failed: t('forms.failed') })}>
+      <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
       <h2 id="form-title" class="t-h4">{t('contact.formTitle')}</h2>
-      {!endpoint && <p class="notice t-body-xs" role="note">{t('contact.demoNotice')}</p>}
       <label class="field"><span>{f('name')}*</span><input type="text" name="name" required autocomplete="name" /></label>
       <label class="field"><span>{f('org')}</span><input type="text" name="organisation" autocomplete="organization" /></label>
       <label class="field"><span>{f('email')}*</span><input name="email" type="email" required autocomplete="email" /></label>
@@ -42,13 +42,16 @@ const f = (k: string) => t(`contact.fields.${k}`);
       <label class="field"><span>{f('message')}*</span><textarea name="message" rows="6" required></textarea></label>
       <label class="check"><input type="checkbox" name="consent" required /><span>{t('contact.consent')}* <a href={pathFor(locale, 'privacy')}>{t('pageNames.privacy')}</a></span></label>
       <p class="t-body-xxs t-muted">* {t('booking.required')}</p>
+      <p class="form-status t-body-xs" data-form-status hidden></p>
       <Button type="submit" size="L" icon>{t('contact.submit')}</Button>
-      <p class="sent t-body-s" role="status" hidden>{t('contact.demoSent')}</p>
+      <p class="sent t-body-s" role="status" tabindex="-1" hidden>{t('contact.sent')}</p>
     </form>
   </div>
 </section>
 
 <script>
+  import { setupForm, type SubmitTexts } from '../lib/submit-form';
+
   const form = document.querySelector<HTMLFormElement>('form.form');
   if (form) {
     // Thema vorauswählen: /kontakt/?topic=demo (Buttons „Live-Demo buchen“, „Individueller Call“)
@@ -56,12 +59,16 @@ const f = (k: string) => t(`contact.fields.${k}`);
     const select = form.querySelector<HTMLSelectElement>('select[name="category"]');
     if (topic && select && [...select.options].some((o) => o.value === topic)) select.value = topic;
 
-    form.addEventListener('submit', (event) => {
-      if (!form.reportValidity()) { event.preventDefault(); return; }
-      if (form.dataset.demo) {
-        event.preventDefault();
-        form.querySelector<HTMLElement>('.sent')!.hidden = false;
-      }
+    setupForm(form, {
+      endpoint: '/api/contact/',
+      locale: form.dataset.locale ?? 'de',
+      texts: JSON.parse(form.dataset.texts ?? '{}') as SubmitTexts,
+      onSuccess: () => {
+        const sent = form.querySelector<HTMLElement>('.sent')!;
+        form.querySelectorAll<HTMLElement>('.field, .check, button[type="submit"]').forEach((el) => (el.hidden = true));
+        sent.hidden = false;
+        sent.focus();
+      },
     });
   }
 </script>
@@ -74,7 +81,11 @@ const f = (k: string) => t(`contact.fields.${k}`);
   .checks li { display: flex; gap: var(--spacing-8); }
   .checks :global(.icon) { flex: none; margin-block-start: 4px; color: var(--color-green-700); }
   .form { display: grid; gap: var(--spacing-24); }
-  .notice { padding: 12px var(--spacing-16); border-radius: var(--radius-8); background: #fff7ed; border: 1px solid var(--color-status-warning); color: #7c2d12; }
+  .hp { position: absolute; inset-inline-start: -10000px; inline-size: 1px; block-size: 1px; overflow: hidden; }
+  .form { position: relative; }
+  .form-status { padding: 12px var(--spacing-16); border-radius: var(--radius-8); background: var(--color-petrol-100); color: var(--color-petrol-900); }
+  .form-status[data-kind='error'] { background: #fdecec; border: 1px solid var(--color-status-error); color: #7f1d1d; }
+  [hidden] { display: none !important; }
   .field { display: grid; gap: var(--spacing-8); font-size: var(--font-size-body-xs); font-weight: var(--font-weight-bold); color: var(--color-petrol-900); }
   .field input, .field select, .field textarea { inline-size: 100%; padding: 12px var(--spacing-16); border: 1px solid var(--color-gray-cool-300); border-radius: var(--radius-8); background: var(--color-white); font-weight: var(--font-weight-regular); font-size: var(--font-size-body-s); color: var(--color-petrol-900); }
   .check { display: flex; gap: 12px; align-items: flex-start; font-size: var(--font-size-body-s); }

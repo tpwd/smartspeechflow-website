@@ -2,7 +2,7 @@
 
 Statische, mehrsprachige Website für smartspeechflow.de. Grundgerüst auf Basis der Figma-Datei „Smart Speech Flow-LP (Copy)“: HiFi-Library, Desktop-, Tablet- und Mobil-Entwürfe.
 
-**Stand:** lokal lauffähig. Es gibt noch kein Online-Repository und kein Deployment.
+**Stand:** lokal lauffähig, vorbereitet für Netlify. Buchung und Kontakt schreiben direkt in Pipedrive. Es gibt noch kein Online-Repository und kein Deployment.
 
 ## Lokal starten
 
@@ -16,8 +16,7 @@ npm run dev          # Entwicklungsserver: http://localhost:4321/de/
 Weitere Befehle:
 
 ```sh
-npm run build        # statische Seite nach dist/ bauen
-npm run preview      # gebaute Seite lokal ansehen (wie später auf dem Server)
+npm run build        # für Netlify bauen (Seiten nach dist/, Formular-API als Netlify Function)
 npm run check        # Typprüfung + Übersicht fehlender Übersetzungen
 npm run i18n:check   # nur fehlende Übersetzungen
 npm run validate     # bauen + alle Seiten mit html-validate prüfen
@@ -25,15 +24,17 @@ npm run validate     # bauen + alle Seiten mit html-validate prüfen
 
 Optional: `.env.example` nach `.env` kopieren. Die Einstellungen darin sind dort erklärt.
 
+**Hinweis:** `npm run dev` ist der Weg zum lokalen Testen, auch für die Formulare. `astro preview` gibt es mit dem Netlify-Adapter nicht (Astro meldet „adapter does not support the preview command“). Wer die gebaute Fassung samt Function lokal sehen will, kann die Netlify CLI nutzen (`npx netlify-cli serve`); das ist hier nicht getestet.
+
 ## Was drin ist
 
 | Seite | Deutsch | andere Sprachen | Stand |
 |---|---|---|---|
 | Startseite | `/de/` | `/en/` … | fertig nach HiFi-Entwurf |
-| Buchen | `/de/buchen/` | `/en/booking/` | fertig, **ohne Backend** (Demo-Modus) |
-| Danke | `/de/buchen/danke/` | `/en/booking/thank-you/` | fertig, Buchungsnummer und E-Mail sind Platzhalter |
+| Buchen | `/de/buchen/` | `/en/booking/` | fertig, legt in Pipedrive Organisation, Person, Deal und Notiz an |
+| Danke | `/de/buchen/danke/` | `/en/booking/thank-you/` | fertig, zeigt die Buchungsnummer `SSF-<Deal-ID>`; Hinweis auf Bestätigungsmail nur, wenn eine verschickt wurde |
 | Produkt, Einsatzfelder, Projekt, Open Source | wie heute | wie heute | Inhalte der Bestandsseite, neu geschrieben mit Fokus auf Buchung |
-| Kontakt | `/de/kontakt/` | `/en/contact/` | Formular **ohne Backend** (Demo-Modus), Thema per `?topic=demo` vorwählbar |
+| Kontakt | `/de/kontakt/` | `/en/contact/` | fertig, legt in Pipedrive einen Lead an (oder einen Deal, siehe unten), Thema per `?topic=demo` vorwählbar |
 | Impressum, Datenschutz | wie heute | wie heute | Rechtstexte **wörtlich** aus der Bestandsseite, Datenschutz mit markiertem Platzhalter für das Buchungsformular |
 | AGB | `/de/agb/` | `/en/terms/` | Platzhalter, **Text fehlt** (vom Buchungsformular vorausgesetzt) |
 
@@ -47,6 +48,35 @@ Optional: `.env.example` nach `.env` kopieren. Die Einstellungen darin sind dort
 - **Chat-Mockup im Hero** ist HTML statt Bild und lässt sich daher übersetzen.
 - **Responsiv:** Mobil (ab 375 px), Tablet (ab 768 px), Desktop-Navigation ab 1024 px, Desktop-Layout bis 1440 px.
 
+## Buchung und Kontakt: Pipedrive und Netlify
+
+Die Formulare senden an `/api/booking/` und `/api/contact/`. Diese beiden Routen laufen serverseitig (auf Netlify als Function, lokal in `npm run dev`). Der Pipedrive-Token bleibt auf dem Server und erscheint nie im Browser.
+
+**Was passiert bei einer Buchung**
+1. Prüfung: Herkunft (nur von der eigenen Seite), Pflichtfelder, Spam-Schutz (unsichtbares Feld und Mindestzeit von 3 Sekunden; Bots bekommen eine Schein-Bestätigung, es wird nichts gespeichert).
+2. Pipedrive: Organisation (mit Adresse) und Person werden gesucht und nur bei Bedarf neu angelegt (Organisation nach exaktem Namen, Person nach E-Mail).
+3. Deal „Smart Speech Flow – Option – Kommune“ in der Pipeline „Smart Speech Flow Form“, Wert = Netto-Betrag des ersten Jahres (inkl. Aktion), berechnet auf dem Server.
+4. Notiz am Deal mit allen Angaben und der Schätzung aus dem Rechner.
+5. Optional: Bestätigungsmail an die Kommune und Benachrichtigung an das Team (über Resend).
+6. Weiterleitung auf die Danke-Seite mit der Buchungsnummer `SSF-<Deal-ID>`.
+
+**Kontaktanfrage:** Lead mit Notiz (Leads-Eingang). Ist `PIPEDRIVE_CONTACT_STAGE_ID` gesetzt, wird stattdessen ein Deal in dieser Phase angelegt.
+
+**Fehlerfälle:** fehlerhafte Eingaben → Meldung und Fokus auf das erste Feld; Pipedrive nicht konfiguriert → Hinweis auf E-Mail/Telefon; Pipedrive nicht erreichbar → Hinweis, es später erneut zu versuchen oder direkt Kontakt aufzunehmen.
+
+### Einrichtung (einmalig)
+
+1. **Pipedrive (SVS-Konto):** Pipeline „Smart Speech Flow Form“ anlegen, Phasen z. B. „Buchung eingegangen“, „Server eingerichtet“, „Aktiv“ (optional „Anfrage“ für Kontakte).
+2. **IDs herausfinden:** Pipeline in Pipedrive öffnen – die Zahl in der Adresszeile (`…/pipeline/<ID>`) ist die Pipeline-ID. Phasen-IDs: `https://<firma>.pipedrive.com/api/v1/stages?pipeline_id=<ID>&api_token=<TOKEN>` im Browser öffnen, dort steht je Phase `id`.
+3. **API-Token:** Pipedrive → Persönliche Einstellungen → API. Am besten einen eigenen Pipedrive-Nutzer nur für die Website verwenden, dann hängt der Token nicht an einer Person.
+4. **Lokal testen:** `.env.example` nach `.env` kopieren, `PIPEDRIVE_API_TOKEN`, `PIPEDRIVE_DOMAIN`, `PIPEDRIVE_PIPELINE_ID`, `PIPEDRIVE_BOOKING_STAGE_ID` eintragen, `npm run dev`, Testbuchung abschicken, Deal in Pipedrive prüfen und wieder löschen.
+5. **Netlify:** Repository verbinden (Build-Befehl `npm run build`, Ordner `dist`, Node 22). Dieselben Variablen unter *Site configuration → Environment variables* eintragen. Die `.env` wird nie hochgeladen.
+6. **Bestätigungsmails (optional):** Konto bei Resend, Domain smartspeechflow.de dort verifizieren (DNS-Einträge), dann `RESEND_API_KEY`, `MAIL_FROM`, `MAIL_NOTIFY_TO` setzen. Ohne diese Werte wird keine Mail verschickt, und die Danke-Seite verspricht auch keine.
+
+**Ohne Pipedrive vorführen:** `FORMS_DEMO=true` – die Formulare melden Erfolg, speichern aber nichts. Nur lokal oder auf einer Vorschau-Adresse verwenden, nie live.
+
+**Datenschutz:** Für Pipedrive, Netlify und ggf. Resend braucht es Auftragsverarbeitungsverträge. Der Abschnitt dazu in der Datenschutzerklärung ist ein markierter Entwurf und muss geprüft werden.
+
 ## Projektstruktur
 
 ```
@@ -58,8 +88,12 @@ src/
   styles/tokens.css     Design-Tokens aus den Figma-Variablen
   styles/global.css     Basis, Layout, Typografie-Klassen
   components/           Bausteine (Button, Badge, Header, Footer, Hero, PricingCard …)
-  views/                Seiteninhalte (Home, Booking, Thanks, Placeholder)
+  views/                Seiteninhalte (Home, Booking, Thanks, Contact …)
   pages/[lang]/[...slug].astro   erzeugt alle Seiten für alle Sprachen
+  pages/api/            Formular-API (booking.ts, contact.ts) – läuft auf dem Server
+  lib/forms.ts          Prüfregeln und Preisberechnung der Formulare
+  lib/pipedrive.ts      Pipedrive-Anbindung (API v2 für Personen, Organisationen, Deals; v1 für Leads, Notizen)
+  lib/mail.ts           optionaler Mailversand über Resend
   assets/               Bilder und Logos aus Figma, Icons (Phosphor Light, MIT)
 ```
 
@@ -95,13 +129,13 @@ Geprüft beim Aufbau mit html-validate (alle Seiten), axe-core 4.10 (WCAG 2.0–
 
 ## Offene Punkte (vor Go-live)
 
-- [ ] Kontaktformular-Backend: Ziel-URL in `PUBLIC_CONTACT_ENDPOINT`
-- [ ] Impressum/Datenschutz: Die Bestandstexte nennen das TMG, das 2024 durch das Digitale-Dienste-Gesetz (DDG) abgelöst wurde – rechtlich prüfen lassen. Abschnitt zum Buchungsformular ergänzen.
+- [ ] Pipeline „Smart Speech Flow Form“ im SVS-Pipedrive anlegen, Token und IDs eintragen (siehe oben)
+- [ ] AV-Verträge Pipedrive, Netlify, ggf. Resend; Datenschutz-Abschnitt dazu prüfen lassen
+- [ ] Impressum/Datenschutz: Die Bestandstexte nennen das TMG, das 2024 durch das Digitale-Dienste-Gesetz (DDG) abgelöst wurde – rechtlich prüfen lassen. Abschnitt zu den Formularen ist als Entwurf ergänzt und muss geprüft werden.
 - [ ] Serverstandort: „Server in Deutschland“ ist laut Briefing nicht belegt (Hosting bei Hetzner) – Formulierung bestätigen
 - [ ] Preis „Betrieb in der Kommune“ (`src/data/site.ts`, derzeit `null` → „xy €“)
 - [ ] Ziele für „Live-Demo buchen“ und „Individueller Call“ (`links.demo`, `links.call`; derzeit Kontaktseite)
 - [ ] Aktion: Gilt sie nur bei 12 Monaten Vorauszahlung? (`promotion.requiresPrepaid`)
-- [ ] Buchungs-Backend: Ziel-URL in `PUBLIC_BOOKING_ENDPOINT`. Ohne Backend sendet das Formular nichts. Buchungsnummer und Bestätigungs-E-Mail brauchen eine Server-Komponente.
 - [ ] Testimonials: Namen, Funktionen, Freigaben, Wappen
 - [ ] Bildrechte prüfen. Die Fotos stammen aus Figma, Dateinamen dort deuten auf Getty Images hin. Das Hero-Foto liegt nur in 509 × 339 px vor, für scharfe Darstellung wird eine größere Fassung gebraucht.
 - [ ] Nutzungsrechte und Belege für die Pressen-Logos (hr, Kommune21, RTL)
@@ -112,6 +146,7 @@ Geprüft beim Aufbau mit html-validate (alle Seiten), axe-core 4.10 (WCAG 2.0–
 
 ## Go-live (später)
 
-1. `PUBLIC_NOINDEX=false` setzen und `public/robots.txt` freigeben (Vorlage steht in der Datei).
-2. `npm run build`. Der Ordner `dist/` ist die komplette Website und kann auf jedem statischen Webserver liegen.
-3. **Weiterleitungen auf dem Server:** `/` → `/de/` als 301-Weiterleitung, außerdem `404.html` als Fehlerseite. Eine Weiterleitungsseite ist zwar enthalten, eine Server-Regel ist aber sauberer.
+1. Bei Netlify `PUBLIC_NOINDEX=false` setzen. Dann erlaubt die erzeugte `robots.txt` alles und verweist auf die Sitemap, und `noindex` entfällt.
+2. Domain smartspeechflow.de bei Netlify verbinden.
+3. Die Weiterleitung `/` → `/de/` (301) und die 404-Seite erzeugt der Build automatisch für Netlify (`dist/_redirects`, `dist/404.html`).
+4. Nach dem Go-live eine echte Testbuchung durchführen und in Pipedrive prüfen.
