@@ -54,8 +54,12 @@ const label = t(locale, 'nav.language');
     document.addEventListener('click', (e) => {
       if (details.open && !details.contains(e.target as Node)) details.open = false;
     });
+    // Nur schließen, wenn der Fokus per Tastatur auf ein Element außerhalb wandert. Ohne Ziel
+    // (relatedTarget null) nicht schließen: Safari, iOS und Chrome auf dem Mac geben Links beim
+    // Klicken keinen Fokus – sonst klappt die Liste vor dem Klick zu und der Link wird nie ausgelöst.
     details.addEventListener('focusout', (e) => {
-      if (details.open && !details.contains(e.relatedTarget as Node | null)) details.open = false;
+      const next = e.relatedTarget as Node | null;
+      if (details.open && next && !details.contains(next)) details.open = false;
     });
   });
 </script>
