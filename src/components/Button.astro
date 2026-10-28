@@ -1,0 +1,52 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit';
+  size?: 'L' | 'M' | 'S';
+  variant?: 'primary' | 'secondary' | 'secondary-light' | 'secondary-dark';
+  icon?: boolean;
+  block?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { href, type = 'button', size = 'M', variant = 'primary', icon = false, block = false, class: className, ...rest } = Astro.props;
+const classes = ['btn', `btn--${size.toLowerCase()}`, `btn--${variant}`, block && 'btn--block', className].filter(Boolean).join(' ');
+---
+{href ? (
+  <a href={href} class={classes} {...rest}><span><slot /></span>{icon && <Icon name="arrow-right" size={size === 'L' ? 24 : 20} />}</a>
+) : (
+  <button type={type} class={classes} {...rest}><span><slot /></span>{icon && <Icon name="arrow-right" size={size === 'L' ? 24 : 20} />}</button>
+)}
+
+<style>
+  /* Figma „Button HiFi“: Pill-Form, Größen L/M/S, Stile Primary / Secondary / Secondary Light / Secondary Dark. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8);
+    border: var(--border-width-default) solid transparent;
+    border-radius: var(--radius-32);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .btn--l { padding: var(--spacing-16) var(--spacing-40); font-size: var(--font-size-button-l); line-height: var(--line-height-button-l); }
+  .btn--m { padding: var(--spacing-8) var(--spacing-24); font-size: var(--font-size-button-m); line-height: var(--line-height-button-m); }
+  .btn--s { padding: var(--spacing-8) var(--spacing-16); font-size: var(--font-size-button-s); line-height: var(--line-height-button-s); }
+  .btn--block { display: flex; inline-size: 100%; }
+
+  .btn--primary { background: var(--color-petrol-900); color: var(--color-white); }
+  .btn--primary:hover { background: var(--color-petrol-800); }
+  .btn--secondary { background: var(--color-white); color: var(--color-petrol-900); border-color: var(--color-petrol-900); }
+  .btn--secondary:hover { background: var(--color-petrol-050); }
+  .btn--secondary-light { background: transparent; color: var(--color-white); border-color: var(--color-white); }
+  .btn--secondary-light:hover { background: rgb(255 255 255 / 0.1); }
+  .btn--secondary-dark { background: transparent; color: var(--color-petrol-900); border-color: var(--color-petrol-900); }
+  .btn--secondary-dark:hover { background: rgb(10 40 51 / 0.06); }
+</style>

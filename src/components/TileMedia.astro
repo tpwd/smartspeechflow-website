@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  title: string;
+  text: string;
+  /** Figma „Tile Media HiFi“: L = großes Bild, S = kleines Bild, M = Text vor Bild */
+  size: 'L' | 'S' | 'M';
+}
+const { image, alt, title, text, size } = Astro.props;
+---
+<article class:list={['tile', `tile--${size.toLowerCase()}`]}>
+  <Image src={image} alt={alt} widths={[400, 800, 1200]} sizes="(min-width: 1024px) 66vw, (min-width: 768px) 50vw, 100vw" />
+  <div class="text">
+    <h3 class="t-h6">{title}</h3>
+    <p class="t-body-s">{text}</p>
+  </div>
+</article>
+
+<style>
+  .tile { display: grid; gap: var(--spacing-16); }
+  .tile :global(img) { inline-size: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .text { display: grid; gap: var(--spacing-8); }
+  @media (min-width: 768px) {
+    .tile { grid-template-columns: 1fr 1fr; align-items: center; gap: var(--spacing-32); }
+    .tile--m :global(img) { order: 2; }
+  }
+  @media (min-width: 1024px) {
+    .tile--l { grid-template-columns: 788fr 412fr; }
+    .tile--s { grid-template-columns: 384fr 816fr; }
+    .tile--s .text { max-inline-size: 280px; }
+    .tile--m { grid-template-columns: 614fr 586fr; }
+    .tile--m .text { justify-self: center; max-inline-size: 280px; }
+    .tile--l .text { max-inline-size: 280px; }
+  }
+</style>

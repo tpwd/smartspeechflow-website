@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "siteName": "Smart Speech Flow",
+    "homeTitle": "Smart Speech Flow – Interpreting for public services",
+    "description": "Smart Speech Flow interprets conversations between public services and citizens in real time – in 20 languages, legally compliant and privacy-friendly. Open source."
+  },
+  "nav": {
+    "skip": "Skip to content",
+    "main": "Main navigation",
+    "home": "Home",
+    "product": "Product",
+    "useCases": "Use cases",
+    "project": "Project",
+    "openSource": "Open Source",
+    "offer": "Offer",
+    "language": "Choose language",
+    "book": "Book now",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu"
+  },
+  "promo": {
+    "badge": "Until 31 Dec 2026: 2 months free",
+    "short": "2 months free"
+  },
+  "hero": {
+    "headline": "Interpreting for public services",
+    "subline": "No conversation fails because of language anymore. Smart Speech Flow interprets in 20 languages, legally compliant and privacy-friendly.",
+    "ctaBook": "Book now",
+    "ctaDemo": "Book a live demo",
+    "imageAlt": "Consultation between a public servant and a citizen"
+  },
+  "chat": {
+    "app": "Smart Speech Flow",
+    "question": "Wie kann ich Ihnen heute helfen?",
+    "questionLang": "German",
+    "divider": "Real-time translation",
+    "answer": "I need help with my registration.",
+    "answerLang": "English",
+    "translated": "Ich brauche Hilfe bei meiner Anmeldung.",
+    "translatedNote": "Translated automatically",
+    "status": "Connected",
+    "mode": "Audio & text",
+    "label": "Example of a translated conversation"
+  },
+  "trust": {
+    "label": "As seen on:"
+  },
+  "how": {
+    "title": "How it works",
+    "items": [
+      {
+        "title": "A real interpreting dialogue, not a chatbot",
+        "text": "Both sides speak their own language; every statement appears translated as text and audio",
+        "alt": "Hand using a tablet with the conversation view"
+      },
+      {
+        "title": "Runs in the browser on existing devices",
+        "text": "No special hardware: two devices of the municipality or the visitor’s own phone",
+        "alt": "Laptop, tablet and smartphone on a table"
+      },
+      {
+        "title": "20 languages",
+        "text": "The 20 most common foreign languages in Germany are available",
+        "alt": "Man holding up a smartphone with the language selection"
+      }
+    ]
+  },
+  "why": {
+    "title": "Why Smart Speech Flow",
+    "items": [
+      { "title": "Legally compliant", "text": "The only German open-source tool for legally compliant speech translation" },
+      { "title": "Legally reviewed concept", "text": "Operation and conversation modes were agreed with a law firm for use in public authorities" },
+      { "title": "Data protection", "text": "Open-source models run on servers in Germany" },
+      { "title": "The software belongs to the municipality", "text": "Open source under the MIT licence: free to use and extend, without vendor lock-in" },
+      { "title": "Pays off", "text": "From around 12 interpreter hours per month" }
+    ],
+    "modes": {
+      "title": "Three conversation modes",
+      "items": ["No recording", "Recording log, optionally reviewed by an interpreter", "Full recording"]
+    }
+  },
+  "testimonials": {
+    "title": "Voices from practice",
+    "coatOfArms": "Coat of arms",
+    "items": [
+      {
+        "quote": "“With Smart Speech Flow we hold conversations at the citizen service desk right away, without waiting for an interpreter appointment. It noticeably relieves our team.”",
+        "name": "[Name], [Role]",
+        "org": "City of Kassel, developed together with SVS"
+      },
+      {
+        "quote": "“The introduction was done within a few days. What convinced us most is that the data stays on our server.”",
+        "name": "[Name], [Role]",
+        "org": "Havelland district"
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Pricing and hosting",
+    "perMonth": "/month excl. VAT",
+    "book": "Book now",
+    "select": "Select",
+    "selected": "Selected",
+    "pricePlaceholder": "€ xy",
+    "plans": {
+      "shared": {
+        "overline": "Starter",
+        "title": "Shared server",
+        "features": ["Runs in the browser on existing devices", "Three conversation modes", "20 languages", "Server at SVS, shared with other municipalities", "Up to 3 simultaneous conversations"]
+      },
+      "dedicated": {
+        "overline": "Upgrade",
+        "title": "Dedicated server",
+        "features": ["Runs in the browser on existing devices", "Three conversation modes", "20 languages", "Dedicated server at SVS, only for your municipality", "Up to 5 simultaneous conversations"]
+      },
+      "selfhosted": {
+        "overline": "Self-hosted",
+        "title": "Operated by the municipality",
+        "badge": "Open source, no licence fees",
+        "features": ["Runs in the browser on existing devices", "Three conversation modes", "20 languages", "Runs on the municipality’s own server", "Full control over infrastructure and data"]
+      }
+    }
+  },
+  "cta": {
+    "title": "Any questions?",
+    "text": "Would you like to get to know Smart Speech Flow first? In our weekly, free live demo we show the application and answer your questions. For specific matters, book an individual call.",
+    "demo": "Book a live demo",
+    "call": "Individual call"
+  },
+  "footer": {
+    "claim": "Open-source solution for multilingual real-time communication in municipal and public settings.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "resources": "Resources",
+    "info": "Information",
+    "promo": "Offer: 2 months free",
+    "contactUs": "Get in touch",
+    "demo": "Book a live demo",
+    "call": "Individual call",
+    "github": "GitHub repository",
+    "docs": "Documentation",
+    "projectBy": "A project by:",
+    "implementation": "Implemented by:",
+    "copyright": "© 2026 Smart Speech Flow. Open source under the MIT License.",
+    "legal": "Legal"
+  },
+  "pageNames": {
+    "product": "Product",
+    "useCases": "Use cases",
+    "project": "Project",
+    "openSource": "Open Source",
+    "contact": "Contact",
+    "legalNotice": "Legal notice",
+    "privacy": "Privacy policy",
+    "terms": "Terms and conditions"
+  },
+  "placeholder": {
+    "text": "This page is still empty in the scaffold. Its content will be taken over from the existing site.",
+    "back": "Back to home"
+  },
+  "booking": {
+    "metaTitle": "Book Smart Speech Flow",
+    "breadcrumb": "Breadcrumb",
+    "breadcrumbCurrent": "Booking",
+    "title": "Book Smart Speech Flow",
+    "intro": "A binding booking in three steps. After a successful booking, Smart Speech Flow is ready to use within 2 days.",
+    "steps": ["Option", "Term", "Your details"],
+    "step1": "1. Choose an option",
+    "step2": "2. Choose a term",
+    "step3": "3. Your details",
+    "terms": {
+      "prepaid": { "label": "12 months in advance", "text": "Billed for 12 months; includes the offer when booked by 31 Dec 2026" },
+      "monthly": { "label": "Monthly", "text": "Billed monthly" }
+    },
+    "fields": {
+      "org": "Municipality / organisation",
+      "orgPh": "e.g. City of Sampletown",
+      "person": "Contact person",
+      "personPh": "First and last name",
+      "role": "Role",
+      "rolePh": "e.g. Head of department",
+      "email": "Email",
+      "emailPh": "name@municipality.de",
+      "phone": "Phone",
+      "phonePh": "+49 …",
+      "billing": "Billing address",
+      "street": "Street and number",
+      "zip": "Postcode",
+      "city": "City",
+      "start": "Preferred start date (optional)",
+      "message": "Message / questions"
+    },
+    "consentPrivacy": "I have read the privacy policy and agree to the processing of my data.",
+    "consentTerms": "I accept the terms and conditions.",
+    "required": "Required field",
+    "summary": {
+      "title": "Summary",
+      "option": "Option",
+      "term": "Term",
+      "price": "Price",
+      "promo": "Offer",
+      "noPromo": "–",
+      "total12": "Total for 12 months",
+      "totalMonthly": "Monthly amount",
+      "net": "excl. VAT",
+      "onRequest": "on request"
+    },
+    "submit": "Book now (binding)",
+    "note": "After booking you will receive a confirmation by email. Ready to use within 2 days.",
+    "demoNotice": "Demo mode: no booking backend is connected. Submitting sends no data; you are only redirected to the thank-you page."
+  },
+  "thanks": {
+    "metaTitle": "Thank you for your booking",
+    "title1": "Thank you!",
+    "title2": "We have received your booking.",
+    "text": "We have sent a confirmation to [email address]. It contains all details of your booking.",
+    "number": "Booking number",
+    "numberPlaceholder": "[Number]",
+    "nextTitle": "What happens next?",
+    "steps": [
+      { "title": "Email confirmation", "text": "You will receive the booking confirmation with all details at the address you provided." },
+      { "title": "Provisioning", "text": "We will get in touch with the next steps for the setup, tailored to the option you booked." },
+      { "title": "Access and organisation", "text": "You will receive your access by email. You create your organisation and adjust the settings, for example separate areas for individual departments." },
+      { "title": "Ready to go", "text": "Within 2 days of booking you can hold your first conversations." }
+    ],
+    "questionsTitle": "Questions about your booking?",
+    "questionsText": "We are happy to help – contact us directly with questions about setup, access or billing.",
+    "home": "Back to home",
+    "contact": "Get in touch"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you requested does not exist (anymore).",
+    "back": "Back to home"
+  }
+}

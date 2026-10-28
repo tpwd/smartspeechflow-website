@@ -1,0 +1,265 @@
+---
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import { localeTags, pathFor, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+import { formatEuro, plans, promotion } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const { t, tv } = useTranslations(locale);
+const tag = localeTags[locale];
+const endpoint = import.meta.env.PUBLIC_BOOKING_ENDPOINT || '';
+const steps = tv<string[]>('booking.steps');
+
+// Texte und Preise für das kleine Skript unten (Zusammenfassung live aktualisieren).
+const config = {
+  locale: tag,
+  thanksUrl: pathFor(locale, 'thanks'),
+  promo: promotion,
+  plans: Object.fromEntries(plans.map((p) => [p.id, { title: t(`pricing.plans.${p.id}.title`), monthlyNet: p.monthlyNet, promo: p.promo }])),
+  terms: { prepaid: t('booking.terms.prepaid.label'), monthly: t('booking.terms.monthly.label') },
+  text: {
+    perMonth: t('pricing.perMonth'),
+    net: t('booking.summary.net'),
+    total12: t('booking.summary.total12'),
+    totalMonthly: t('booking.summary.totalMonthly'),
+    promo: t('promo.short'),
+    noPromo: t('booking.summary.noPromo'),
+    onRequest: t('booking.summary.onRequest'),
+  },
+};
+const field = (key: string) => t(`booking.fields.${key}`);
+---
+<section class="head section--tint">
+  <div class="container">
+    <nav aria-label={t('booking.breadcrumb')} class="t-body-xs t-muted breadcrumb">
+      <a href={pathFor(locale, 'home')}>{t('nav.home')}</a> / <span aria-current="page">{t('booking.breadcrumbCurrent')}</span>
+    </nav>
+    <h1 class="t-hero">{t('booking.title')}</h1>
+    <p class="t-body-l intro">{t('booking.intro')}</p>
+    <ol class="steps" role="list">
+      {steps.map((s, i) => <li><span class:list={['num', i === 0 && 'num--active']}>{i + 1}</span><span>{s}</span></li>)}
+    </ol>
+  </div>
+</section>
+
+<form class="container booking" method="post" action={endpoint || undefined} data-demo={endpoint ? undefined : 'true'} novalidate>
+  {!endpoint && <p class="demo-notice t-body-xs" role="note"><Icon name="bell" size={16} />{t('booking.demoNotice')}</p>}
+
+  <fieldset class="block">
+    <legend class="t-h4">{t('booking.step1')}</legend>
+    <div class="plans">
+      {plans.map((plan, i) => (
+        <label class="plan">
+          <input type="radio" name="option" value={plan.id} checked={i === 0} class="visually-hidden" />
+          <span class="overline">{t(`pricing.plans.${plan.id}.overline`)}</span>
+          <span class="t-h5">{t(`pricing.plans.${plan.id}.title`)}</span>
+          <span class="price"><b>{plan.monthlyNet === null ? t('pricing.pricePlaceholder') : formatEuro(plan.monthlyNet, tag)}</b> <span class="t-body-xs t-muted">{t('pricing.perMonth')}</span></span>
+          <Badge>{plan.promo ? t('promo.badge') : t(`pricing.plans.${plan.id}.badge`)}</Badge>
+          <ul class="features t-body-xs" role="list">
+            {tv<string[]>(`pricing.plans.${plan.id}.features`).map((f) => <li><Icon name="check" size={16} />{f}</li>)}
+          </ul>
+          <span class="choose" aria-hidden="true"><span class="when-off">{t('pricing.select')}</span><span class="when-on">{t('pricing.selected')}</span></span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <fieldset class="block">
+    <legend class="t-h4">{t('booking.step2')}</legend>
+    <div class="terms">
+      {(['prepaid', 'monthly'] as const).map((term, i) => (
+        <label class="term">
+          <span class="term-head">
+            <input type="radio" name="term" value={term} checked={i === 0} />
+            <span class="t-body-s">{t(`booking.terms.${term}.label`)}</span>
+            {term === 'prepaid' && <Badge size="S">{t('promo.short')}</Badge>}
+          </span>
+          <span class="t-body-xs t-muted">{t(`booking.terms.${term}.text`)}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <fieldset class="block">
+    <legend class="t-h4">{t('booking.step3')}</legend>
+    <div class="details">
+      <div class="fields">
+        <label class="f f--full"><span>{field('org')}*</span><input name="organisation" required autocomplete="organization" placeholder={field('orgPh')} /></label>
+        <label class="f"><span>{field('person')}*</span><input name="name" required autocomplete="name" placeholder={field('personPh')} /></label>
+        <label class="f"><span>{field('role')}</span><input name="role" autocomplete="organization-title" placeholder={field('rolePh')} /></label>
+        <label class="f"><span>{field('email')}*</span><input name="email" type="email" required autocomplete="email" placeholder={field('emailPh')} /></label>
+        <label class="f"><span>{field('phone')}</span><input name="phone" type="tel" autocomplete="tel" placeholder={field('phonePh')} /></label>
+        <p class="t-h6 f--full billing">{field('billing')}</p>
+        <label class="f f--full"><span>{field('street')}*</span><input name="street" required autocomplete="street-address" /></label>
+        <div class="f--full zip-city">
+          <label class="f"><span>{field('zip')}*</span><input name="zip" required autocomplete="postal-code" inputmode="numeric" /></label>
+          <label class="f"><span>{field('city')}*</span><input name="city" required autocomplete="address-level2" /></label>
+        </div>
+        <label class="f"><span>{field('start')}</span><input name="start" type="date" /></label>
+        <label class="f f--full"><span>{field('message')}</span><textarea name="message" rows="5"></textarea></label>
+        <label class="check f--full"><input type="checkbox" name="consentPrivacy" required /><span>{t('booking.consentPrivacy')}*</span></label>
+        <label class="check f--full"><input type="checkbox" name="consentTerms" required /><span>{t('booking.consentTerms')}*</span></label>
+        <p class="t-body-xxs t-muted f--full">* {t('booking.required')}</p>
+      </div>
+
+      <aside class="summary" aria-labelledby="summary-title" aria-live="polite">
+        <h2 id="summary-title" class="t-h5">{t('booking.summary.title')}</h2>
+        <dl>
+          <div><dt>{t('booking.summary.option')}</dt><dd data-sum="option"></dd></div>
+          <div><dt>{t('booking.summary.term')}</dt><dd data-sum="term"></dd></div>
+          <div><dt>{t('booking.summary.price')}</dt><dd data-sum="price"></dd></div>
+          <div><dt>{t('booking.summary.promo')}</dt><dd data-sum="promo"></dd></div>
+        </dl>
+        <p class="total"><span class="t-body-s t-strong" data-sum="totalLabel"></span><span class="t-h4" data-sum="total"></span></p>
+        <Button type="submit" size="L" icon block>{t('booking.submit')}</Button>
+        <p class="t-body-xxs t-muted">{t('booking.note')}</p>
+      </aside>
+    </div>
+  </fieldset>
+</form>
+
+<script is:inline type="application/json" id="booking-config" set:html={JSON.stringify(config)}></script>
+
+<script>
+  type Config = {
+    locale: string;
+    thanksUrl: string;
+    promo: { until: string; freeMonths: number; requiresPrepaid: boolean };
+    plans: Record<string, { title: string; monthlyNet: number | null; promo: boolean }>;
+    terms: Record<string, string>;
+    text: Record<string, string>;
+  };
+  const config = JSON.parse(document.getElementById('booking-config')!.textContent!) as Config;
+  const form = document.querySelector<HTMLFormElement>('form.booking')!;
+  const eur = (v: number) => new Intl.NumberFormat(config.locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
+  const set = (key: string, value: string) => { const el = form.querySelector(`[data-sum="${key}"]`); if (el) el.textContent = value; };
+
+  // Vorauswahl über ?option=… (Links „Jetzt buchen“ auf der Startseite)
+  const pre = new URLSearchParams(location.search).get('option');
+  const preInput = pre ? form.querySelector<HTMLInputElement>(`input[name="option"][value="${CSS.escape(pre)}"]`) : null;
+  if (preInput) preInput.checked = true;
+
+  function update() {
+    const option = (form.querySelector<HTMLInputElement>('input[name="option"]:checked')?.value) ?? 'shared';
+    const term = (form.querySelector<HTMLInputElement>('input[name="term"]:checked')?.value) ?? 'prepaid';
+    const plan = config.plans[option];
+    const promoActive = plan.promo && new Date() <= new Date(`${config.promo.until}T23:59:59`) && (!config.promo.requiresPrepaid || term === 'prepaid');
+    set('option', plan.title);
+    set('term', config.terms[term]);
+    set('promo', promoActive ? config.text.promo : config.text.noPromo);
+    if (plan.monthlyNet === null) {
+      set('price', config.text.onRequest);
+      set('totalLabel', '');
+      set('total', '');
+      return;
+    }
+    set('price', `${eur(plan.monthlyNet)}${config.text.perMonth}`);
+    if (term === 'prepaid') {
+      const months = 12 - (promoActive ? config.promo.freeMonths : 0);
+      set('totalLabel', config.text.total12);
+      set('total', `${eur(plan.monthlyNet * months)} ${config.text.net}`);
+    } else {
+      set('totalLabel', config.text.totalMonthly);
+      set('total', `${eur(plan.monthlyNet)} ${config.text.net}`);
+    }
+  }
+  form.addEventListener('change', update);
+  update();
+
+  form.addEventListener('submit', (event) => {
+    if (!form.reportValidity()) { event.preventDefault(); return; }
+    if (form.dataset.demo) {
+      // Demo-Modus: kein Backend – nichts senden, nur zur Danke-Seite mit Auswahl weiterleiten.
+      event.preventDefault();
+      const data = new FormData(form);
+      const params = new URLSearchParams({ option: String(data.get('option')), term: String(data.get('term')) });
+      location.href = `${config.thanksUrl}?${params}`;
+    }
+  });
+</script>
+
+<style>
+  .head { padding-block: var(--spacing-40); }
+  .head .container { display: grid; gap: var(--spacing-16); }
+  .breadcrumb a { color: inherit; }
+  .intro { max-inline-size: 792px; color: var(--color-gray-cool-700); }
+  .steps { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--spacing-8); margin: var(--spacing-8) 0 0; padding: 0; }
+  .steps li { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-8); font-size: var(--font-size-body-xs); font-weight: var(--font-weight-bold); color: var(--color-petrol-900); text-align: center; }
+  .num { display: grid; place-items: center; inline-size: 32px; block-size: 32px; border-radius: 50%; border: 1.5px solid var(--color-petrol-900); background: var(--color-white); }
+  .num--active { background: var(--color-petrol-900); color: var(--color-white); }
+
+  .booking { display: grid; gap: var(--spacing-48); padding-block: var(--spacing-48) var(--spacing-64); }
+  .demo-notice { display: flex; gap: var(--spacing-8); align-items: flex-start; padding: 12px var(--spacing-16); border-radius: var(--radius-8); background: #fff7ed; border: 1px solid var(--color-status-warning); color: #7c2d12; }
+  .block { margin: 0; padding: 0; border: 0; display: grid; gap: var(--spacing-24); min-inline-size: 0; }
+  legend { padding: 0; margin-block-end: var(--spacing-24); color: var(--color-petrol-900); font-weight: var(--font-weight-bold); }
+
+  .plans { display: grid; gap: var(--spacing-16); }
+  .plan { position: relative; display: grid; gap: var(--spacing-8); align-content: start; padding: var(--spacing-24); background: var(--color-white); border: 1px solid var(--color-gray-cool-200); border-radius: var(--radius-16); cursor: pointer; color: var(--color-petrol-900); }
+  .plan:has(input:checked) { border: 2px solid var(--color-petrol-700); padding: calc(var(--spacing-24) - 1px); }
+  .plan:has(input:focus-visible) { outline: 3px solid var(--color-petrol-500); outline-offset: 2px; }
+  .overline { color: var(--color-petrol-700); font-size: var(--font-size-body-xxs); font-weight: var(--font-weight-bold); text-transform: uppercase; letter-spacing: 0.08em; }
+  .price b { font-size: var(--font-size-h3); line-height: var(--line-height-h3); }
+  .features { margin: var(--spacing-16) 0 var(--spacing-24); padding: var(--spacing-16) 0 0; border-block-start: 1px solid var(--color-gray-cool-200); display: grid; gap: 12px; color: var(--color-gray-cool-700); }
+  .features li { display: flex; gap: var(--spacing-8); }
+  .features :global(.icon) { flex: none; color: var(--color-green-700); margin-block-start: 2px; }
+  .choose { align-self: end; display: flex; justify-content: center; padding: var(--spacing-8); border: 1px solid var(--color-petrol-900); border-radius: var(--radius-32); font-weight: var(--font-weight-semibold); }
+  .plan .when-on, .plan:has(input:checked) .when-off { display: none; }
+  .plan:has(input:checked) .when-on { display: inline; }
+  .plan:has(input:checked) .choose { background: var(--color-petrol-900); color: var(--color-white); }
+
+  .terms { display: grid; gap: var(--spacing-16); }
+  .term { display: grid; gap: var(--spacing-8); padding: 20px; border: 1px solid var(--color-gray-cool-200); border-radius: var(--radius-16); cursor: pointer; }
+  .term:has(input:checked) { border: 2px solid var(--color-petrol-700); padding: 19px; }
+  .term-head { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; color: var(--color-petrol-900); }
+  .term input, .check input { inline-size: 20px; block-size: 20px; margin: 0; accent-color: var(--color-petrol-900); flex: none; }
+
+  .details { display: grid; gap: var(--spacing-32); }
+  .fields { display: grid; gap: var(--spacing-24); }
+  .f { display: grid; gap: var(--spacing-8); font-size: var(--font-size-body-xs); font-weight: var(--font-weight-bold); color: var(--color-petrol-900); }
+  .f input, .f textarea {
+    inline-size: 100%;
+    padding: 12px var(--spacing-16);
+    border: 1px solid var(--color-gray-cool-300);
+    border-radius: var(--radius-8);
+    background: var(--color-white);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-body-s);
+    color: var(--color-petrol-900);
+  }
+  .f input::placeholder, .f textarea::placeholder { color: var(--color-gray-cool-600); }
+  .zip-city { display: grid; grid-template-columns: 104px 1fr; gap: var(--spacing-16); }
+  .billing { margin-block-start: var(--spacing-8); }
+  .check { display: flex; gap: 12px; align-items: flex-start; font-size: var(--font-size-body-s); }
+
+  .summary { display: grid; gap: var(--spacing-16); align-self: start; padding: var(--spacing-24); background: var(--color-petrol-050); border-radius: var(--radius-16); }
+  dl { margin: 0; display: grid; gap: 12px; padding-block-end: var(--spacing-16); border-block-end: 1px solid var(--color-gray-cool-300); }
+  dl div { display: flex; justify-content: space-between; gap: var(--spacing-16); font-size: var(--font-size-body-xs); }
+  dt { color: var(--color-gray-cool-600); }
+  dd { margin: 0; font-weight: var(--font-weight-bold); color: var(--color-petrol-900); text-align: end; }
+  .total { display: grid; gap: var(--spacing-4); }
+  .total .t-h4 { color: var(--color-petrol-900); font-weight: var(--font-weight-bold); }
+
+  @media (min-width: 768px) {
+    .head { padding-block: var(--spacing-56); }
+    .steps { gap: var(--spacing-16); }
+    .steps li { flex-direction: row; font-size: var(--font-size-body-s); }
+    .steps li:not(:last-child) { flex: 1; }
+    .steps li:not(:last-child)::after { content: ''; flex: 1; block-size: 2px; margin-inline-start: var(--spacing-16); background: var(--color-gray-cool-300); }
+    .plans { grid-template-columns: 1fr 1fr; gap: var(--spacing-24); }
+    .terms { grid-template-columns: 1fr 1fr; gap: var(--spacing-24); }
+    .fields { grid-template-columns: 1fr 1fr; }
+    .f--full { grid-column: 1 / -1; }
+    .zip-city { grid-template-columns: 160px 1fr; gap: var(--spacing-24); }
+  }
+  @media (min-width: 1024px) {
+    .head { padding-block: var(--spacing-64); }
+    .plans { grid-template-columns: repeat(3, 1fr); }
+    .details { grid-template-columns: 1fr 384px; gap: var(--spacing-48); }
+    .summary { position: sticky; inset-block-start: 120px; padding: var(--spacing-32); }
+  }
+</style>

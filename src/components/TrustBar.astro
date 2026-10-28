@@ -1,0 +1,38 @@
+---
+import rtl from '../assets/logos/press-rtl.svg?raw';
+import hr from '../assets/logos/press-hr.svg?raw';
+import { Image } from 'astro:assets';
+import kommune21 from '../assets/logos/press-kommune21.png';
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const label = t(Astro.props.locale, 'trust.label');
+const svg = (s: string, name: string) => s.replace('<svg ', `<svg role="img" aria-label="${name}" `);
+---
+<section class="trust container" aria-label={label}>
+  <p class="t-body-xs t-muted">{label}</p>
+  <ul role="list">
+    <li><Fragment set:html={svg(hr, 'Hessischer Rundfunk')} /></li>
+    <li><Image src={kommune21} alt="Kommune21" height={40} /></li>
+    <li><Fragment set:html={svg(rtl, 'RTL')} /></li>
+  </ul>
+</section>
+
+<style>
+  .trust { display: grid; gap: var(--spacing-16); padding-block: var(--spacing-32); }
+  ul { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-16); margin: 0; padding: 0; }
+  li :global(svg), li :global(img) { block-size: 24px; inline-size: auto; }
+  @media (min-width: 768px) {
+    .trust { grid-template-columns: auto 1fr; align-items: center; padding-block: var(--spacing-40); }
+    ul { justify-content: flex-end; gap: var(--spacing-32); }
+    li :global(svg), li :global(img) { block-size: 30px; }
+  }
+  @media (min-width: 1024px) {
+    .trust { padding-block: var(--spacing-48); }
+    ul { gap: var(--spacing-48); }
+    li :global(svg), li :global(img) { block-size: 40px; }
+  }
+</style>

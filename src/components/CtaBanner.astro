@@ -1,0 +1,36 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  title: string;
+  text: string;
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
+}
+const { title, text, primary, secondary } = Astro.props;
+---
+<section class="cta section section--dark" aria-labelledby="cta-title">
+  <div class="container inner">
+    <div class="text">
+      <h2 id="cta-title" class="t-section">{title}</h2>
+      <p class="t-body-l">{text}</p>
+    </div>
+    <div class="buttons">
+      <Button href={primary.href} size="L" variant="secondary" icon block>{primary.label}</Button>
+      <Button href={secondary.href} size="L" variant="secondary-light" block>{secondary.label}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .inner { display: grid; gap: var(--spacing-24); }
+  .text { display: grid; gap: var(--spacing-16); max-inline-size: 588px; }
+  .text h2 { color: var(--color-white); }
+  .buttons { display: grid; gap: 12px; }
+  @media (min-width: 768px) {
+    .inner { grid-template-columns: 1fr 240px; align-items: center; gap: var(--spacing-40); }
+  }
+  @media (min-width: 1024px) {
+    .inner { grid-template-columns: 1fr 280px; }
+  }
+</style>

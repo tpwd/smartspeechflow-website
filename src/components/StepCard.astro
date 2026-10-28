@@ -1,0 +1,19 @@
+---
+interface Props {
+  number: number;
+  title: string;
+  text: string;
+}
+const { number, title, text } = Astro.props;
+---
+<li class="step">
+  <span class="num" aria-hidden="true">{number}</span>
+  <h3 class="t-h6">{title}</h3>
+  <p class="t-body-s">{text}</p>
+</li>
+
+<style>
+  .step { display: grid; align-content: start; gap: var(--spacing-16); padding: var(--spacing-24); background: var(--color-white); border: 1px solid var(--color-gray-cool-200); border-radius: var(--radius-16); }
+  .num { display: grid; place-items: center; inline-size: 40px; block-size: 40px; border-radius: 50%; background: var(--color-petrol-900); color: var(--color-white); font-weight: var(--font-weight-bold); }
+  @media (min-width: 768px) { .step { padding: var(--spacing-32); } }
+</style>

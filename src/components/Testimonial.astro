@@ -1,0 +1,28 @@
+---
+interface Props {
+  quote: string;
+  name: string;
+  org: string;
+  coatLabel: string;
+}
+const { quote, name, org, coatLabel } = Astro.props;
+---
+<figure class="testimonial">
+  <blockquote class="quote">{quote}</blockquote>
+  <figcaption>
+    <span class="coat" aria-hidden="true">{coatLabel}</span>
+    <span><b>{name}</b><br /><span class="t-muted">{org}</span></span>
+  </figcaption>
+</figure>
+
+<style>
+  .testimonial { margin: 0; display: grid; gap: var(--spacing-24); align-content: space-between; padding: var(--spacing-24); background: var(--color-petrol-050); border-radius: var(--radius-24); }
+  .quote { color: var(--color-petrol-900); font-size: var(--font-size-body-l); line-height: var(--line-height-body-l); }
+  figcaption { display: flex; align-items: center; gap: var(--spacing-16); font-size: var(--font-size-body-xs); line-height: var(--line-height-body-xs); }
+  figcaption b { color: var(--color-petrol-900); font-size: var(--font-size-body-s); }
+  .coat { flex: none; display: grid; place-items: center; inline-size: 56px; block-size: 56px; background: var(--color-white); border: 1px solid var(--color-gray-cool-200); border-radius: var(--radius-8); font-size: var(--font-size-body-xxs); color: var(--color-gray-cool-600); }
+  @media (min-width: 768px) {
+    .testimonial { padding: var(--spacing-40); gap: var(--spacing-32); }
+    .quote { font-size: var(--font-size-body-xl); line-height: var(--line-height-body-xl); }
+  }
+</style>

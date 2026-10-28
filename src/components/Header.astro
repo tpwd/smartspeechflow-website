@@ -1,0 +1,161 @@
+---
+import logoSvg from '../assets/logos/ssf-logo.svg?raw';
+import Badge from './Badge.astro';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { pathFor, type Locale, type PageKey } from '../i18n/config';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+}
+const { locale, page } = Astro.props;
+const { t } = useTranslations(locale);
+
+const items: { page: PageKey; label: string }[] = [
+  { page: 'product', label: t('nav.product') },
+  { page: 'useCases', label: t('nav.useCases') },
+  { page: 'project', label: t('nav.project') },
+  { page: 'openSource', label: t('nav.openSource') },
+];
+const offerHref = pathFor(locale, 'home', 'preise');
+const logo = logoSvg.replace('<svg ', '<svg role="img" aria-hidden="true" ');
+---
+<header class="site-header">
+  <div class="container bar">
+    <a class="logo" href={pathFor(locale, 'home')}>
+      <span class="visually-hidden">Smart Speech Flow – {t('nav.home')}</span>
+      <Fragment set:html={logo} />
+    </a>
+
+    <nav class="nav-desktop" aria-label={t('nav.main')}>
+      <ul role="list">
+        {items.map((item) => (
+          <li><a href={pathFor(locale, item.page)} aria-current={item.page === page ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+        <li><a href={offerHref} class="offer">{t('nav.offer')} <Badge size="S" icon><span class="visually-hidden">{t('promo.short')}</span></Badge></a></li>
+      </ul>
+    </nav>
+
+    <div class="actions">
+      <div class="lang-desktop"><LanguageSwitcher locale={locale} page={page} /></div>
+      <div class="lang-mobile"><LanguageSwitcher locale={locale} page={page} mode="compact" /></div>
+      <Button href={pathFor(locale, 'booking')} size="S" class="book-desktop">{t('nav.book')}</Button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"
+        data-label-open={t('nav.menuOpen')} data-label-close={t('nav.menuClose')} aria-label={t('nav.menuOpen')}>
+        <span class="i-open"><Icon name="list" /></span>
+        <span class="i-close"><Icon name="x" /></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <nav class="container" aria-label={t('nav.main')}>
+      <ul role="list" class="mobile-links">
+        {items.map((item) => (
+          <li><a href={pathFor(locale, item.page)} aria-current={item.page === page ? 'page' : undefined}>{item.label}<Icon name="caret-right" size={20} /></a></li>
+        ))}
+        <li><a href={offerHref} data-close-menu>{t('nav.offer')}<Badge size="S" icon>{t('promo.short')}</Badge></a></li>
+      </ul>
+      <p class="mobile-lang-title t-body-xs t-muted">{t('nav.language')}</p>
+      <LanguageSwitcher locale={locale} page={page} mode="list" />
+      <Button href={pathFor(locale, 'booking')} size="L" icon block>{t('nav.book')}</Button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Mobiles Menü öffnen/schließen. Ohne JavaScript bleibt die Desktop-Navigation die Rückfallebene
+  // (Breakpoint siehe CSS); auf kleinen Bildschirmen sind die Seiten zusätzlich über den Footer erreichbar.
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', (open ? toggle.dataset.labelClose : toggle.dataset.labelOpen) ?? '');
+      menu.hidden = !open;
+      document.body.classList.toggle('menu-open', open);
+    };
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu.querySelectorAll('[data-close-menu]').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.hidden) { setOpen(false); toggle.focus(); }
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 20;
+    background: var(--color-white);
+    border-block-end: var(--border-width-default) solid var(--color-gray-cool-200);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-24);
+    min-block-size: 64px;
+    padding-block: var(--spacing-8);
+  }
+  .logo { display: block; flex: none; }
+  .logo :global(svg) { inline-size: 111px; block-size: auto; }
+  .nav-desktop ul { display: flex; align-items: center; gap: var(--spacing-32); margin: 0; padding: 0; }
+  .nav-desktop a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    color: var(--color-petrol-900);
+    text-decoration: none;
+    font-size: var(--font-size-body-s);
+    line-height: var(--line-height-body-s);
+  }
+  .nav-desktop a:hover,
+  .nav-desktop a[aria-current='page'] { text-decoration: underline; text-underline-offset: 6px; }
+  .actions { display: flex; align-items: center; gap: var(--spacing-24); }
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 44px;
+    block-size: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-petrol-900);
+    cursor: pointer;
+  }
+  .menu-toggle[aria-expanded='true'] .i-open,
+  .menu-toggle[aria-expanded='false'] .i-close { display: none; }
+
+  .mobile-menu { border-block-start: var(--border-width-default) solid var(--color-gray-cool-200); background: var(--color-white); max-block-size: calc(100dvh - 64px); overflow-y: auto; }
+  .mobile-menu nav { padding-block: var(--spacing-8) var(--spacing-32); display: grid; gap: var(--spacing-16); }
+  .mobile-links { margin: 0; padding: 0; }
+  .mobile-links a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: var(--spacing-16);
+    border-block-end: var(--border-width-default) solid var(--color-gray-cool-200);
+    color: var(--color-petrol-900);
+    font-size: var(--font-size-body-l);
+    line-height: var(--line-height-body-l);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+  }
+  .mobile-lang-title { margin-block-start: var(--spacing-8); }
+
+  /* Mobil + Tablet (< 1024 px, abgeleitet): Logo, Sprache, Menü-Button */
+  .nav-desktop, .lang-desktop, .actions :global(.book-desktop) { display: none; }
+  @media (min-width: 1024px) {
+    .bar { min-block-size: 97px; }
+    .logo :global(svg) { inline-size: 149px; }
+    .nav-desktop, .lang-desktop { display: block; }
+    .actions :global(.book-desktop) { display: inline-flex; }
+    .lang-mobile, .menu-toggle, .mobile-menu { display: none; }
+  }
+</style>

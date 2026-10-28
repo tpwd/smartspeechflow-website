@@ -1,0 +1,87 @@
+---
+import Icon from '../components/Icon.astro';
+import StepCard from '../components/StepCard.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import { pathFor, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+import { plans } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const { t, tv } = useTranslations(locale);
+const steps = tv<{ title: string; text: string }[]>('thanks.steps');
+const config = {
+  plans: Object.fromEntries(plans.map((p) => [p.id, t(`pricing.plans.${p.id}.title`)])),
+  terms: { prepaid: t('booking.terms.prepaid.label'), monthly: t('booking.terms.monthly.label') },
+};
+---
+<section class="confirm section--tint">
+  <div class="container inner">
+    <div class="head">
+      <span class="icon" aria-hidden="true"><Icon name="check" /></span>
+      <div class="stack">
+        <h1 class="t-hero">{t('thanks.title1')}<br />{t('thanks.title2')}</h1>
+        <p class="t-body-l">{t('thanks.text')}</p>
+      </div>
+    </div>
+    <dl class="overview">
+      <div><dt>{t('thanks.number')}</dt><dd>{t('thanks.numberPlaceholder')}</dd></div>
+      <div><dt>{t('booking.summary.option')}</dt><dd data-thanks="option">{config.plans.shared}</dd></div>
+      <div><dt>{t('booking.summary.term')}</dt><dd data-thanks="term">{config.terms.prepaid}</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="next-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="next-title" class="t-section">{t('thanks.nextTitle')}</h2>
+    <ol class="steps" role="list">
+      {steps.map((s, i) => <StepCard number={i + 1} title={s.title} text={s.text} />)}
+    </ol>
+  </div>
+</section>
+
+<CtaBanner
+  title={t('thanks.questionsTitle')}
+  text={t('thanks.questionsText')}
+  primary={{ label: t('thanks.home'), href: pathFor(locale, 'home') }}
+  secondary={{ label: t('thanks.contact'), href: pathFor(locale, 'contact') }}
+/>
+
+<script is:inline type="application/json" id="thanks-config" set:html={JSON.stringify(config)}></script>
+<script>
+  // Zeigt die gewählte Option aus der Weiterleitung (?option=…&term=…). Buchungsnummer und
+  // E-Mail kommen erst mit einem echten Buchungs-Backend.
+  const cfg = JSON.parse(document.getElementById('thanks-config')!.textContent!) as { plans: Record<string, string>; terms: Record<string, string> };
+  const q = new URLSearchParams(location.search);
+  const option = q.get('option'); const term = q.get('term');
+  const setText = (key: string, value?: string) => { const el = document.querySelector(`[data-thanks="${key}"]`); if (el && value) el.textContent = value; };
+  if (option) setText('option', cfg.plans[option]);
+  if (term) setText('term', cfg.terms[term]);
+</script>
+
+<style>
+  .confirm { padding-block: var(--spacing-48); }
+  .inner { display: grid; gap: var(--spacing-32); }
+  .head { display: grid; gap: var(--spacing-24); }
+  .head p { color: var(--color-gray-cool-700); max-inline-size: 792px; }
+  .icon { display: grid; place-items: center; inline-size: 48px; block-size: 48px; border-radius: 50%; background: var(--color-petrol-900); color: var(--color-white); }
+  .overview { margin: 0; display: grid; gap: var(--spacing-16); padding: 20px; background: var(--color-white); border: 1px solid var(--color-gray-cool-200); border-radius: var(--radius-16); }
+  .overview div { display: flex; justify-content: space-between; gap: var(--spacing-16); }
+  dt { color: var(--color-gray-cool-600); font-size: var(--font-size-body-xs); }
+  dd { margin: 0; color: var(--color-petrol-900); font-weight: var(--font-weight-bold); }
+  .steps { margin: 0; padding: 0; display: grid; gap: var(--spacing-16); }
+  @media (min-width: 768px) {
+    .confirm { padding-block: var(--spacing-80); }
+    .head { grid-template-columns: auto 1fr; }
+    .icon { inline-size: 64px; block-size: 64px; }
+    .overview { grid-template-columns: repeat(3, 1fr); padding: var(--spacing-24) var(--spacing-32); }
+    .overview div { display: grid; gap: var(--spacing-4); }
+    .steps { grid-template-columns: 1fr 1fr; gap: var(--spacing-24); }
+  }
+  @media (min-width: 1024px) {
+    .steps { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>

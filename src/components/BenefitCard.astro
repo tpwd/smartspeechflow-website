@@ -1,0 +1,33 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  text?: string;
+  list?: string[];
+}
+const { title, text, list } = Astro.props;
+---
+<article class="card">
+  <span class="icon-box"><Icon name="check" /></span>
+  <h3 class="t-h6">{title}</h3>
+  {text && <p class="t-body-s">{text}</p>}
+  {list && <ul class="t-body-s">{list.map((item) => <li>{item}</li>)}</ul>}
+</article>
+
+<style>
+  .card {
+    display: grid;
+    align-content: start;
+    gap: var(--spacing-16);
+    padding: var(--spacing-24);
+    background: var(--color-white);
+    border: var(--border-width-default) solid var(--color-gray-cool-200);
+    border-radius: var(--radius-16);
+  }
+  .icon-box { display: grid; place-items: center; inline-size: 48px; block-size: 48px; border-radius: var(--radius-8); background: var(--color-green-100); color: var(--color-green-700); }
+  ul { margin: 0; padding-inline-start: 1.2em; display: grid; gap: var(--spacing-4); }
+  @media (min-width: 768px) {
+    .card { padding: var(--spacing-32); }
+  }
+</style>

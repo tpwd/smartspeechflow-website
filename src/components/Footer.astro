@@ -1,0 +1,112 @@
+---
+import logoSvg from '../assets/logos/ssf-logo-inverse.svg?raw';
+import { pathFor, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+import { links } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const { t } = useTranslations(locale);
+const contact = pathFor(locale, 'contact');
+const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" ');
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="columns">
+      <div class="brand">
+        <a href={pathFor(locale, 'home')} class="logo"><span class="visually-hidden">Smart Speech Flow</span><Fragment set:html={logo} /></a>
+        <p class="t-body-xs">{t('footer.claim')}</p>
+      </div>
+      <nav aria-label={t('footer.navigation')}>
+        <h2>{t('footer.navigation')}</h2>
+        <ul role="list">
+          <li><a href={pathFor(locale, 'home')}>{t('nav.home')}</a></li>
+          <li><a href={pathFor(locale, 'product')}>{t('nav.product')}</a></li>
+          <li><a href={pathFor(locale, 'useCases')}>{t('nav.useCases')}</a></li>
+          <li><a href={pathFor(locale, 'project')}>{t('nav.project')}</a></li>
+          <li><a href={pathFor(locale, 'openSource')}>{t('nav.openSource')}</a></li>
+          <li><a href={pathFor(locale, 'home', 'preise')}>{t('footer.promo')}</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2>{t('footer.contact')}</h2>
+        <ul role="list">
+          <li><a href={contact}>{t('footer.contactUs')}</a></li>
+          <li><a href={links.demo ?? contact}>{t('footer.demo')}</a></li>
+          <li><a href={links.call ?? contact}>{t('footer.call')}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>{t('footer.resources')}</h2>
+        <ul role="list">
+          <li><a href={links.github} rel="noopener">{t('footer.github')}</a></li>
+          <li><a href={links.docs} rel="noopener">{t('footer.docs')}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>{t('footer.info')}</h2>
+        <ul role="list">
+          <li>{t('footer.projectBy')}<br /><a href={links.smartCityKassel} rel="noopener">Smart City Kassel</a></li>
+          <li>{t('footer.implementation')}<br /><a href={links.svs} rel="noopener">SVS GmbH</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <nav aria-label={t('footer.legal')}>
+        <ul role="list" class="legal">
+          <li><a href={pathFor(locale, 'legalNotice')}>{t('pageNames.legalNotice')}</a></li>
+          <li><a href={pathFor(locale, 'privacy')}>{t('pageNames.privacy')}</a></li>
+          <li><a href={pathFor(locale, 'terms')}>{t('pageNames.terms')}</a></li>
+        </ul>
+      </nav>
+      <p>{t('footer.copyright')}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-petrol-900);
+    color: var(--color-petrol-100);
+    padding-block: var(--spacing-48) var(--spacing-32);
+    font-size: var(--font-size-body-xs);
+    line-height: var(--line-height-body-xs);
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-32) var(--spacing-24);
+  }
+  .brand { grid-column: 1 / -1; display: grid; gap: var(--spacing-16); max-inline-size: 384px; }
+  .logo :global(svg) { inline-size: 111px; }
+  h2 {
+    margin-block-end: var(--spacing-12, 12px);
+    color: var(--color-white);
+    font-size: var(--font-size-body-s);
+    line-height: var(--line-height-body-s);
+    font-weight: var(--font-weight-bold);
+  }
+  ul { margin: 0; padding: 0; display: grid; gap: 12px; }
+  a { color: var(--color-petrol-100); text-decoration: none; }
+  a:hover { color: var(--color-white); text-decoration: underline; }
+  .bottom {
+    margin-block-start: var(--spacing-32);
+    padding-block-start: var(--spacing-32);
+    border-block-start: var(--border-width-default) solid var(--color-petrol-800);
+    display: grid;
+    gap: var(--spacing-16);
+  }
+  .legal { display: flex; flex-wrap: wrap; gap: var(--spacing-24); }
+
+  @media (min-width: 768px) {
+    .columns { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .site-footer { padding-block: var(--spacing-80) var(--spacing-48); }
+    .columns { grid-template-columns: 2fr repeat(4, 1fr); gap: var(--spacing-48); }
+    .brand { grid-column: auto; }
+    .bottom { margin-block-start: var(--spacing-48); padding-block-start: var(--spacing-48); display: flex; justify-content: space-between; flex-direction: row-reverse; }
+  }
+</style>

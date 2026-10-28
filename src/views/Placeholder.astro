@@ -1,0 +1,19 @@
+---
+import Button from '../components/Button.astro';
+import { pathFor, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  title: string;
+}
+const { locale, title } = Astro.props;
+const { t } = useTranslations(locale);
+---
+<section class="section">
+  <div class="container stack" style="--stack-gap: var(--spacing-24)">
+    <h1 class="t-hero">{title}</h1>
+    <p class="t-body-l">{t('placeholder.text')}</p>
+    <Button href={pathFor(locale, 'home')} variant="secondary-dark">{t('placeholder.back')}</Button>
+  </div>
+</section>

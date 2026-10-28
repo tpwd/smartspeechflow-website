@@ -1,0 +1,90 @@
+---
+import Icon from './Icon.astro';
+import { locales, localeLabels, localeTags, pathFor, type Locale, type PageKey } from '../i18n/config';
+import { t } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+  /** compact: nur Globus-Icon (mobile Kopfzeile); list: offene Liste (im Menü) */
+  mode?: 'dropdown' | 'compact' | 'list';
+}
+const { locale, page, mode = 'dropdown' } = Astro.props;
+const label = t(locale, 'nav.language');
+---
+{mode === 'list' ? (
+  <ul class="lang-list" role="list" aria-label={label}>
+    {locales.map((l) => (
+      <li>
+        <a href={pathFor(l, page)} hreflang={localeTags[l]} lang={localeTags[l]} aria-current={l === locale ? 'true' : undefined}>
+          {localeLabels[l]}
+          {l === locale && <Icon name="check" size={16} />}
+        </a>
+      </li>
+    ))}
+  </ul>
+) : (
+  <details class:list={['lang', `lang--${mode}`]}>
+    <summary aria-label={`${label}: ${localeLabels[locale]}`}>
+      <Icon name="globe" size={24} />
+      {mode === 'dropdown' && <span>{localeLabels[locale]}</span>}
+      {mode === 'dropdown' && <Icon name="caret-down" size={16} />}
+    </summary>
+    <ul role="list">
+      {locales.map((l) => (
+        <li>
+          <a href={pathFor(l, page)} hreflang={localeTags[l]} lang={localeTags[l]} aria-current={l === locale ? 'true' : undefined}>
+            {localeLabels[l]}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </details>
+)}
+
+<style>
+  .lang { position: relative; }
+  .lang summary {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+    min-block-size: 44px;
+    min-inline-size: 44px;
+    justify-content: center;
+    cursor: pointer;
+    list-style: none;
+    color: var(--color-petrol-900);
+    font-size: var(--font-size-body-s);
+  }
+  .lang summary::-webkit-details-marker { display: none; }
+  .lang--dropdown summary .icon:first-child { display: none; }
+  .lang ul {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: calc(100% + var(--spacing-8));
+    z-index: 30;
+    min-inline-size: 180px;
+    margin: 0;
+    padding: var(--spacing-8);
+    list-style: none;
+    background: var(--color-white);
+    border: var(--border-width-default) solid var(--color-gray-cool-200);
+    border-radius: var(--radius-16);
+    box-shadow: 0 8px 24px rgb(10 40 51 / 0.12);
+  }
+  .lang a,
+  .lang-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-8) var(--spacing-16);
+    border-radius: var(--radius-8);
+    color: var(--color-petrol-900);
+    text-decoration: none;
+  }
+  .lang a:hover,
+  .lang-list a:hover { background: var(--color-petrol-050); }
+  .lang a[aria-current],
+  .lang-list a[aria-current] { font-weight: var(--font-weight-bold); }
+  .lang-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-4); }
+</style>

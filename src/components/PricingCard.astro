@@ -1,0 +1,55 @@
+---
+import Badge from './Badge.astro';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  overline: string;
+  title: string;
+  price: string;
+  unit: string;
+  badge: string;
+  features: string[];
+  cta: { label: string; href?: string; variant?: 'primary' | 'secondary'; icon?: boolean; attrs?: Record<string, string> };
+  selected?: boolean;
+}
+const { overline, title, price, unit, badge, features, cta, selected = false } = Astro.props;
+---
+<article class:list={['plan', selected && 'plan--selected']} data-plan-card>
+  <div class="head">
+    <p class="overline">{overline}</p>
+    <h3 class="t-h5">{title}</h3>
+    <p class="price"><span class="t-h3-price">{price}</span> <span class="t-body-xs t-muted">{unit}</span></p>
+    <Badge>{badge}</Badge>
+  </div>
+  <ul class="features t-body-xs" role="list">
+    {features.map((f) => <li><Icon name="check" size={16} />{f}</li>)}
+  </ul>
+  <div class="cta">
+    <Button href={cta.href} size="M" variant={cta.variant ?? 'primary'} icon={cta.icon ?? true} block {...cta.attrs}>{cta.label}</Button>
+  </div>
+</article>
+
+<style>
+  .plan {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: var(--spacing-24);
+    padding: var(--spacing-24);
+    background: var(--color-white);
+    border: var(--border-width-default) solid var(--color-gray-cool-200);
+    border-radius: var(--radius-16);
+  }
+  .plan--selected { border: 2px solid var(--color-petrol-700); padding: calc(var(--spacing-24) - 1px); }
+  .head { display: grid; gap: var(--spacing-8); padding-block-end: var(--spacing-24); border-block-end: 1px solid var(--color-gray-cool-200); }
+  .overline { color: var(--color-petrol-700); font-size: var(--font-size-body-xxs); line-height: var(--line-height-body-xxs); font-weight: var(--font-weight-bold); text-transform: uppercase; letter-spacing: 0.08em; }
+  .price { display: flex; align-items: baseline; gap: var(--spacing-8); }
+  .t-h3-price { color: var(--color-petrol-900); font-size: var(--font-size-h3); line-height: var(--line-height-h3); font-weight: var(--font-weight-bold); letter-spacing: var(--letter-spacing-h3); }
+  .features { display: grid; align-content: start; gap: 12px; margin: 0; padding: 0; }
+  .features li { display: flex; gap: var(--spacing-8); }
+  .features :global(.icon) { flex: none; margin-block-start: 2px; color: var(--color-green-700); }
+  @media (min-width: 768px) {
+    .plan { padding: var(--spacing-32); }
+    .plan--selected { padding: calc(var(--spacing-32) - 1px); }
+  }
+</style>

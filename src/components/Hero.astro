@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import hero from '../assets/images/hero-gespraech.jpg';
+import Badge from './Badge.astro';
+import Button from './Button.astro';
+import ChatMockup from './ChatMockup.astro';
+import { pathFor, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+import { links } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const { t } = useTranslations(locale);
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="text">
+    <div class="inner">
+      <Badge icon>{t('promo.badge')}</Badge>
+      <h1 id="hero-title" class="t-hero">{t('hero.headline')}</h1>
+      <p class="t-body-l">{t('hero.subline')}</p>
+      <div class="ctas">
+        <Button href={pathFor(locale, 'booking')} size="L" icon>{t('hero.ctaBook')}</Button>
+        <Button href={links.demo ?? pathFor(locale, 'contact')} size="L" variant="secondary-dark">{t('hero.ctaDemo')}</Button>
+      </div>
+    </div>
+  </div>
+  <div class="media">
+    <Image src={hero} alt={t('hero.imageAlt')} widths={[480, 768, 1080]} sizes="(min-width: 1024px) 50vw, 100vw" loading="eager" fetchpriority="high" />
+    <div class="chat-wrap"><ChatMockup locale={locale} /></div>
+  </div>
+</section>
+
+<style>
+  .hero { display: grid; background: var(--color-petrol-200); }
+  .text { padding-block: var(--spacing-40); padding-inline: var(--page-gutter); }
+  .inner { display: grid; gap: var(--spacing-24); justify-items: start; max-inline-size: 588px; }
+  .inner p { color: var(--color-gray-cool-700); }
+  .ctas { display: grid; gap: 12px; inline-size: 100%; }
+  .ctas :global(.btn) { inline-size: 100%; }
+  .media { position: relative; min-block-size: 320px; }
+  .media :global(img) { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .chat-wrap { position: absolute; inset-inline-end: var(--spacing-16); inset-block-end: var(--spacing-16); inline-size: min(248px, 70%); }
+  .chat-wrap :global(.chat) { zoom: 0.62; inline-size: 400px; }
+
+  @media (min-width: 768px) {
+    .text { padding-block: var(--spacing-64); }
+    .ctas { display: flex; flex-wrap: wrap; gap: var(--spacing-16); inline-size: auto; }
+    .ctas :global(.btn) { inline-size: auto; }
+    .media { min-block-size: 432px; }
+    .chat-wrap { inset-inline-end: var(--spacing-40); inset-block-end: var(--spacing-32); inline-size: 320px; }
+    .chat-wrap :global(.chat) { zoom: 0.8; }
+  }
+  @media (min-width: 1024px) {
+    .hero { grid-template-columns: 1fr 1fr; min-block-size: 709px; }
+    .text { display: flex; align-items: center; padding-inline-start: max(var(--page-gutter), (100vw - var(--grid-content-width)) / 2); padding-inline-end: var(--spacing-48); }
+    .media { min-block-size: auto; }
+    .chat-wrap { inset-inline-end: var(--spacing-24); inset-block-end: var(--spacing-24); inline-size: 400px; }
+    .chat-wrap :global(.chat) { zoom: 1; }
+  }
+</style>

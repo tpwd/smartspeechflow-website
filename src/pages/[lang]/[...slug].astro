@@ -1,0 +1,38 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import Home from '../../views/Home.astro';
+import Booking from '../../views/Booking.astro';
+import Thanks from '../../views/Thanks.astro';
+import Placeholder from '../../views/Placeholder.astro';
+import { locales, pages, slugs, type Locale, type PageKey } from '../../i18n/config';
+import { t } from '../../i18n';
+
+export const getStaticPaths = (() =>
+  locales.flatMap((locale) =>
+    pages.map((page) => ({
+      params: { lang: locale, slug: slugs[locale][page] || undefined },
+      props: { locale, page },
+    })),
+  )) satisfies GetStaticPaths;
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+}
+const { locale, page } = Astro.props;
+
+const titles: Partial<Record<PageKey, string>> = {
+  home: t(locale, 'meta.homeTitle'),
+  booking: `${t(locale, 'booking.metaTitle')} – Smart Speech Flow`,
+  thanks: `${t(locale, 'thanks.metaTitle')} – Smart Speech Flow`,
+};
+const pageName = page === 'home' || page === 'booking' || page === 'thanks' ? '' : t(locale, `pageNames.${page}`);
+const title = titles[page] ?? `${pageName} – Smart Speech Flow`;
+---
+<Base locale={locale} page={page} title={title}>
+  {page === 'home' && <Home locale={locale} />}
+  {page === 'booking' && <Booking locale={locale} />}
+  {page === 'thanks' && <Thanks locale={locale} />}
+  {pageName && <Placeholder locale={locale} title={pageName} />}
+</Base>

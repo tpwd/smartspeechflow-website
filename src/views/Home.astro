@@ -1,0 +1,101 @@
+---
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import TileMedia from '../components/TileMedia.astro';
+import BenefitCard from '../components/BenefitCard.astro';
+import Testimonial from '../components/Testimonial.astro';
+import PricingCard from '../components/PricingCard.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import tileDialog from '../assets/images/tile-dialog.jpg';
+import tileDevices from '../assets/images/tile-geraete.jpg';
+import tileLanguages from '../assets/images/tile-sprachen.jpg';
+import { pathFor, localeTags, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+import { formatEuro, links, plans } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const { t, tv } = useTranslations(locale);
+
+type Item = { title: string; text: string; alt?: string };
+const how = tv<Item[]>('how.items');
+const tiles = [
+  { image: tileDialog, size: 'L' as const },
+  { image: tileDevices, size: 'S' as const },
+  { image: tileLanguages, size: 'M' as const },
+];
+const why = tv<Item[]>('why.items');
+const quotes = tv<{ quote: string; name: string; org: string }[]>('testimonials.items');
+const contact = pathFor(locale, 'contact');
+---
+<Hero locale={locale} />
+<TrustBar locale={locale} />
+
+<section class="section" aria-labelledby="how-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="how-title" class="t-section">{t('how.title')}</h2>
+    {how.map((item, i) => (
+      <TileMedia image={tiles[i].image} size={tiles[i].size} alt={item.alt ?? ''} title={item.title} text={item.text} />
+    ))}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="why-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="why-title" class="t-section">{t('why.title')}</h2>
+    <div class="grid-3">
+      {why.map((item) => <BenefitCard title={item.title} text={item.text} />)}
+      <BenefitCard title={t('why.modes.title')} list={tv<string[]>('why.modes.items')} />
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="testimonials-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="testimonials-title" class="t-section">{t('testimonials.title')}</h2>
+    <div class="grid-2">
+      {quotes.map((q) => <Testimonial quote={q.quote} name={q.name} org={q.org} coatLabel={t('testimonials.coatOfArms')} />)}
+    </div>
+  </div>
+</section>
+
+<section id="preise" class="section section--tint" aria-labelledby="pricing-title">
+  <div class="container stack" style="--stack-gap: var(--spacing-40)">
+    <h2 id="pricing-title" class="t-section">{t('pricing.title')}</h2>
+    <div class="grid-3 grid-3--plans">
+      {plans.map((plan) => (
+        <PricingCard
+          overline={t(`pricing.plans.${plan.id}.overline`)}
+          title={t(`pricing.plans.${plan.id}.title`)}
+          price={plan.monthlyNet === null ? t('pricing.pricePlaceholder') : formatEuro(plan.monthlyNet, localeTags[locale])}
+          unit={t('pricing.perMonth')}
+          badge={plan.promo ? t('promo.badge') : t(`pricing.plans.${plan.id}.badge`)}
+          features={tv<string[]>(`pricing.plans.${plan.id}.features`)}
+          cta={{ label: t('pricing.book'), href: `${pathFor(locale, 'booking')}?option=${plan.id}` }}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<CtaBanner
+  title={t('cta.title')}
+  text={t('cta.text')}
+  primary={{ label: t('cta.demo'), href: links.demo ?? contact }}
+  secondary={{ label: t('cta.call'), href: links.call ?? contact }}
+/>
+
+<style>
+  .grid-3, .grid-2 { display: grid; gap: var(--spacing-16); }
+  @media (min-width: 768px) {
+    .grid-3, .grid-2 { gap: var(--spacing-24); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+  }
+</style>

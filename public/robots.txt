@@ -1,0 +1,7 @@
+# Grundgerüst: Crawler gesperrt, solange die Seite nicht live ist.
+# Beim Go-live ersetzen durch:
+#   User-agent: *
+#   Allow: /
+#   Sitemap: https://smartspeechflow.de/sitemap.xml
+User-agent: *
+Disallow: /

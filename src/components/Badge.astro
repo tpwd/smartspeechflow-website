@@ -1,0 +1,32 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  size?: 'S' | 'M' | 'L';
+  /** „Medium“ (weiß auf Petrol 500) ist bewusst nicht enthalten: Kontrast 4,3:1 reicht für kleine Schrift nicht (WCAG AA). */
+  variant?: 'light' | 'dark';
+  icon?: boolean;
+}
+const { size = 'M', variant = 'light', icon = false } = Astro.props;
+---
+<span class:list={['badge', `badge--${size.toLowerCase()}`, `badge--${variant}`]}>
+  <slot />{icon && <Icon name="bell" size={16} />}
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    inline-size: fit-content;
+    border: var(--border-width-default) solid transparent;
+    border-radius: var(--radius-8);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+  }
+  .badge--s { padding: 2px var(--spacing-4); font-size: var(--font-size-body-xxs); line-height: var(--line-height-body-xxs); }
+  .badge--m { padding: var(--spacing-4) var(--spacing-8); gap: var(--spacing-8); font-size: var(--font-size-body-xs); line-height: var(--line-height-body-xs); }
+  .badge--l { padding: 6px var(--spacing-16); gap: var(--spacing-8); font-size: var(--font-size-body-s); line-height: var(--line-height-body-s); }
+  .badge--light { background: var(--color-petrol-100); border-color: var(--color-petrol-300); color: var(--color-petrol-900); }
+  .badge--dark { background: var(--color-petrol-900); color: var(--color-white); }
+</style>

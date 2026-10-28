@@ -1,0 +1,104 @@
+/*
+ * Design-Tokens – übernommen aus den Figma-Variablen der Datei „Smart Speech Flow-LP“
+ * (Sammlungen Color, Spacing, Shape, Grid, Typography HiFi). Namen entsprechen Figma.
+ */
+:root {
+  /* Color – Petrol (Logofarben: 500, 700, 900) */
+  --color-petrol-050: #f0f7f9;
+  --color-petrol-100: #ddedf3;
+  --color-petrol-200: #badce8;
+  --color-petrol-300: #83c1d8;
+  --color-petrol-400: #48a8cb;
+  --color-petrol-500: #1e83a6;
+  --color-petrol-600: #1e7393;
+  --color-petrol-700: #1d6480;
+  --color-petrol-800: #134356;
+  --color-petrol-900: #0a2833;
+
+  /* Color – Green */
+  --color-green-050: #f1f9f7;
+  --color-green-100: #def2ee;
+  --color-green-200: #bde5dd;
+  --color-green-300: #8fd6c8;
+  --color-green-400: #53c6af;
+  --color-green-500: #27a58c;
+  --color-green-600: #1a7f6b;
+  --color-green-700: #146756;
+  --color-green-800: #0e4e41;
+  --color-green-900: #09352c;
+
+  /* Color – Gray cool */
+  --color-gray-cool-050: #f5f8f9;
+  --color-gray-cool-100: #e9edf0;
+  --color-gray-cool-200: #d4dce0;
+  --color-gray-cool-300: #b8c4ca;
+  --color-gray-cool-400: #97a5ad;
+  --color-gray-cool-500: #758892;
+  --color-gray-cool-600: #566972;
+  --color-gray-cool-700: #3d4f58;
+  --color-gray-cool-800: #27353c;
+  --color-gray-cool-900: #121b20;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-status-error: #c62828;
+  --color-status-success: #2e7d32;
+  --color-status-warning: #b45309;
+  --color-status-info: #1565c0;
+
+  /* Spacing */
+  --spacing-0: 0;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-56: 56px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+  --spacing-120: 120px;
+  --spacing-160: 160px;
+
+  /* Shape */
+  --radius-8: 8px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+  --radius-32: 32px;
+  --radius-pill: 999px;
+  --border-width-default: 1px;
+
+  /* Grid (Desktop 1440: 12 Spalten, Gutter 24, Rand 120, Inhalt max. 1200) */
+  --grid-content-width: 1200px;
+  --grid-gutter: 24px;
+  --page-gutter: 24px; /* Mobil 24, ab Tablet 40 (abgeleitet); Desktop-Rand 120 ergibt sich aus max. 1200 px Inhalt */
+
+  /* Typography HiFi – Hanken Grotesk; Noto für Arabisch und Devanagari */
+  --font-family-base: 'Hanken Grotesk Variable', 'Hanken Grotesk', 'Noto Sans Arabic', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-size-h1: 64px;  --line-height-h1: 72px;  --letter-spacing-h1: -0.96px;
+  --font-size-h2: 48px;  --line-height-h2: 56px;  --letter-spacing-h2: -0.48px;
+  --font-size-h3: 40px;  --line-height-h3: 48px;  --letter-spacing-h3: -0.4px;
+  --font-size-h4: 32px;  --line-height-h4: 40px;  --letter-spacing-h4: -0.16px;
+  --font-size-h5: 24px;  --line-height-h5: 32px;
+  --font-size-h6: 20px;  --line-height-h6: 28px;
+  --font-size-body-xl: 24px;  --line-height-body-xl: 36px;
+  --font-size-body-l: 20px;   --line-height-body-l: 30px;
+  --font-size-body-m: 18px;   --line-height-body-m: 28px;
+  --font-size-body-s: 16px;   --line-height-body-s: 24px;
+  --font-size-body-xs: 14px;  --line-height-body-xs: 20px;
+  --font-size-body-xxs: 12px; --line-height-body-xxs: 16px; --letter-spacing-body-xxs: 0.06px;
+  --font-size-button-l: 18px; --line-height-button-l: 24px;
+  --font-size-button-m: 16px; --line-height-button-m: 24px;
+  --font-size-button-s: 14px; --line-height-button-s: 20px;
+}
+
+@media (min-width: 768px) {
+  :root { --page-gutter: 40px; }
+}

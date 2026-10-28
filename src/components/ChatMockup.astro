@@ -1,0 +1,64 @@
+---
+// Gesprächsansicht als HTML statt Bild – dadurch übersetzbar (im Figma-Entwurf: Bild „hero-screen-dialog“).
+import Icon from './Icon.astro';
+import type { Locale } from '../i18n/config';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { t } = useTranslations(Astro.props.locale);
+---
+<figure class="chat" aria-label={t('chat.label')}>
+  <div class="titlebar" aria-hidden="true"><span></span><span></span><span></span><b>{t('chat.app')}</b></div>
+  <div class="body">
+    <div class="msg">
+      <span class="avatar" aria-hidden="true">A</span>
+      <div><p class="bubble" lang="de" dir="ltr">{t('chat.question')}</p><small>{t('chat.questionLang')}</small></div>
+    </div>
+    <div class="divider"><span><Icon name="globe" size={16} />{t('chat.divider')}</span></div>
+    <div class="msg msg--end">
+      <div><p class="bubble bubble--green" lang="en" dir="ltr">{t('chat.answer')}</p><small>{t('chat.answerLang')}</small></div>
+      <span class="avatar avatar--green" aria-hidden="true">B</span>
+    </div>
+    <div class="msg">
+      <span class="avatar" aria-hidden="true"><Icon name="arrow-right" size={16} /></span>
+      <div><p class="bubble bubble--outline" lang="de" dir="ltr"><em>{t('chat.translated')}</em></p><small>{t('chat.translatedNote')}</small></div>
+    </div>
+  </div>
+  <figcaption class="statusbar"><span class="dot" aria-hidden="true"></span>{t('chat.status')}<span class="mode">{t('chat.mode')}</span></figcaption>
+</figure>
+
+<style>
+  .chat {
+    margin: 0;
+    inline-size: min(400px, 100%);
+    background: var(--color-white);
+    border-radius: var(--radius-16);
+    box-shadow: 0 8px 24px rgb(10 40 51 / 0.16);
+    overflow: hidden;
+    font-size: var(--font-size-body-xxs);
+    line-height: var(--line-height-body-xxs);
+    color: var(--color-petrol-900);
+  }
+  .titlebar { display: flex; align-items: center; gap: 6px; padding: 10px var(--spacing-16); border-block-end: 1px solid var(--color-gray-cool-100); color: var(--color-gray-cool-600); }
+  .titlebar span { inline-size: 8px; block-size: 8px; border-radius: 50%; background: #f87171; }
+  .titlebar span:nth-child(2) { background: #fbbf24; }
+  .titlebar span:nth-child(3) { background: #4ade80; }
+  .titlebar b { margin-inline-start: var(--spacing-8); font-weight: var(--font-weight-regular); }
+  .body { display: grid; gap: var(--spacing-16); padding: var(--spacing-16); }
+  .msg { display: flex; gap: var(--spacing-8); align-items: flex-start; }
+  .msg--end { justify-content: flex-end; text-align: end; }
+  .avatar { flex: none; display: grid; place-items: center; inline-size: 24px; block-size: 24px; border-radius: 50%; background: var(--color-petrol-100); font-weight: var(--font-weight-bold); }
+  .avatar--green { background: var(--color-green-100); }
+  .bubble { display: inline-block; padding: var(--spacing-8) 12px; border-radius: var(--radius-8); background: var(--color-petrol-050); font-size: var(--font-size-body-xs); line-height: var(--line-height-body-xs); }
+  .bubble--green { background: var(--color-green-050); }
+  .bubble--outline { background: var(--color-white); border: 1px solid var(--color-gray-cool-200); }
+  small { display: block; margin-block-start: 4px; color: var(--color-gray-cool-600); font-size: 10px; }
+  .divider { display: flex; align-items: center; gap: var(--spacing-8); }
+  .divider::before, .divider::after { content: ''; flex: 1; block-size: 1px; background: var(--color-green-200); }
+  .divider span { display: inline-flex; align-items: center; gap: 4px; padding: 2px var(--spacing-8); border-radius: var(--radius-8); background: var(--color-green-050); font-weight: var(--font-weight-bold); text-transform: uppercase; letter-spacing: 0.04em; font-size: 10px; }
+  .statusbar { display: flex; align-items: center; gap: 6px; padding: 10px var(--spacing-16); border-block-start: 1px solid var(--color-gray-cool-100); color: var(--color-gray-cool-600); }
+  .dot { inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--color-green-500); }
+  .mode { margin-inline-start: auto; }
+</style>

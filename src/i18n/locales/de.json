@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "siteName": "Smart Speech Flow",
+    "homeTitle": "Smart Speech Flow – Dolmetschen im Bürgerkontakt",
+    "description": "Smart Speech Flow dolmetscht Gespräche im Bürgerkontakt in Echtzeit – in 20 Sprachen, rechtssicher und datenschutzkonform. Open Source."
+  },
+  "nav": {
+    "skip": "Zum Inhalt springen",
+    "main": "Hauptnavigation",
+    "home": "Startseite",
+    "product": "Produkt",
+    "useCases": "Einsatzfelder",
+    "project": "Projekt",
+    "openSource": "Open Source",
+    "offer": "Angebot",
+    "language": "Sprache wählen",
+    "book": "Jetzt buchen",
+    "menuOpen": "Menü öffnen",
+    "menuClose": "Menü schließen"
+  },
+  "promo": {
+    "badge": "Bis 31.12.2026: 2 Monate gratis",
+    "short": "2 Monate gratis"
+  },
+  "hero": {
+    "headline": "Dolmetschen im Bürgerkontakt",
+    "subline": "Kein Gespräch scheitert mehr an der Sprache. Smart Speech Flow dolmetscht in 20 Sprachen, rechtssicher und datenschutzkonform.",
+    "ctaBook": "Jetzt buchen",
+    "ctaDemo": "Live-Demo buchen",
+    "imageAlt": "Beratungsgespräch zwischen einer Mitarbeiterin und einem Bürger"
+  },
+  "chat": {
+    "app": "Smart Speech Flow",
+    "question": "Wie kann ich Ihnen heute helfen?",
+    "questionLang": "Deutsch",
+    "divider": "Echtzeit-Übersetzung",
+    "answer": "I need help with my registration.",
+    "answerLang": "English",
+    "translated": "Ich brauche Hilfe bei meiner Anmeldung.",
+    "translatedNote": "Automatisch übersetzt",
+    "status": "Verbindung aktiv",
+    "mode": "Audio & Text",
+    "label": "Beispiel eines übersetzten Gesprächs"
+  },
+  "trust": {
+    "label": "Bekannt aus:"
+  },
+  "how": {
+    "title": "So funktioniert’s",
+    "items": [
+      {
+        "title": "Echter Dolmetscher-Dialog statt Chatbot",
+        "text": "Beide Seiten sprechen in ihrer Sprache, jede Äußerung erscheint übersetzt als Text und Audio",
+        "alt": "Hand bedient ein Tablet mit der Gesprächsansicht"
+      },
+      {
+        "title": "Läuft im Browser auf vorhandenen Geräten",
+        "text": "Keine spezielle Hardware: zwei Geräte der Kommune oder das eigene Handy des Gasts",
+        "alt": "Laptop, Tablet und Smartphone auf einem Tisch"
+      },
+      {
+        "title": "20 Sprachen",
+        "text": "Die 20 häufigsten Fremdsprachen in Deutschland stehen zur Verfügung",
+        "alt": "Mann zeigt ein Smartphone mit der Sprachauswahl"
+      }
+    ]
+  },
+  "why": {
+    "title": "Warum Smart Speech Flow",
+    "items": [
+      { "title": "Rechtskonform", "text": "Einziges deutsches Open-Source-Tool für rechtskonforme Sprachübersetzung" },
+      { "title": "Rechtlich geprüftes Konzept", "text": "Betrieb und Gesprächsmodi wurden mit einer Anwaltskanzlei für den Einsatz in Behörden abgestimmt" },
+      { "title": "Datenschutz", "text": "Open-Source-Modelle laufen auf Servern in Deutschland" },
+      { "title": "Software gehört der Kommune", "text": "Open Source unter MIT-Lizenz: frei nutzbar und weiterentwickelbar, ohne Bindung an einen Anbieter" },
+      { "title": "Rechnet sich", "text": "Ab ca. 12 Dolmetscherstunden im Monat" }
+    ],
+    "modes": {
+      "title": "Drei Gesprächsmodi",
+      "items": ["Ohne Aufzeichnung", "Aufzeichnungsprotokoll, optional zur Prüfung durch Dolmetscher", "Vollständige Aufzeichnung"]
+    }
+  },
+  "testimonials": {
+    "title": "Stimmen aus der Praxis",
+    "coatOfArms": "Wappen",
+    "items": [
+      {
+        "quote": "„Mit Smart Speech Flow führen wir Gespräche im Bürgerservice sofort, ohne auf einen Dolmetschertermin zu warten. Das entlastet unser Team spürbar.“",
+        "name": "[Name], [Funktion]",
+        "org": "Stadt Kassel, gemeinsam mit SVS entwickelt"
+      },
+      {
+        "quote": "„Die Einführung war in wenigen Tagen erledigt. Überzeugt hat uns vor allem, dass die Daten auf unserem Server bleiben.“",
+        "name": "[Name], [Funktion]",
+        "org": "Landkreis Havelland"
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Preise und Hosting",
+    "perMonth": "/Monat netto",
+    "book": "Jetzt buchen",
+    "select": "Auswählen",
+    "selected": "Ausgewählt",
+    "pricePlaceholder": "xy €",
+    "plans": {
+      "shared": {
+        "overline": "Einstieg",
+        "title": "Geteilter Server",
+        "features": ["Im Browser auf vorhandenen Geräten", "Drei Gesprächsmodi", "20 Sprachen", "Server bei SVS, geteilt mit anderen Kommunen", "Bis zu 3 Gespräche gleichzeitig"]
+      },
+      "dedicated": {
+        "overline": "Upgrade",
+        "title": "Eigener Server",
+        "features": ["Im Browser auf vorhandenen Geräten", "Drei Gesprächsmodi", "20 Sprachen", "Eigener Server bei SVS, nur für Ihre Kommune", "Bis zu 5 Gespräche gleichzeitig"]
+      },
+      "selfhosted": {
+        "overline": "Selbstbetrieb",
+        "title": "Betrieb in der Kommune",
+        "badge": "Open Source, ohne Lizenzkosten",
+        "features": ["Im Browser auf vorhandenen Geräten", "Drei Gesprächsmodi", "20 Sprachen", "Betrieb auf dem eigenen Server der Kommune", "Volle Kontrolle über Infrastruktur und Daten"]
+      }
+    }
+  },
+  "cta": {
+    "title": "Noch Fragen?",
+    "text": "Sie möchten Smart Speech Flow erst kennenlernen? In unserer wöchentlichen, kostenlosen Live-Demo zeigen wir die Anwendung und beantworten Ihre Fragen. Für konkrete Anliegen vereinbaren Sie einen individuellen Call.",
+    "demo": "Live-Demo buchen",
+    "call": "Individueller Call"
+  },
+  "footer": {
+    "claim": "Open-Source-Lösung für mehrsprachige Echtzeitkommunikation im kommunalen und öffentlichen Kontext.",
+    "navigation": "Navigation",
+    "contact": "Kontakt",
+    "resources": "Ressourcen",
+    "info": "Informationen",
+    "promo": "Aktion: 2 Monate gratis",
+    "contactUs": "Kontakt aufnehmen",
+    "demo": "Live-Demo buchen",
+    "call": "Individueller Call",
+    "github": "GitHub Repository",
+    "docs": "Dokumentation",
+    "projectBy": "Projekt von:",
+    "implementation": "Umsetzung:",
+    "copyright": "© 2026 Smart Speech Flow. Open Source unter MIT License.",
+    "legal": "Rechtliches"
+  },
+  "pageNames": {
+    "product": "Produkt",
+    "useCases": "Einsatzfelder",
+    "project": "Projekt",
+    "openSource": "Open Source",
+    "contact": "Kontakt",
+    "legalNotice": "Impressum",
+    "privacy": "Datenschutz",
+    "terms": "AGB"
+  },
+  "placeholder": {
+    "text": "Diese Seite ist im Grundgerüst noch leer. Der Inhalt wird aus der bestehenden Seite übernommen.",
+    "back": "Zur Startseite"
+  },
+  "booking": {
+    "metaTitle": "Smart Speech Flow buchen",
+    "breadcrumb": "Brotkrumen-Navigation",
+    "breadcrumbCurrent": "Buchen",
+    "title": "Smart Speech Flow buchen",
+    "intro": "In drei Schritten zur verbindlichen Buchung. Nach erfolgreicher Buchung ist Smart Speech Flow in bis zu 2 Tagen startklar.",
+    "steps": ["Option", "Laufzeit", "Ihre Angaben"],
+    "step1": "1. Option wählen",
+    "step2": "2. Laufzeit wählen",
+    "step3": "3. Ihre Angaben",
+    "terms": {
+      "prepaid": { "label": "12 Monate im Voraus", "text": "Abrechnung für 12 Monate, bei Buchung bis 31.12.2026 mit Aktion" },
+      "monthly": { "label": "Monatlich", "text": "Monatliche Abrechnung" }
+    },
+    "fields": {
+      "org": "Kommune / Organisation",
+      "orgPh": "z. B. Stadt Musterstadt",
+      "person": "Ansprechperson",
+      "personPh": "Vor- und Nachname",
+      "role": "Funktion",
+      "rolePh": "z. B. Amtsleitung",
+      "email": "E-Mail",
+      "emailPh": "name@kommune.de",
+      "phone": "Telefon",
+      "phonePh": "+49 …",
+      "billing": "Rechnungsadresse",
+      "street": "Straße und Hausnummer",
+      "zip": "PLZ",
+      "city": "Ort",
+      "start": "Wunschtermin für den Start (optional)",
+      "message": "Nachricht / Fragen"
+    },
+    "consentPrivacy": "Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zu.",
+    "consentTerms": "Ich akzeptiere die Vertragsbedingungen / AGB.",
+    "required": "Pflichtfeld",
+    "summary": {
+      "title": "Zusammenfassung",
+      "option": "Option",
+      "term": "Laufzeit",
+      "price": "Preis",
+      "promo": "Aktion",
+      "noPromo": "–",
+      "total12": "Gesamt für 12 Monate",
+      "totalMonthly": "Monatlicher Betrag",
+      "net": "netto",
+      "onRequest": "auf Anfrage"
+    },
+    "submit": "Verbindlich buchen",
+    "note": "Nach der Buchung erhalten Sie eine Bestätigung per E-Mail. Startklar in bis zu 2 Tagen.",
+    "demoNotice": "Demo-Modus: Es ist kein Buchungs-Backend angebunden. Beim Absenden werden keine Daten übertragen, Sie werden nur zur Danke-Seite weitergeleitet."
+  },
+  "thanks": {
+    "metaTitle": "Vielen Dank für Ihre Buchung",
+    "title1": "Vielen Dank!",
+    "title2": "Ihre Buchung ist bei uns eingegangen.",
+    "text": "Wir haben Ihnen eine Bestätigung an [E-Mail-Adresse] gesendet. Darin finden Sie alle Details zu Ihrer Buchung.",
+    "number": "Buchungsnummer",
+    "numberPlaceholder": "[Nummer]",
+    "nextTitle": "Was passiert als Nächstes?",
+    "steps": [
+      { "title": "E-Mail-Bestätigung", "text": "Sie erhalten die Buchungsbestätigung mit allen Details an die angegebene Adresse." },
+      { "title": "Bereitstellung", "text": "Wir melden uns mit den nächsten Schritten zur Einrichtung, abgestimmt auf die gebuchte Option." },
+      { "title": "Zugang und Organisation", "text": "Per E-Mail erhalten Sie Ihren Zugang. Sie legen Ihre Organisation an und nehmen die Einstellungen vor, etwa eigene Bereiche für einzelne Ämter." },
+      { "title": "Startklar", "text": "In bis zu 2 Tagen nach der Buchung können Sie die ersten Gespräche führen." }
+    ],
+    "questionsTitle": "Fragen zu Ihrer Buchung?",
+    "questionsText": "Wir helfen Ihnen gern weiter – bei Fragen zu Einrichtung, Zugang oder Abrechnung erreichen Sie uns direkt.",
+    "home": "Zur Startseite",
+    "contact": "Kontakt aufnehmen"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "text": "Die aufgerufene Seite gibt es nicht (mehr).",
+    "back": "Zur Startseite"
+  }
+}
