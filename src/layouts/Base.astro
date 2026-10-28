@@ -64,6 +64,14 @@ const jsonLd = page ? structuredData(contentLocale, page, title, description) : 
     <meta property="og:locale" content={localeTags[contentLocale].replace('-', '_')} />
     <meta name="twitter:card" content="summary_large_image" />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <script is:inline>
+      // Animationen nur mit JavaScript (siehe styles/motion.css). Nach einem Seitenwechsel mit
+      // Überblendung entfällt die Lade-Animation, sonst würde die Seite doppelt einblenden.
+      document.documentElement.classList.add('js');
+      window.addEventListener('pagereveal', function (e) {
+        if (e.viewTransition) document.documentElement.classList.add('vt-nav');
+      });
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#inhalt">{t(locale, 'nav.skip')}</a>
@@ -72,6 +80,42 @@ const jsonLd = page ? structuredData(contentLocale, page, title, description) : 
       <slot />
     </main>
     <Footer locale={locale} />
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // Was beim Scrollen einblendet: Abschnitts-Inhalte und – nacheinander – Karten in Rastern.
+        var blocks = document.querySelectorAll('main > section.section > .container > :not(.grid-2, .grid-3, .grid-4)');
+        var groups = document.querySelectorAll('main :is(.grid-2, .grid-3, .grid-4) > *, main .trust li');
+        var items = [];
+        blocks.forEach(function (el) { if (!el.matches('.grid-2, .grid-3, .grid-4')) items.push(el); });
+        groups.forEach(function (el) {
+          el.style.setProperty('--i', String(Math.min(Array.prototype.indexOf.call(el.parentElement.children, el), 5)));
+          items.push(el);
+        });
+        items.forEach(function (el) {
+          el.classList.add('reveal');
+          // Schon sichtbar: kommt mit dem Seitenaufbau, ohne eigene Verzögerung
+          if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('reveal--instant', 'is-visible');
+        });
+        // Bilder einblenden, sobald sie geladen sind
+        document.querySelectorAll('main img').forEach(function (img) {
+          var done = function () { img.classList.add('is-loaded'); };
+          if (img.complete) done(); else { img.addEventListener('load', done, { once: true }); img.addEventListener('error', done, { once: true }); }
+        });
+        requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.add('is-loaded'); }); });
+        if (!reduce && 'IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+            });
+          }, { rootMargin: '0px 0px -8% 0px' });
+          items.forEach(function (el) { if (!el.classList.contains('is-visible')) io.observe(el); });
+        } else {
+          items.forEach(function (el) { el.classList.add('is-visible'); });
+        }
+      })();
+    </script>
   </body>
 </html>
 

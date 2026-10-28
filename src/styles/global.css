@@ -1,4 +1,5 @@
 @import './tokens.css';
+@import './motion.css';
 
 /* Basis. Abstände durchgehend mit logischen Eigenschaften (inline/block),
    damit Arabisch (dir="rtl") ohne Sonderregeln gespiegelt wird. */
