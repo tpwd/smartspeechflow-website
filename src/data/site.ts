@@ -95,5 +95,5 @@ export function callHref(contactPath: string): string {
 }
 
 export function formatEuro(value: number, locale: string): string {
-  return new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
+  return new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0, numberingSystem: 'latn' }).format(value);
 }

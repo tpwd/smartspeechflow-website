@@ -123,7 +123,7 @@ const config = {
   const config = JSON.parse(document.getElementById('savings-config')!.textContent!) as Config;
   const form = document.querySelector<HTMLElement>('[data-savings]');
   if (form) {
-    const eur = (v: number) => new Intl.NumberFormat(config.locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
+    const eur = (v: number) => new Intl.NumberFormat(config.locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0, numberingSystem: 'latn' }).format(v);
     const out = (key: string) => form.querySelector<HTMLElement>(`[data-out="${key}"]`);
     const field = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:not([type="radio"]), input[name="${name}"]:checked`)!;
     const num = (name: string, fallback: number) => {

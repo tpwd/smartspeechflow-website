@@ -143,7 +143,7 @@ const field = (key: string) => t(`booking.fields.${key}`);
   };
   const config = JSON.parse(document.getElementById('booking-config')!.textContent!) as Config;
   const form = document.querySelector<HTMLFormElement>('form.booking')!;
-  const eur = (v: number) => new Intl.NumberFormat(config.locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
+  const eur = (v: number) => new Intl.NumberFormat(config.locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0, numberingSystem: 'latn' }).format(v);
   const set = (key: string, value: string) => { const el = form.querySelector(`[data-sum="${key}"]`); if (el) el.textContent = value; };
 
   // Vorauswahl über ?option=… (Links „Jetzt buchen“ auf der Startseite)

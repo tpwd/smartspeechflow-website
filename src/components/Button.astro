@@ -33,7 +33,10 @@ const classes = ['btn', `btn--${size.toLowerCase()}`, `btn--${variant}`, block &
     font-weight: var(--font-weight-semibold);
     text-decoration: none;
     cursor: pointer;
-    white-space: nowrap;
+    max-inline-size: 100%;
+    text-align: center;
+    /* Umbruch nur, wenn der Platz nicht reicht (lange Übersetzungen auf schmalen Bildschirmen) */
+    text-wrap: balance;
     transition: background-color 0.15s, color 0.15s, border-color 0.15s;
   }
   .btn--l { padding: var(--spacing-16) var(--spacing-40); font-size: var(--font-size-button-l); line-height: var(--line-height-button-l); }

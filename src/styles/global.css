@@ -170,6 +170,11 @@ textarea {
 :lang(hi) .t-hero, :lang(hi) .t-section, :lang(hi) .t-h4 {
   letter-spacing: 0;
 }
+/* Automatische Silbentrennung trennt Devanagari und Arabisch falsch – dort aus */
+:lang(ar) :is(.t-hero, .t-section, .t-h4, .t-h5, .t-h6),
+:lang(hi) :is(.t-hero, .t-section, .t-h4, .t-h5, .t-h6) {
+  hyphens: manual;
+}
 :lang(ar) body { font-family: 'Noto Sans Arabic', var(--font-family-base); }
 :lang(hi) body { font-family: 'Hanken Grotesk Variable', 'Noto Sans Devanagari', system-ui, sans-serif; }
 

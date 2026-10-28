@@ -1,1 +1,751 @@
-{}
+{
+  "meta": {
+    "siteName": "Smart Speech Flow",
+    "description": "Smart Speech Flow interprète en temps réel les échanges entre l’administration et les usagers – en 20 langues, en toute sécurité juridique et dans le respect de la protection des données. Open source."
+  },
+  "nav": {
+    "skip": "Aller au contenu",
+    "main": "Navigation principale",
+    "home": "Accueil",
+    "product": "Produit",
+    "useCases": "Domaines d’utilisation",
+    "project": "Projet",
+    "openSource": "Open Source",
+    "offer": "Offre",
+    "language": "Choisir la langue",
+    "book": "Réserver maintenant",
+    "menuOpen": "Ouvrir le menu",
+    "menuClose": "Fermer le menu",
+    "mobile": "Menu"
+  },
+  "promo": {
+    "badge": "Jusqu’au 31/12/2026 : 2 mois offerts",
+    "short": "2 mois offerts"
+  },
+  "hero": {
+    "headline": "L’interprétation au service des usagers",
+    "subline": "Plus aucun échange n’échoue à cause de la langue. Smart Speech Flow interprète en 20 langues, en toute sécurité juridique et dans le respect de la protection des données.",
+    "ctaBook": "Réserver maintenant",
+    "ctaDemo": "Réserver une démo en direct",
+    "imageAlt": "Entretien de conseil entre une agente et un citoyen",
+    "ctaSavings": "Calculer vos économies"
+  },
+  "chat": {
+    "app": "Smart Speech Flow",
+    "question": "Wie kann ich Ihnen heute helfen?",
+    "questionLang": "Allemand",
+    "divider": "Traduction en temps réel",
+    "answer": "J’ai besoin d’aide pour mon inscription.",
+    "answerLang": "Français",
+    "translated": "Ich brauche Hilfe bei meiner Anmeldung.",
+    "translatedNote": "Traduit automatiquement",
+    "status": "Connexion active",
+    "mode": "Audio et texte",
+    "label": "Exemple d’une conversation traduite"
+  },
+  "trust": {
+    "label": "Ils parlent de nous :"
+  },
+  "how": {
+    "title": "Comment ça marche",
+    "items": [
+      {
+        "title": "Un vrai dialogue interprété, pas un chatbot",
+        "text": "Chacun parle dans sa langue, chaque propos s’affiche traduit sous forme de texte et d’audio",
+        "alt": "Main utilisant une tablette avec la vue de la conversation"
+      },
+      {
+        "title": "Fonctionne dans le navigateur, sur les appareils existants",
+        "text": "Aucun matériel spécifique : deux appareils de la commune ou le téléphone de l’usager",
+        "alt": "Ordinateur portable, tablette et smartphone sur une table"
+      },
+      {
+        "title": "20 langues",
+        "text": "Les 20 langues étrangères les plus parlées en Allemagne sont disponibles",
+        "alt": "Homme montrant un smartphone avec le choix de la langue"
+      }
+    ]
+  },
+  "why": {
+    "title": "Pourquoi Smart Speech Flow",
+    "items": [
+      {
+        "title": "Conforme au droit",
+        "text": "Le seul outil open source allemand de traduction vocale conforme au droit"
+      },
+      {
+        "title": "Un concept validé juridiquement",
+        "text": "L’exploitation et les modes de conversation ont été définis avec un cabinet d’avocats pour un usage dans les administrations – y compris pour les entretiens sensibles"
+      },
+      {
+        "title": "Protection des données",
+        "text": "Des modèles open source exploités localement, sur un serveur réservé à votre commune – ou mutualisé, tout aussi conforme à la protection des données"
+      },
+      {
+        "title": "Le logiciel appartient à la commune",
+        "text": "Open source sous licence MIT : libre d’utilisation et de développement, sans dépendance à un fournisseur"
+      },
+      {
+        "title": "Rentable",
+        "text": "Avec le serveur mutualisé, dès env. {hours} heures d’interprétariat par mois (à {rate} € de l’heure)"
+      }
+    ],
+    "modes": {
+      "title": "Trois modes de conversation",
+      "items": [
+        "Sans enregistrement : aucune donnée n’est conservée",
+        "Mode procès-verbal : les passages juridiquement pertinents de l’entretien sont enregistrés de manière chiffrée et peuvent être vérifiés par une ou un interprète mandaté",
+        "Mode test : enregistrement complet, réservé aux tests"
+      ]
+    }
+  },
+  "testimonials": {
+    "title": "Témoignages du terrain",
+    "coatOfArms": "Blason",
+    "items": [
+      {
+        "quote": "« Avec Smart Speech Flow, nous menons nos entretiens au service aux citoyens immédiatement, sans attendre un rendez-vous avec un interprète. Notre équipe s’en trouve nettement soulagée. »",
+        "name": "[Nom], [Fonction]",
+        "org": "Ville de Kassel, développé conjointement avec SVS"
+      },
+      {
+        "quote": "« La mise en place a été bouclée en quelques jours. Ce qui nous a surtout convaincus, c’est que les données restent sur notre serveur. »",
+        "name": "[Nom], [Fonction]",
+        "org": "Arrondissement de Havelland"
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Tarifs et hébergement",
+    "perMonth": "/mois HT",
+    "book": "Réserver maintenant",
+    "select": "Sélectionner",
+    "selected": "Sélectionné",
+    "pricePlaceholder": "xy €",
+    "plans": {
+      "shared": {
+        "overline": "Découverte",
+        "title": "Serveur mutualisé",
+        "features": [
+          "Dans le navigateur, sur les appareils existants",
+          "Trois modes de conversation",
+          "20 langues",
+          "Serveur chez SVS, partagé avec d’autres communes",
+          "Jusqu’à env. 3 conversations simultanées"
+        ]
+      },
+      "dedicated": {
+        "overline": "Upgrade",
+        "title": "Serveur dédié",
+        "features": [
+          "Dans le navigateur, sur les appareils existants",
+          "Trois modes de conversation",
+          "20 langues",
+          "Serveur dédié chez SVS, réservé à votre commune",
+          "Jusqu’à env. 5 conversations simultanées"
+        ]
+      },
+      "selfhosted": {
+        "overline": "Auto-hébergement",
+        "title": "Exploitation par la commune",
+        "badge": "Open source, sans frais de licence",
+        "features": [
+          "Dans le navigateur, sur les appareils existants",
+          "Trois modes de conversation",
+          "20 langues",
+          "Exploitation sur le serveur propre de la commune",
+          "Contrôle total de l’infrastructure et des données"
+        ]
+      }
+    }
+  },
+  "cta": {
+    "title": "Des questions ?",
+    "text": "Vous souhaitez d’abord découvrir Smart Speech Flow ? Lors de notre démo en direct hebdomadaire et gratuite, nous présentons l’application et répondons à vos questions. Pour une demande précise, convenez d’un entretien individuel.",
+    "demo": "Réserver une démo en direct",
+    "call": "Entretien individuel"
+  },
+  "footer": {
+    "claim": "Solution open source pour la communication multilingue en temps réel dans le secteur communal et public.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "resources": "Ressources",
+    "info": "Informations",
+    "promo": "Offre : 2 mois offerts",
+    "contactUs": "Nous contacter",
+    "demo": "Réserver une démo en direct",
+    "call": "Entretien individuel",
+    "github": "Dépôt GitHub",
+    "docs": "Documentation",
+    "projectBy": "Un projet de :",
+    "implementation": "Réalisation :",
+    "copyright": "© 2026 Smart Speech Flow. Open source sous licence MIT.",
+    "legal": "Informations légales"
+  },
+  "pageNames": {
+    "product": "Produit",
+    "useCases": "Domaines d’utilisation",
+    "project": "Projet",
+    "openSource": "Open Source",
+    "contact": "Contact",
+    "legalNotice": "Mentions légales",
+    "privacy": "Protection des données"
+  },
+  "booking": {
+    "breadcrumb": "Fil d’Ariane",
+    "breadcrumbCurrent": "Réservation",
+    "title": "Réserver Smart Speech Flow",
+    "intro": "Une réservation ferme en trois étapes. Une fois la réservation effectuée, Smart Speech Flow est opérationnel en 2 jours maximum.",
+    "steps": [
+      "Option",
+      "Durée",
+      "Vos coordonnées"
+    ],
+    "step1": "1. Choisir l’option",
+    "step2": "2. Choisir la durée",
+    "step3": "3. Vos coordonnées",
+    "terms": {
+      "prepaid": {
+        "label": "12 mois payés d’avance",
+        "text": "Facturation pour 12 mois, avec l’offre promotionnelle pour toute réservation jusqu’au 31/12/2026"
+      },
+      "monthly": {
+        "label": "Mensuel",
+        "text": "Facturation mensuelle"
+      }
+    },
+    "fields": {
+      "org": "Commune / organisation",
+      "orgPh": "p. ex. Ville de Villeneuve",
+      "person": "Personne de contact",
+      "personPh": "Prénom et nom",
+      "role": "Fonction",
+      "rolePh": "p. ex. Direction de service",
+      "email": "E-mail",
+      "emailPh": "nom@commune.de",
+      "phone": "Téléphone",
+      "phonePh": "+49 …",
+      "billing": "Adresse de facturation",
+      "street": "Rue et numéro",
+      "zip": "Code postal",
+      "city": "Ville",
+      "start": "Date de démarrage souhaitée (facultatif)",
+      "message": "Message / questions"
+    },
+    "consentPrivacy": "J’ai lu la politique de confidentialité et j’accepte le traitement de mes données.",
+    "required": "Champ obligatoire",
+    "summary": {
+      "title": "Récapitulatif",
+      "option": "Option",
+      "term": "Durée",
+      "price": "Prix",
+      "promo": "Offre",
+      "noPromo": "–",
+      "total12": "Total pour 12 mois",
+      "totalMonthly": "Montant mensuel",
+      "net": "HT",
+      "onRequest": "sur demande",
+      "estimatedSaving": "Vos économies estimées",
+      "perYear": "par an"
+    },
+    "submit": "Réserver (engagement ferme)",
+    "note": "Après la réservation, vous recevez une confirmation par e-mail. Opérationnel en 2 jours maximum."
+  },
+  "thanks": {
+    "title1": "Merci beaucoup !",
+    "title2": "Nous avons bien reçu votre réservation.",
+    "text": "Nous vous avons envoyé une confirmation par e-mail. Vous y trouverez tous les détails de votre réservation.",
+    "number": "Numéro de réservation",
+    "nextTitle": "Et maintenant ?",
+    "steps": [
+      {
+        "title": "Confirmation",
+        "text": "Nous confirmons votre réservation par e-mail, avec tous les détails, à l’adresse indiquée."
+      },
+      {
+        "title": "Mise à disposition",
+        "text": "Nous vous contactons pour les prochaines étapes de la mise en place, adaptées à l’option réservée."
+      },
+      {
+        "title": "Accès et organisation",
+        "text": "Vous recevez votre accès par e-mail. Vous créez votre organisation et effectuez les réglages, par exemple des espaces distincts pour chaque service."
+      },
+      {
+        "title": "Opérationnel",
+        "text": "En 2 jours maximum après la réservation, vous pouvez mener vos premiers entretiens."
+      }
+    ],
+    "questionsTitle": "Des questions sur votre réservation ?",
+    "questionsText": "Nous sommes là pour vous aider – pour toute question sur la mise en place, l’accès ou la facturation, contactez-nous directement.",
+    "home": "Retour à l’accueil",
+    "contact": "Nous contacter",
+    "textNoMail": "Nous vous recontactons très prochainement. Vous trouverez ci-dessous tous les détails de votre réservation."
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "text": "La page demandée n’existe pas (ou plus).",
+    "back": "Retour à l’accueil"
+  },
+  "savings": {
+    "title": "Combien votre commune peut-elle économiser ?",
+    "intro": "Faites le calcul : vos heures d’interprétariat comparées au prix mensuel fixe de Smart Speech Flow.",
+    "hours": {
+      "label": "Heures d’interprétariat",
+      "period": "Période",
+      "perMonth": "par mois",
+      "perYear": "par an"
+    },
+    "plan": {
+      "label": "Option",
+      "hint": {
+        "shared": "jusqu’à env. 3 conversations simultanées",
+        "dedicated": "jusqu’à env. 5 conversations simultanées"
+      }
+    },
+    "rate": {
+      "label": "Coût par heure d’interprétariat (HT)",
+      "hint": "Hypothèse. Saisissez votre propre tarif horaire."
+    },
+    "result": {
+      "interpreter": "Coûts d’interprétariat par an",
+      "ssf": "Smart Speech Flow par an",
+      "saving": "Vos économies par an",
+      "perMonthEquivalent": "soit {amount} par mois",
+      "breakEven": "À ce volume, l’option n’est pas encore rentable. Elle le devient à partir d’env. {hours} heures d’interprétariat par mois.",
+      "promoBonus": "En réservant jusqu’au 31/12/2026 avec paiement anticipé de 12 mois, vous économisez en plus {amount} la première année ({months} mois offerts)."
+    },
+    "effort": {
+      "title": "Et vous gagnez du temps :",
+      "items": [
+        "Plus besoin d’organiser ni de coordonner des rendez-vous avec des interprètes",
+        "Mener les entretiens immédiatement au lieu d’attendre un rendez-vous",
+        "Pas de déplacement, pas de facturation à l’intervention – un prix mensuel fixe",
+        "Fonctionne dans le navigateur sur les appareils existants, opérationnel en 2 jours maximum"
+      ]
+    },
+    "cta": "Réserver cette option",
+    "disclaimer": "Exemple de calcul sans garantie, tous les montants sont HT. Les coûts réels d’interprétariat dépendent notamment de la langue, du prestataire, du déplacement et de la facturation minimale. Si vous faites vérifier les procès-verbaux par des interprètes, cela entraîne des coûts supplémentaires, en général nettement inférieurs."
+  },
+  "subpage": {
+    "ctaTitle": "Smart Speech Flow est-il rentable pour votre commune ?",
+    "ctaText": "Calculez vos économies par rapport aux heures d’interprétariat – ou réservez directement. Après la réservation, Smart Speech Flow est opérationnel en 2 jours maximum.",
+    "ctaSavings": "Calculer vos économies",
+    "ctaBook": "Réserver maintenant"
+  },
+  "product": {
+    "title": "L’interprétation en temps réel – directement dans le navigateur",
+    "intro": "Smart Speech Flow réunit reconnaissance vocale, traduction et synthèse vocale dans un processus continu. Agents et usagers parlent ou écrivent dans leur langue, l’interlocuteur reçoit immédiatement la traduction sous forme de texte et d’audio.",
+    "stepsTitle": "De la conversation à la compréhension",
+    "steps": [
+      {
+        "title": "Saisie vocale ou écrite",
+        "text": "Les agents ou les citoyens parlent ou écrivent dans leur propre langue."
+      },
+      {
+        "title": "Traitement automatique",
+        "text": "Le système reconnaît la langue, traduit le contenu et le prépare pour l’interlocuteur."
+      },
+      {
+        "title": "Restitution en texte et en audio",
+        "text": "L’interlocuteur reçoit la traduction à l’écrit et, en option, sous forme vocale."
+      },
+      {
+        "title": "Dialogue en temps réel",
+        "text": "La barrière de la langue laisse place à un échange direct – sur deux appareils de la commune ou avec le téléphone de l’usager."
+      }
+    ],
+    "benefitsTitle": "Ce que vous obtenez",
+    "benefits": [
+      {
+        "title": "20 langues en temps réel",
+        "text": "Les 20 langues étrangères les plus parlées en Allemagne, traduites en texte et en audio."
+      },
+      {
+        "title": "Fonctionne dans le navigateur",
+        "text": "Aucune installation, aucun matériel spécifique : les appareils existants suffisent."
+      },
+      {
+        "title": "Opérationnel en 2 jours",
+        "text": "Pas de projet de déploiement sur plusieurs mois : après la réservation, nous configurons le serveur et vous pouvez commencer."
+      },
+      {
+        "title": "Des espaces dédiés par service",
+        "text": "Créez votre organisation et configurez des espaces et des règles propres à chaque service."
+      },
+      {
+        "title": "Open source sous licence MIT",
+        "text": "Code source ouvert, modèles open source exploités localement, aucune dépendance à un fournisseur."
+      }
+    ],
+    "techTitle": "Une technologie moderne, une utilisation simple",
+    "techText": "Smart Speech Flow repose sur une architecture modulaire avec des composants de reconnaissance vocale (speech-to-text), de traduction, de synthèse vocale (text-to-speech) et de communication en temps réel basée sur WebSocket. Le système peut être étendu, exploité et intégré aux processus existants de manière transparente.",
+    "blackboxTitle": "Pas une boîte noire",
+    "blackboxText": "Le code source est librement accessible et publié sous licence MIT. Cela garantit transparence et adaptabilité – et rend votre commune indépendante sur le long terme."
+  },
+  "useCases": {
+    "title": "Là où la compréhension est décisive",
+    "intro": "Smart Speech Flow est conçu pour les situations où des personnes parlant des langues différentes doivent échanger directement et clairement – dans l’administration, le conseil et partout où l’on accueille le public.",
+    "stats": [
+      {
+        "value": "20",
+        "label": "langues"
+      },
+      {
+        "value": "Temps réel",
+        "label": "traduction vocale et écrite"
+      },
+      {
+        "value": "Navigateur",
+        "label": "aucune installation nécessaire"
+      }
+    ],
+    "fieldsTitle": "Là où Smart Speech Flow apporte une valeur ajoutée",
+    "fields": [
+      {
+        "title": "Service aux citoyens et administration",
+        "text": "Au bureau, au guichet ou en déplacement : les agents échangent directement avec les citoyens, quelle que soit leur langue."
+      },
+      {
+        "title": "Conseil social et accompagnement à l’intégration",
+        "text": "Dans les entretiens sensibles, se comprendre directement est essentiel. Les échanges deviennent plus accessibles et mieux structurés – sans attendre d’interprètes externes."
+      },
+      {
+        "title": "Action de quartier et lieux de rencontre",
+        "text": "Dans les centres sociaux, les maisons de quartier et les cafés-rencontres, la communication entre professionnels et visiteurs devient plus claire."
+      },
+      {
+        "title": "Situations mobiles et décentralisées",
+        "text": "Également lors de visites à domicile, d’événements ou de permanences temporaires – simplement dans le navigateur."
+      }
+    ],
+    "practiceTitle": "Utilisé sur le terrain",
+    "practiceText": "Smart Speech Flow a été développé avec la ville de Kassel et testé en conditions réelles au centre de quartier Wesertor (Stadtteilzentrum Wesertor). La langue parlée au quotidien est traduite de manière compréhensible vers l’allemand et inversement – directement pendant l’entretien, sans attendre d’interprète. Smart Speech Flow est aujourd’hui utilisé dans plusieurs communes.",
+    "transferTitle": "Prêt pour votre commune",
+    "transferText": "Solution open source d’origine communale, Smart Speech Flow peut être déployé dans d’autres villes, arrondissements et établissements sans projet d’adaptation."
+  },
+  "project": {
+    "title": "Les coulisses du projet",
+    "intro": "Smart Speech Flow est né d’un besoin concret du quotidien communal : réduire les barrières linguistiques dans les contextes publics et sociaux.",
+    "originTitle": "La genèse de Smart Speech Flow",
+    "origin": [
+      "Dans les centres de quartier, les services de conseil et les établissements publics, des personnes qui ne partagent aucune langue commune se rencontrent chaque jour. L’idée : un outil numérique qui facilite sensiblement ce quotidien.",
+      "Smart Speech Flow a vu le jour dans le cadre de Smart Kassel / Smart City Kassel. Il a été testé au centre de quartier Wesertor à Kassel – en conditions réelles et avec les retours des personnes sur place."
+    ],
+    "fundingTitle": "Contexte de financement",
+    "fundingText": "Smart Speech Flow est financé dans le cadre du programme fédéral allemand « Modellprojekte Smart Cities » (projets pilotes Smart Cities). Ce programme aide les communes à développer et à tester des solutions numériques.",
+    "partnersTitle": "Qui est derrière Smart Speech Flow",
+    "partners": [
+      {
+        "role": "Partenaire du projet",
+        "name": "Smart City Kassel",
+        "text": "Smart Kassel constitue le cadre communal d’application et de développement. Le bureau Smart Kassel a développé et testé l’application avec Smart Village Solutions."
+      },
+      {
+        "role": "Mise en œuvre technique et exploitation",
+        "name": "Smart Village Solutions SVS GmbH",
+        "text": "SVS est responsable de la conception, du développement et de l’exploitation de la plateforme et de son architecture ouverte et modulaire."
+      }
+    ],
+    "whyTitle": "Pourquoi ce projet compte",
+    "why": [
+      {
+        "title": "Pensé pour les communes",
+        "text": "Né d’un besoin réel du quotidien communal, et non comme un projet technologique abstrait."
+      },
+      {
+        "title": "Ouvert et évolutif",
+        "text": "Ancrage dans la pratique communale et open source – une base pour la réutilisation, le transfert et la souveraineté numérique."
+      }
+    ]
+  },
+  "openSource": {
+    "title": "L’open source comme principe",
+    "intro": "Le code source de Smart Speech Flow est librement accessible et publié sous licence MIT. Le logiciel appartient ainsi à votre commune – transparent, vérifiable et évolutif.",
+    "mitTitle": "Licence MIT",
+    "mitText": "La licence MIT est une licence open source reconnue. Elle autorise l’utilisation, l’adaptation, la diffusion et l’intégration dans vos propres systèmes, à condition de conserver la mention de licence – sans frais de licence ni obstacles juridiques complexes.",
+    "mitAllowsTitle": "La licence MIT autorise",
+    "mitAllows": [
+      "L’utilisation commerciale",
+      "La modification et l’adaptation",
+      "Le partage et la distribution",
+      "L’utilisation privée"
+    ],
+    "principlesTitle": "Ce que l’open source signifie concrètement ici",
+    "principles": [
+      {
+        "title": "Transparence",
+        "text": "Chaque ligne de code est consultable et compréhensible."
+      },
+      {
+        "title": "Évolution",
+        "text": "Des adaptations à vos besoins spécifiques sont possibles."
+      },
+      {
+        "title": "Réutilisabilité",
+        "text": "Utilisation dans d’autres projets et communes – sans frais de licence ni dépendance à un fournisseur."
+      },
+      {
+        "title": "Coopération",
+        "text": "Une bonne base pour des intégrations et un développement commun."
+      }
+    ],
+    "operateTitle": "L’exploiter vous-même ou nous le confier",
+    "operateText": "Vous pouvez exploiter Smart Speech Flow sur vos propres serveurs. Ou confier l’exploitation, les mises à jour et les serveurs à SVS – à partir de 250 € par mois, opérationnel en 2 jours maximum.",
+    "operateCta": "Voir les tarifs",
+    "resourcesTitle": "Code, documentation et contribution",
+    "resources": [
+      {
+        "title": "Dépôt GitHub",
+        "text": "github.com/smart-village-solutions/smart-speech-flow"
+      },
+      {
+        "title": "Documentation",
+        "text": "Documentation technique et guides"
+      },
+      {
+        "title": "Fichier de licence",
+        "text": "Licence MIT dans le dépôt"
+      }
+    ],
+    "contribute": "Les contributions externes sont possibles via les issues et pull requests GitHub. Des règles de contribution formelles sont en cours d’élaboration. Vous souhaitez collaborer avec nous ? Écrivez-nous."
+  },
+  "contact": {
+    "title": "Contact et échanges",
+    "intro": "Vous souhaitez découvrir Smart Speech Flow, vous avez des questions sur la réservation ou vous voulez parler de votre projet d’utilisation ? Nous attendons votre message avec plaisir.",
+    "peopleTitle": "Vos interlocuteurs",
+    "people": [
+      {
+        "name": "Corinna Neige",
+        "role": "Ville de Kassel – Numérique et informatique, bureau Smart Kassel"
+      },
+      {
+        "name": "Philipp Wilimzig",
+        "role": "Smart Village Solutions SVS GmbH"
+      }
+    ],
+    "direct": "Joignables directement",
+    "topicsTitle": "Pourquoi nous contacter",
+    "topics": [
+      "Démo en direct et webinaire",
+      "Questions sur la réservation",
+      "Scénarios d’utilisation dans les communes",
+      "Collaboration technique et open source"
+    ],
+    "formTitle": "Envoyer un message",
+    "fields": {
+      "name": "Nom",
+      "org": "Organisation",
+      "email": "E-mail",
+      "category": "Sujet",
+      "message": "Message"
+    },
+    "categories": {
+      "demo": "Démo en direct / webinaire",
+      "call": "Entretien individuel",
+      "booking": "Questions sur la réservation",
+      "municipal": "Utilisation communale",
+      "tech": "Open source / technique",
+      "other": "Autre"
+    },
+    "consent": "J’ai lu la politique de confidentialité et j’accepte le traitement de mes données pour le traitement de ma demande.",
+    "submit": "Envoyer le message",
+    "sent": "Merci pour votre message. Nous vous recontactons très prochainement."
+  },
+  "legal": {
+    "translationNote": "Ceci est une traduction du texte juridique allemand, fournie à titre informatif. En cas de divergence, seule la version allemande fait foi.",
+    "notice": {
+      "title": "Mentions légales",
+      "sections": [
+        {
+          "title": "Informations conformément au § 5 TMG",
+          "lines": [
+            "Smart Village Solutions SVS GmbH",
+            "Klein Glien 25",
+            "14806 Bad Belzig",
+            "Allemagne"
+          ]
+        },
+        {
+          "title": "Contact",
+          "lines": [
+            "Tél. : 033841-63969-0",
+            "E-mail : info@smart-village.solutions"
+          ]
+        },
+        {
+          "title": "Registre du commerce",
+          "lines": [
+            "Tribunal d’enregistrement : Amtsgericht Potsdam (tribunal cantonal de Potsdam)",
+            "Numéro d’immatriculation : HRB 34248"
+          ]
+        },
+        {
+          "title": "Direction",
+          "lines": [
+            "Philipp Wilimzig & Erik Hildenbrand"
+          ]
+        },
+        {
+          "title": "Numéro d’identification à la TVA",
+          "lines": [
+            "DE265570015"
+          ]
+        },
+        {
+          "title": "Responsable au sens du § 18, al. 2 MStV",
+          "lines": [
+            "Philipp Wilimzig"
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "sections": [
+        {
+          "title": "1. Responsable du traitement",
+          "lines": [
+            "Smart Village Solutions SVS GmbH",
+            "Klein Glien 25",
+            "14806 Bad Belzig",
+            "Allemagne",
+            "E-mail : info@smart-village.solutions",
+            "Tél. : 033841-63969-0"
+          ]
+        },
+        {
+          "title": "2. Informations générales sur le traitement des données",
+          "paragraphs": [
+            "La protection de vos données personnelles nous tient à cœur. Nous traitons vos données exclusivement sur la base des dispositions légales (RGPD, BDSG, TMG). La présente politique de confidentialité vous informe des principaux aspects du traitement des données dans le cadre de notre site web."
+          ]
+        },
+        {
+          "title": "3. Hébergement et mise à disposition du site web",
+          "paragraphs": [
+            "Lors de votre visite sur notre site web, l’hébergeur enregistre automatiquement dans des fichiers journaux du serveur (« logs ») des informations que votre navigateur transmet automatiquement. Il s’agit de :"
+          ],
+          "list": [
+            "type et version du navigateur",
+            "système d’exploitation utilisé",
+            "URL de provenance (referrer)",
+            "nom d’hôte de l’ordinateur accédant au site",
+            "adresse IP",
+            "heure de la requête au serveur"
+          ],
+          "after": [
+            "Ces données ne peuvent pas être attribuées à des personnes déterminées. Elles ne sont pas recoupées avec d’autres sources de données. La collecte repose sur l’art. 6, par. 1, point f) du RGPD (intérêt légitime à la mise à disposition technique du site web)."
+          ]
+        },
+        {
+          "title": "4. Formulaire de contact",
+          "paragraphs": [
+            "Si vous nous contactez via le formulaire de contact de notre site web, les données que vous indiquez (nom, organisation, adresse e-mail, catégorie, message) sont enregistrées et traitées chez nous aux fins du traitement de votre demande.",
+            "La base juridique est l’art. 6, par. 1, point b) du RGPD (mesures précontractuelles) ou l’art. 6, par. 1, point f) du RGPD (intérêt légitime à répondre aux demandes). Vos données sont supprimées une fois votre demande entièrement traitée, sauf obligation légale de conservation contraire."
+          ]
+        },
+        {
+          "title": "[Projet] Formulaires de réservation et de contact",
+          "paragraphs": [
+            "[Espace réservé – à compléter avant la mise en ligne par le responsable du traitement ou le conseil en protection des données : les formulaires de réservation et de contact transmettent les informations (organisation, personne de contact, coordonnées et données de facturation, date souhaitée, message) au système CRM Pipedrive (Pipedrive OÜ). Le site web est hébergé chez Netlify ; les formulaires sont traités via Netlify Functions. Des e-mails de confirmation peuvent être envoyés via Resend. À compléter : finalité, base juridique (art. 6, par. 1, point b) du RGPD), durée de conservation, destinataires, contrats de sous-traitance, le cas échéant transferts vers des pays tiers.]"
+          ]
+        },
+        {
+          "title": "5. Cookies",
+          "paragraphs": [
+            "Ce site web n’utilise ni cookies de suivi ni outils d’analyse de tiers. Seuls des cookies techniquement nécessaires au fonctionnement du site web sont utilisés."
+          ]
+        },
+        {
+          "title": "6. Vos droits",
+          "paragraphs": [
+            "Vous disposez à notre égard des droits suivants concernant vos données personnelles :"
+          ],
+          "list": [
+            "Droit d’accès (art. 15 RGPD)",
+            "Droit de rectification (art. 16 RGPD)",
+            "Droit à l’effacement (art. 17 RGPD)",
+            "Droit à la limitation du traitement (art. 18 RGPD)",
+            "Droit à la portabilité des données (art. 20 RGPD)",
+            "Droit d’opposition (art. 21 RGPD)"
+          ],
+          "after": [
+            "Vous avez en outre le droit d’introduire une réclamation auprès d’une autorité de contrôle de la protection des données au sujet du traitement de vos données personnelles."
+          ]
+        },
+        {
+          "title": "7. Liens externes",
+          "paragraphs": [
+            "Notre site web contient des liens vers des sites web externes de tiers, sur le contenu desquels nous n’avons aucune influence. Le contenu des pages liées relève toujours de la responsabilité de leur fournisseur respectif. Les pages liées ont été vérifiées au moment de la création du lien afin de détecter d’éventuelles infractions. Aucun contenu illicite n’était identifiable à ce moment-là."
+          ]
+        },
+        {
+          "title": "8. Modifications de la présente politique de confidentialité",
+          "paragraphs": [
+            "Nous nous réservons le droit d’adapter la présente politique de confidentialité afin qu’elle soit toujours conforme aux exigences légales en vigueur ou pour y intégrer des modifications de nos services. La nouvelle politique de confidentialité s’appliquera alors lors de votre prochaine visite.",
+            "Pour toute question relative à la protection des données, vous pouvez nous contacter à tout moment : info@smart-village.solutions",
+            "Vous trouverez de plus amples informations sur le prestataire dans les mentions légales."
+          ]
+        }
+      ]
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Interprétation pour les usagers – Smart Speech Flow",
+      "description": "Smart Speech Flow interprète en temps réel en 20 langues, en toute sécurité juridique et conformité RGPD. Calculez vos économies et réservez en ligne."
+    },
+    "product": {
+      "title": "Interprétation en temps réel – Smart Speech Flow",
+      "description": "Smart Speech Flow : reconnaissance vocale, traduction et synthèse vocale en 20 langues, trois modes de conversation, opérationnel en 2 jours."
+    },
+    "useCases": {
+      "title": "Domaines d’utilisation – Smart Speech Flow",
+      "description": "Service aux citoyens, conseil social, intégration, action de quartier, déplacements : Smart Speech Flow lève immédiatement les barrières linguistiques."
+    },
+    "project": {
+      "title": "À propos du projet – Smart Speech Flow",
+      "description": "Né avec Smart City Kassel, réalisé par Smart Village Solutions, financé par le programme fédéral allemand Modellprojekte Smart Cities."
+    },
+    "openSource": {
+      "title": "Open source sous licence MIT – Smart Speech Flow",
+      "description": "Le code source de Smart Speech Flow est sous licence MIT : transparent, vérifiable, sans frais de licence. À exploiter vous-même ou à nous confier."
+    },
+    "contact": {
+      "title": "Contact et démo en direct – Smart Speech Flow",
+      "description": "Demander une démo en direct, poser une question sur la réservation ou parler de votre projet : comment joindre l’équipe Smart Speech Flow."
+    },
+    "booking": {
+      "title": "Réserver Smart Speech Flow en ligne",
+      "description": "Réservez Smart Speech Flow en trois étapes : choisir l’option, choisir la durée, saisir vos coordonnées. Opérationnel en 2 jours maximum."
+    },
+    "thanks": {
+      "title": "Merci pour votre réservation – Smart Speech Flow",
+      "description": "Nous avons bien reçu votre réservation de Smart Speech Flow. Voici la suite."
+    },
+    "legalNotice": {
+      "title": "Mentions légales – Smart Speech Flow",
+      "description": "Mentions légales de Smart Speech Flow : Smart Village Solutions SVS GmbH, Bad Belzig, Allemagne."
+    },
+    "privacy": {
+      "title": "Politique de confidentialité – Smart Speech Flow",
+      "description": "Politique de confidentialité du site smartspeechflow.de : responsable du traitement, hébergement, formulaire de contact, vos droits."
+    },
+    "notFound": {
+      "title": "Page introuvable – Smart Speech Flow",
+      "description": "La page demandée n’existe pas."
+    }
+  },
+  "forms": {
+    "sending": "Envoi en cours …",
+    "invalid": "Veuillez vérifier vos informations – au moins un champ n’est pas correctement rempli.",
+    "notConfigured": "Le formulaire n’est pas encore configuré. Veuillez nous écrire à info@smart-village.solutions.",
+    "failed": "Malheureusement, cela n’a pas fonctionné. Veuillez réessayer ou nous écrire à info@smart-village.solutions."
+  },
+  "mail": {
+    "bookingSubject": "Votre réservation de Smart Speech Flow",
+    "greeting": "Bonjour {name},",
+    "bookingIntro": "merci d’avoir réservé Smart Speech Flow. Voici les détails :",
+    "bookingNext": "Nous vous contacterons pour les prochaines étapes de la mise en place. Après la réservation, Smart Speech Flow est opérationnel en 2 jours maximum.",
+    "signature": "Votre équipe Smart Speech Flow\nSmart Village Solutions SVS GmbH · info@smart-village.solutions"
+  }
+}

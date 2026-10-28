@@ -7,6 +7,7 @@ import { createPipedrive, noteHtml } from '../../lib/pipedrive';
 import { sendMail } from '../../lib/mail';
 import { json, readJson, sameOrigin } from '../../lib/form-response';
 import { t } from '../../i18n';
+import { localeTags } from '../../i18n/config';
 import { formatEuro } from '../../data/site';
 
 export const prerender = false;
@@ -69,7 +70,7 @@ export const POST: APIRoute = async ({ request, url }) => {
 
     const number = `SSF-${dealId}`;
     const mail = { apiKey: RESEND_API_KEY, from: MAIL_FROM };
-    const lang = input.locale === 'en' ? 'en' : 'de';
+    const lang = input.locale;
     const emailSent = await sendMail(mail, {
       to: input.email,
       subject: `${t(lang, 'mail.bookingSubject')} ${number}`,
@@ -81,7 +82,7 @@ export const POST: APIRoute = async ({ request, url }) => {
         `${t(lang, 'thanks.number')}: ${number}`,
         `${t(lang, 'booking.summary.option')}: ${t(lang, `pricing.plans.${input.option}.title`)}`,
         `${t(lang, 'booking.summary.term')}: ${t(lang, `booking.terms.${input.term}.label`)}`,
-        price.monthlyNet === null ? '' : `${t(lang, 'booking.summary.price')}: ${formatEuro(price.monthlyNet, lang === 'en' ? 'en' : 'de-DE')}${t(lang, 'pricing.perMonth')}`,
+        price.monthlyNet === null ? '' : `${t(lang, 'booking.summary.price')}: ${formatEuro(price.monthlyNet, localeTags[lang])}${t(lang, 'pricing.perMonth')}`,
         price.promo ? `${t(lang, 'booking.summary.promo')}: ${t(lang, 'promo.short')}` : '',
         '',
         t(lang, 'mail.bookingNext'),

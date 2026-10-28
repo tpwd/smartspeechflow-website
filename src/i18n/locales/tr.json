@@ -1,1 +1,751 @@
-{}
+{
+  "meta": {
+    "siteName": "Smart Speech Flow",
+    "description": "Smart Speech Flow, vatandaşlarla yapılan görüşmeleri gerçek zamanlı olarak tercüme eder – 20 dilde, hukuken güvenli ve veri korumaya uygun. Açık kaynak."
+  },
+  "nav": {
+    "skip": "İçeriğe geç",
+    "main": "Ana gezinme",
+    "home": "Ana sayfa",
+    "product": "Ürün",
+    "useCases": "Kullanım alanları",
+    "project": "Proje",
+    "openSource": "Açık Kaynak",
+    "offer": "Teklif",
+    "language": "Dil seçin",
+    "book": "Hemen satın alın",
+    "menuOpen": "Menüyü aç",
+    "menuClose": "Menüyü kapat",
+    "mobile": "Menü"
+  },
+  "promo": {
+    "badge": "31.12.2026'ya kadar: 2 ay ücretsiz",
+    "short": "2 ay ücretsiz"
+  },
+  "hero": {
+    "headline": "Vatandaş iletişiminde tercümanlık",
+    "subline": "Hiçbir görüşme artık dil engeline takılmıyor. Smart Speech Flow 20 dilde tercüme eder – hukuken güvenli ve veri korumaya uygun.",
+    "ctaBook": "Hemen satın alın",
+    "ctaDemo": "Canlı demo ayarlayın",
+    "imageAlt": "Bir çalışan ile bir vatandaş arasında danışma görüşmesi",
+    "ctaSavings": "Tasarrufunuzu hesaplayın"
+  },
+  "chat": {
+    "app": "Smart Speech Flow",
+    "question": "Wie kann ich Ihnen heute helfen?",
+    "questionLang": "Almanca",
+    "divider": "Gerçek zamanlı çeviri",
+    "answer": "İkamet kaydım için yardıma ihtiyacım var.",
+    "answerLang": "Türkçe",
+    "translated": "Ich brauche Hilfe bei meiner Anmeldung.",
+    "translatedNote": "Otomatik çevrildi",
+    "status": "Bağlantı etkin",
+    "mode": "Ses ve metin",
+    "label": "Çevrilmiş bir görüşme örneği"
+  },
+  "trust": {
+    "label": "Basında:"
+  },
+  "how": {
+    "title": "Nasıl çalışır?",
+    "items": [
+      {
+        "title": "Sohbet botu değil, gerçek bir tercüme diyaloğu",
+        "text": "Her iki taraf da kendi dilinde konuşur; her ifade çevrilmiş olarak metin ve ses şeklinde görünür",
+        "alt": "Görüşme ekranı açık bir tableti kullanan el"
+      },
+      {
+        "title": "Mevcut cihazlarda tarayıcıda çalışır",
+        "text": "Özel donanım gerekmez: belediyeye ait iki cihaz ya da misafirin kendi cep telefonu yeterlidir",
+        "alt": "Masa üzerinde dizüstü bilgisayar, tablet ve akıllı telefon"
+      },
+      {
+        "title": "20 dil",
+        "text": "Almanya'da en sık konuşulan 20 yabancı dil kullanıma hazırdır",
+        "alt": "Dil seçimini gösteren akıllı telefonu tutan adam"
+      }
+    ]
+  },
+  "why": {
+    "title": "Neden Smart Speech Flow?",
+    "items": [
+      {
+        "title": "Mevzuata uygun",
+        "text": "Mevzuata uygun sesli çeviri için tek Alman açık kaynak aracı"
+      },
+      {
+        "title": "Hukuki açıdan incelenmiş konsept",
+        "text": "İşletim ve görüşme modları, kamu kurumlarında kullanım için bir hukuk bürosuyla birlikte belirlendi – hassas görüşmeler için de"
+      },
+      {
+        "title": "Veri koruma",
+        "text": "Yalnızca belediyeniz için ayrılmış bir sunucuda yerel olarak çalışan açık kaynak modeller – ya da paylaşımlı, aynı ölçüde veri korumaya uygun"
+      },
+      {
+        "title": "Yazılım belediyeye aittir",
+        "text": "MIT lisansıyla açık kaynak: tek bir sağlayıcıya bağlı kalmadan özgürce kullanılabilir ve geliştirilebilir"
+      },
+      {
+        "title": "Kendini amorti eder",
+        "text": "Paylaşılan Sunucu ile ayda yaklaşık {hours} tercüman saatinden itibaren (saat ücreti {rate} € olarak alındığında)"
+      }
+    ],
+    "modes": {
+      "title": "Üç görüşme modu",
+      "items": [
+        "Kayıtsız: hiçbir şey saklanmaz",
+        "Tutanak modu: görüşmenin hukuken önemli bölümleri şifreli olarak kaydedilir ve görevlendirilen bir tercüman tarafından kontrol edilebilir",
+        "Test modu: tam kayıt, yalnızca test amaçlı"
+      ]
+    }
+  },
+  "testimonials": {
+    "title": "Uygulamadan görüşler",
+    "coatOfArms": "Arma",
+    "items": [
+      {
+        "quote": "“Smart Speech Flow sayesinde vatandaş hizmetlerindeki görüşmeleri tercüman randevusu beklemeden hemen yapabiliyoruz. Bu, ekibimizin yükünü belirgin şekilde hafifletiyor.”",
+        "name": "[Ad], [Görev]",
+        "org": "Kassel Şehri, SVS ile birlikte geliştirildi"
+      },
+      {
+        "quote": "“Kurulum birkaç gün içinde tamamlandı. Bizi en çok ikna eden, verilerin kendi sunucumuzda kalmasıydı.”",
+        "name": "[Ad], [Görev]",
+        "org": "Havelland İlçesi"
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Fiyatlar ve barındırma",
+    "perMonth": "/ay, KDV hariç",
+    "book": "Hemen satın alın",
+    "select": "Seç",
+    "selected": "Seçildi",
+    "pricePlaceholder": "xy €",
+    "plans": {
+      "shared": {
+        "overline": "Başlangıç",
+        "title": "Paylaşılan Sunucu",
+        "features": [
+          "Mevcut cihazlarda tarayıcıda",
+          "Üç görüşme modu",
+          "20 dil",
+          "SVS'de, diğer belediyelerle paylaşılan sunucu",
+          "Aynı anda yaklaşık 3 görüşmeye kadar"
+        ]
+      },
+      "dedicated": {
+        "overline": "Yükseltme",
+        "title": "Özel Sunucu",
+        "features": [
+          "Mevcut cihazlarda tarayıcıda",
+          "Üç görüşme modu",
+          "20 dil",
+          "SVS'de yalnızca belediyenize ait özel sunucu",
+          "Aynı anda yaklaşık 5 görüşmeye kadar"
+        ]
+      },
+      "selfhosted": {
+        "overline": "Kendi işletiminiz",
+        "title": "Belediye bünyesinde işletim",
+        "badge": "Açık kaynak, lisans ücreti yok",
+        "features": [
+          "Mevcut cihazlarda tarayıcıda",
+          "Üç görüşme modu",
+          "20 dil",
+          "Belediyenin kendi sunucusunda işletim",
+          "Altyapı ve veriler üzerinde tam kontrol"
+        ]
+      }
+    }
+  },
+  "cta": {
+    "title": "Sorularınız mı var?",
+    "text": "Smart Speech Flow'u önce tanımak mı istiyorsunuz? Haftalık ücretsiz canlı demomuzda uygulamayı gösteriyor ve sorularınızı yanıtlıyoruz. Somut talepleriniz için bireysel bir görüşme ayarlayabilirsiniz.",
+    "demo": "Canlı demo ayarlayın",
+    "call": "Bireysel görüşme"
+  },
+  "footer": {
+    "claim": "Belediye ve kamu alanında çok dilli, gerçek zamanlı iletişim için açık kaynak çözüm.",
+    "navigation": "Gezinme",
+    "contact": "İletişim",
+    "resources": "Kaynaklar",
+    "info": "Bilgiler",
+    "promo": "Kampanya: 2 ay ücretsiz",
+    "contactUs": "Bize ulaşın",
+    "demo": "Canlı demo ayarlayın",
+    "call": "Bireysel görüşme",
+    "github": "GitHub deposu",
+    "docs": "Dokümantasyon",
+    "projectBy": "Proje sahibi:",
+    "implementation": "Uygulama:",
+    "copyright": "© 2026 Smart Speech Flow. MIT License kapsamında açık kaynak.",
+    "legal": "Yasal bilgiler"
+  },
+  "pageNames": {
+    "product": "Ürün",
+    "useCases": "Kullanım alanları",
+    "project": "Proje",
+    "openSource": "Açık Kaynak",
+    "contact": "İletişim",
+    "legalNotice": "Künye",
+    "privacy": "Veri koruma"
+  },
+  "booking": {
+    "breadcrumb": "Sayfa yolu",
+    "breadcrumbCurrent": "Satın alma",
+    "title": "Smart Speech Flow satın alın",
+    "intro": "Üç adımda bağlayıcı sipariş. Siparişiniz tamamlandıktan sonra Smart Speech Flow en geç 2 gün içinde kullanıma hazırdır.",
+    "steps": [
+      "Seçenek",
+      "Süre",
+      "Bilgileriniz"
+    ],
+    "step1": "1. Seçenek belirleyin",
+    "step2": "2. Süre belirleyin",
+    "step3": "3. Bilgileriniz",
+    "terms": {
+      "prepaid": {
+        "label": "12 ay peşin",
+        "text": "12 aylık faturalandırma; 31.12.2026'ya kadar yapılan siparişlerde kampanya dahil"
+      },
+      "monthly": {
+        "label": "Aylık",
+        "text": "Aylık faturalandırma"
+      }
+    },
+    "fields": {
+      "org": "Belediye / Kurum",
+      "orgPh": "ör. Örnekşehir Belediyesi",
+      "person": "İrtibat kişisi",
+      "personPh": "Ad ve soyad",
+      "role": "Görev",
+      "rolePh": "ör. Daire başkanı",
+      "email": "E-posta",
+      "emailPh": "name@kommune.de",
+      "phone": "Telefon",
+      "phonePh": "+49 …",
+      "billing": "Fatura adresi",
+      "street": "Sokak ve bina numarası",
+      "zip": "Posta kodu",
+      "city": "Şehir",
+      "start": "İstenen başlangıç tarihi (isteğe bağlı)",
+      "message": "Mesaj / Sorular"
+    },
+    "consentPrivacy": "Gizlilik politikasını okudum ve verilerimin işlenmesine onay veriyorum.",
+    "required": "Zorunlu alan",
+    "summary": {
+      "title": "Özet",
+      "option": "Seçenek",
+      "term": "Süre",
+      "price": "Fiyat",
+      "promo": "Kampanya",
+      "noPromo": "–",
+      "total12": "12 ay için toplam",
+      "totalMonthly": "Aylık tutar",
+      "net": "KDV hariç",
+      "onRequest": "talep üzerine",
+      "estimatedSaving": "Tahmini tasarrufunuz",
+      "perYear": "yıllık"
+    },
+    "submit": "Bağlayıcı olarak satın al",
+    "note": "Siparişinizden sonra e-posta ile bir onay alırsınız. En geç 2 gün içinde kullanıma hazır."
+  },
+  "thanks": {
+    "title1": "Çok teşekkür ederiz!",
+    "title2": "Siparişiniz bize ulaştı.",
+    "text": "Size e-posta ile bir onay gönderdik. Siparişinize ilişkin tüm ayrıntıları bu e-postada bulabilirsiniz.",
+    "number": "Sipariş numarası",
+    "nextTitle": "Bundan sonra ne olacak?",
+    "steps": [
+      {
+        "title": "Onay",
+        "text": "Siparişinizi tüm ayrıntılarıyla birlikte belirttiğiniz adrese e-posta ile onaylıyoruz."
+      },
+      {
+        "title": "Kurulum",
+        "text": "Satın aldığınız seçeneğe göre kurulumun sonraki adımları için sizinle iletişime geçiyoruz."
+      },
+      {
+        "title": "Erişim ve organizasyon",
+        "text": "Erişim bilgileriniz size e-posta ile gönderilir. Kurumunuzu oluşturur ve ayarları yaparsınız; örneğin her birim için ayrı alanlar tanımlayabilirsiniz."
+      },
+      {
+        "title": "Kullanıma hazır",
+        "text": "Siparişten sonra en geç 2 gün içinde ilk görüşmelerinizi yapabilirsiniz."
+      }
+    ],
+    "questionsTitle": "Siparişinizle ilgili sorularınız mı var?",
+    "questionsText": "Size memnuniyetle yardımcı oluruz – kurulum, erişim veya faturalandırma ile ilgili sorularınız için bize doğrudan ulaşabilirsiniz.",
+    "home": "Ana sayfaya dön",
+    "contact": "Bize ulaşın",
+    "textNoMail": "Kısa süre içinde sizinle iletişime geçeceğiz. Siparişinize ilişkin tüm ayrıntıları aşağıda bulabilirsiniz."
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "text": "Aradığınız sayfa mevcut değil (artık yok).",
+    "back": "Ana sayfaya dön"
+  },
+  "savings": {
+    "title": "Belediyeniz ne kadar tasarruf eder?",
+    "intro": "Kendiniz hesaplayın: tercüman saatleriniz ile Smart Speech Flow'un sabit aylık fiyatının karşılaştırması.",
+    "hours": {
+      "label": "Tercüman saatleri",
+      "period": "Dönem",
+      "perMonth": "aylık",
+      "perYear": "yıllık"
+    },
+    "plan": {
+      "label": "Seçenek",
+      "hint": {
+        "shared": "aynı anda yaklaşık 3 görüşmeye kadar",
+        "dedicated": "aynı anda yaklaşık 5 görüşmeye kadar"
+      }
+    },
+    "rate": {
+      "label": "Tercüman saati başına maliyet (KDV hariç)",
+      "hint": "Varsayım. Kendi saat ücretinizi girin."
+    },
+    "result": {
+      "interpreter": "Yıllık tercüman maliyeti",
+      "ssf": "Yıllık Smart Speech Flow maliyeti",
+      "saving": "Yıllık tasarrufunuz",
+      "perMonthEquivalent": "aylık {amount} tutarına karşılık gelir",
+      "breakEven": "Bu kullanım hacminde seçenek henüz kendini amorti etmiyor. Ayda yaklaşık {hours} tercüman saatinden itibaren kârlı hale gelir.",
+      "promoBonus": "31.12.2026'ya kadar 12 ay peşin ödemeli sipariş verirseniz ilk yılda ek olarak şu tutarı tasarruf edersiniz: {amount} (ücretsiz ay sayısı: {months})."
+    },
+    "effort": {
+      "title": "Üstelik iş yükünden de tasarruf edersiniz:",
+      "items": [
+        "Tercüman randevusu ayarlamak ve koordine etmek zorunda kalmazsınız",
+        "Randevu beklemeden görüşmeleri hemen yaparsınız",
+        "Yol masrafı yok, tek tek görevlerin faturalandırılması yok – sabit bir aylık fiyat",
+        "Mevcut cihazlarda tarayıcıda çalışır, en geç 2 gün içinde kullanıma hazır"
+      ]
+    },
+    "cta": "Bu seçenekle satın alın",
+    "disclaimer": "Garanti verilmeyen örnek hesaplamadır, tüm tutarlar KDV hariçtir. Gerçek tercüman maliyetleri diğerlerinin yanı sıra dile, sağlayıcıya, yol masraflarına ve asgari faturalandırmaya bağlıdır. Tutanakları tercümanlara kontrol ettirirseniz bunun için ek, ancak genellikle çok daha düşük maliyetler oluşur."
+  },
+  "subpage": {
+    "ctaTitle": "Smart Speech Flow belediyeniz için kârlı mı?",
+    "ctaText": "Tercüman saatlerine kıyasla tasarrufunuzu hesaplayın – ya da hemen satın alın. Siparişten sonra Smart Speech Flow en geç 2 gün içinde kullanıma hazırdır.",
+    "ctaSavings": "Tasarrufunuzu hesaplayın",
+    "ctaBook": "Hemen satın alın"
+  },
+  "product": {
+    "title": "Gerçek zamanlı tercümanlık – doğrudan tarayıcıda",
+    "intro": "Smart Speech Flow; konuşma tanıma, çeviri ve sesli çıktıyı kesintisiz tek bir süreçte birleştirir. Çalışanlar ve misafirler kendi dillerinde konuşur veya yazar; karşı taraf çeviriyi anında metin ve ses olarak alır.",
+    "stepsTitle": "Görüşmeden anlaşmaya",
+    "steps": [
+      {
+        "title": "Ses veya metinle giriş",
+        "text": "Çalışanlar veya vatandaşlar kendi dillerinde konuşur ya da yazar."
+      },
+      {
+        "title": "Otomatik işleme",
+        "text": "Sistem dili tanır, içeriği çevirir ve karşı taraf için çıktıyı hazırlar."
+      },
+      {
+        "title": "Metin ve ses olarak çıktı",
+        "text": "Karşı taraf çeviriyi okunabilir biçimde ve isteğe bağlı olarak sesli olarak alır."
+      },
+      {
+        "title": "Gerçek zamanlı diyalog",
+        "text": "Dil engelleri doğrudan bir iletişime dönüşür – belediyeye ait iki cihazda ya da misafirin kendi cep telefonuyla."
+      }
+    ],
+    "benefitsTitle": "Neler elde edersiniz?",
+    "benefits": [
+      {
+        "title": "Gerçek zamanlı 20 dil",
+        "text": "Almanya'da en sık konuşulan 20 yabancı dil, metin ve ses olarak çevrilir."
+      },
+      {
+        "title": "Tarayıcıda çalışır",
+        "text": "Kurulum yok, özel donanım yok: mevcut cihazlar yeterlidir."
+      },
+      {
+        "title": "2 günde kullanıma hazır",
+        "text": "Aylarca süren bir uygulamaya geçiş projesi yok: siparişten sonra sunucuyu kuruyoruz ve hemen başlayabilirsiniz."
+      },
+      {
+        "title": "Her birim için ayrı alanlar",
+        "text": "Kurumunuzu oluşturun ve tek tek birimler için kendi alanlarını ve kurallarını tanımlayın."
+      },
+      {
+        "title": "MIT lisansıyla açık kaynak",
+        "text": "Açık kaynak kod, yerel olarak çalışan açık kaynak modeller, tek bir sağlayıcıya bağımlılık yok."
+      }
+    ],
+    "techTitle": "Teknik olarak modern, kullanımı kolay",
+    "techText": "Smart Speech Flow; konuşmadan metne (Speech-to-Text), çeviri, metinden konuşmaya (Text-to-Speech) ve WebSocket tabanlı gerçek zamanlı iletişim bileşenlerinden oluşan modüler bir mimariye dayanır. Sistem şeffaf bir şekilde genişletilebilir, işletilebilir ve mevcut iş süreçlerine entegre edilebilir.",
+    "blackboxTitle": "Kara kutu bir ürün değil",
+    "blackboxText": "Kaynak kodu açık olarak erişilebilir ve MIT License kapsamındadır. Bu, şeffaflık ve uyarlanabilirlik sağlar – ve belediyenizi uzun vadede bağımsız kılar."
+  },
+  "useCases": {
+    "title": "Anlaşmanın belirleyici olduğu her yerde",
+    "intro": "Smart Speech Flow, farklı dilleri konuşan insanların birbirleriyle doğrudan ve anlaşılır biçimde konuşması gereken durumlar için tasarlandı – kamu yönetiminde, danışmanlıkta ve vatandaşlarla temasın olduğu her yerde.",
+    "stats": [
+      {
+        "value": "20",
+        "label": "Dil"
+      },
+      {
+        "value": "Gerçek zamanlı",
+        "label": "Ses ve metin çevirisi"
+      },
+      {
+        "value": "Tarayıcı",
+        "label": "kurulum gerekmez"
+      }
+    ],
+    "fieldsTitle": "Smart Speech Flow nerede katma değer sağlar?",
+    "fields": [
+      {
+        "title": "Vatandaş hizmetleri ve kamu yönetimi",
+        "text": "Ofiste, hizmet noktasında ya da sahada: Çalışanlar, dil fark etmeksizin vatandaşlarla doğrudan konuşur."
+      },
+      {
+        "title": "Sosyal danışmanlık ve uyum danışmanlığı",
+        "text": "Hassas danışma görüşmelerinde doğrudan iletişim çok önemlidir. Görüşmeler daha erişilebilir ve daha düzenli hale gelir – harici tercüman beklemeden."
+      },
+      {
+        "title": "Mahalle çalışmaları ve buluşma mekânları",
+        "text": "Semt merkezlerinde, mahalle evlerinde ve buluşma kafelerinde uzmanlar ile ziyaretçiler arasındaki iletişim daha anlaşılır hale gelir."
+      },
+      {
+        "title": "Mobil ve merkez dışı durumlar",
+        "text": "Ev ziyaretlerinde, etkinliklerde veya geçici danışmanlık hizmetlerinde de – kolayca tarayıcıda."
+      }
+    ],
+    "practiceTitle": "Uygulamada kullanımda",
+    "practiceText": "Smart Speech Flow, Kassel Şehri ile birlikte geliştirildi ve Wesertor semt merkezinde gerçek koşullar altında test edildi. Günlük konuşma dili anlaşılır şekilde Almancaya ve Almancadan aktarılır – doğrudan görüşme sırasında, tercüman beklemeden. Smart Speech Flow bugün birçok belediyede kullanılmaktadır.",
+    "transferTitle": "Belediyeniz için hazır",
+    "transferText": "Kökeni belediyeye dayanan açık kaynak bir çözüm olarak Smart Speech Flow, ayrı bir uyarlama projesine gerek kalmadan diğer şehirlerde, ilçelerde ve kurumlarda kullanılabilir."
+  },
+  "project": {
+    "title": "Projenin arkasında",
+    "intro": "Smart Speech Flow, belediyelerin günlük işleyişindeki somut bir ihtiyaçtan doğdu: kamusal ve sosyal ortamlardaki dil engellerini azaltmak.",
+    "originTitle": "Smart Speech Flow nasıl ortaya çıktı?",
+    "origin": [
+      "Semt merkezlerinde, danışma birimlerinde ve kamu kurumlarında her gün ortak bir dil konuşmayan insanlar bir araya geliyor. Fikir: bu gündelik hayatı belirgin şekilde kolaylaştıran dijital bir araç.",
+      "Smart Speech Flow, Smart Kassel / Smart City Kassel bağlamında geliştirildi. Kassel'deki Wesertor semt merkezinde, gerçek koşullar altında ve yerel halkın geri bildirimleriyle test edildi."
+    ],
+    "fundingTitle": "Destek çerçevesi",
+    "fundingText": "Smart Speech Flow, Alman Federal Hükümeti'nin Akıllı Şehirler Model Projeleri (Modellprojekte Smart Cities) kapsamında desteklenmektedir. Program, belediyeleri dijital çözümler geliştirme ve test etme konusunda destekler.",
+    "partnersTitle": "Smart Speech Flow'un arkasında kimler var?",
+    "partners": [
+      {
+        "role": "Proje ortağı",
+        "name": "Smart City Kassel",
+        "text": "Smart Kassel, uygulamanın belediye bünyesindeki kullanım ve geliştirme ortamıdır. Smart Kassel Ofisi, uygulamayı Smart Village Solutions ile birlikte geliştirdi ve test etti."
+      },
+      {
+        "role": "Teknik uygulama ve işletim",
+        "name": "Smart Village Solutions SVS GmbH",
+        "text": "SVS, platformun ve açık, modüler sistem mimarisinin tasarımından, geliştirilmesinden ve işletiminden sorumludur."
+      }
+    ],
+    "whyTitle": "Bu proje neden önemli?",
+    "why": [
+      {
+        "title": "Belediyeler için düşünüldü",
+        "text": "Soyut bir teknoloji projesi olarak değil, belediyelerin günlük işleyişindeki gerçek bir ihtiyaçtan doğdu."
+      },
+      {
+        "title": "Açık şekilde geliştirilebilir",
+        "text": "Belediye pratiğiyle bağlantı ve açık kaynak – yeniden kullanım, aktarım ve dijital egemenlik için bir temel."
+      }
+    ]
+  },
+  "openSource": {
+    "title": "İlke olarak açık kaynak",
+    "intro": "Smart Speech Flow'un kaynak kodu açık olarak erişilebilir ve MIT License kapsamındadır. Böylece yazılım belediyenize aittir – şeffaf, denetlenebilir ve geliştirilebilir.",
+    "mitTitle": "MIT License",
+    "mitText": "MIT License, yerleşik bir açık kaynak lisansıdır. Lisans bildirimi korunduğu sürece kullanıma, uyarlamaya, dağıtıma ve kendi sistemlerinize entegrasyona izin verir – lisans ücreti olmadan ve karmaşık hukuki engeller olmadan.",
+    "mitAllowsTitle": "MIT License şunlara izin verir",
+    "mitAllows": [
+      "Ticari kullanım",
+      "Değiştirme ve uyarlama",
+      "Paylaşım ve dağıtım",
+      "Özel kullanım"
+    ],
+    "principlesTitle": "Açık kaynak burada somut olarak ne anlama geliyor?",
+    "principles": [
+      {
+        "title": "Şeffaflık",
+        "text": "Her kod satırı görüntülenebilir ve izlenebilir."
+      },
+      {
+        "title": "Geliştirme",
+        "text": "Özel gereksinimlere yönelik kendi uyarlamalarınızı yapabilirsiniz."
+      },
+      {
+        "title": "Yeniden kullanılabilirlik",
+        "text": "Başka projelerde ve belediyelerde kullanım – lisans ücreti veya sağlayıcıya bağımlılık (vendor lock-in) olmadan."
+      },
+      {
+        "title": "İş birliği",
+        "text": "Entegrasyonlar ve ortak geliştirme için sağlam bir temel."
+      }
+    ],
+    "operateTitle": "Kendiniz işletin ya da işlettirin",
+    "operateText": "Smart Speech Flow'u kendi sunucularınızda işletebilirsiniz. Ya da işletimi, güncellemeleri ve sunucuyu SVS'ye bırakırsınız – ayda 250 €'dan başlayan fiyatlarla, en geç 2 gün içinde kullanıma hazır.",
+    "operateCta": "Fiyatları görün",
+    "resourcesTitle": "Kod, dokümantasyon ve katkı",
+    "resources": [
+      {
+        "title": "GitHub deposu",
+        "text": "github.com/smart-village-solutions/smart-speech-flow"
+      },
+      {
+        "title": "Dokümantasyon",
+        "text": "Teknik dokümantasyon ve kılavuzlar"
+      },
+      {
+        "title": "Lisans dosyası",
+        "text": "Depodaki MIT License"
+      }
+    ],
+    "contribute": "Dışarıdan katkı, GitHub Issues ve Pull Requests aracılığıyla mümkündür. Resmî katkı yönergeleri (Contribution Guidelines) şu anda hazırlanmaktadır. İş birliği için mesajınızı memnuniyetle bekliyoruz."
+  },
+  "contact": {
+    "title": "İletişim ve fikir alışverişi",
+    "intro": "Smart Speech Flow'u tanımak mı istiyorsunuz, satın alma ile ilgili sorularınız mı var ya da kullanım senaryonuzu konuşmak mı istiyorsunuz? Mesajınızı memnuniyetle bekliyoruz.",
+    "peopleTitle": "İrtibat kişileri",
+    "people": [
+      {
+        "name": "Corinna Neige",
+        "role": "Kassel Şehri – Dijital ve BT, Smart Kassel Ofisi"
+      },
+      {
+        "name": "Philipp Wilimzig",
+        "role": "Smart Village Solutions SVS GmbH"
+      }
+    ],
+    "direct": "Doğrudan ulaşın",
+    "topicsTitle": "Hangi konularda bize ulaşabilirsiniz?",
+    "topics": [
+      "Canlı demo ve webinar",
+      "Satın alma ile ilgili sorular",
+      "Belediyelerde kullanım senaryoları",
+      "Teknik iş birliği ve açık kaynak"
+    ],
+    "formTitle": "Mesaj gönderin",
+    "fields": {
+      "name": "Ad soyad",
+      "org": "Kurum",
+      "email": "E-posta",
+      "category": "Konu",
+      "message": "Mesaj"
+    },
+    "categories": {
+      "demo": "Canlı demo / Webinar",
+      "call": "Bireysel görüşme",
+      "booking": "Satın alma ile ilgili sorular",
+      "municipal": "Belediyede kullanım",
+      "tech": "Açık kaynak / Teknik",
+      "other": "Diğer"
+    },
+    "consent": "Gizlilik politikasını okudum ve talebimin işlenmesi amacıyla verilerimin işlenmesine onay veriyorum.",
+    "submit": "Mesaj gönderin",
+    "sent": "Mesajınız için çok teşekkür ederiz. Kısa süre içinde sizinle iletişime geçeceğiz."
+  },
+  "legal": {
+    "translationNote": "Bu metin, Almanca hukuki metnin bilgilendirme amaçlı bir çevirisidir. Farklılık olması halinde Almanca metin geçerlidir.",
+    "notice": {
+      "title": "Künye",
+      "sections": [
+        {
+          "title": "§ 5 TMG uyarınca bilgiler",
+          "lines": [
+            "Smart Village Solutions SVS GmbH",
+            "Klein Glien 25",
+            "14806 Bad Belzig",
+            "Almanya"
+          ]
+        },
+        {
+          "title": "İletişim",
+          "lines": [
+            "Tel.: 033841-63969-0",
+            "E-posta: info@smart-village.solutions"
+          ]
+        },
+        {
+          "title": "Ticaret sicili",
+          "lines": [
+            "Sicil mahkemesi: Potsdam Sulh Hukuk Mahkemesi (Amtsgericht Potsdam)",
+            "Sicil numarası: HRB 34248"
+          ]
+        },
+        {
+          "title": "Genel müdürler",
+          "lines": [
+            "Philipp Wilimzig & Erik Hildenbrand"
+          ]
+        },
+        {
+          "title": "KDV kimlik numarası",
+          "lines": [
+            "DE265570015"
+          ]
+        },
+        {
+          "title": "§ 18 Abs. 2 MStV uyarınca sorumlu kişi",
+          "lines": [
+            "Philipp Wilimzig"
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Gizlilik politikası",
+      "sections": [
+        {
+          "title": "1. Veri sorumlusu",
+          "lines": [
+            "Smart Village Solutions SVS GmbH",
+            "Klein Glien 25",
+            "14806 Bad Belzig",
+            "Almanya",
+            "E-posta: info@smart-village.solutions",
+            "Tel.: 033841-63969-0"
+          ]
+        },
+        {
+          "title": "2. Veri işlemeye ilişkin genel bilgiler",
+          "paragraphs": [
+            "Kişisel verilerinizin korunması bizim için büyük önem taşır. Verilerinizi yalnızca yasal düzenlemeler (GDPR (AB Genel Veri Koruma Tüzüğü), BDSG, TMG) temelinde işleriz. Bu gizlilik politikasında, web sitemiz kapsamındaki veri işlemenin en önemli yönleri hakkında sizi bilgilendiriyoruz."
+          ]
+        },
+        {
+          "title": "3. Web sitesinin barındırılması ve sunulması",
+          "paragraphs": [
+            "Web sitemizi ziyaret ettiğinizde, tarayıcınızın otomatik olarak ilettiği bilgiler barındırma sağlayıcısı tarafından sunucu günlük dosyalarına (server log files) otomatik olarak kaydedilir. Bunlar şunlardır:"
+          ],
+          "list": [
+            "Tarayıcı türü ve sürümü",
+            "Kullanılan işletim sistemi",
+            "Yönlendiren URL (referrer)",
+            "Erişen bilgisayarın ana bilgisayar adı",
+            "IP adresi",
+            "Sunucu isteğinin saati"
+          ],
+          "after": [
+            "Bu veriler belirli kişilerle ilişkilendirilemez. Başka veri kaynaklarıyla birleştirilmez. Veriler, GDPR Madde 6 Fıkra 1 Bent f (web sitesinin teknik olarak sunulmasına yönelik meşru menfaat) temelinde toplanır."
+          ]
+        },
+        {
+          "title": "4. İletişim formu",
+          "paragraphs": [
+            "Web sitemizdeki iletişim formu aracılığıyla bizimle iletişime geçtiğinizde, belirttiğiniz veriler (ad, kurum, e-posta adresi, kategori, mesaj) talebinizin işlenmesi amacıyla tarafımızca saklanır ve işlenir.",
+            "Hukuki dayanak, GDPR Madde 6 Fıkra 1 Bent b (sözleşme öncesi tedbirler) veya GDPR Madde 6 Fıkra 1 Bent f'dir (taleplerin yanıtlanmasına yönelik meşru menfaat). Yasal saklama yükümlülükleri aksini gerektirmediği sürece verileriniz, talebiniz tamamen işlendikten sonra silinir."
+          ]
+        },
+        {
+          "title": "[Taslak] Satın alma ve iletişim formu",
+          "paragraphs": [
+            "[Yer tutucu – yayına almadan önce veri sorumlusu veya veri koruma danışmanı tarafından tamamlanacaktır: Satın alma ve iletişim formları bilgileri (kurum, irtibat kişisi, iletişim ve fatura bilgileri, istenen başlangıç tarihi, mesaj) CRM sistemi Pipedrive'a (Pipedrive OÜ) iletir. Web sitesi Netlify'da barındırılır; formlar Netlify Functions aracılığıyla işlenir. İsteğe bağlı olarak onay e-postaları Resend üzerinden gönderilir. Eklenecekler: amaç, hukuki dayanak (GDPR Madde 6 Fıkra 1 Bent b), saklama süresi, alıcılar, veri işleme sözleşmeleri, varsa üçüncü ülkelere aktarım.]"
+          ]
+        },
+        {
+          "title": "5. Çerezler",
+          "paragraphs": [
+            "Bu web sitesi izleme çerezleri ve üçüncü taraflara ait analiz araçları kullanmaz. Yalnızca web sitesinin işletimi için gerekli olan, teknik açıdan zorunlu çerezler kullanılır."
+          ]
+        },
+        {
+          "title": "6. Haklarınız",
+          "paragraphs": [
+            "Kişisel verilerinizle ilgili olarak bize karşı aşağıdaki haklara sahipsiniz:"
+          ],
+          "list": [
+            "Bilgi edinme hakkı (GDPR Madde 15)",
+            "Düzeltme hakkı (GDPR Madde 16)",
+            "Silme hakkı (GDPR Madde 17)",
+            "İşlemenin kısıtlanmasını isteme hakkı (GDPR Madde 18)",
+            "Veri taşınabilirliği hakkı (GDPR Madde 20)",
+            "İtiraz hakkı (GDPR Madde 21)"
+          ],
+          "after": [
+            "Ayrıca kişisel verilerinizin işlenmesine ilişkin olarak bir veri koruma denetim makamına şikâyette bulunma hakkına sahipsiniz."
+          ]
+        },
+        {
+          "title": "7. Harici bağlantılar",
+          "paragraphs": [
+            "Web sitemiz, içerikleri üzerinde etkimiz bulunmayan üçüncü taraflara ait harici web sitelerine bağlantılar içerir. Bağlantı verilen sayfaların içeriğinden her zaman ilgili sağlayıcı sorumludur. Sayfalar, bağlantı oluşturulduğu sırada olası hukuka aykırılıklar açısından kontrol edilmiştir. Bağlantı oluşturulduğu sırada hukuka aykırı içerik tespit edilmemiştir."
+          ]
+        },
+        {
+          "title": "8. Bu gizlilik politikasındaki değişiklikler",
+          "paragraphs": [
+            "Bu gizlilik politikasını, her zaman güncel yasal gerekliliklere uygun olması veya hizmetlerimizdeki değişiklikleri yansıtması amacıyla değiştirme hakkımızı saklı tutarız. Bir sonraki ziyaretinizde yeni gizlilik politikası geçerli olur.",
+            "Veri koruma ile ilgili sorularınız için bize her zaman ulaşabilirsiniz: info@smart-village.solutions",
+            "Hizmet sağlayıcı hakkında daha fazla bilgiyi Künye sayfasında bulabilirsiniz."
+          ]
+        }
+      ]
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Vatandaş iletişiminde tercümanlık – Smart Speech Flow",
+      "description": "Smart Speech Flow vatandaş görüşmelerini 20 dilde gerçek zamanlı tercüme eder – hukuken güvenli, veri korumaya uygun. Tasarrufu hesaplayın, online alın."
+    },
+    "product": {
+      "title": "Tarayıcıda gerçek zamanlı tercümanlık – Smart Speech Flow",
+      "description": "Smart Speech Flow nasıl çalışır: 20 dilde konuşma tanıma, çeviri ve sesli çıktı, üç görüşme modu, 2 günde kullanıma hazır."
+    },
+    "useCases": {
+      "title": "Kamu ve danışmanlıkta kullanım – Smart Speech Flow",
+      "description": "Vatandaş hizmetleri, sosyal ve uyum danışmanlığı, mahalle çalışmaları, mobil kullanım: Smart Speech Flow dil engellerini anında aşar."
+    },
+    "project": {
+      "title": "Proje hakkında – Smart Speech Flow",
+      "description": "Smart City Kassel ile geliştirildi, Smart Village Solutions tarafından hayata geçirildi, federal Smart Cities model projeleri programınca desteklendi."
+    },
+    "openSource": {
+      "title": "MIT lisansıyla açık kaynak – Smart Speech Flow",
+      "description": "Smart Speech Flow'un kaynak kodu MIT License kapsamında: şeffaf, denetlenebilir, lisans ücretsiz. Kendiniz işletin ya da işlettirin."
+    },
+    "contact": {
+      "title": "İletişim ve canlı demo – Smart Speech Flow",
+      "description": "Canlı demo talep edin, satın alma ile ilgili sorular sorun veya kullanım senaryonuzu konuşun: Smart Speech Flow ekibine böyle ulaşırsınız."
+    },
+    "booking": {
+      "title": "Smart Speech Flow'u online satın alın",
+      "description": "Smart Speech Flow'u üç adımda satın alın: seçeneği seçin, süreyi seçin, bilgilerinizi girin. En geç 2 gün içinde kullanıma hazır."
+    },
+    "thanks": {
+      "title": "Siparişiniz için teşekkürler – Smart Speech Flow",
+      "description": "Smart Speech Flow siparişiniz bize ulaştı. Sonraki adımlar burada."
+    },
+    "legalNotice": {
+      "title": "Künye – Smart Speech Flow",
+      "description": "Smart Speech Flow künyesi: Smart Village Solutions SVS GmbH, Bad Belzig."
+    },
+    "privacy": {
+      "title": "Gizlilik politikası – Smart Speech Flow",
+      "description": "smartspeechflow.de web sitesinin gizlilik politikası: veri sorumlusu, barındırma, iletişim formu, haklarınız."
+    },
+    "notFound": {
+      "title": "Sayfa bulunamadı – Smart Speech Flow",
+      "description": "Aradığınız sayfa mevcut değil."
+    }
+  },
+  "forms": {
+    "sending": "Gönderiliyor …",
+    "invalid": "Lütfen bilgilerinizi kontrol edin – en az bir alan doğru doldurulmamış.",
+    "notConfigured": "Form henüz yapılandırılmadı. Lütfen bize info@smart-village.solutions adresinden yazın.",
+    "failed": "Maalesef bir sorun oluştu. Lütfen tekrar deneyin veya bize info@smart-village.solutions adresinden yazın."
+  },
+  "mail": {
+    "bookingSubject": "Smart Speech Flow siparişiniz",
+    "greeting": "Sayın {name},",
+    "bookingIntro": "Smart Speech Flow siparişiniz için çok teşekkür ederiz. Ayrıntılar aşağıdadır:",
+    "bookingNext": "Kurulumun sonraki adımları için sizinle iletişime geçeceğiz. Siparişten sonra Smart Speech Flow en geç 2 gün içinde kullanıma hazırdır.",
+    "signature": "Smart Speech Flow Ekibi\nSmart Village Solutions SVS GmbH · info@smart-village.solutions"
+  }
+}

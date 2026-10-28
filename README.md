@@ -122,8 +122,10 @@ Geprüft beim Aufbau mit html-validate (alle Seiten), axe-core 4.10 (WCAG 2.0–
 
 `de.json` ist die Referenz. Fehlt ein Text in einer anderen Sprache, erscheint dort der deutsche Text. `npm run i18n:check` zeigt, was fehlt.
 
-- **Stand:** Deutsch und Englisch sind vollständig. Hi, fr, it, pl, es, tr und ar sind noch leer und zeigen daher Deutsch.
-- **Englisch:** Die Texte sind von Claude übersetzt und noch nicht fachlich geprüft.
+- **Stand:** Alle 9 Sprachen sind vollständig und werden damit indexiert (sobald `PUBLIC_NOINDEX=false`).
+- **Übersetzungen von Claude, nicht fachlich geprüft:** en, fr, it, es, pl, tr, hi, ar. Vor dem Go-live sollten Muttersprachler sie gegenlesen, besonders Rechtstexte (Impressum/Datenschutz sind als Information übersetzt, die deutsche Fassung gilt), Tarifnamen und Fachbegriffe (z. B. „Protokoll-Modus“, „netto“, Kommune/Landkreis).
+- **Chat-Mockup im Hero:** Die Bürgerin spricht die Sprache der Seite (auf Deutsch: Englisch), die Mitarbeiterseite bleibt Deutsch.
+- **Bestätigungsmail** geht in der Sprache der Seite raus, auf der gebucht wurde.
 - **Neue Sprache übersetzen:** Struktur aus `de.json` kopieren und übersetzen. Für unveränderte Texte lassen sich die vorhandenen Übersetzungen der heutigen Seite übernehmen.
 
 ## Offene Punkte (vor Go-live)
@@ -141,7 +143,7 @@ Geprüft beim Aufbau mit html-validate (alle Seiten), axe-core 4.10 (WCAG 2.0–
 - [ ] Alleinstellungs-Aussage „Einziges deutsches Open-Source-Tool …“ rechtlich prüfen lassen
 - [ ] Inhalte der Unterseiten
 - [ ] Vertragsbedingungen für die Buchung klären (die AGB-Seite und die AGB-Zustimmung im Buchungsformular wurden auf Wunsch entfernt)
-- [ ] Übersetzungen für hi, fr, it, pl, es, tr, ar
+- [ ] Übersetzungen von Muttersprachlern prüfen lassen (alle außer Deutsch)
 - [ ] Video (Open Source Business Award) von der heutigen Startseite: übernehmen oder nicht?
 
 ## Go-live (später)

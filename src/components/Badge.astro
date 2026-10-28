@@ -22,7 +22,9 @@ const { size = 'M', variant = 'light', icon = false } = Astro.props;
     border: var(--border-width-default) solid transparent;
     border-radius: var(--radius-8);
     font-weight: var(--font-weight-medium);
-    white-space: nowrap;
+    max-inline-size: 100%;
+    /* Kurze Abzeichen bleiben einzeilig; lange (z. B. Aktion auf Französisch) brechen auf schmalen Bildschirmen um */
+    text-wrap: balance;
   }
   .badge--s { padding: 2px var(--spacing-4); font-size: var(--font-size-body-xxs); line-height: var(--line-height-body-xxs); }
   .badge--m { padding: var(--spacing-4) var(--spacing-8); gap: var(--spacing-8); font-size: var(--font-size-body-xs); line-height: var(--line-height-body-xs); }

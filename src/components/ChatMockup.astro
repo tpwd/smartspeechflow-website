@@ -1,13 +1,18 @@
 ---
 // Gesprächsansicht als HTML statt Bild – dadurch übersetzbar (im Figma-Entwurf: Bild „hero-screen-dialog“).
 import Icon from './Icon.astro';
-import type { Locale } from '../i18n/config';
-import { useTranslations } from '../i18n';
+import { isRtl, localeTags, type Locale } from '../i18n/config';
+import { t as translate, useTranslations } from '../i18n';
 
 interface Props {
   locale: Locale;
 }
-const { t } = useTranslations(Astro.props.locale);
+const { locale } = Astro.props;
+const { t } = useTranslations(locale);
+// Die Bürgerin spricht die Sprache der Seite; auf der deutschen Seite (und ohne Übersetzung) Englisch.
+const answerInLocale = t('chat.answer') !== translate('de', 'chat.answer');
+const answerLang = answerInLocale ? localeTags[locale] : 'en';
+const answerDir = answerInLocale && isRtl(locale) ? 'rtl' : 'ltr';
 ---
 <figure class="chat" aria-label={t('chat.label')}>
   <div class="titlebar" aria-hidden="true"><span></span><span></span><span></span><b>{t('chat.app')}</b></div>
@@ -18,7 +23,7 @@ const { t } = useTranslations(Astro.props.locale);
     </div>
     <div class="divider"><span><Icon name="globe" size={16} />{t('chat.divider')}</span></div>
     <div class="msg msg--end">
-      <div><p class="bubble bubble--green" lang="en" dir="ltr">{t('chat.answer')}</p><small>{t('chat.answerLang')}</small></div>
+      <div><p class="bubble bubble--green" lang={answerLang} dir={answerDir}>{t('chat.answer')}</p><small>{t('chat.answerLang')}</small></div>
       <span class="avatar avatar--green" aria-hidden="true">B</span>
     </div>
     <div class="msg">
