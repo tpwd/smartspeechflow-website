@@ -10,12 +10,17 @@ export function mailEnabled(config: MailConfig): config is Required<MailConfig> 
   return Boolean(config.apiKey && config.from);
 }
 
+/** "a@x.de, b@y.de" → ["a@x.de", "b@y.de"] – für MAIL_NOTIFY_TO mit mehreren Empfängern. */
+export function recipients(value: string): string[] {
+  return value.split(/[,;]/).map((s) => s.trim()).filter(Boolean);
+}
+
 export async function sendMail(config: MailConfig, mail: { to: string; subject: string; text: string; replyTo?: string }): Promise<boolean> {
   if (!mailEnabled(config)) return false;
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { authorization: `Bearer ${config.apiKey}`, 'content-type': 'application/json' },
-    body: JSON.stringify({ from: config.from, to: [mail.to], subject: mail.subject, text: mail.text, ...(mail.replyTo ? { reply_to: mail.replyTo } : {}) }),
+    body: JSON.stringify({ from: config.from, to: recipients(mail.to), subject: mail.subject, text: mail.text, ...(mail.replyTo ? { reply_to: mail.replyTo } : {}) }),
   });
   return res.ok;
 }

@@ -70,7 +70,7 @@ Die Formulare senden an `/api/booking/` und `/api/contact/`. Diese beiden Routen
 3. **API-Token:** Pipedrive → Persönliche Einstellungen → API. Am besten einen eigenen Pipedrive-Nutzer nur für die Website verwenden, dann hängt der Token nicht an einer Person.
 4. **Lokal testen:** `.env.example` nach `.env` kopieren, `PIPEDRIVE_API_TOKEN`, `PIPEDRIVE_DOMAIN`, `PIPEDRIVE_PIPELINE_ID`, `PIPEDRIVE_BOOKING_STAGE_ID` eintragen, `npm run dev`, Testbuchung abschicken, Deal in Pipedrive prüfen und wieder löschen.
 5. **Netlify:** Repository verbinden (Build-Befehl `npm run build`, Ordner `dist`, Node 22). Dieselben Variablen unter *Site configuration → Environment variables* eintragen. Die `.env` wird nie hochgeladen.
-6. **Bestätigungsmails (optional):** Konto bei Resend, Domain smartspeechflow.de dort verifizieren (DNS-Einträge), dann `RESEND_API_KEY`, `MAIL_FROM`, `MAIL_NOTIFY_TO` setzen. Ohne diese Werte wird keine Mail verschickt, und die Danke-Seite verspricht auch keine.
+6. **Bestätigungsmails (optional):** Absender-Domain `mail.smartspeechflow.de` ist im Resend-Konto von TPWD angelegt (Region EU); sie wird erst nach Eintragen der DNS-Einträge verifiziert. Dann `RESEND_API_KEY`, `MAIL_FROM` (z. B. `Smart Speech Flow <buchung@mail.smartspeechflow.de>`) und `MAIL_NOTIFY_TO` (mehrere Adressen mit Komma getrennt) setzen. Ohne diese Werte wird keine Mail verschickt, und die Danke-Seite verspricht auch keine.
 
 **Ohne Pipedrive vorführen:** `FORMS_DEMO=true` – die Formulare melden Erfolg, speichern aber nichts. Nur lokal oder auf einer Vorschau-Adresse verwenden, nie live.
 
