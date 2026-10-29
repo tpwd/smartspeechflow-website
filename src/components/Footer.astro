@@ -18,6 +18,7 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
       <div class="brand">
         <a href={pathFor(locale, 'home')} class="logo"><span class="visually-hidden">Smart Speech Flow</span><Fragment set:html={logo} /></a>
         <p class="t-body-xs">{t('footer.claim')}</p>
+        <p>{t('partnership.claim')} <a href={links.smartCityKassel}>{t('partnership.city')}</a> {t('partnership.and')} <a href={links.svs}>Smart Village Solutions SVS GmbH</a>.</p>
       </div>
       <nav aria-label={t('footer.navigation')}>
         <h2>{t('footer.navigation')}</h2>
@@ -48,8 +49,8 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
       <div>
         <h2>{t('footer.info')}</h2>
         <ul role="list">
-          <li>{t('footer.projectBy')}<br /><a href={links.smartCityKassel} rel="noopener">Smart City Kassel</a></li>
-          <li>{t('footer.implementation')}<br /><a href={links.svs} rel="noopener">Smart Village Solutions SVS GmbH</a></li>
+          <li>{t('partnership.partner')}<br /><a href={links.smartCityKassel} rel="noopener">{t('partnership.city')}</a></li>
+          <li>{t('partnership.partner')}<br /><a href={links.svs} rel="noopener">Smart Village Solutions SVS GmbH</a></li>
         </ul>
       </div>
     </div>

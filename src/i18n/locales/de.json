@@ -425,7 +425,7 @@
   },
   "project": {
     "title": "Hinter dem Projekt",
-    "intro": "Smart Speech Flow ist aus einem konkreten Bedarf im kommunalen Alltag entstanden: Sprachbarrieren in öffentlichen und sozialen Kontexten zu verringern.",
+    "intro": "Ein gemeinsames Projekt von Stadt Kassel und Smart Village Solutions SVS GmbH. Smart Speech Flow ist aus einem konkreten Bedarf im kommunalen Alltag entstanden: Sprachbarrieren in öffentlichen und sozialen Kontexten zu verringern.",
     "originTitle": "Wie Smart Speech Flow entstanden ist",
     "origin": [
       "In Stadtteilzentren, Beratungsstellen und öffentlichen Einrichtungen treffen täglich Menschen aufeinander, die keine gemeinsame Sprache sprechen. Die Idee: ein digitales Werkzeug, das diesen Alltag spürbar erleichtert.",
@@ -437,13 +437,13 @@
     "partners": [
       {
         "role": "Projektpartner",
-        "name": "Smart City Kassel",
-        "text": "Smart Kassel ist kommunaler Anwendungs- und Entwicklungskontext. Das Smart Kassel Büro hat die Anwendung gemeinsam mit Smart Village Solutions entwickelt und erprobt."
+        "name": "Stadt Kassel",
+        "text": "Die Stadt Kassel gestaltet Smart Speech Flow über das Smart Kassel Büro gemeinsam mit SVS. Sie bringt kommunale Anforderungen ein und erprobt die Anwendung im Stadtteilzentrum Wesertor mit den Menschen vor Ort."
       },
       {
-        "role": "Technische Umsetzung und Betrieb",
+        "role": "Projektpartner",
         "name": "Smart Village Solutions SVS GmbH",
-        "text": "SVS verantwortet Konzeption, Entwicklung und Betrieb der Plattform und ihrer offenen, modularen Systemarchitektur."
+        "text": "Smart Village Solutions entwickelt Smart Speech Flow gemeinsam mit der Stadt Kassel. SVS verantwortet die technische Umsetzung, die offene Systemarchitektur und den Betrieb der Plattform."
       }
     ],
     "whyTitle": "Warum dieses Projekt wichtig ist",
@@ -747,5 +747,11 @@
     "bookingIntro": "vielen Dank für Ihre Buchung von Smart Speech Flow. Hier die Details:",
     "bookingNext": "Wir melden uns mit den nächsten Schritten zur Einrichtung. Nach der Buchung ist Smart Speech Flow in bis zu 2 Tagen startklar.",
     "signature": "Ihr Team von Smart Speech Flow\nSmart Village Solutions SVS GmbH · info@smart-village.solutions"
+  },
+  "partnership": {
+    "claim": "Ein gemeinsames Projekt von",
+    "city": "Stadt Kassel",
+    "and": "und",
+    "partner": "Projektpartner"
   }
 }

@@ -425,7 +425,7 @@
   },
   "project": {
     "title": "Projenin arkasında",
-    "intro": "Smart Speech Flow, belediyelerin günlük işleyişindeki somut bir ihtiyaçtan doğdu: kamusal ve sosyal ortamlardaki dil engellerini azaltmak.",
+    "intro": "Ortak proje: Kassel Belediyesi ve Smart Village Solutions SVS GmbH. Smart Speech Flow, belediyelerin günlük işleyişindeki somut bir ihtiyaçtan doğdu: kamusal ve sosyal ortamlardaki dil engellerini azaltmak.",
     "originTitle": "Smart Speech Flow nasıl ortaya çıktı?",
     "origin": [
       "Semt merkezlerinde, danışma birimlerinde ve kamu kurumlarında her gün ortak bir dil konuşmayan insanlar bir araya geliyor. Fikir: bu gündelik hayatı belirgin şekilde kolaylaştıran dijital bir araç.",
@@ -437,13 +437,13 @@
     "partners": [
       {
         "role": "Proje ortağı",
-        "name": "Smart City Kassel",
-        "text": "Smart Kassel, uygulamanın belediye bünyesindeki kullanım ve geliştirme ortamıdır. Smart Kassel Ofisi, uygulamayı Smart Village Solutions ile birlikte geliştirdi ve test etti."
+        "name": "Kassel Belediyesi",
+        "text": "Kassel Belediyesi, Smart Kassel ofisi aracılığıyla Smart Speech Flow’u SVS ile birlikte şekillendirir. Belediyenin gereksinimlerini projeye taşır ve uygulamayı Wesertor mahalle merkezinde yerel halkla birlikte dener."
       },
       {
-        "role": "Teknik uygulama ve işletim",
+        "role": "Proje ortağı",
         "name": "Smart Village Solutions SVS GmbH",
-        "text": "SVS, platformun ve açık, modüler sistem mimarisinin tasarımından, geliştirilmesinden ve işletiminden sorumludur."
+        "text": "Smart Village Solutions, Smart Speech Flow’u Kassel Belediyesi ile birlikte geliştirir. SVS teknik uygulama, açık sistem mimarisi ve platformun işletilmesinden sorumludur."
       }
     ],
     "whyTitle": "Bu proje neden önemli?",
@@ -747,5 +747,11 @@
     "bookingIntro": "Smart Speech Flow siparişiniz için çok teşekkür ederiz. Ayrıntılar aşağıdadır:",
     "bookingNext": "Kurulumun sonraki adımları için sizinle iletişime geçeceğiz. Siparişten sonra Smart Speech Flow en geç 2 gün içinde kullanıma hazırdır.",
     "signature": "Smart Speech Flow Ekibi\nSmart Village Solutions SVS GmbH · info@smart-village.solutions"
+  },
+  "partnership": {
+    "claim": "Ortak proje:",
+    "city": "Kassel Belediyesi",
+    "and": "ve",
+    "partner": "Proje ortağı"
   }
 }

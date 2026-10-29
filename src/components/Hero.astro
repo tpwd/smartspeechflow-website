@@ -7,7 +7,7 @@ import ChatMockup from './ChatMockup.astro';
 import Icon from './Icon.astro';
 import { pathFor, type Locale } from '../i18n/config';
 import { useTranslations } from '../i18n';
-import { demoHref } from '../data/site';
+import { demoHref, links } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -21,6 +21,7 @@ const { t } = useTranslations(locale);
       <Badge icon>{t('promo.badge')}</Badge>
       <h1 id="hero-title" class="t-hero">{t('hero.headline')}</h1>
       <p class="t-body-l">{t('hero.subline')}</p>
+      <p class="project-credit t-body-s">{t('partnership.claim')} <a href={links.smartCityKassel}>{t('partnership.city')}</a> {t('partnership.and')} <a href={links.svs}>Smart Village Solutions SVS GmbH</a>.</p>
       <div class="ctas">
         <Button href={pathFor(locale, 'booking')} size="L" icon>{t('hero.ctaBook')}</Button>
         <Button href={demoHref(pathFor(locale, 'contact'))} size="L" variant="secondary-dark">{t('hero.ctaDemo')}</Button>
@@ -39,6 +40,7 @@ const { t } = useTranslations(locale);
   .text { padding-block: var(--spacing-40); padding-inline: var(--page-gutter); }
   .inner { display: grid; gap: var(--spacing-24); justify-items: start; max-inline-size: 588px; }
   .inner p { color: var(--color-gray-cool-700); }
+  .project-credit a { color: var(--color-petrol-900); font-weight: var(--font-weight-semibold); text-underline-offset: 3px; }
   .ctas { display: grid; gap: 12px; inline-size: 100%; }
   .ctas :global(.btn) { inline-size: 100%; }
   .savings-link { display: inline-flex; align-items: center; gap: var(--spacing-8); color: var(--color-petrol-900); font-weight: var(--font-weight-semibold); }

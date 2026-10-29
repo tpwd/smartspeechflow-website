@@ -425,7 +425,7 @@
   },
   "project": {
     "title": "ما وراء المشروع",
-    "intro": "نشأ Smart Speech Flow من حاجة ملموسة في العمل البلدي اليومي: الحدّ من الحواجز اللغوية في السياقات العامة والاجتماعية.",
+    "intro": "مشروع مشترك بين مدينة كاسل و Smart Village Solutions SVS GmbH. نشأ Smart Speech Flow من حاجة ملموسة في العمل البلدي اليومي: الحدّ من الحواجز اللغوية في السياقات العامة والاجتماعية.",
     "originTitle": "كيف نشأ Smart Speech Flow",
     "origin": [
       "في المراكز المجتمعية للأحياء ومراكز الاستشارة والمؤسسات العامة يلتقي يوميًا أشخاص لا تجمعهم لغة مشتركة. والفكرة: أداة رقمية تُيسّر هذا الواقع اليومي بشكل ملموس.",
@@ -437,13 +437,13 @@
     "partners": [
       {
         "role": "شريك المشروع",
-        "name": "Smart City Kassel",
-        "text": "يمثّل Smart Kassel السياق البلدي للتطبيق والتطوير. وقد طوّر مكتب Smart Kassel التطبيق وجرّبه بالتعاون مع Smart Village Solutions."
+        "name": "مدينة كاسل",
+        "text": "تشارك مدينة كاسل في تطوير Smart Speech Flow مع SVS من خلال مكتب Smart Kassel. وتساهم بمتطلبات العمل البلدي وتختبر التطبيق مع السكان في المركز المجتمعي في فيزرتور."
       },
       {
-        "role": "التنفيذ التقني والتشغيل",
+        "role": "شريك المشروع",
         "name": "Smart Village Solutions SVS GmbH",
-        "text": "تتولى SVS مسؤولية تصميم المنصة وتطويرها وتشغيلها، إلى جانب بنيتها المعيارية المفتوحة."
+        "text": "تطوّر Smart Village Solutions تطبيق Smart Speech Flow بالتعاون مع مدينة كاسل. وتتولى SVS التنفيذ التقني وبنية النظام المفتوحة وتشغيل المنصة."
       }
     ],
     "whyTitle": "لماذا يُعدّ هذا المشروع مهمًا",
@@ -747,5 +747,11 @@
     "bookingIntro": "نشكركم على حجز Smart Speech Flow. وفيما يلي التفاصيل:",
     "bookingNext": "سنتواصل معكم بشأن الخطوات التالية للإعداد. بعد الحجز يصبح Smart Speech Flow جاهزًا للعمل خلال يومين كحد أقصى.",
     "signature": "فريق Smart Speech Flow\nSmart Village Solutions SVS GmbH · info@smart-village.solutions"
+  },
+  "partnership": {
+    "claim": "مشروع مشترك بين",
+    "city": "مدينة كاسل",
+    "and": "و",
+    "partner": "شريك المشروع"
   }
 }

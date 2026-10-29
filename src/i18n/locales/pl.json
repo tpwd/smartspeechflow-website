@@ -425,7 +425,7 @@
   },
   "project": {
     "title": "Za kulisami projektu",
-    "intro": "Smart Speech Flow powstał w odpowiedzi na konkretną potrzebę w codziennej pracy samorządu: zmniejszenie barier językowych w kontekstach publicznych i społecznych.",
+    "intro": "Wspólny projekt: Miasto Kassel i Smart Village Solutions SVS GmbH. Smart Speech Flow powstał w odpowiedzi na konkretną potrzebę w codziennej pracy samorządu: zmniejszenie barier językowych w kontekstach publicznych i społecznych.",
     "originTitle": "Jak powstał Smart Speech Flow",
     "origin": [
       "W centrach dzielnicowych, poradniach i instytucjach publicznych codziennie spotykają się ludzie, którzy nie mówią wspólnym językiem. Pomysł: cyfrowe narzędzie, które wyraźnie ułatwi tę codzienność.",
@@ -437,13 +437,13 @@
     "partners": [
       {
         "role": "Partner projektu",
-        "name": "Smart City Kassel",
-        "text": "Smart Kassel stanowi samorządowe środowisko zastosowania i rozwoju. Biuro Smart Kassel opracowało i przetestowało aplikację wspólnie z Smart Village Solutions."
+        "name": "Miasto Kassel",
+        "text": "Miasto Kassel współtworzy Smart Speech Flow z SVS za pośrednictwem biura Smart Kassel. Wnosi wymagania samorządu i testuje aplikację z lokalną społecznością w centrum dzielnicowym Wesertor."
       },
       {
-        "role": "Realizacja techniczna i utrzymanie",
+        "role": "Partner projektu",
         "name": "Smart Village Solutions SVS GmbH",
-        "text": "SVS odpowiada za koncepcję, rozwój i utrzymanie platformy oraz jej otwartej, modułowej architektury systemu."
+        "text": "Smart Village Solutions rozwija Smart Speech Flow wspólnie z miastem Kassel. SVS odpowiada za realizację techniczną, otwartą architekturę systemu i utrzymanie platformy."
       }
     ],
     "whyTitle": "Dlaczego ten projekt jest ważny",
@@ -747,5 +747,11 @@
     "bookingIntro": "dziękujemy za zamówienie Smart Speech Flow. Oto szczegóły:",
     "bookingNext": "Skontaktujemy się z Państwem w sprawie kolejnych kroków konfiguracji. Po złożeniu zamówienia Smart Speech Flow jest gotowy do pracy w ciągu maksymalnie 2 dni.",
     "signature": "Zespół Smart Speech Flow\nSmart Village Solutions SVS GmbH · info@smart-village.solutions"
+  },
+  "partnership": {
+    "claim": "Wspólny projekt:",
+    "city": "Miasto Kassel",
+    "and": "i",
+    "partner": "Partner projektu"
   }
 }

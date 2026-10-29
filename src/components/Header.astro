@@ -1,5 +1,6 @@
 ---
 import logoSvg from '../assets/logos/ssf-logo.svg?raw';
+import { links } from '../data/site';
 import Badge from './Badge.astro';
 import Button from './Button.astro';
 import Icon from './Icon.astro';
@@ -25,10 +26,13 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
 ---
 <header class="site-header">
   <div class="container bar">
+    <div class="project-brand">
     <a class="logo" href={pathFor(locale, 'home')}>
       <span class="visually-hidden">Smart Speech Flow – {t('nav.home')}</span>
       <Fragment set:html={logo} />
     </a>
+    <a class="kassel-logo" href={links.smartCityKassel}><img src="/kassel-logo.svg" alt="Stadt Kassel" width="163" height="66" /></a>
+    </div>
 
     <nav class="nav-desktop" aria-label={t('nav.main')}>
       <ul role="list">
@@ -98,10 +102,13 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--spacing-24);
+    gap: 8px;
     min-block-size: 64px;
     padding-block: var(--spacing-8);
   }
+  .project-brand { display: flex; align-items: center; gap: 12px; flex: none; }
+  .kassel-logo { display: block; inline-size: 96px; }
+  .kassel-logo img { display: block; inline-size: 100%; block-size: auto; }
   .logo { display: block; flex: none; }
   .logo :global(svg) { inline-size: 111px; block-size: auto; }
   .nav-desktop ul { display: flex; align-items: center; gap: var(--spacing-32); margin: 0; padding: 0; }
@@ -116,7 +123,7 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
   }
   .nav-desktop a:hover,
   .nav-desktop a[aria-current='page'] { text-decoration: underline; text-underline-offset: 6px; }
-  .actions { display: flex; align-items: center; gap: var(--spacing-24); }
+  .actions { display: flex; align-items: center; gap: 8px; }
   .menu-toggle {
     display: inline-flex;
     align-items: center;
@@ -151,11 +158,20 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
 
   /* Mobil + Tablet (< 1024 px, abgeleitet): Logo, Sprache, Menü-Button */
   .nav-desktop, .lang-desktop, .actions :global(.book-desktop) { display: none; }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     .bar { min-block-size: 97px; }
     .logo :global(svg) { inline-size: 149px; }
     .nav-desktop, .lang-desktop { display: block; }
     .actions :global(.book-desktop) { display: inline-flex; }
     .lang-mobile, .menu-toggle, .mobile-menu { display: none; }
   }
+</style>
+
+<style>
+  @media (max-width: 374px) {
+    .project-brand { gap: 6px; }
+    .logo :global(svg) { inline-size: 84px; }
+    .kassel-logo { inline-size: 78px; }
+  }
+  @media (min-width: 1280px) { .kassel-logo { inline-size: 124px; } .nav-desktop ul { gap: 20px; } }
 </style>
