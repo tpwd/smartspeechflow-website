@@ -1,5 +1,5 @@
 ---
-import logoSvg from '../assets/logos/ssf-logo-inverse.svg?raw';
+import logoSvg from '../assets/logos/ssf-logo.svg?raw';
 import { pathFor, type Locale } from '../i18n/config';
 import { useTranslations } from '../i18n';
 import { callHref, demoHref, links } from '../data/site';
@@ -79,7 +79,7 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
     gap: var(--spacing-32) var(--spacing-24);
   }
   .brand { grid-column: 1 / -1; display: grid; gap: var(--spacing-16); max-inline-size: 384px; }
-  .logo :global(svg) { inline-size: 111px; }
+  .logo :global(svg) { inline-size: 111px; block-size: auto; filter: brightness(0) invert(1); }
   h2 {
     margin-block-end: var(--spacing-12, 12px);
     color: var(--color-white);

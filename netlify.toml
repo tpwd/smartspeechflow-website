@@ -1,0 +1,8 @@
+[build]
+command = "npm run build"
+publish = "dist"
+
+[build.environment]
+NODE_VERSION = "22"
+
+# Der Astro-Netlify-Adapter erzeugt Functions und Weiterleitungen beim Build.
