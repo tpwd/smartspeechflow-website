@@ -23,6 +23,11 @@ const mock = createServer(async (req, res) => {
     return;
   }
   writes.push({ path, body });
+  // Ohne Pipedrive-Kontaktsynchronisierung wird dieses optionale Personenfeld mit 403 abgelehnt.
+  if (path === '/api/v2/persons' && Object.hasOwn(body, 'job_title')) {
+    res.writeHead(403).end(JSON.stringify({ success: false, error: 'Contact sync is not enabled' }));
+    return;
+  }
   if (path === '/api/v1/notes') {
     const allowed = ['content', 'deal_id', 'lead_id', 'person_id', 'org_id', 'pinned_to_deal_flag', 'pinned_to_lead_flag'];
     const valid = Object.keys(body).every((key) => allowed.includes(key))
@@ -73,7 +78,7 @@ async function post(route, data, origin = 'http://127.0.0.1:4398') {
   return { status: res.status, body: await res.json() };
 }
 const booking = { locale: 'de', option: 'shared', term: 'prepaid', organisation: 'TEST Integration', name: 'Testperson',
-  email: 'test@example.com', street: 'Teststraße 1', zip: '12345', city: 'Teststadt', consentPrivacy: true, message: '<script>test</script>' };
+  email: 'test@example.com', role: 'Amtsleitung – Formularprüfung', street: 'Teststraße 1', zip: '12345', city: 'Teststadt', consentPrivacy: true, message: '<script>test</script>' };
 const contact = { locale: 'de', name: 'Testperson', email: 'test@example.com', organisation: 'TEST Integration', category: 'demo', message: 'TEST Anfrage', consent: true };
 try {
   await start();
@@ -85,8 +90,16 @@ try {
     assert.equal(result.body.emailSent, false);
     assert.equal(writes.findLast((w) => w.path === '/api/v2/deals').body.value, value);
     assert.ok(writes.at(-1).body.content.includes('&lt;script&gt;test&lt;/script&gt;'));
+    assert.ok(writes.at(-1).body.content.includes(`<b>Funktion:</b> ${booking.role}`));
+    assert.equal(Object.hasOwn(writes.findLast((w) => w.path === '/api/v2/persons').body, 'job_title'), false);
   }
   console.log('PASS: all hosted plans/terms, server prices, CRM notes, HTML escaping, no false mail promise');
+  console.log('PASS: new contacts without contact sync; booking role preserved in deal note');
+
+  const { role: _role, ...withoutRole } = booking;
+  assert.equal((await post('booking', withoutRole)).status, 200);
+  assert.equal(writes.at(-1).body.content.includes('<b>Funktion:</b>'), false);
+  console.log('PASS: booking without optional role');
 
   for (const overrides of [{ consentPrivacy: false }, { zip: 'ABCDE' }, { organisation: '  ' }, { email: 'invalid' }, { option: 'selfhosted' }]) {
     const count = writes.length;

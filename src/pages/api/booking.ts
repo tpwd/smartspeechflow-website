@@ -35,7 +35,8 @@ export const POST: APIRoute = async ({ request, url }) => {
     const pd = createPipedrive({ token: PIPEDRIVE_API_TOKEN, domain: PIPEDRIVE_DOMAIN, baseUrl: PIPEDRIVE_BASE_URL });
     const address = `${input.street}, ${input.zip} ${input.city}`;
     const orgId = await pd.upsertOrganization(input.organisation, address);
-    const personId = await pd.upsertPerson({ name: input.name, email: input.email, phone: input.phone, orgId, jobTitle: input.role });
+    // Funktion bleibt in der Buchungsnotiz: job_title setzt bei Pipedrive Kontaktsynchronisierung voraus.
+    const personId = await pd.upsertPerson({ name: input.name, email: input.email, phone: input.phone, orgId });
     const dealId = await pd.createDeal({
       title: `Smart Speech Flow – ${optionLabel} – ${input.organisation}`,
       value: price.firstYearNet,
