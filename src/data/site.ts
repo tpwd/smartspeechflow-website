@@ -4,7 +4,7 @@ export type PlanId = 'shared' | 'dedicated' | 'selfhosted';
 
 export interface Plan {
   id: PlanId;
-  /** Netto-Monatspreis in Euro; null = noch nicht festgelegt (Platzhalter „xy €“). */
+  /** Netto-Monatspreis in Euro; null = Selbstbetrieb mit optionaler Unterstützung nach Aufwand. */
   monthlyNet: number | null;
   /** Ob die Aktion „2 Monate gratis“ für diese Option gilt. */
   promo: boolean;
@@ -13,9 +13,10 @@ export interface Plan {
 export const plans: Plan[] = [
   { id: 'shared', monthlyNet: 250, promo: true },
   { id: 'dedicated', monthlyNet: 1000, promo: true },
-  // TODO: Preis für den Selbstbetrieb fehlt im Entwurf („xy €“).
   { id: 'selfhosted', monthlyNet: null, promo: false },
 ];
+
+export const selfHostedSupport = { hourlyGross: 169 };
 
 export const promotion = {
   /** Letzter Buchungstag der Aktion (inklusive). */

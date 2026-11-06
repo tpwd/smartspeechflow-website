@@ -26,8 +26,9 @@ export function createPipedrive(config: PipedriveConfig) {
       body: body === undefined ? undefined : JSON.stringify(body),
     });
     const json = (await res.json().catch(() => ({}))) as { success?: boolean; data?: T; error?: string };
-    if (!res.ok || json.success === false) {
-      throw new PipedriveError(`Pipedrive ${method} ${path} → ${res.status} ${json.error ?? ''}`.trim(), res.status);
+    if (!res.ok || json.success !== true || json.data === undefined) {
+      // Suchbegriffe und Nutzereingaben gehören nicht in Function-Logs.
+      throw new PipedriveError(`Pipedrive ${method} ${path.split('?')[0]} → ${res.status}`, res.status);
     }
     return json.data as T;
   }
@@ -89,8 +90,8 @@ export function createPipedrive(config: PipedriveConfig) {
     async addNote(n: { content: string; dealId?: number; leadId?: string; personId?: number; orgId?: number }): Promise<void> {
       await call('POST', '/api/v1/notes', {
         content: n.content,
-        ...(n.dealId ? { deal_id: n.dealId, pin_to_deal_flag: 1 } : {}),
-        ...(n.leadId ? { lead_id: n.leadId, pin_to_lead_flag: 1 } : {}),
+        ...(n.dealId ? { deal_id: n.dealId, pinned_to_deal_flag: 1 } : {}),
+        ...(n.leadId ? { lead_id: n.leadId, pinned_to_lead_flag: 1 } : {}),
         ...(n.personId && !n.dealId && !n.leadId ? { person_id: n.personId } : {}),
         ...(n.orgId && !n.dealId && !n.leadId ? { org_id: n.orgId } : {}),
       });

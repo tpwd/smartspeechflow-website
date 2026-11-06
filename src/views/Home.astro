@@ -12,7 +12,7 @@ import tileDevices from '../assets/images/tile-geraete.jpg';
 import tileLanguages from '../assets/images/tile-sprachen.jpg';
 import { pathFor, localeTags, type Locale } from '../i18n/config';
 import { fill, useTranslations } from '../i18n';
-import { breakEvenHoursPerMonth, callHref, demoHref, formatEuro, plans, pricedPlans, savings } from '../data/site';
+import { breakEvenHoursPerMonth, callHref, demoHref, formatEuro, plans, pricedPlans, savings, selfHostedSupport } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -31,7 +31,8 @@ const tiles = [
 const cheapest = pricedPlans.reduce((a, b) => (b.monthlyNet < a.monthlyNet ? b : a));
 const breakEven = breakEvenHoursPerMonth(cheapest.monthlyNet);
 const why = tv<Item[]>('why.items').map((item) => ({ ...item, text: fill(item.text, { hours: breakEven, rate: savings.interpreterHourlyRate }) }));
-const quotes = tv<{ quote: string; name: string; org: string }[]>('testimonials.items');
+// Nicht freigegebene Entwurfszitate mit Platzhaltern nicht öffentlich anzeigen.
+const quotes = tv<{ quote: string; name: string; org: string }[]>('testimonials.items').filter((q) => q.name && !/\[|\]/.test(q.name));
 const contact = pathFor(locale, 'contact');
 ---
 <Hero locale={locale} />
@@ -58,14 +59,14 @@ const contact = pathFor(locale, 'contact');
   </div>
 </section>
 
-<section class="section" aria-labelledby="testimonials-title">
+{quotes.length > 0 && <section class="section" aria-labelledby="testimonials-title">
   <div class="container stack" style="--stack-gap: var(--spacing-40)">
     <h2 id="testimonials-title" class="t-section">{t('testimonials.title')}</h2>
     <div class="quotes">
       {quotes.map((q) => <Testimonial quote={q.quote} name={q.name} org={q.org} coatLabel={t('testimonials.coatOfArms')} />)}
     </div>
   </div>
-</section>
+</section>}
 
 <section id="preise" class="section section--tint" aria-labelledby="pricing-title">
   <div class="container stack" style="--stack-gap: var(--spacing-40)">
@@ -75,11 +76,13 @@ const contact = pathFor(locale, 'contact');
         <PricingCard
           overline={t(`pricing.plans.${plan.id}.overline`)}
           title={t(`pricing.plans.${plan.id}.title`)}
-          price={plan.monthlyNet === null ? t('pricing.pricePlaceholder') : formatEuro(plan.monthlyNet, localeTags[locale])}
-          unit={t('pricing.perMonth')}
+          price={formatEuro(plan.monthlyNet ?? selfHostedSupport.hourlyGross, localeTags[locale])}
+          unit={t(plan.id === 'selfhosted' ? 'pricing.perHourGross' : 'pricing.perMonth')}
           badge={plan.promo ? t('promo.badge') : t(`pricing.plans.${plan.id}.badge`)}
-          features={tv<string[]>(`pricing.plans.${plan.id}.features`)}
-          cta={{ label: t('pricing.book'), href: `${pathFor(locale, 'booking')}?option=${plan.id}` }}
+          features={[...tv<string[]>(`pricing.plans.${plan.id}.features`), ...(plan.id === 'selfhosted' ? [t('pricing.support')] : [])]}
+          cta={plan.id === 'selfhosted'
+            ? { label: t('pricing.requestSupport'), href: `${contact}?topic=selfhosted` }
+            : { label: t('pricing.book'), href: `${pathFor(locale, 'booking')}?option=${plan.id}` }}
         />
       ))}
     </div>

@@ -61,7 +61,11 @@ Die Formulare senden an `/api/booking/` und `/api/contact/`. Diese beiden Routen
 
 **Kontaktanfrage:** Lead mit Notiz (Leads-Eingang). Ist `PIPEDRIVE_CONTACT_STAGE_ID` gesetzt, wird stattdessen ein Deal in dieser Phase angelegt.
 
+**Selbstbetrieb:** Optionale Unterstützung nach Aufwand zu **169 € brutto pro Stunde** (`selfHostedSupport.hourlyGross`). Die Preiskarte führt zu einer unverbindlichen Kontaktanfrage mit Thema `selfhosted`, ohne Hosting-Laufzeit oder pauschalen Auftragswert. Alte Buchungslinks mit `?option=selfhosted` führen ebenfalls dorthin. Die Buchungs-API akzeptiert ausschließlich die beiden Hosting-Angebote.
+
 **Fehlerfälle:** fehlerhafte Eingaben → Meldung und Fokus auf das erste Feld; Pipedrive nicht konfiguriert → Hinweis auf E-Mail/Telefon; Pipedrive nicht erreichbar → Hinweis, es später erneut zu versuchen oder direkt Kontakt aufzunehmen.
+
+Feldfehler werden zusätzlich direkt am jeweiligen Feld mit `aria-describedby` angezeigt. Falls ein Deal/Lead bereits angelegt wurde und erst die Notiz fehlschlägt, liefert die API `error: partial` mit einer Vorgangsnummer. Das Formular bewahrt die Angaben, zeigt einen Kontakt-Hinweis mit dieser Nummer und verhindert weiteres Absenden. Es wird dabei kein Erfolg behauptet und keine automatische Wiederholung vorgenommen. Ein Verbindungsabbruch ohne Serverantwort kann weiterhin nur durch CRM-Prüfung geklärt werden.
 
 ### Stand der Einrichtung (28.10.2026)
 
@@ -146,6 +150,8 @@ Diese Adressen enthalten den Token. Danach den Browserverlauf dafür löschen od
 
 ### Lokal testen (Entwickler)
 
+`npm run test:forms` prüft die Formular-APIs gegen einen strikten lokalen Pipedrive-Nachbau: Preise, Notizparameter (`pinned_to_deal_flag`/`pinned_to_lead_flag`), Validierung, Selbstbetriebsanfragen und Teilspeicherung. Der Test verwendet ausschließlich synthetische Daten und schreibt nicht ins echte CRM. Er benötigt den lokalen Port 4398.
+
 `.env.example` nach `.env` kopieren, Werte eintragen, `npm run dev`, Formular unter http://localhost:4321/de/buchen/ abschicken. Die `.env` wird nie hochgeladen.
 
 **Ohne Pipedrive vorführen:** `FORMS_DEMO=true` – die Formulare melden Erfolg, speichern aber nichts. Nur lokal oder auf einer Vorschau-Adresse verwenden, nie live.
@@ -210,10 +216,10 @@ Geprüft beim Aufbau mit html-validate (alle Seiten), axe-core 4.10 (WCAG 2.0–
 - [ ] AV-Verträge Pipedrive, Netlify, ggf. Resend; Datenschutz-Abschnitt dazu prüfen lassen
 - [ ] Impressum/Datenschutz: Die Bestandstexte nennen das TMG, das 2024 durch das Digitale-Dienste-Gesetz (DDG) abgelöst wurde – rechtlich prüfen lassen. Abschnitt zu den Formularen ist als Entwurf ergänzt und muss geprüft werden.
 - [ ] Serverstandort: „Server in Deutschland“ ist laut Briefing nicht belegt (Hosting bei Hetzner) – Formulierung bestätigen
-- [ ] Preis „Betrieb in der Kommune“ (`src/data/site.ts`, derzeit `null` → „xy €“)
+- [x] Selbstbetrieb: optionale Unterstützung nach Aufwand, 169 € brutto/Stunde, unverbindliche Anfrage
 - [ ] Ziele für „Live-Demo buchen“ und „Individueller Call“ (`links.demo`, `links.call`; derzeit Kontaktseite)
 - [ ] Aktion: Gilt sie nur bei 12 Monaten Vorauszahlung? (`promotion.requiresPrepaid`)
-- [ ] Testimonials: Namen, Funktionen, Freigaben, Wappen
+- [ ] Testimonials: Namen, Funktionen, Freigaben, Wappen; Einträge mit Platzhaltern im Namen werden bis dahin nicht angezeigt
 - [ ] Bildrechte prüfen. Die Fotos stammen aus Figma, Dateinamen dort deuten auf Getty Images hin. Das Hero-Foto liegt nur in 509 × 339 px vor, für scharfe Darstellung wird eine größere Fassung gebraucht.
 - [ ] Nutzungsrechte und Belege für die Pressen-Logos (hr, Kommune21, RTL)
 - [ ] Alleinstellungs-Aussage „Einziges deutsches Open-Source-Tool …“ rechtlich prüfen lassen

@@ -200,3 +200,9 @@ textarea {
 /* Sprungziele nicht unter der fixierten Kopfzeile verstecken */
 [id] { scroll-margin-block-start: 80px; }
 @media (min-width: 1024px) { [id] { scroll-margin-block-start: 112px; } }
+/* Feldfehler bleiben direkt am Eingabefeld sichtbar, auch außerhalb des Statusbereichs. */
+.field-error { display: block; color: #7f1d1d; font-size: 0.875rem; font-weight: 400; line-height: 1.5; }
+input[aria-invalid='true'], textarea[aria-invalid='true'], select[aria-invalid='true'] { border-color: var(--color-status-error); outline: 2px solid var(--color-status-error); outline-offset: 2px; }
+input, textarea, select { scroll-margin-block-start: 140px; }
+.booking .check:has(.field-error), .form .check:has(.field-error) { display: grid; grid-template-columns: 20px minmax(0, 1fr); }
+.check .field-error { grid-column: 1 / -1; }

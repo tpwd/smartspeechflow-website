@@ -121,7 +121,6 @@
     "book": "Jetzt buchen",
     "select": "Auswählen",
     "selected": "Ausgewählt",
-    "pricePlaceholder": "xy €",
     "plans": {
       "shared": {
         "overline": "Einstieg",
@@ -157,7 +156,11 @@
           "Volle Kontrolle über Infrastruktur und Daten"
         ]
       }
-    }
+    },
+    "perHourGross": "/Stunde brutto",
+    "support": "Optionale Unterstützung nach Aufwand",
+    "requestSupport": "Unterstützung anfragen",
+    "supportInquiry": "Sie fragen unverbindlich an. Umfang und Aufwand stimmen wir vor einer Beauftragung mit Ihnen ab."
   },
   "cta": {
     "title": "Noch Fragen?",
@@ -249,7 +252,7 @@
       "perYear": "pro Jahr"
     },
     "submit": "Verbindlich buchen",
-    "note": "Nach der Buchung erhalten Sie eine Bestätigung per E-Mail. Startklar in bis zu 2 Tagen."
+    "note": "Nach erfolgreicher Buchung sehen Sie Ihre Buchungsnummer. Startklar in bis zu 2 Tagen."
   },
   "thanks": {
     "title1": "Vielen Dank!",
@@ -545,7 +548,8 @@
       "booking": "Fragen zur Buchung",
       "municipal": "Kommunaler Einsatz",
       "tech": "Open Source / Technik",
-      "other": "Sonstiges"
+      "other": "Sonstiges",
+      "selfhosted": "Unterstützung beim Selbstbetrieb"
     },
     "consent": "Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu.",
     "submit": "Nachricht senden",
@@ -739,7 +743,10 @@
     "sending": "Wird gesendet …",
     "invalid": "Bitte prüfen Sie Ihre Angaben – mindestens ein Feld ist nicht korrekt ausgefüllt.",
     "notConfigured": "Das Formular ist noch nicht eingerichtet. Bitte schreiben Sie uns an info@smart-village.solutions.",
-    "failed": "Das hat leider nicht geklappt. Bitte versuchen Sie es erneut oder schreiben Sie uns an info@smart-village.solutions."
+    "failed": "Das hat leider nicht geklappt. Bitte versuchen Sie es erneut oder schreiben Sie uns an info@smart-village.solutions.",
+    "fieldInvalid": "Bitte korrigieren Sie dieses Feld.",
+    "partial": "Ihr Vorgang wurde unter {number} angelegt, die Details konnten jedoch nicht vollständig gespeichert werden. Bitte nicht erneut absenden. Kontaktieren Sie info@smart-village.solutions mit dieser Nummer; Ihre Angaben bleiben hier sichtbar.",
+    "zipHint": "Bitte eine fünfstellige deutsche Postleitzahl eingeben."
   },
   "mail": {
     "bookingSubject": "Ihre Buchung von Smart Speech Flow",

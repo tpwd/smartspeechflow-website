@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { pathFor, type Locale } from '../i18n/config';
 import { fill, indexableLocales, t, tv } from '../i18n';
-import { breakEvenHoursPerMonth, formatEuro, links, plans, pricedPlans, promotion, savings } from '../data/site';
+import { breakEvenHoursPerMonth, formatEuro, links, plans, pricedPlans, promotion, savings, selfHostedSupport } from '../data/site';
 
 // llms.txt: kompakte, maschinenlesbare Zusammenfassung für KI-Assistenten (Vorschlag llmstxt.org).
 // Wird aus denselben Texten und Daten erzeugt wie die Seite – kein zweiter Pflegeort.
@@ -12,7 +12,9 @@ export const GET: APIRoute = ({ site }) => {
   const de: Locale = 'de';
 
   const planLines = plans.map((p) => {
-    const price = p.monthlyNet === null ? t(de, 'pricing.pricePlaceholder') : `${formatEuro(p.monthlyNet, 'de-DE')} ${t(de, 'pricing.perMonth')}`;
+    const price = p.monthlyNet === null
+      ? `${t(de, 'pricing.support')}: ${formatEuro(selfHostedSupport.hourlyGross, 'de-DE')}${t(de, 'pricing.perHourGross')}`
+      : `${formatEuro(p.monthlyNet, 'de-DE')} ${t(de, 'pricing.perMonth')}`;
     return `- ${t(de, `pricing.plans.${p.id}.title`)}: ${price}. ${tv<string[]>(de, `pricing.plans.${p.id}.features`).join('; ')}`;
   });
 
@@ -28,7 +30,7 @@ Smart Speech Flow ist eine browserbasierte Open-Source-Anwendung (MIT License) z
 - ${fill(t(de, 'why.items.4.text'), { hours: breakEvenHoursPerMonth(cheapest.monthlyNet), rate: savings.interpreterHourlyRate })}
 - Aktion: Bei Buchung bis ${promotion.until} mit 12 Monaten Vorauszahlung ${promotion.freeMonths} Monate gratis.
 
-## Preise (netto)
+## Preise (Hosting netto, Unterstützung beim Selbstbetrieb brutto)
 ${planLines.join('\n')}
 
 ## Seiten

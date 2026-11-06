@@ -121,7 +121,6 @@
     "book": "Zamów teraz",
     "select": "Wybierz",
     "selected": "Wybrano",
-    "pricePlaceholder": "xy €",
     "plans": {
       "shared": {
         "overline": "Na start",
@@ -157,7 +156,11 @@
           "Pełna kontrola nad infrastrukturą i danymi"
         ]
       }
-    }
+    },
+    "perHourGross": "/godzinę brutto",
+    "support": "Opcjonalne wsparcie rozliczane według czasu pracy",
+    "requestSupport": "Zapytaj o wsparcie",
+    "supportInquiry": "To niewiążące zapytanie. Zakres i nakład pracy uzgodnimy przed zleceniem usługi."
   },
   "cta": {
     "title": "Mają Państwo pytania?",
@@ -249,7 +252,7 @@
       "perYear": "rocznie"
     },
     "submit": "Zamawiam z obowiązkiem zapłaty",
-    "note": "Po złożeniu zamówienia otrzymają Państwo potwierdzenie e-mailem. Gotowość do pracy w ciągu maksymalnie 2 dni."
+    "note": "Po udanej rezerwacji zobaczysz jej numer. Gotowość do pracy w ciągu 2 dni."
   },
   "thanks": {
     "title1": "Dziękujemy!",
@@ -545,7 +548,8 @@
       "booking": "Pytania dotyczące zamówienia",
       "municipal": "Zastosowanie w samorządzie",
       "tech": "Open source / technologia",
-      "other": "Inne"
+      "other": "Inne",
+      "selfhosted": "Wsparcie przy samodzielnym hostingu"
     },
     "consent": "Zapoznałem(-am) się z polityką prywatności i wyrażam zgodę na przetwarzanie moich danych w celu obsługi mojego zapytania.",
     "submit": "Wyślij wiadomość",
@@ -739,7 +743,10 @@
     "sending": "Wysyłanie …",
     "invalid": "Prosimy sprawdzić wprowadzone dane – co najmniej jedno pole nie zostało wypełnione poprawnie.",
     "notConfigured": "Formularz nie jest jeszcze skonfigurowany. Prosimy o wiadomość na adres info@smart-village.solutions.",
-    "failed": "Niestety coś poszło nie tak. Prosimy spróbować ponownie lub napisać do nas na adres info@smart-village.solutions."
+    "failed": "Niestety coś poszło nie tak. Prosimy spróbować ponownie lub napisać do nas na adres info@smart-village.solutions.",
+    "fieldInvalid": "Popraw to pole.",
+    "partial": "Zgłoszenie utworzono pod numerem {number}, ale nie udało się zapisać wszystkich szczegółów. Nie wysyłaj go ponownie. Skontaktuj się z info@smart-village.solutions, podając ten numer; wpisane dane pozostają tutaj widoczne.",
+    "zipHint": "Wpisz pięciocyfrowy niemiecki kod pocztowy."
   },
   "mail": {
     "bookingSubject": "Państwa zamówienie Smart Speech Flow",

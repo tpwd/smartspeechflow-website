@@ -121,7 +121,6 @@
     "book": "Réserver maintenant",
     "select": "Sélectionner",
     "selected": "Sélectionné",
-    "pricePlaceholder": "xy €",
     "plans": {
       "shared": {
         "overline": "Découverte",
@@ -157,7 +156,11 @@
           "Contrôle total de l’infrastructure et des données"
         ]
       }
-    }
+    },
+    "perHourGross": "/heure TTC",
+    "support": "Assistance optionnelle facturée au temps passé",
+    "requestSupport": "Demander une assistance",
+    "supportInquiry": "Cette demande est sans engagement. Nous conviendrons avec vous du périmètre et du temps nécessaire avant toute commande."
   },
   "cta": {
     "title": "Des questions ?",
@@ -249,7 +252,7 @@
       "perYear": "par an"
     },
     "submit": "Réserver (engagement ferme)",
-    "note": "Après la réservation, vous recevez une confirmation par e-mail. Opérationnel en 2 jours maximum."
+    "note": "Votre numéro de réservation s’affiche après une réservation réussie. Prêt à l’emploi sous 2 jours."
   },
   "thanks": {
     "title1": "Merci beaucoup !",
@@ -545,7 +548,8 @@
       "booking": "Questions sur la réservation",
       "municipal": "Utilisation communale",
       "tech": "Open source / technique",
-      "other": "Autre"
+      "other": "Autre",
+      "selfhosted": "Assistance pour l’auto-hébergement"
     },
     "consent": "J’ai lu la politique de confidentialité et j’accepte le traitement de mes données pour le traitement de ma demande.",
     "submit": "Envoyer le message",
@@ -739,7 +743,10 @@
     "sending": "Envoi en cours …",
     "invalid": "Veuillez vérifier vos informations – au moins un champ n’est pas correctement rempli.",
     "notConfigured": "Le formulaire n’est pas encore configuré. Veuillez nous écrire à info@smart-village.solutions.",
-    "failed": "Malheureusement, cela n’a pas fonctionné. Veuillez réessayer ou nous écrire à info@smart-village.solutions."
+    "failed": "Malheureusement, cela n’a pas fonctionné. Veuillez réessayer ou nous écrire à info@smart-village.solutions.",
+    "fieldInvalid": "Veuillez corriger ce champ.",
+    "partial": "Votre demande a été créée sous la référence {number}, mais ses détails n’ont pas pu être entièrement enregistrés. Ne la renvoyez pas. Contactez info@smart-village.solutions avec cette référence ; vos données restent visibles ici.",
+    "zipHint": "Veuillez saisir un code postal allemand à cinq chiffres."
   },
   "mail": {
     "bookingSubject": "Votre réservation de Smart Speech Flow",
