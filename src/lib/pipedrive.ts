@@ -53,7 +53,7 @@ export function createPipedrive(config: PipedriveConfig) {
     },
 
     /** Vorhandene Person (exakte E-Mail) wiederverwenden, sonst anlegen. */
-    async upsertPerson(p: { name: string; email: string; phone?: string; orgId?: number; jobTitle?: string }): Promise<number> {
+    async upsertPerson(p: { name: string; email: string; phone?: string; orgId?: number }): Promise<number> {
       const existing = await searchId('persons', 'email', p.email);
       if (existing) return existing;
       const person = await call<{ id: number }>('POST', '/api/v2/persons', {
@@ -61,7 +61,6 @@ export function createPipedrive(config: PipedriveConfig) {
         emails: [{ value: p.email, primary: true, label: 'work' }],
         ...(p.phone ? { phones: [{ value: p.phone, primary: true, label: 'work' }] } : {}),
         ...(p.orgId ? { org_id: p.orgId } : {}),
-        ...(p.jobTitle ? { job_title: p.jobTitle } : {}),
       });
       return person.id;
     },

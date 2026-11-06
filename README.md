@@ -56,6 +56,8 @@ Die Formulare senden an `/api/booking/` und `/api/contact/`. Diese beiden Routen
 2. Pipedrive: Organisation (mit Adresse) und Person werden gesucht und nur bei Bedarf neu angelegt (Organisation nach exaktem Namen, Person nach E-Mail).
 3. Deal „Smart Speech Flow – Option – Kommune“ in der Pipeline „Smart Speech Flow Form“, Wert = Netto-Betrag des ersten Jahres (inkl. Aktion), berechnet auf dem Server.
 4. Notiz am Deal mit allen Angaben und der Schätzung aus dem Rechner.
+
+   Die optionale „Funktion“ wird ausschließlich in dieser Notiz gespeichert. Das Pipedrive-Personenfeld `job_title` setzt eine eingerichtete Kontaktsynchronisierung voraus und wird deshalb nicht gesetzt.
 5. Optional: Bestätigungsmail an die Kommune und Benachrichtigung an das Team (über Resend).
 6. Weiterleitung auf die Danke-Seite mit der Buchungsnummer `SSF-<Deal-ID>`.
 
