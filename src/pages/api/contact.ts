@@ -5,6 +5,7 @@ import { createPipedrive, noteHtml } from '../../lib/pipedrive';
 import { sendMail } from '../../lib/mail';
 import { json, readJson, sameOrigin } from '../../lib/form-response';
 import { t } from '../../i18n';
+import { selfHostedSupport } from '../../data/site';
 
 export const prerender = false;
 
@@ -20,6 +21,7 @@ export const POST: APIRoute = async ({ request, url }) => {
     return json(503, { ok: false, error: 'not_configured' });
   }
 
+  let savedNumber: string | undefined;
   try {
     const pd = createPipedrive({ token: PIPEDRIVE_API_TOKEN, domain: PIPEDRIVE_DOMAIN, baseUrl: PIPEDRIVE_BASE_URL });
     const topic = t('de', `contact.categories.${input.category}`);
@@ -32,15 +34,18 @@ export const POST: APIRoute = async ({ request, url }) => {
       ['Organisation', input.organisation],
       ['E-Mail', input.email],
       ['Nachricht', input.message],
+      ['Unterstützung Selbstbetrieb', input.category === 'selfhosted' ? `${selfHostedSupport.hourlyGross} EUR brutto pro Stunde, Abrechnung nach Aufwand; unverbindliche Anfrage` : undefined],
       ['Sprache der Seite', input.locale],
       ['Zustimmung Datenschutz', `ja (${new Date().toISOString()})`],
     ]);
     // Mit PIPEDRIVE_CONTACT_STAGE_ID landen Anfragen als Deal in der Pipeline, sonst im Lead-Eingang.
     if (PIPEDRIVE_CONTACT_STAGE_ID) {
       const dealId = await pd.createDeal({ title, personId, orgId, pipelineId: PIPEDRIVE_PIPELINE_ID, stageId: PIPEDRIVE_CONTACT_STAGE_ID });
+      savedNumber = `SSF-${dealId}`;
       await pd.addNote({ dealId, content: note });
     } else {
       const leadId = await pd.createLead({ title, personId, orgId });
+      savedNumber = `SSF-L-${leadId}`;
       await pd.addNote({ leadId, content: note });
     }
     if (MAIL_NOTIFY_TO) {
@@ -49,6 +54,6 @@ export const POST: APIRoute = async ({ request, url }) => {
     return json(200, { ok: true });
   } catch (error) {
     console.error('contact: Pipedrive-Fehler', error instanceof Error ? error.message : error);
-    return json(502, { ok: false, error: 'upstream' });
+    return json(502, { ok: false, error: savedNumber ? 'partial' : 'upstream', ...(savedNumber ? { number: savedNumber } : {}) });
   }
 };

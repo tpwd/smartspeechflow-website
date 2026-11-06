@@ -4,7 +4,7 @@ import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
 import { localeTags, pathFor, type Locale } from '../i18n/config';
 import { useTranslations } from '../i18n';
-import { formatEuro, plans, promotion } from '../data/site';
+import { formatEuro, plans, promotion, selfHostedSupport } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -18,8 +18,9 @@ const steps = tv<string[]>('booking.steps');
 const config = {
   locale: tag,
   thanksUrl: pathFor(locale, 'thanks'),
+  supportUrl: `${pathFor(locale, 'contact')}?topic=selfhosted`,
   pageLocale: locale,
-  submit: { sending: t('forms.sending'), invalid: t('forms.invalid'), notConfigured: t('forms.notConfigured'), failed: t('forms.failed') },
+  submit: { sending: t('forms.sending'), invalid: t('forms.invalid'), notConfigured: t('forms.notConfigured'), failed: t('forms.failed'), fieldInvalid: t('forms.fieldInvalid'), partial: t('forms.partial') },
   promo: promotion,
   plans: Object.fromEntries(plans.map((p) => [p.id, { title: t(`pricing.plans.${p.id}.title`), monthlyNet: p.monthlyNet, promo: p.promo }])),
   terms: { prepaid: t('booking.terms.prepaid.label'), monthly: t('booking.terms.monthly.label') },
@@ -57,15 +58,18 @@ const field = (key: string) => t(`booking.fields.${key}`);
     <div class="plans">
       {plans.map((plan, i) => (
         <div class="plan">
-          <input type="radio" name="option" value={plan.id} checked={i === 0} class="cover" aria-label={`${t(`pricing.plans.${plan.id}.title`)}, ${plan.monthlyNet === null ? t('pricing.pricePlaceholder') : formatEuro(plan.monthlyNet, tag)} ${t('pricing.perMonth')}`} />
+          {plan.id === 'selfhosted'
+            ? <a class="cover" href={config.supportUrl} aria-label={t('pricing.requestSupport')}></a>
+            : <input type="radio" name="option" value={plan.id} checked={i === 0} class="cover" aria-label={`${t(`pricing.plans.${plan.id}.title`)}, ${formatEuro(plan.monthlyNet!, tag)} ${t('pricing.perMonth')}`} />}
           <span class="overline">{t(`pricing.plans.${plan.id}.overline`)}</span>
           <span class="t-h5">{t(`pricing.plans.${plan.id}.title`)}</span>
-          <span class="price"><b>{plan.monthlyNet === null ? t('pricing.pricePlaceholder') : formatEuro(plan.monthlyNet, tag)}</b> <span class="t-body-xs t-muted">{t('pricing.perMonth')}</span></span>
+          <span class="price"><b>{formatEuro(plan.monthlyNet ?? selfHostedSupport.hourlyGross, tag)}</b> <span class="t-body-xs t-muted">{t(plan.id === 'selfhosted' ? 'pricing.perHourGross' : 'pricing.perMonth')}</span></span>
           <Badge>{plan.promo ? t('promo.badge') : t(`pricing.plans.${plan.id}.badge`)}</Badge>
+          {plan.id === 'selfhosted' && <p class="t-body-xs">{t('pricing.support')} {t('pricing.supportInquiry')}</p>}
           <ul class="features t-body-xs" role="list">
             {tv<string[]>(`pricing.plans.${plan.id}.features`).map((f) => <li><Icon name="check" size={16} />{f}</li>)}
           </ul>
-          <span class="choose" aria-hidden="true"><span class="when-off">{t('pricing.select')}</span><span class="when-on">{t('pricing.selected')}</span></span>
+          <span class="choose" aria-hidden="true"><span class="when-off">{t(plan.id === 'selfhosted' ? 'pricing.requestSupport' : 'pricing.select')}</span>{plan.id !== 'selfhosted' && <span class="when-on">{t('pricing.selected')}</span>}</span>
         </div>
       ))}
     </div>
@@ -99,12 +103,12 @@ const field = (key: string) => t(`booking.fields.${key}`);
         <p class="t-h6 f--full billing">{field('billing')}</p>
         <label class="f f--full"><span>{field('street')}*</span><input type="text" name="street" required autocomplete="address-line1" /></label>
         <div class="f--full zip-city">
-          <label class="f"><span>{field('zip')}*</span><input type="text" name="zip" required autocomplete="postal-code" inputmode="numeric" /></label>
+          <label class="f"><span>{field('zip')}*</span><input type="text" name="zip" required autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" title={t('forms.zipHint')} /></label>
           <label class="f"><span>{field('city')}*</span><input type="text" name="city" required autocomplete="address-level2" /></label>
         </div>
         <label class="f"><span>{field('start')}</span><input name="start" type="date" /></label>
         <label class="f f--full"><span>{field('message')}</span><textarea name="message" rows="5"></textarea></label>
-        <label class="check f--full"><input type="checkbox" name="consentPrivacy" required /><span>{t('booking.consentPrivacy')}*</span></label>
+        <label class="check f--full"><input type="checkbox" name="consentPrivacy" required /><span>{t('booking.consentPrivacy')}* <a href={pathFor(locale, 'privacy')}>{t('pageNames.privacy')}</a></span></label>
         <p class="t-body-xxs t-muted f--full">* {t('booking.required')}</p>
       </div>
 
@@ -136,6 +140,7 @@ const field = (key: string) => t(`booking.fields.${key}`);
     submit: SubmitTexts;
     locale: string;
     thanksUrl: string;
+    supportUrl: string;
     promo: { until: string; freeMonths: number; requiresPrepaid: boolean };
     plans: Record<string, { title: string; monthlyNet: number | null; promo: boolean }>;
     terms: Record<string, string>;
@@ -148,6 +153,7 @@ const field = (key: string) => t(`booking.fields.${key}`);
 
   // Vorauswahl über ?option=… (Links „Jetzt buchen“ auf der Startseite)
   const query = new URLSearchParams(location.search);
+  if (query.get('option') === 'selfhosted') location.replace(config.supportUrl);
   for (const name of ['option', 'term']) {
     const value = query.get(name);
     const input = value ? form.querySelector<HTMLInputElement>(`input[name="${name}"][value="${CSS.escape(value)}"]`) : null;

@@ -12,6 +12,7 @@
     "build": "astro build",
     "check": "astro check && node scripts/check-i18n.mjs",
     "i18n:check": "node scripts/check-i18n.mjs",
+    "test:forms": "node scripts/test-forms.mjs",
     "validate": "astro build && html-validate \"dist/**/*.html\""
   },
   "dependencies": {

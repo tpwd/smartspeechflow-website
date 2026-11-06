@@ -121,7 +121,6 @@
     "book": "Contratar ahora",
     "select": "Seleccionar",
     "selected": "Seleccionado",
-    "pricePlaceholder": "xy €",
     "plans": {
       "shared": {
         "overline": "Básico",
@@ -157,7 +156,11 @@
           "Control total sobre la infraestructura y los datos"
         ]
       }
-    }
+    },
+    "perHourGross": "/hora IVA incluido",
+    "support": "Asistencia opcional facturada según el tiempo empleado",
+    "requestSupport": "Solicitar asistencia",
+    "supportInquiry": "Esta consulta no es vinculante. Acordaremos el alcance y la dedicación antes de que contrate el servicio."
   },
   "cta": {
     "title": "¿Tiene preguntas?",
@@ -249,7 +252,7 @@
       "perYear": "al año"
     },
     "submit": "Contratar de forma vinculante",
-    "note": "Tras la contratación recibirá una confirmación por correo electrónico. Listo para usar en un máximo de 2 días."
+    "note": "Tras completar la reserva verá su número de referencia. Listo para usar en un máximo de 2 días."
   },
   "thanks": {
     "title1": "¡Muchas gracias!",
@@ -545,7 +548,8 @@
       "booking": "Preguntas sobre la contratación",
       "municipal": "Uso municipal",
       "tech": "Código abierto / tecnología",
-      "other": "Otros"
+      "other": "Otros",
+      "selfhosted": "Asistencia para alojamiento propio"
     },
     "consent": "He leído la política de privacidad y acepto el tratamiento de mis datos para la gestión de mi consulta.",
     "submit": "Enviar mensaje",
@@ -739,7 +743,10 @@
     "sending": "Enviando …",
     "invalid": "Revise sus datos: al menos un campo no se ha completado correctamente.",
     "notConfigured": "El formulario aún no está configurado. Escríbanos a info@smart-village.solutions.",
-    "failed": "Lamentablemente, no ha funcionado. Inténtelo de nuevo o escríbanos a info@smart-village.solutions."
+    "failed": "Lamentablemente, no ha funcionado. Inténtelo de nuevo o escríbanos a info@smart-village.solutions.",
+    "fieldInvalid": "Corrija este campo.",
+    "partial": "Su solicitud se ha creado con la referencia {number}, pero no se han podido guardar todos los detalles. No vuelva a enviarla. Contacte con info@smart-village.solutions indicando esta referencia; sus datos siguen visibles aquí.",
+    "zipHint": "Introduzca un código postal alemán de cinco dígitos."
   },
   "mail": {
     "bookingSubject": "Su contratación de Smart Speech Flow",

@@ -9,7 +9,8 @@ const required = (max: number) => text(max).min(1);
 
 export const bookingSchema = z.object({
   locale: z.enum(locales),
-  option: z.enum(['shared', 'dedicated', 'selfhosted']),
+  // Unterstützung beim Selbstbetrieb ist eine unverbindliche Kontaktanfrage.
+  option: z.enum(['shared', 'dedicated']),
   term: z.enum(['prepaid', 'monthly']),
   organisation: required(200),
   name: required(120),
@@ -17,7 +18,7 @@ export const bookingSchema = z.object({
   email: z.email().max(200),
   phone: text(60).optional().default(''),
   street: required(200),
-  zip: required(10),
+  zip: required(10).regex(/^\d{5}$/),
   city: required(120),
   start: text(20).optional().default(''),
   message: text(4000).optional().default(''),
@@ -36,7 +37,7 @@ export const contactSchema = z.object({
   name: required(120),
   organisation: text(200).optional().default(''),
   email: z.email().max(200),
-  category: z.enum(['demo', 'call', 'booking', 'municipal', 'tech', 'other']),
+  category: z.enum(['demo', 'call', 'booking', 'municipal', 'tech', 'selfhosted', 'other']),
   message: required(4000),
   consent: z.literal(true),
   website: z.string().max(500).optional().default(''),

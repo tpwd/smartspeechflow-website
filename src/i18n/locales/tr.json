@@ -121,7 +121,6 @@
     "book": "Hemen satın alın",
     "select": "Seç",
     "selected": "Seçildi",
-    "pricePlaceholder": "xy €",
     "plans": {
       "shared": {
         "overline": "Başlangıç",
@@ -157,7 +156,11 @@
           "Altyapı ve veriler üzerinde tam kontrol"
         ]
       }
-    }
+    },
+    "perHourGross": "/saat KDV dahil",
+    "support": "Harcanan zamana göre ücretlendirilen isteğe bağlı destek",
+    "requestSupport": "Destek talep edin",
+    "supportInquiry": "Bu talep bağlayıcı değildir. Sipariş vermeden önce kapsamı ve gereken süreyi sizinle kararlaştırırız."
   },
   "cta": {
     "title": "Sorularınız mı var?",
@@ -249,7 +252,7 @@
       "perYear": "yıllık"
     },
     "submit": "Bağlayıcı olarak satın al",
-    "note": "Siparişinizden sonra e-posta ile bir onay alırsınız. En geç 2 gün içinde kullanıma hazır."
+    "note": "Başarılı rezervasyondan sonra rezervasyon numaranız gösterilir. En geç 2 gün içinde kullanıma hazır."
   },
   "thanks": {
     "title1": "Çok teşekkür ederiz!",
@@ -545,7 +548,8 @@
       "booking": "Satın alma ile ilgili sorular",
       "municipal": "Belediyede kullanım",
       "tech": "Açık kaynak / Teknik",
-      "other": "Diğer"
+      "other": "Diğer",
+      "selfhosted": "Kendi sunucusunda barındırma desteği"
     },
     "consent": "Gizlilik politikasını okudum ve talebimin işlenmesi amacıyla verilerimin işlenmesine onay veriyorum.",
     "submit": "Mesaj gönderin",
@@ -739,7 +743,10 @@
     "sending": "Gönderiliyor …",
     "invalid": "Lütfen bilgilerinizi kontrol edin – en az bir alan doğru doldurulmamış.",
     "notConfigured": "Form henüz yapılandırılmadı. Lütfen bize info@smart-village.solutions adresinden yazın.",
-    "failed": "Maalesef bir sorun oluştu. Lütfen tekrar deneyin veya bize info@smart-village.solutions adresinden yazın."
+    "failed": "Maalesef bir sorun oluştu. Lütfen tekrar deneyin veya bize info@smart-village.solutions adresinden yazın.",
+    "fieldInvalid": "Lütfen bu alanı düzeltin.",
+    "partial": "Talebiniz {number} referansıyla oluşturuldu, ancak tüm ayrıntılar kaydedilemedi. Lütfen yeniden göndermeyin. Bu referansla info@smart-village.solutions adresine başvurun; girdiğiniz bilgiler burada görünür kalır.",
+    "zipHint": "Lütfen beş haneli bir Alman posta kodu girin."
   },
   "mail": {
     "bookingSubject": "Smart Speech Flow siparişiniz",

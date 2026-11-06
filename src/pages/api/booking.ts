@@ -30,6 +30,7 @@ export const POST: APIRoute = async ({ request, url }) => {
     return json(503, { ok: false, error: 'not_configured' });
   }
 
+  let savedNumber: string | undefined;
   try {
     const pd = createPipedrive({ token: PIPEDRIVE_API_TOKEN, domain: PIPEDRIVE_DOMAIN, baseUrl: PIPEDRIVE_BASE_URL });
     const address = `${input.street}, ${input.zip} ${input.city}`;
@@ -43,6 +44,7 @@ export const POST: APIRoute = async ({ request, url }) => {
       pipelineId: PIPEDRIVE_PIPELINE_ID,
       stageId: PIPEDRIVE_BOOKING_STAGE_ID,
     });
+    savedNumber = `SSF-${dealId}`;
     const estimate = input.estimate
       ? `${input.estimate.hours} Std. pro ${input.estimate.period === 'month' ? 'Monat' : 'Jahr'} × ${input.estimate.rate} €`
       : undefined;
@@ -96,6 +98,6 @@ export const POST: APIRoute = async ({ request, url }) => {
     return json(200, { ok: true, number, emailSent });
   } catch (error) {
     console.error('booking: Pipedrive-Fehler', error instanceof Error ? error.message : error);
-    return json(502, { ok: false, error: 'upstream' });
+    return json(502, { ok: false, error: savedNumber ? 'partial' : 'upstream', ...(savedNumber ? { number: savedNumber } : {}) });
   }
 };

@@ -5,6 +5,8 @@ export interface SubmitTexts {
   invalid: string;
   notConfigured: string;
   failed: string;
+  fieldInvalid: string;
+  partial: string;
 }
 
 export interface SubmitResult {
@@ -31,6 +33,36 @@ export function setupForm(
   const startedAt = Date.now();
   const status = form.querySelector<HTMLElement>('[data-form-status]')!;
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  let inFlight = false;
+  let finished = false;
+  const focusField = (el: HTMLInputElement) => {
+    el.focus({ preventScroll: true });
+    el.scrollIntoView({ block: 'center' });
+  };
+
+  const clearFieldError = (el: HTMLInputElement) => {
+    el.removeAttribute('aria-invalid');
+    const id = el.dataset.errorId;
+    if (id) {
+      document.getElementById(id)?.remove();
+      const describedBy = (el.getAttribute('aria-describedby') ?? '').split(' ').filter((value) => value && value !== id);
+      if (describedBy.length) el.setAttribute('aria-describedby', describedBy.join(' '));
+      else el.removeAttribute('aria-describedby');
+      delete el.dataset.errorId;
+    }
+  };
+
+  const markField = (el: HTMLInputElement) => {
+    clearFieldError(el);
+    const error = document.createElement('span');
+    error.id = `${form.id || 'form'}-${el.name}-error`;
+    error.className = 'field-error';
+    error.textContent = el.validationMessage || options.texts.fieldInvalid;
+    el.setAttribute('aria-invalid', 'true');
+    el.setAttribute('aria-describedby', [el.getAttribute('aria-describedby'), error.id].filter(Boolean).join(' '));
+    el.dataset.errorId = error.id;
+    el.closest('label')?.append(error);
+  };
 
   const show = (message: string, kind: 'info' | 'error') => {
     status.hidden = false;
@@ -41,20 +73,22 @@ export function setupForm(
 
   form.addEventListener('input', (event) => {
     const el = event.target as HTMLInputElement;
-    if (el.hasAttribute('aria-invalid') && el.checkValidity()) el.removeAttribute('aria-invalid');
+    if (el.hasAttribute('aria-invalid')) clearFieldError(el);
   });
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (inFlight || finished) return;
     // Eigene Prüfung statt Browser-Blase: Meldung im Statusfeld, Felder markiert, Fokus aufs erste.
     const invalid = (Array.from(form.elements) as HTMLInputElement[]).filter((el) => el.willValidate && !el.checkValidity());
-    form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+    form.querySelectorAll<HTMLInputElement>('[aria-invalid]').forEach(clearFieldError);
     if (invalid.length) {
-      invalid.forEach((el) => el.setAttribute('aria-invalid', 'true'));
+      invalid.forEach(markField);
       show(options.texts.invalid, 'error');
-      invalid[0].focus();
+      focusField(invalid[0]);
       return;
     }
+    inFlight = true;
     button.disabled = true;
     button.setAttribute('aria-busy', 'true');
     show(options.texts.sending, 'info');
@@ -66,8 +100,14 @@ export function setupForm(
       });
       const result = (await res.json().catch(() => ({ ok: false }))) as SubmitResult;
       if (res.ok && result.ok) {
+        finished = true;
         status.hidden = true;
         options.onSuccess(result);
+        return;
+      }
+      if (result.error === 'partial' && typeof result.number === 'string') {
+        finished = true;
+        show(options.texts.partial.replace('{number}', result.number), 'error');
         return;
       }
       const message =
@@ -75,15 +115,17 @@ export function setupForm(
       show(message, 'error');
       // Fokus auf das erste vom Server bemängelte Feld
       const fields = result.fields as Record<string, string> | undefined;
-      const first = fields ? form.querySelector<HTMLElement>(`[name="${Object.keys(fields)[0]}"]`) : null;
-      if (first) {
-        first.setAttribute('aria-invalid', 'true');
-        first.focus();
-      }
+      const invalidFields = Object.keys(fields ?? {}).flatMap((name) => {
+        const el = form.querySelector<HTMLInputElement>(`[name="${CSS.escape(name)}"]`);
+        return el ? [el] : [];
+      });
+      invalidFields.forEach(markField);
+      if (invalidFields[0]) focusField(invalidFields[0]);
     } catch {
       show(options.texts.failed, 'error');
     } finally {
-      button.disabled = false;
+      inFlight = false;
+      button.disabled = finished;
       button.removeAttribute('aria-busy');
     }
   });

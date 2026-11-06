@@ -121,7 +121,6 @@
     "book": "Book now",
     "select": "Select",
     "selected": "Selected",
-    "pricePlaceholder": "€ xy",
     "plans": {
       "shared": {
         "overline": "Starter",
@@ -157,7 +156,11 @@
           "Full control over infrastructure and data"
         ]
       }
-    }
+    },
+    "perHourGross": "/hour incl. VAT",
+    "support": "Optional support billed by time spent",
+    "requestSupport": "Request support",
+    "supportInquiry": "This is a non-binding enquiry. We will agree the scope and effort with you before you commission any work."
   },
   "cta": {
     "title": "Any questions?",
@@ -249,7 +252,7 @@
       "perYear": "per year"
     },
     "submit": "Book now (binding)",
-    "note": "After booking you will receive a confirmation by email. Ready to use within 2 days."
+    "note": "Your booking reference will appear after a successful booking. Ready to use within 2 days."
   },
   "thanks": {
     "title1": "Thank you!",
@@ -545,7 +548,8 @@
       "booking": "Questions about booking",
       "municipal": "Municipal use",
       "tech": "Open source / technology",
-      "other": "Other"
+      "other": "Other",
+      "selfhosted": "Support for self-hosting"
     },
     "consent": "I have read the privacy policy and agree to the processing of my data to handle my enquiry.",
     "submit": "Send message",
@@ -739,7 +743,10 @@
     "sending": "Sending …",
     "invalid": "Please check your details – at least one field is not filled in correctly.",
     "notConfigured": "The form is not set up yet. Please email us at info@smart-village.solutions.",
-    "failed": "Unfortunately, that did not work. Please try again or email us at info@smart-village.solutions."
+    "failed": "Unfortunately, that did not work. Please try again or email us at info@smart-village.solutions.",
+    "fieldInvalid": "Please correct this field.",
+    "partial": "Your request was created with reference {number}, but its details could not be saved in full. Please do not submit again. Contact info@smart-village.solutions with this reference; your entries remain visible here.",
+    "zipHint": "Please enter a five-digit German postcode."
   },
   "mail": {
     "bookingSubject": "Your Smart Speech Flow booking",
