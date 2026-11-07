@@ -9,6 +9,7 @@ import { json, readJson, sameOrigin } from '../../lib/form-response';
 import { t } from '../../i18n';
 import { localeTags } from '../../i18n/config';
 import { formatEuro } from '../../data/site';
+import { greetingFor, identityRows } from '../../lib/contact-identity';
 
 export const prerender = false;
 
@@ -36,7 +37,7 @@ export const POST: APIRoute = async ({ request, url }) => {
     const address = `${input.street}, ${input.zip} ${input.city}`;
     const orgId = await pd.upsertOrganization(input.organisation, address);
     // Funktion bleibt in der Buchungsnotiz: job_title setzt bei Pipedrive Kontaktsynchronisierung voraus.
-    const personId = await pd.upsertPerson({ name: input.name, email: input.email, phone: input.phone, orgId });
+    const personId = await pd.upsertPerson({ name: input.name, email: input.email, phone: input.phone, orgId, salutation: input.salutation ? t('de', `forms.identity.${input.salutation}`) : undefined, greeting: greetingFor('de', input) });
     const dealId = await pd.createDeal({
       title: `Smart Speech Flow – ${optionLabel} – ${input.organisation}`,
       value: price.firstYearNet,
@@ -59,6 +60,7 @@ export const POST: APIRoute = async ({ request, url }) => {
         ['Wert erstes Jahr', price.firstYearNet === null ? undefined : `${formatEuro(price.firstYearNet, 'de-DE')} netto`],
         ['Kommune / Organisation', input.organisation],
         ['Ansprechperson', input.name],
+        ...identityRows(input),
         ['Funktion', input.role],
         ['E-Mail', input.email],
         ['Telefon', input.phone],
@@ -78,7 +80,7 @@ export const POST: APIRoute = async ({ request, url }) => {
       to: input.email,
       subject: `${t(lang, 'mail.bookingSubject')} ${number}`,
       text: [
-        t(lang, 'mail.greeting').replace('{name}', input.name),
+        greetingFor(lang, input),
         '',
         t(lang, 'mail.bookingIntro'),
         '',

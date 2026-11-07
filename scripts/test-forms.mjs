@@ -8,6 +8,10 @@ const writes = [];
 let nextId = 100;
 let failNotes = false;
 let failSearch = false;
+let existingPerson = false;
+let failFields = false;
+const salutationKey = 'a'.repeat(40);
+const greetingKey = 'b'.repeat(40);
 const mock = createServer(async (req, res) => {
   let raw = '';
   for await (const chunk of req) raw += chunk;
@@ -19,7 +23,15 @@ const mock = createServer(async (req, res) => {
     return;
   }
   if (req.method === 'GET') {
-    res.writeHead(failSearch ? 503 : 200).end(JSON.stringify({ success: !failSearch, data: { items: [] } }));
+    if (path === '/api/v2/personFields') {
+      res.writeHead(failFields ? 503 : 200).end(JSON.stringify({ success: !failFields, data: [
+        { field_code: salutationKey, field_name: 'Anrede', field_type: 'varchar' },
+        { field_code: greetingKey, field_name: 'Grußformel', field_type: 'varchar' },
+      ] }));
+      return;
+    }
+    const items = existingPerson && path === '/api/v2/persons/search' ? [{ item: { id: 777 } }] : [];
+    res.writeHead(failSearch ? 503 : 200).end(JSON.stringify({ success: !failSearch, data: { items } }));
     return;
   }
   writes.push({ path, body });
@@ -119,6 +131,52 @@ try {
     if (category === 'selfhosted') assert.match(writes.at(-1).body.content, /169 EUR brutto pro Stunde/);
   }
   console.log('PASS: demo, call and self-hosting enquiries including pinned lead notes and gross support rate');
+
+  const structured = { salutation: 'frau', firstName: '  Anne-Marie  ', lastName: ' van der Meer ', name: 'Ignored legacy name' };
+  for (const [route, input] of [['contact', contact], ['booking', booking]]) {
+    for (const [salutation, greeting] of [['frau', 'Guten Tag Frau van der Meer,'], ['herr', 'Guten Tag Herr van der Meer,'], ['neutral', 'Guten Tag Anne-Marie van der Meer,']]) {
+      assert.equal((await post(route, { ...input, ...structured, salutation })).status, 200);
+      const person = writes.findLast((w) => w.path === '/api/v2/persons').body;
+      assert.equal(person.name, 'Anne-Marie van der Meer');
+      assert.equal(person.custom_fields[greetingKey], greeting);
+      assert.equal(person.custom_fields[salutationKey], { frau: 'Frau', herr: 'Herr', neutral: 'Neutrale Anrede' }[salutation]);
+      assert.ok(writes.at(-1).body.content.includes(`<b>Grußformel:</b> ${greeting}`));
+      assert.ok(writes.at(-1).body.content.includes('<b>Vorname:</b> Anne-Marie'));
+      assert.ok(writes.at(-1).body.content.includes('<b>Nachname:</b> van der Meer'));
+    }
+    for (const overrides of [
+      { salutation: undefined }, { salutation: '' }, { salutation: 'unbekannt' },
+      { firstName: undefined }, { firstName: '   ' }, { firstName: 'x'.repeat(81) },
+      { lastName: undefined }, { lastName: '   ' }, { lastName: 'x'.repeat(121) },
+      { salutation: undefined, firstName: undefined, lastName: undefined, name: undefined },
+    ]) {
+      const count = writes.length;
+      const result = await post(route, { ...input, ...structured, ...overrides });
+      assert.equal(result.status, 400);
+      assert.equal(writes.length, count);
+    }
+    existingPerson = true;
+    const count = writes.length;
+    assert.equal((await post(route, { ...input, ...structured })).status, 200);
+    assert.equal(writes.slice(count).some((w) => w.path === '/api/v2/persons'), false);
+    assert.equal(writes.findLast((w) => /\/(deals|leads)$/.test(w.path)).body.person_id, 777);
+    assert.ok(writes.at(-1).body.content.includes('Guten Tag Frau van der Meer,'));
+    existingPerson = false;
+  }
+  failFields = true;
+  assert.equal((await post('contact', { ...contact, ...structured })).status, 200);
+  assert.equal(writes.findLast((w) => w.path === '/api/v2/persons').body.custom_fields, undefined);
+  assert.ok(writes.at(-1).body.content.includes('Guten Tag Frau van der Meer,'));
+  failFields = false;
+  console.log('PASS: explicit salutations, compound surnames, neutral greeting, structured validation, preserved existing contacts and metadata failure fallback');
+
+  for (const [route, input] of [['contact', contact], ['booking', booking]]) {
+    assert.equal((await post(route, input)).status, 200);
+    assert.equal(writes.findLast((w) => w.path === '/api/v2/persons').body.custom_fields, undefined);
+    assert.ok(writes.at(-1).body.content.includes('Guten Tag Testperson,'));
+    assert.equal(writes.at(-1).body.content.includes('<b>Anrede:</b>'), false);
+  }
+  console.log('PASS: already-open legacy forms remain usable without guessing gender or splitting names');
 
   failNotes = true;
   for (const [route, input] of [['booking', booking], ['contact', contact]]) {

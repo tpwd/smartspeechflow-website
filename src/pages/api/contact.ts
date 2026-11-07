@@ -6,6 +6,7 @@ import { sendMail } from '../../lib/mail';
 import { json, readJson, sameOrigin } from '../../lib/form-response';
 import { t } from '../../i18n';
 import { selfHostedSupport } from '../../data/site';
+import { greetingFor, identityRows } from '../../lib/contact-identity';
 
 export const prerender = false;
 
@@ -26,11 +27,12 @@ export const POST: APIRoute = async ({ request, url }) => {
     const pd = createPipedrive({ token: PIPEDRIVE_API_TOKEN, domain: PIPEDRIVE_DOMAIN, baseUrl: PIPEDRIVE_BASE_URL });
     const topic = t('de', `contact.categories.${input.category}`);
     const orgId = input.organisation ? await pd.upsertOrganization(input.organisation) : undefined;
-    const personId = await pd.upsertPerson({ name: input.name, email: input.email, orgId });
+    const personId = await pd.upsertPerson({ name: input.name, email: input.email, orgId, salutation: input.salutation ? t('de', `forms.identity.${input.salutation}`) : undefined, greeting: greetingFor('de', input) });
     const title = `Smart Speech Flow – ${topic} – ${input.organisation || input.name}`;
     const note = noteHtml('Kontaktanfrage über smartspeechflow.de', [
       ['Thema', topic],
       ['Name', input.name],
+      ...identityRows(input),
       ['Organisation', input.organisation],
       ['E-Mail', input.email],
       ['Nachricht', input.message],

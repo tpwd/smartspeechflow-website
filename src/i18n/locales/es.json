@@ -746,7 +746,21 @@
     "failed": "Lamentablemente, no ha funcionado. Inténtelo de nuevo o escríbanos a info@smart-village.solutions.",
     "fieldInvalid": "Corrija este campo.",
     "partial": "Su solicitud se ha creado con la referencia {number}, pero no se han podido guardar todos los detalles. No vuelva a enviarla. Contacte con info@smart-village.solutions indicando esta referencia; sus datos siguen visibles aquí.",
-    "zipHint": "Introduzca un código postal alemán de cinco dígitos."
+    "zipHint": "Introduzca un código postal alemán de cinco dígitos.",
+    "identity": {
+      "salutation": "Tratamiento",
+      "choose": "Seleccione",
+      "frau": "Señora",
+      "herr": "Señor",
+      "neutral": "Tratamiento neutro",
+      "firstName": "Nombre",
+      "lastName": "Apellidos",
+      "greetings": {
+        "frau": "Estimada señora {lastName}:",
+        "herr": "Estimado señor {lastName}:",
+        "neutral": "Hola {name}:"
+      }
+    }
   },
   "mail": {
     "bookingSubject": "Su contratación de Smart Speech Flow",

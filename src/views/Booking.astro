@@ -2,6 +2,7 @@
 import Badge from '../components/Badge.astro';
 import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
+import IdentityFields from '../components/IdentityFields.astro';
 import { localeTags, pathFor, type Locale } from '../i18n/config';
 import { useTranslations } from '../i18n';
 import { formatEuro, plans, promotion, selfHostedSupport } from '../data/site';
@@ -96,7 +97,7 @@ const field = (key: string) => t(`booking.fields.${key}`);
     <div class="details">
       <div class="fields">
         <label class="f f--full"><span>{field('org')}*</span><input type="text" name="organisation" required autocomplete="organization" placeholder={field('orgPh')} /></label>
-        <label class="f"><span>{field('person')}*</span><input type="text" name="name" required autocomplete="name" placeholder={field('personPh')} /></label>
+        <IdentityFields locale={locale} fieldClass="f" fullClass="f--full" />
         <label class="f"><span>{field('role')}</span><input type="text" name="role" autocomplete="organization-title" placeholder={field('rolePh')} /></label>
         <label class="f"><span>{field('email')}*</span><input name="email" type="email" required autocomplete="email" placeholder={field('emailPh')} /></label>
         <label class="f"><span>{field('phone')}</span><input name="phone" type="tel" autocomplete="tel" placeholder={field('phonePh')} /></label>
