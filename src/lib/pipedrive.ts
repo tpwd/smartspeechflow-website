@@ -40,6 +40,19 @@ export function createPipedrive(config: PipedriveConfig) {
     return data?.items?.[0]?.item.id ?? null;
   }
 
+  async function requestGreeting(greeting?: string): Promise<Record<string, string>> {
+    if (!greeting) return {};
+    try {
+      const fields = await call<{ field_code: string; field_name: string; field_type: string }[]>('GET', '/api/v2/dealFields?limit=500');
+      const matches = fields.filter((f) => f.field_name === 'SSF Grußformel' && f.field_type === 'varchar' && /^[a-f0-9]{40}$/.test(f.field_code));
+      if (matches.length === 1) return { [matches[0].field_code]: greeting };
+    } catch {
+      console.warn('Pipedrive: SSF-Vorgangsfeld konnte nicht gelesen werden');
+    }
+    // Die Notiz bleibt vollständig; die Eingangsautomation verwendet dann ihre neutrale Alternative.
+    return {};
+  }
+
   return {
     /** Vorhandene Organisation (exakter Name) wiederverwenden, sonst anlegen. */
     async upsertOrganization(name: string, address?: string): Promise<number> {
@@ -81,7 +94,8 @@ export function createPipedrive(config: PipedriveConfig) {
       return person.id;
     },
 
-    async createDeal(d: { title: string; value?: number | null; personId: number; orgId?: number; pipelineId?: number; stageId?: number }): Promise<number> {
+    async createDeal(d: { title: string; value?: number | null; personId: number; orgId?: number; pipelineId?: number; stageId?: number; greeting?: string }): Promise<number> {
+      const customFields = await requestGreeting(d.greeting);
       const deal = await call<{ id: number }>('POST', '/api/v2/deals', {
         title: d.title,
         person_id: d.personId,
@@ -89,15 +103,18 @@ export function createPipedrive(config: PipedriveConfig) {
         ...(d.value ? { value: d.value, currency: 'EUR' } : {}),
         ...(d.pipelineId ? { pipeline_id: d.pipelineId } : {}),
         ...(d.stageId ? { stage_id: d.stageId } : {}),
+        ...(Object.keys(customFields).length ? { custom_fields: customFields } : {}),
       });
       return deal.id;
     },
 
-    async createLead(l: { title: string; personId: number; orgId?: number }): Promise<string> {
+    async createLead(l: { title: string; personId: number; orgId?: number; greeting?: string }): Promise<string> {
       const lead = await call<{ id: string }>('POST', '/api/v1/leads', {
         title: l.title,
         person_id: l.personId,
         ...(l.orgId ? { organization_id: l.orgId } : {}),
+        // API v1 erwartet benutzerdefinierte Felder direkt am Lead, API v2 unter custom_fields.
+        ...await requestGreeting(l.greeting),
       });
       return lead.id;
     },

@@ -12,6 +12,7 @@ let existingPerson = false;
 let failFields = false;
 const salutationKey = 'a'.repeat(40);
 const greetingKey = 'b'.repeat(40);
+const requestGreetingKey = 'c'.repeat(40);
 const mock = createServer(async (req, res) => {
   let raw = '';
   for await (const chunk of req) raw += chunk;
@@ -23,6 +24,12 @@ const mock = createServer(async (req, res) => {
     return;
   }
   if (req.method === 'GET') {
+    if (path === '/api/v2/dealFields') {
+      res.writeHead(failFields ? 503 : 200).end(JSON.stringify({ success: !failFields, data: [
+        { field_code: requestGreetingKey, field_name: 'SSF Grußformel', field_type: 'varchar' },
+      ] }));
+      return;
+    }
     if (path === '/api/v2/personFields') {
       res.writeHead(failFields ? 503 : 200).end(JSON.stringify({ success: !failFields, data: [
         { field_code: salutationKey, field_name: 'Anrede', field_type: 'varchar' },
@@ -140,6 +147,8 @@ try {
       assert.equal(person.name, 'Anne-Marie van der Meer');
       assert.equal(person.custom_fields[greetingKey], greeting);
       assert.equal(person.custom_fields[salutationKey], { frau: 'Frau', herr: 'Herr', neutral: 'Neutrale Anrede' }[salutation]);
+      const request = writes.findLast((w) => /\/(deals|leads)$/.test(w.path));
+      assert.equal(route === 'booking' ? request.body.custom_fields[requestGreetingKey] : request.body[requestGreetingKey], greeting);
       assert.ok(writes.at(-1).body.content.includes(`<b>Grußformel:</b> ${greeting}`));
       assert.ok(writes.at(-1).body.content.includes('<b>Vorname:</b> Anne-Marie'));
       assert.ok(writes.at(-1).body.content.includes('<b>Nachname:</b> van der Meer'));
@@ -160,12 +169,15 @@ try {
     assert.equal((await post(route, { ...input, ...structured })).status, 200);
     assert.equal(writes.slice(count).some((w) => w.path === '/api/v2/persons'), false);
     assert.equal(writes.findLast((w) => /\/(deals|leads)$/.test(w.path)).body.person_id, 777);
+    const request = writes.findLast((w) => /\/(deals|leads)$/.test(w.path));
+    assert.equal(route === 'booking' ? request.body.custom_fields[requestGreetingKey] : request.body[requestGreetingKey], 'Guten Tag Frau van der Meer,');
     assert.ok(writes.at(-1).body.content.includes('Guten Tag Frau van der Meer,'));
     existingPerson = false;
   }
   failFields = true;
   assert.equal((await post('contact', { ...contact, ...structured })).status, 200);
   assert.equal(writes.findLast((w) => w.path === '/api/v2/persons').body.custom_fields, undefined);
+  assert.equal(writes.findLast((w) => w.path === '/api/v1/leads').body[requestGreetingKey], undefined);
   assert.ok(writes.at(-1).body.content.includes('Guten Tag Frau van der Meer,'));
   failFields = false;
   console.log('PASS: explicit salutations, compound surnames, neutral greeting, structured validation, preserved existing contacts and metadata failure fallback');
