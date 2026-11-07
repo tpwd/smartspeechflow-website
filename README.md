@@ -158,6 +158,8 @@ Diese Adressen enthalten den Token. Danach den Browserverlauf dafür löschen od
 
 Der optionale Resend-Buchungsversand nutzt die gewählte Anrede in der Seitensprache. Native Pipedrive-Automationen und deren E-Mail-Texte werden durch diese Codeänderung nicht geändert; dort muss die passende Grußformel separat in die Vorlage eingebunden werden.
 
+Für die SSF-Eingangsautomationen wird zusätzlich das eindeutige Lead-/Deal-Textfeld „SSF Grußformel“ beim Anlegen des Vorgangs aus genau dieser Anfrage befüllt. Das funktioniert auch bei vorhandenen Personen, deren Stammdaten unverändert bleiben. Die API ermittelt den Feldcode über die Kontometadaten. Ohne erreichbares/eindeutiges Feld bleibt die Notiz vollständig; die Automation benötigt dafür eine neutrale Alternative. Keine rückwirkende Befüllung bestehender Vorgänge.
+
 `.env.example` nach `.env` kopieren, Werte eintragen, `npm run dev`, Formular unter http://localhost:4321/de/buchen/ abschicken. Die `.env` wird nie hochgeladen.
 
 **Ohne Pipedrive vorführen:** `FORMS_DEMO=true` – die Formulare melden Erfolg, speichern aber nichts. Nur lokal oder auf einer Vorschau-Adresse verwenden, nie live.

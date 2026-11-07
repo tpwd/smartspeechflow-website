@@ -42,11 +42,11 @@ export const POST: APIRoute = async ({ request, url }) => {
     ]);
     // Mit PIPEDRIVE_CONTACT_STAGE_ID landen Anfragen als Deal in der Pipeline, sonst im Lead-Eingang.
     if (PIPEDRIVE_CONTACT_STAGE_ID) {
-      const dealId = await pd.createDeal({ title, personId, orgId, pipelineId: PIPEDRIVE_PIPELINE_ID, stageId: PIPEDRIVE_CONTACT_STAGE_ID });
+      const dealId = await pd.createDeal({ title, personId, orgId, pipelineId: PIPEDRIVE_PIPELINE_ID, stageId: PIPEDRIVE_CONTACT_STAGE_ID, greeting: greetingFor('de', input) });
       savedNumber = `SSF-${dealId}`;
       await pd.addNote({ dealId, content: note });
     } else {
-      const leadId = await pd.createLead({ title, personId, orgId });
+      const leadId = await pd.createLead({ title, personId, orgId, greeting: greetingFor('de', input) });
       savedNumber = `SSF-L-${leadId}`;
       await pd.addNote({ leadId, content: note });
     }

@@ -45,6 +45,7 @@ export const POST: APIRoute = async ({ request, url }) => {
       orgId,
       pipelineId: PIPEDRIVE_PIPELINE_ID,
       stageId: PIPEDRIVE_BOOKING_STAGE_ID,
+      greeting: greetingFor('de', input),
     });
     savedNumber = `SSF-${dealId}`;
     const estimate = input.estimate
