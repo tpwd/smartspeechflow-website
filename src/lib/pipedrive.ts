@@ -53,14 +53,30 @@ export function createPipedrive(config: PipedriveConfig) {
     },
 
     /** Vorhandene Person (exakte E-Mail) wiederverwenden, sonst anlegen. */
-    async upsertPerson(p: { name: string; email: string; phone?: string; orgId?: number }): Promise<number> {
+    async upsertPerson(p: { name: string; email: string; phone?: string; orgId?: number; salutation?: string; greeting?: string }): Promise<number> {
       const existing = await searchId('persons', 'email', p.email);
       if (existing) return existing;
+      // Nur neue Personen anreichern. Vorhandene Stammdaten werden nie überschrieben.
+      // Feldcodes gehören zum jeweiligen Pipedrive-Konto; keine neuen globalen Felder anlegen.
+      const customFields: Record<string, string> = {};
+      if (p.salutation && p.greeting) {
+        try {
+          const fields = await call<{ field_code: string; field_name: string; field_type: string }[]>('GET', '/api/v2/personFields?limit=500');
+          for (const [name, value] of [['Anrede', p.salutation], ['Grußformel', p.greeting]]) {
+            const matches = fields.filter((f) => f.field_name === name && f.field_type === 'varchar' && /^[a-f0-9]{40}$/.test(f.field_code));
+            if (matches.length === 1) customFields[matches[0].field_code] = value;
+          }
+        } catch {
+          // Die vollständigen Angaben bleiben unabhängig davon in der Vorgangsnotiz erhalten.
+          console.warn('Pipedrive: optionale Personenfelder konnten nicht gelesen werden');
+        }
+      }
       const person = await call<{ id: number }>('POST', '/api/v2/persons', {
         name: p.name,
         emails: [{ value: p.email, primary: true, label: 'work' }],
         ...(p.phone ? { phones: [{ value: p.phone, primary: true, label: 'work' }] } : {}),
         ...(p.orgId ? { org_id: p.orgId } : {}),
+        ...(Object.keys(customFields).length ? { custom_fields: customFields } : {}),
       });
       return person.id;
     },

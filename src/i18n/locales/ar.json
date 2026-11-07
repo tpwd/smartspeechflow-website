@@ -746,7 +746,21 @@
     "failed": "للأسف لم تنجح العملية. يُرجى المحاولة مرة أخرى أو مراسلتنا على info@smart-village.solutions.",
     "fieldInvalid": "يرجى تصحيح هذا الحقل.",
     "partial": "تم إنشاء طلبكم بالمرجع {number}، لكن تعذّر حفظ جميع التفاصيل. يرجى عدم الإرسال مجددًا. تواصلوا مع info@smart-village.solutions مع ذكر هذا المرجع؛ تبقى بياناتكم ظاهرة هنا.",
-    "zipHint": "يرجى إدخال رمز بريدي ألماني من خمسة أرقام."
+    "zipHint": "يرجى إدخال رمز بريدي ألماني من خمسة أرقام.",
+    "identity": {
+      "salutation": "صيغة المخاطبة",
+      "choose": "يرجى الاختيار",
+      "frau": "السيدة",
+      "herr": "السيد",
+      "neutral": "صيغة محايدة",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "greetings": {
+        "frau": "السيدة {lastName} المحترمة،",
+        "herr": "السيد {lastName} المحترم،",
+        "neutral": "مرحبًا {name}،"
+      }
+    }
   },
   "mail": {
     "bookingSubject": "حجزكم لـ Smart Speech Flow",

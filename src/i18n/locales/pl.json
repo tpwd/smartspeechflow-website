@@ -746,7 +746,21 @@
     "failed": "Niestety coś poszło nie tak. Prosimy spróbować ponownie lub napisać do nas na adres info@smart-village.solutions.",
     "fieldInvalid": "Popraw to pole.",
     "partial": "Zgłoszenie utworzono pod numerem {number}, ale nie udało się zapisać wszystkich szczegółów. Nie wysyłaj go ponownie. Skontaktuj się z info@smart-village.solutions, podając ten numer; wpisane dane pozostają tutaj widoczne.",
-    "zipHint": "Wpisz pięciocyfrowy niemiecki kod pocztowy."
+    "zipHint": "Wpisz pięciocyfrowy niemiecki kod pocztowy.",
+    "identity": {
+      "salutation": "Forma grzecznościowa",
+      "choose": "Proszę wybrać",
+      "frau": "Pani",
+      "herr": "Pan",
+      "neutral": "Neutralna forma",
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "greetings": {
+        "frau": "Szanowna Pani {lastName},",
+        "herr": "Szanowny Panie {lastName},",
+        "neutral": "Dzień dobry {name},"
+      }
+    }
   },
   "mail": {
     "bookingSubject": "Państwa zamówienie Smart Speech Flow",

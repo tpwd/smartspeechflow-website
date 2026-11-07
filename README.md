@@ -152,7 +152,11 @@ Diese Adressen enthalten den Token. Danach den Browserverlauf dafür löschen od
 
 ### Lokal testen (Entwickler)
 
-`npm run test:forms` prüft die Formular-APIs gegen einen strikten lokalen Pipedrive-Nachbau: Preise, Notizparameter (`pinned_to_deal_flag`/`pinned_to_lead_flag`), Validierung, Selbstbetriebsanfragen und Teilspeicherung. Der Test verwendet ausschließlich synthetische Daten und schreibt nicht ins echte CRM. Er benötigt den lokalen Port 4398.
+`npm run test:forms` prüft die Formular-APIs gegen einen strikten lokalen Pipedrive-Nachbau: Preise, Notizparameter (`pinned_to_deal_flag`/`pinned_to_lead_flag`), Validierung, Selbstbetriebsanfragen, Teilspeicherung und die getrennten Namensfelder. Der Test verwendet ausschließlich synthetische Daten und schreibt nicht ins echte CRM. Er benötigt den lokalen Port 4398.
+
+**Persönliche Anrede:** Kontakt und Buchung fragen `salutation` (`frau`, `herr`, `neutral`), `firstName` und `lastName` verpflichtend ab. Mehrteilige Namen bleiben erhalten. Im CRM werden die Angaben samt deutscher Grußformel in der Vorgangsnotiz gespeichert. Bei neuen Personen werden zusätzlich die bereits vorhandenen eindeutigen Textfelder „Anrede“ und „Grußformel“ über ihre Kontometadaten befüllt; es werden keine Felder angelegt. Fehlen diese Felder oder sind ihre Metadaten nicht erreichbar, bleiben die Angaben in der Notiz erhalten. Bestehende Personen mit exakt gleicher E-Mail werden unverändert wiederverwendet. Bereits geöffnete alte Formulare mit ausschließlich `name` bleiben kompatibel; daraus werden keine Anrede oder Namensteile geraten.
+
+Der optionale Resend-Buchungsversand nutzt die gewählte Anrede in der Seitensprache. Native Pipedrive-Automationen und deren E-Mail-Texte werden durch diese Codeänderung nicht geändert; dort muss die passende Grußformel separat in die Vorlage eingebunden werden.
 
 `.env.example` nach `.env` kopieren, Werte eintragen, `npm run dev`, Formular unter http://localhost:4321/de/buchen/ abschicken. Die `.env` wird nie hochgeladen.
 

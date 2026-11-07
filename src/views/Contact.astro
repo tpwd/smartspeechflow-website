@@ -3,6 +3,7 @@ import PageHead from '../components/PageHead.astro';
 import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
 import TextCard from '../components/TextCard.astro';
+import IdentityFields from '../components/IdentityFields.astro';
 import { pathFor, localeTags, type Locale } from '../i18n/config';
 import { useTranslations } from '../i18n';
 import { links, selfHostedSupport, formatEuro } from '../data/site';
@@ -31,7 +32,7 @@ const f = (k: string) => t(`contact.fields.${k}`);
       data-texts={JSON.stringify({ sending: t('forms.sending'), invalid: t('forms.invalid'), notConfigured: t('forms.notConfigured'), failed: t('forms.failed'), fieldInvalid: t('forms.fieldInvalid'), partial: t('forms.partial') })}>
       <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
       <h2 id="form-title" class="t-h4">{t('contact.formTitle')}</h2>
-      <label class="field"><span>{f('name')}*</span><input type="text" name="name" required autocomplete="name" /></label>
+      <IdentityFields locale={locale} fieldClass="field" />
       <label class="field"><span>{f('org')}</span><input type="text" name="organisation" autocomplete="organization" /></label>
       <label class="field"><span>{f('email')}*</span><input name="email" type="email" required autocomplete="email" /></label>
       <label class="field"><span>{f('category')}</span>

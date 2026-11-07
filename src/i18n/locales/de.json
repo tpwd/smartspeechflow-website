@@ -746,7 +746,21 @@
     "failed": "Das hat leider nicht geklappt. Bitte versuchen Sie es erneut oder schreiben Sie uns an info@smart-village.solutions.",
     "fieldInvalid": "Bitte korrigieren Sie dieses Feld.",
     "partial": "Ihr Vorgang wurde unter {number} angelegt, die Details konnten jedoch nicht vollständig gespeichert werden. Bitte nicht erneut absenden. Kontaktieren Sie info@smart-village.solutions mit dieser Nummer; Ihre Angaben bleiben hier sichtbar.",
-    "zipHint": "Bitte eine fünfstellige deutsche Postleitzahl eingeben."
+    "zipHint": "Bitte eine fünfstellige deutsche Postleitzahl eingeben.",
+    "identity": {
+      "salutation": "Anrede",
+      "choose": "Bitte wählen",
+      "frau": "Frau",
+      "herr": "Herr",
+      "neutral": "Neutrale Anrede",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "greetings": {
+        "frau": "Guten Tag Frau {lastName},",
+        "herr": "Guten Tag Herr {lastName},",
+        "neutral": "Guten Tag {name},"
+      }
+    }
   },
   "mail": {
     "bookingSubject": "Ihre Buchung von Smart Speech Flow",

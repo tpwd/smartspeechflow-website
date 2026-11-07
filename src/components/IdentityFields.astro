@@ -1,0 +1,32 @@
+---
+import { useTranslations } from '../i18n';
+import type { Locale } from '../i18n/config';
+
+interface Props { locale: Locale; fieldClass: string; fullClass?: string }
+const { locale, fieldClass, fullClass } = Astro.props;
+const { t } = useTranslations(locale);
+---
+<label class:list={['identity-field', fieldClass, fullClass]}>
+  <span>{t('forms.identity.salutation')}*</span>
+  <select name="salutation" required autocomplete="honorific-prefix">
+    <option value="" selected disabled>{t('forms.identity.choose')}</option>
+    <option value="frau">{t('forms.identity.frau')}</option>
+    <option value="herr">{t('forms.identity.herr')}</option>
+    <option value="neutral">{t('forms.identity.neutral')}</option>
+  </select>
+</label>
+<label class:list={['identity-field', fieldClass]}>
+  <span>{t('forms.identity.firstName')}*</span>
+  <input type="text" name="firstName" required maxlength="80" autocomplete="given-name" />
+</label>
+<label class:list={['identity-field', fieldClass]}>
+  <span>{t('forms.identity.lastName')}*</span>
+  <input type="text" name="lastName" required maxlength="120" autocomplete="family-name" />
+</label>
+
+<style>
+  .identity-field { display: grid; gap: var(--spacing-8); min-inline-size: 0; font-size: var(--font-size-body-xs); font-weight: var(--font-weight-bold); color: var(--color-petrol-900); }
+  input, select { inline-size: 100%; min-inline-size: 0; padding: 12px var(--spacing-16); border: 1px solid var(--color-gray-cool-300); border-radius: var(--radius-8); background: var(--color-white); font-weight: var(--font-weight-regular); font-size: var(--font-size-body-s); color: var(--color-petrol-900); }
+  .f--full { grid-column: 1 / -1; }
+  [hidden] { display: none !important; }
+</style>

@@ -7,13 +7,35 @@ import { plans, promotion, promotionActive, type PlanId } from '../data/site';
 const text = (max: number) => z.string().trim().max(max);
 const required = (max: number) => text(max).min(1);
 
+const identityFields = {
+  salutation: z.enum(['frau', 'herr', 'neutral']).optional(),
+  firstName: required(80).optional(),
+  lastName: required(120).optional(),
+  // Übergang für bereits geöffnete Seiten: nur vollständige alte Payloads akzeptieren.
+  name: required(201).optional(),
+};
+type IdentityInput = { salutation?: 'frau' | 'herr' | 'neutral'; firstName?: string; lastName?: string; name?: string };
+function validateIdentity(input: IdentityInput, ctx: z.RefinementCtx) {
+  const structured = input.salutation !== undefined || input.firstName !== undefined || input.lastName !== undefined;
+  if (structured) {
+    for (const key of ['salutation', 'firstName', 'lastName'] as const) {
+      if (input[key] === undefined) ctx.addIssue({ code: 'custom', path: [key], message: 'Required' });
+    }
+  } else if (!input.name) {
+    for (const key of ['salutation', 'firstName', 'lastName']) ctx.addIssue({ code: 'custom', path: [key], message: 'Required' });
+  }
+}
+function normalizeIdentity<T extends IdentityInput>(input: T) {
+  return { ...input, name: input.firstName !== undefined && input.lastName !== undefined ? `${input.firstName} ${input.lastName}` : input.name! };
+}
+
 export const bookingSchema = z.object({
   locale: z.enum(locales),
   // Unterstützung beim Selbstbetrieb ist eine unverbindliche Kontaktanfrage.
   option: z.enum(['shared', 'dedicated']),
   term: z.enum(['prepaid', 'monthly']),
   organisation: required(200),
-  name: required(120),
+  ...identityFields,
   role: text(120).optional().default(''),
   email: z.email().max(200),
   phone: text(60).optional().default(''),
@@ -30,11 +52,11 @@ export const bookingSchema = z.object({
   // Spamschutz: verstecktes Feld muss leer bleiben, Formular muss mindestens 3 s offen gewesen sein
   website: z.string().max(500).optional().default(''),
   startedAt: z.number().optional(),
-});
+}).superRefine(validateIdentity).transform(normalizeIdentity);
 
 export const contactSchema = z.object({
   locale: z.enum(locales),
-  name: required(120),
+  ...identityFields,
   organisation: text(200).optional().default(''),
   email: z.email().max(200),
   category: z.enum(['demo', 'call', 'booking', 'municipal', 'tech', 'selfhosted', 'other']),
@@ -42,7 +64,7 @@ export const contactSchema = z.object({
   consent: z.literal(true),
   website: z.string().max(500).optional().default(''),
   startedAt: z.number().optional(),
-});
+}).superRefine(validateIdentity).transform(normalizeIdentity);
 
 export type BookingInput = z.infer<typeof bookingSchema>;
 export type ContactInput = z.infer<typeof contactSchema>;
